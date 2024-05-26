@@ -1,3 +1,3 @@
 <template>
-  <main></main>
+  <p>123</p>
 </template>

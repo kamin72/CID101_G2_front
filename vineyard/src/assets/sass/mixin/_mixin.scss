@@ -1,0 +1,58 @@
+//RWD mixin
+//平版_996px以下
+@mixin t() {
+  @media screen and (max-width: $t) {
+    @content;
+  }
+}
+//手機板_430px以下
+@mixin m() {
+  @media screen and (max-width: $m) {
+    @content;
+  }
+}
+
+//任意斷點
+@mixin bp($b) {
+  @media screen and (max-width: $b) {
+    @content;
+  }
+}
+
+//grid system
+@mixin grid($value) {
+  @for $i from 1 through $value {
+    .col-#{$i} {
+      width: math.div($i, $value) * 100%;
+    }
+  }
+}
+
+@mixin grid-m($value) {
+  @for $i from 1 through $value {
+    .col-sm-#{$i} {
+      width: math.div($i, $value) * 100%;
+    }
+  }
+}
+
+//網站顏色
+@mixin color($color) {
+  @each $k, $v in $color {
+    .#{$k} {
+      color: $v;
+    }
+  }
+}
+
+//字體大小
+@mixin font($font_size) {
+  @each $k, $v in $font_size {
+    #{$k} {
+      font-size: $v;
+      font-family: $font_DM;
+      font-weight: $f_weight;
+      letter-spacing: $letter_spacing;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 //js入口執行檔案
-import './assets/main.css'
+
+//引入scss
+import './assets/sass/style.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

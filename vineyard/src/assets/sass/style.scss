@@ -1,0 +1,48 @@
+//引用內建函式
+@use 'sass:math';
+
+// base 變數
+@import 'base/var';
+@import 'base/color';
+@import 'base/font';
+@import 'base/setting';
+
+// mixin function
+@import 'mixin/mixin';
+
+// component 組件
+@import 'component/btn';
+@import 'component/card';
+@import 'component/form';
+@import 'component/table';
+
+// layout
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/login';
+@import 'layout/body';
+@import 'layout/nav';
+
+//page 頁面
+@import 'page/index';
+@import 'page/about';
+@import 'page/account';
+@import 'page/cart';
+@import 'page/course';
+@import 'page/game';
+@import 'page/new';
+@import 'page/wine';
+
+// 套件
+//grid
+@import 'plugin/grid';
+
+//呼叫顏色fuuction
+@include color($color);
+
+//呼叫標題大小function
+@include font($font_size);
+
+div {
+  color: red;
+}

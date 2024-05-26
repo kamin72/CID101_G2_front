@@ -1,0 +1,198 @@
+.btn {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 27px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.btn_num {
+  width: 50px;
+  border: 0;
+  border-radius: 0;
+  padding: 7px 0;
+  text-align: center;
+}
+
+.text {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 0;
+  font-family: "DM Sans", sans-serif;
+}
+
+.t_toggle {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  border: 0;
+  border-radius: 0;
+}
+
+.radio {
+  border: 0;
+  border-radius: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+[class*=col-],
+.col {
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+
+.col-1 {
+  width: 8.3333333333%;
+}
+
+.col-2 {
+  width: 16.6666666667%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.3333333333%;
+}
+
+.col-5 {
+  width: 41.6666666667%;
+}
+
+.col-6 {
+  width: 50%;
+}
+
+.col-7 {
+  width: 58.3333333333%;
+}
+
+.col-8 {
+  width: 66.6666666667%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.3333333333%;
+}
+
+.col-11 {
+  width: 91.6666666667%;
+}
+
+.col-12 {
+  width: 100%;
+}
+
+@media screen and (max-width: 995px) {
+  .col-sm-1 {
+    width: 8.3333333333%;
+  }
+  .col-sm-2 {
+    width: 16.6666666667%;
+  }
+  .col-sm-3 {
+    width: 25%;
+  }
+  .col-sm-4 {
+    width: 33.3333333333%;
+  }
+  .col-sm-5 {
+    width: 41.6666666667%;
+  }
+  .col-sm-6 {
+    width: 50%;
+  }
+  .col-sm-7 {
+    width: 58.3333333333%;
+  }
+  .col-sm-8 {
+    width: 66.6666666667%;
+  }
+  .col-sm-9 {
+    width: 75%;
+  }
+  .col-sm-10 {
+    width: 83.3333333333%;
+  }
+  .col-sm-11 {
+    width: 91.6666666667%;
+  }
+  .col-sm-12 {
+    width: 100%;
+  }
+}
+/* --------------------------------------- */
+.primary {
+  color: #eadece;
+}
+
+.highlight {
+  color: #7f1023;
+}
+
+.font {
+  color: #322d26;
+}
+
+h2 {
+  font-size: 64px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+h3 {
+  font-size: 36px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+h4 {
+  font-size: 24px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+p {
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+h6 {
+  font-size: 13px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+/*# sourceMappingURL=style.css.map */
