@@ -1,17 +1,41 @@
-//字體大小
-$font_size: (
-  h2: 64px,
-  h3: 36px,
-  h4: 24px,
-  p: 16px,
-  h6: 13px,
+// 字體大小
+$font-size-desktop: (
+  'h2': 64px,
+  'h3': 36px,
+  'h4': 24px,
+  'p': 16px,
+  'small': 13px
 );
 
-//字型
-$font_DM: "DM Sans", sans-serif;
+$font-size-mobile: (
+  'h2': 30px,
+  'h3': 20px,
+  'h4': 18px,
+  'p': 14px,
+  'small': 12px
+);
 
-//粗體
-$f_weight: 400;
+// 桌面版字體大小
+@each $title, $size in $font-size-desktop {
+  #{$title} {
+    font-size: $size;
+  }
+}
 
-//間距
-$letter_spacing: 0.1em;
+// 手機版字體大小
+@media (max-width: 768px) {
+  @each $title, $size in $font-size-mobile {
+    #{$title} {
+      font-size: $size;
+    }
+  }
+}
+
+// 字型
+$font-dm: 'DM Sans', sans-serif;
+
+// 粗體
+$font-weight-regular: 400;
+
+// 間距
+$letter-spacing: 0.1em;
