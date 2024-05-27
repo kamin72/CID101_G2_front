@@ -1,0 +1,35 @@
+.header {
+  .wrapper {
+    outline: 1px solid red;
+    max-width: 1200px;
+    width: 99%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .hamburger {
+      display: none;
+    }
+
+    .link {
+      //   outline: 1px solid red;
+      text-align: center;
+      list-style: none;
+      a {
+        // outline: 1px solid red;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+    }
+
+    .wrap_login_shoppingcart {
+      // outline: 1px solid red;
+      display: flex;
+      a {
+        margin: 0 10px;
+        text-decoration: none;
+      }
+    }
+  }
+}
