@@ -6,7 +6,7 @@
       </div>
 
       <div class="header logo">
-        <img src="https://fakeimg.pl/50x50/200" />
+        <img src="../../../img/logo/logo2-w.png">
       </div>
 
       <ul class="header link">
