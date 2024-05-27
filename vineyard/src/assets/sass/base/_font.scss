@@ -1,28 +1,30 @@
-// 字體大小
+// 字体大小
 $font-size-desktop: (
   'h2': 64px,
   'h3': 36px,
   'h4': 24px,
-  'p': 16px,
-  'small': 13px
+  'p': 14px,
+  'small': 12px,
+  'nav': 16px,
 );
 
 $font-size-mobile: (
   'h2': 30px,
   'h3': 20px,
   'h4': 18px,
-  'p': 14px,
-  'small': 12px
+  'p': 13px,
+  'small': 11px,
+  'nav': 14px,
 );
 
-// 桌面版字體大小
+// 桌面版字体大小
 @each $title, $size in $font-size-desktop {
   #{$title} {
     font-size: $size;
   }
 }
 
-// 手機版字體大小
+// 手机版字体大小
 @media (max-width: 768px) {
   @each $title, $size in $font-size-mobile {
     #{$title} {
@@ -31,15 +33,20 @@ $font-size-mobile: (
   }
 }
 
-// 字型
-$font-dm: 'DM Sans', sans-serif;
+// 引入 Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Noto+Sans+TC&display=swap');
 
-// 粗體
+// 字体
+$font-dm: 'DM Sans', sans-serif;
+$font-noto: 'Noto Sans TC', sans-serif;
+$font-cormorant: 'Cormorant Garamond', serif;
+
+// 粗体
 $font-weight-regular: 400;
 
-// 間距
+// 间距
 $letter-spacing: 0.1em;
 $a-font-size: 16px;
 
-//font awesome
+// Font Awesome
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
