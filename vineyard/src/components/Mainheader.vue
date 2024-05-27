@@ -1,15 +1,15 @@
 <template>
   <header class="header">
-    <div class="wrapper">
-      <div class="header hamburger">
+    <div class="header_wrapper">
+      <div class="header_hamburger">
         <i class="fa-solid fa-bars"></i>
       </div>
 
-      <div class="header logo">
+      <div class="header_logo">
         <img src="../../public/img/logo/logo2-w.png">
       </div>
 
-      <ul class="header link">
+      <ul class="header_link">
         <li>
           <a href="#">我們的酒</a>
           <a href="#">品酒課程</a>
@@ -19,12 +19,12 @@
       </ul>
 
       <div class="wrap_login_shoppingcart">
-        <div class="header login">
+        <div class="header_login">
           <i class="fa-regular fa-user"></i>
           <a href="#">登入</a>
         </div>
 
-        <div class="header shoppingcart">
+        <div class="header_shoppingcart">
           <i class="fa-solid fa-bag-shopping"></i>
           <a href="#">詢價清單(0)</a>
         </div>

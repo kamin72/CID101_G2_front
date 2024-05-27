@@ -36,11 +36,19 @@
   }
 }
 
-//網站顏色
+//字體顏色
 @mixin color($color) {
   @each $k, $v in $color {
     .#{$k} {
       color: $v;
+    }
+  }
+}
+
+@mixin bg-color($color) {
+  @each $k, $v in $color {
+    .#{$k} {
+      background-color: $v;
     }
   }
 }

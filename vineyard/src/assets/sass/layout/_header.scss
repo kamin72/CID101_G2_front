@@ -1,6 +1,6 @@
 .header {
   background: #322d26;
-  .wrapper {
+  .header_wrapper {
     // outline: 1px solid red;
     max-width: 1200px;
     width: 90%;
@@ -9,10 +9,10 @@
     justify-content: space-between;
     align-items: center;
 
-    .hamburger {
+    .header_hamburger {
       display: none;
     }
-    .logo {
+    .header_logo {
       //   width: 100px;
       padding: 10px 0;
       flex-grow: 1;
@@ -22,7 +22,7 @@
         display: block;
       }
     }
-    .link {
+    .header_link {
       //   outline: 1px solid red;
       flex-grow: 1;
       text-align: center;
