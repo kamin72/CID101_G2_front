@@ -50,9 +50,9 @@
   @each $k, $v in $font_size {
     #{$k} {
       font-size: $v;
-      font-family: $font_DM;
-      font-weight: $f_weight;
-      letter-spacing: $letter_spacing;
+      font-family: $font-dm;
+      font-weight: $font-weight-regular;
+      letter-spacing: $letter-spacing;
     }
   }
 }

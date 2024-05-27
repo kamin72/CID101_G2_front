@@ -1,20 +1,19 @@
 <template>
-  <Mainheader />
+  <MainHeader />
   <RouterView />
-  <Mainfooter />
+  <MainFooter />
 </template>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import Mainheader from './components/Mainheader.vue'
-import Mainfooter from './components/Mainfooter.vue'
+import { RouterView } from 'vue-router'
+import MainHeader from '@/components/MainHeader.vue'
+import MainFooter from '@/components/MainFooter.vue'
 
 export default {
   components: {
-    RouterLink,
     RouterView,
-    Mainheader,
-    Mainfooter
+    MainHeader,
+    MainFooter
   }
-}
+} 
 </script>
