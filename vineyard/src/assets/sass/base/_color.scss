@@ -1,5 +1,15 @@
-$color: (
-  primary: #eadece,
-  highlight: #7f1023,
-  font: #322d26,
-);
+//sand
+$sand: #eadece !default;
+$sand-hover: #b1a390;
+
+//wine
+$wine: #7f1023 !default;
+$wine-hover: #560f1b;
+
+//gray
+$gray: #322d26 !default;
+$gray-hover: #1a1713;
+
+//white
+$white: #fff;
+$white-transp: hsla(0, 0%, 100%, 0.7);
