@@ -6,7 +6,7 @@
       </div>
 
       <div class="header_logo">
-        <img src="../../public/img/logo/logo2-w.png">
+        <img src="/img/logo/logo2-w.png" />
       </div>
 
       <ul class="header_link">
@@ -32,9 +32,3 @@
     </div>
   </header>
 </template>
-
-<style lang="scss">
-p {
-  background-color: red;
-}
-</style>
