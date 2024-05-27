@@ -6,7 +6,7 @@
       </div>
 
       <div class="header logo">
-        <img src="../../../img/logo/logo2-w.png">
+        <img src="../../public/img/logo/logo2-w.png">
       </div>
 
       <ul class="header link">
@@ -26,7 +26,7 @@
 
         <div class="header shoppingcart">
           <i class="fa-solid fa-bag-shopping"></i>
-          <a href="#">詢價清單</a>
+          <a href="#">詢價清單(0)</a>
         </div>
       </div>
     </div>
