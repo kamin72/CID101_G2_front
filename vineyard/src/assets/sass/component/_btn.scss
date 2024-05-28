@@ -4,12 +4,14 @@
   border-radius: 0;
   padding: 7px 27px;
   font-family: $font-dm;
-  color: $btn-color;
+  color: $white;
+  background-color: $btn-color; // 按鈕背景顏色為傳入的顏色變數
   transition: 0.3s;
   font-size: map-get($font-size, h4);
+  cursor: pointer;
 
   &:hover {
-    color: darken($btn-color, 20);
+    background-color: darken($btn-color, 20);
   }
 }
 
@@ -19,27 +21,37 @@
 }
 
 // 大按鈕樣式
-.big-btn-sand {
-  @include big-button($sand);
+.big-btn-primary {
+  @include big-button($primary-botton-color);
 }
 
-.big-btn-wine {
-  @include big-button($wine);
+.big-btn-secondary {
+  @include big-button($secondary-botton-color);
 }
 
-.big-btn-gray {
-  @include big-button($gray);
+.big-btn-invalid {
+  @include big-button($invalid-button-color);
+  cursor: not-allowed; // 設置無效按鈕的游標樣式
+
+  &:hover {
+    background-color: $invalid-button-color; // 無效按鈕滑鼠移過時不改變背景顏色
+  }
 }
 
 // 小按鈕樣式
-.small-btn-sand {
-  @include small-button($sand);
+.small-btn-primary {
+  @include small-button($primary-botton-color);
 }
 
-.small-btn-wine {
-  @include small-button($wine);
+.small-btn-secondary {
+  @include small-button($secondary-botton-color);
 }
 
-.small-btn-gray {
-  @include small-button($gray);
+.small-btn-invalid {
+  @include small-button($invalid-button-color);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: $invalid-button-color;
+  }
 }

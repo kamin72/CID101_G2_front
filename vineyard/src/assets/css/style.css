@@ -1,84 +1,104 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Noto+Sans+TC&display=swap");
-.big-btn-sand {
+.big-btn-primary {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #beb19e;
+  color: #fff;
+  background-color: #322D26;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
 }
-.big-btn-sand:hover {
-  color: #938063;
+.big-btn-primary:hover {
+  background-color: black;
 }
 
-.big-btn-wine {
+.big-btn-secondary {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #7f1023;
+  color: #fff;
+  background-color: #AEA495;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
 }
-.big-btn-wine:hover {
-  color: #24050a;
+.big-btn-secondary:hover {
+  background-color: #7d7160;
 }
 
-.big-btn-gray {
+.big-btn-invalid {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #322d26;
+  color: #fff;
+  background-color: #D5D5D5;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
+  cursor: not-allowed;
 }
-.big-btn-gray:hover {
-  color: black;
+.big-btn-invalid:hover {
+  background-color: #a2a2a2;
+}
+.big-btn-invalid:hover {
+  background-color: #D5D5D5;
 }
 
-.small-btn-sand {
+.small-btn-primary {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #beb19e;
+  color: #fff;
+  background-color: #322D26;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
   font-size: clamp(13px, 2vw, 14px);
 }
-.small-btn-sand:hover {
-  color: #938063;
+.small-btn-primary:hover {
+  background-color: black;
 }
 
-.small-btn-wine {
+.small-btn-secondary {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #7f1023;
+  color: #fff;
+  background-color: #AEA495;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
   font-size: clamp(13px, 2vw, 14px);
 }
-.small-btn-wine:hover {
-  color: #24050a;
+.small-btn-secondary:hover {
+  background-color: #7d7160;
 }
 
-.small-btn-gray {
+.small-btn-invalid {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
   font-family: "DM Sans", sans-serif;
-  color: #322d26;
+  color: #fff;
+  background-color: #D5D5D5;
   transition: 0.3s;
   font-size: clamp(18px, 3vw, 24px);
+  cursor: pointer;
   font-size: clamp(13px, 2vw, 14px);
+  cursor: not-allowed;
 }
-.small-btn-gray:hover {
-  color: black;
+.small-btn-invalid:hover {
+  background-color: #a2a2a2;
+}
+.small-btn-invalid:hover {
+  background-color: #D5D5D5;
 }
 
 .event-card .img-wrap {
