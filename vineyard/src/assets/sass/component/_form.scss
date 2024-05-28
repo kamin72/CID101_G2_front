@@ -1,22 +1,59 @@
-//input-text
-.text {
-  border: 0;
-  border-radius: 0;
-  padding: 7px 0;
-  font-family: $font-dm;
+// Checkbox樣式
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+
+    &::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-color: $checkbox-ratio-bgc;
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    &:checked::after {
+        background-color: $interactive-color;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M0 0h20v20H0V0zm5 10l3 3 7-7' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E");
+    }
 }
 
-.t_toggle {
-  display: flex;
-  align-items: center;
-}
+// Radio樣式
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    border-radius: 50%;
+    background-color: $checkbox-ratio-bgc;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
 
-.checkbox {
-  border: 0;
-  border-radius: 0;
-}
+    &::after {
+        content: "";
+        display: block;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: transparent;
+        margin: 2px; /* Center the inner circle */
+    }
 
-.radio {
-  border: 0;
-  border-radius: 0;
+    &:checked::after {
+        background-color: $interactive-color;
+    }
 }
