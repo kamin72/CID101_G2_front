@@ -1,25 +1,19 @@
-//RWD mixin
-//平版_996px以下
+// RWD mixin
+// 平板版_995px以下
 @mixin t() {
   @media screen and (max-width: $t) {
     @content;
   }
 }
-//手機板_430px以下
+// 手機板_429px以下
 @mixin m() {
   @media screen and (max-width: $m) {
     @content;
   }
 }
 
-//任意斷點
-@mixin bp($b) {
-  @media screen and (max-width: $b) {
-    @content;
-  }
-}
-
-//grid system
+// grid system
+// 電腦版
 @mixin grid($value) {
   @for $i from 1 through $value {
     .col-#{$i} {
@@ -27,7 +21,15 @@
     }
   }
 }
-
+// 平板版
+@mixin grid($value) {
+  @for $i from 1 through $value {
+    .col-md-#{$i} {
+      width: math.div($i, $value) * 100%;
+    }
+  }
+}
+// 手機版
 @mixin grid-m($value) {
   @for $i from 1 through $value {
     .col-sm-#{$i} {
