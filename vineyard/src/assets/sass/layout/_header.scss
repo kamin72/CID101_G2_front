@@ -4,14 +4,10 @@
 
 .header {
   background: $gray;
-  .header_wrapper {
-    max-width: 1200px;
-    width: 90%;
-    margin: auto;
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     .header_hamburger {
       display: none;
     }
@@ -28,7 +24,7 @@
       text-align: center;
       list-style: none;
       a {
-        margin: 0 30px;
+        margin: 0 20px;
         text-decoration: none;
         color: $white;
         font-size: $a-font-size;

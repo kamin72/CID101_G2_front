@@ -1,10 +1,7 @@
 .footer {
   background-color: #7f1023;
-  .footer_wrapper {
+  .container {
     display: flex;
-    max-width: 1200px;
-    width: 90%;
-    margin: auto;
     align-items: center;
   }
   .footer_logo {
@@ -45,9 +42,10 @@
 .tibame {
   padding: 50px 0;
   background-color: black;
-  p {
+  small {
     letter-spacing: $letter-spacing;
     text-align: center;
     color: #fff;
+    display: block;
   }
 }
