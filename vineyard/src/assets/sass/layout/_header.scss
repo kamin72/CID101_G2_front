@@ -27,7 +27,7 @@
         margin: 0 20px;
         text-decoration: none;
         color: $white;
-        font-size: $a-font-size;
+        font-size: map-get($font-size, a);
         letter-spacing: $letter-spacing;
       }
     }
@@ -41,7 +41,7 @@
       margin: 0 10px;
       text-decoration: none;
       color: #fff;
-      font-size: $a-font-size;
+      font-size: map-get($font-size, a);
       letter-spacing: $letter-spacing;
     }
     .fa-regular {

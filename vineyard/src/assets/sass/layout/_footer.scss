@@ -22,7 +22,7 @@
       a {
         color: #fff;
         letter-spacing: $letter-spacing;
-        font-size: $a-font-size;
+        font-size: map-get($font-size, a);
         line-height: 2;
         font-family: $font-dm;
       }
@@ -33,7 +33,7 @@
       a {
         color: #fff;
         letter-spacing: $letter-spacing;
-        font-size: $a-font-size;
+        font-size: map-get($font-size, a);
         line-height: 2;
         font-family: $font-dm;
       }
