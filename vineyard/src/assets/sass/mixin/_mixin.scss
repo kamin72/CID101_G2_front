@@ -1,11 +1,11 @@
 // RWD mixin
-// 平板版_995px以下
+// 平板版_996px以下
 @mixin t() {
   @media screen and (max-width: $t) {
     @content;
   }
 }
-// 手機板_429px以下
+// 手機板_430px以下
 @mixin m() {
   @media screen and (max-width: $m) {
     @content;

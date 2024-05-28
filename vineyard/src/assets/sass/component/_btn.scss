@@ -1,36 +1,45 @@
 // 按鈕混合器
-@mixin button($font-size, $btn-color, $btn-hover-color) {
+@mixin big-button($btn-color) {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
-  font-size: $font-size;
   font-family: $font-dm;
   color: $btn-color;
   transition: 0.3s;
+  font-size: map-get($font-size, h4);
 
   &:hover {
-    color: $btn-hover-color;
+    color: darken($btn-color, 20);
   }
+}
+
+@mixin small-button($btn-color) {
+  @include big-button($btn-color);
+  font-size: map-get($font-size, p);
 }
 
 // 大按鈕樣式
 .big-btn-sand {
-  @include button(h4, $sand, $sand-hover);
+  @include big-button($sand);
 }
+
 .big-btn-wine {
-  @include button(h4, $wine, $wine-hover);
+  @include big-button($wine);
 }
+
 .big-btn-gray {
-  @include button(h4, $gray, $gray-hover);
+  @include big-button($gray);
 }
 
 // 小按鈕樣式
 .small-btn-sand {
-  @include button(p, $sand, $sand-hover);
+  @include small-button($sand);
 }
+
 .small-btn-wine {
-  @include button(p, $wine, $wine-hover);
+  @include small-button($wine);
 }
+
 .small-btn-gray {
-  @include button(p, $gray, $gray-hover);
+  @include small-button($gray);
 }

@@ -1,5 +1,4 @@
 .event-card {
-
     .img-wrap {
         width: 100%;
         position: relative;
@@ -33,9 +32,9 @@
             align-items: center;
             color: $white;
             background-color: $gray;
+
             small {
-                font-size: $small;
-                // 現在字體大小的變數還沒確定之後可能會改
+                font-size: map-get($font-size, small);
             }
         }
 
@@ -43,23 +42,78 @@
             bottom: 0;
         }
     }
+
     .font-wrap {
         h4 {
-            font-size: $h4;
-            // 現在字體大小的變數還沒確定之後可能會改
+            font-size: map-get($font-size, h4);
             margin: 7px 0;
         }
 
         p {
             margin: 0;
-            font-size: $p;
-            // 現在字體大小的變數還沒確定之後可能會改
+            font-size: map-get($font-size, p);
         }
     }
 
     h4 {
-        font-size: $h4;
-        // 現在字體大小的變數還沒確定之後可能會改
+        font-size: map-get($font-size, h4);
         margin: 15px 0;
+    }
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+
+    .img-wrap {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2/1;
+
+        img {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+    }
+
+    small {
+        font-size: map-get($font-size, small);
+    }
+
+    h4 {
+        font-size: map-get($font-size, h4);
+        margin: 10px 0;
+    }
+
+    .font-wrap {
+        p {
+            margin: 0;
+            font-size: map-get($font-size, p);
+        }
+    }
+
+    .info-wrap {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .add-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 45px;
+        color: $white;
+        background-color: $sand;
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($sand, 20);
+        }
     }
 }
