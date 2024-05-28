@@ -5,6 +5,7 @@
     max-width: 1200px;
     width: 90%;
     margin: auto;
+    align-items: center;
   }
   .footer_logo {
     padding: 50px 0;
@@ -14,14 +15,10 @@
     }
   }
   .wrap_contactus_aboutus {
-    padding-top: 30px;
-    // outline: 1px solid red;
     display: flex;
     width: 350px;
     justify-content: space-between;
-    align-items: start;
     .footer_contactus {
-      //   outline: 1px solid red;
       display: flex;
       flex-direction: column;
       a {
@@ -33,7 +30,6 @@
       }
     }
     .footer_aboutus {
-      //   outline: 1px solid red;
       display: flex;
       flex-direction: column;
       a {
@@ -50,6 +46,7 @@
   padding: 50px 0;
   background-color: black;
   p {
+    letter-spacing: $letter-spacing;
     text-align: center;
     color: #fff;
   }
