@@ -36,10 +36,3 @@
 // 套件
 //grid
 @import 'plugin/grid';
-
-//呼叫顏色fuuction
-@include color($color);
-
-//呼叫標題大小function
-@include font($font-size-desktop);
-@include font($font-size-mobile);

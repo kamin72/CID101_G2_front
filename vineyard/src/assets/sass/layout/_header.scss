@@ -1,5 +1,9 @@
+* {
+  font-family: $font-cormorant;
+}
+
 .header {
-  background: #322d26;
+  background: $gray;
   .header_wrapper {
     // outline: 1px solid red;
     max-width: 1200px;
@@ -31,7 +35,7 @@
         // outline: 1px solid red;
         margin: 0 30px;
         text-decoration: none;
-        color: #fff;
+        color: $white;
         font-size: $a-font-size;
         letter-spacing: $letter-spacing;
       }
@@ -50,10 +54,10 @@
         letter-spacing: $letter-spacing;
       }
       .fa-regular {
-        color: #fff;
+        color: $white;
       }
       .fa-solid {
-        color: #fff;
+        color: $white;
       }
     }
   }

@@ -1,16 +1,81 @@
-.btn {
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Noto+Sans+TC&display=swap");
+.big-btn-sand {
   border: 0;
   border-radius: 0;
   padding: 7px 27px;
+  font-size: h4;
   font-family: "DM Sans", sans-serif;
+  color: #beb19e;
+  transition: 0.3s;
+}
+.big-btn-sand:hover {
+  color: #8d8170;
 }
 
-.btn_num {
-  width: 50px;
+.big-btn-wine {
   border: 0;
   border-radius: 0;
-  padding: 7px 0;
-  text-align: center;
+  padding: 7px 27px;
+  font-size: h4;
+  font-family: "DM Sans", sans-serif;
+  color: #7f1023;
+  transition: 0.3s;
+}
+.big-btn-wine:hover {
+  color: #560f1b;
+}
+
+.big-btn-gray {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 27px;
+  font-size: h4;
+  font-family: "DM Sans", sans-serif;
+  color: #322d26;
+  transition: 0.3s;
+}
+.big-btn-gray:hover {
+  color: #1a1713;
+}
+
+.small-btn-sand {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 27px;
+  font-size: p;
+  font-family: "DM Sans", sans-serif;
+  color: #beb19e;
+  transition: 0.3s;
+}
+.small-btn-sand:hover {
+  color: #8d8170;
+}
+
+.small-btn-wine {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 27px;
+  font-size: p;
+  font-family: "DM Sans", sans-serif;
+  color: #7f1023;
+  transition: 0.3s;
+}
+.small-btn-wine:hover {
+  color: #560f1b;
+}
+
+.small-btn-gray {
+  border: 0;
+  border-radius: 0;
+  padding: 7px 27px;
+  font-size: p;
+  font-family: "DM Sans", sans-serif;
+  color: #322d26;
+  transition: 0.3s;
+}
+.small-btn-gray:hover {
+  color: #1a1713;
 }
 
 .text {
@@ -33,6 +98,118 @@
 .radio {
   border: 0;
   border-radius: 0;
+}
+
+* {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.header {
+  background: #322d26;
+}
+.header .header_wrapper {
+  max-width: 1200px;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .header_wrapper .header_hamburger {
+  display: none;
+}
+.header .header_wrapper .header_logo {
+  padding: 10px 0;
+  flex-grow: 1;
+}
+.header .header_wrapper .header_logo img {
+  width: 125px;
+  display: block;
+}
+.header .header_wrapper .header_link {
+  flex-grow: 1;
+  text-align: center;
+  list-style: none;
+}
+.header .header_wrapper .header_link a {
+  margin: 0 30px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+.header .header_wrapper .wrap_login_shoppingcart {
+  width: 205px;
+  display: flex;
+  justify-content: space-between;
+}
+.header .header_wrapper .wrap_login_shoppingcart a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+.header .header_wrapper .wrap_login_shoppingcart .fa-regular {
+  color: #fff;
+}
+.header .header_wrapper .wrap_login_shoppingcart .fa-solid {
+  color: #fff;
+}
+
+.footer {
+  background-color: #7f1023;
+}
+.footer .footer_wrapper {
+  display: flex;
+  max-width: 1200px;
+  width: 90%;
+  margin: auto;
+}
+.footer .footer_logo {
+  padding: 50px 0;
+  flex-grow: 1;
+}
+.footer .footer_logo img {
+  width: 250px;
+}
+.footer .wrap_contactus_aboutus {
+  padding-top: 30px;
+  display: flex;
+  width: 350px;
+  justify-content: space-between;
+  align-items: start;
+}
+.footer .wrap_contactus_aboutus .footer_contactus {
+  display: flex;
+  flex-direction: column;
+}
+.footer .wrap_contactus_aboutus .footer_contactus a {
+  color: #fff;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  line-height: 2;
+  font-family: "DM Sans", sans-serif;
+}
+.footer .wrap_contactus_aboutus .footer_aboutus {
+  display: flex;
+  flex-direction: column;
+}
+.footer .wrap_contactus_aboutus .footer_aboutus a {
+  color: #fff;
+  letter-spacing: 0.1em;
+  font-size: 16px;
+  line-height: 2;
+  font-family: "DM Sans", sans-serif;
+}
+
+.tibame {
+  padding: 50px 0;
+  background-color: black;
+}
+.tibame p {
+  text-align: center;
+  color: #fff;
 }
 
 * {
@@ -148,51 +325,5 @@
   }
 }
 /* --------------------------------------- */
-.primary {
-  color: #eadece;
-}
-
-.highlight {
-  color: #7f1023;
-}
-
-.font {
-  color: #322d26;
-}
-
-h2 {
-  font-size: 64px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-}
-
-h3 {
-  font-size: 36px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-}
-
-h4 {
-  font-size: 24px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-}
-
-p {
-  font-size: 16px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-}
-
-h6 {
-  font-size: 13px;
-  font-family: "DM Sans", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-}
 
 /*# sourceMappingURL=style.css.map */

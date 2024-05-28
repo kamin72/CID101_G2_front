@@ -6,7 +6,7 @@
   font-size: $font-size;
   font-family: $font-dm;
   color: $btn-color;
-  transition: .3s;
+  transition: 0.3s;
 
   &:hover {
     color: $btn-hover-color;
@@ -15,22 +15,22 @@
 
 // 大按鈕樣式
 .big-btn-sand {
-  @include button($h4, $sand, $sand-hover);
+  @include button(h4, $sand, $sand-hover);
 }
 .big-btn-wine {
-  @include button($h4, $wine, $wine-hover);
+  @include button(h4, $wine, $wine-hover);
 }
 .big-btn-gray {
-  @include button($h4, $gray, $gray-hover);
+  @include button(h4, $gray, $gray-hover);
 }
 
 // 小按鈕樣式
 .small-btn-sand {
-  @include button($p, $sand, $sand-hover);
+  @include button(p, $sand, $sand-hover);
 }
 .small-btn-wine {
-  @include button($p, $wine, $wine-hover);
+  @include button(p, $wine, $wine-hover);
 }
 .small-btn-gray {
-  @include button($p, $gray, $gray-hover);
+  @include button(p, $gray, $gray-hover);
 }

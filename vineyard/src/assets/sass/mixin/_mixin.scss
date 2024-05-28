@@ -35,32 +35,3 @@
     }
   }
 }
-
-//字體顏色
-@mixin color($color) {
-  @each $k, $v in $color {
-    .#{$k} {
-      color: $v;
-    }
-  }
-}
-
-@mixin bg-color($color) {
-  @each $k, $v in $color {
-    .#{$k} {
-      background-color: $v;
-    }
-  }
-}
-
-//字體大小
-@mixin font($font_size) {
-  @each $k, $v in $font_size {
-    #{$k} {
-      font-size: $v;
-      font-family: $font-dm;
-      font-weight: $font-weight-regular;
-      letter-spacing: $letter-spacing;
-    }
-  }
-}
