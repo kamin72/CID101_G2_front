@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header_wrapper">
+    <nav class="container">
       <div class="header_hamburger">
         <i class="fa-solid fa-bars"></i>
       </div>
@@ -13,6 +13,7 @@
         <li>
           <a href="#">我們的酒</a>
           <a href="#">品酒課程</a>
+          <a href="#">品酒達人</a>
           <a href="#">最新消息</a>
           <a href="#">關於我們</a>
         </li>
@@ -29,6 +30,6 @@
           <a href="#">詢價清單(0)</a>
         </div>
       </div>
-    </div>
+    </nav>
   </header>
 </template>

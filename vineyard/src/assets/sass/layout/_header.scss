@@ -4,61 +4,51 @@
 
 .header {
   background: $gray;
-  .header_wrapper {
-    // outline: 1px solid red;
-    max-width: 1200px;
-    width: 90%;
-    margin: auto;
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     .header_hamburger {
       display: none;
     }
     .header_logo {
-      //   width: 100px;
       padding: 10px 0;
       flex-grow: 1;
       img {
         width: 125px;
-        // outline: 1px solid red;
         display: block;
       }
     }
     .header_link {
-      //   outline: 1px solid red;
       flex-grow: 1;
       text-align: center;
       list-style: none;
       a {
-        // outline: 1px solid red;
-        margin: 0 30px;
+        margin: 0 20px;
         text-decoration: none;
         color: $white;
         font-size: $a-font-size;
         letter-spacing: $letter-spacing;
       }
     }
-
-    .wrap_login_shoppingcart {
-      //   outline: 1px solid red;
-      width: 205px;
-      display: flex;
-      justify-content: space-between;
-      a {
-        margin: 0 10px;
-        text-decoration: none;
-        color: #fff;
-        font-size: $a-font-size;
-        letter-spacing: $letter-spacing;
-      }
-      .fa-regular {
-        color: $white;
-      }
-      .fa-solid {
-        color: $white;
-      }
+  }
+  .wrap_login_shoppingcart {
+    //   outline: 1px solid red;
+    width: 205px;
+    display: flex;
+    justify-content: space-between;
+    a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #fff;
+      font-size: $a-font-size;
+      letter-spacing: $letter-spacing;
+    }
+    .fa-regular {
+      color: $white;
+    }
+    .fa-solid {
+      color: $white;
     }
   }
 }
