@@ -11,23 +11,23 @@
 
       <ul class="header_link">
         <li>
-          <a href="#">我們的酒</a>
-          <a href="#">品酒課程</a>
-          <a href="#">品酒達人</a>
-          <a href="#">最新消息</a>
-          <a href="#">關於我們</a>
+          <RouterLink to="/product">我們的酒</RouterLink>
+          <RouterLink to="/course">品酒課程</RouterLink>
+          <RouterLink to="/game">品酒達人</RouterLink>
+          <RouterLink to="/new">最新消息</RouterLink>
+          <RouterLink to="/about">關於我們</RouterLink>
         </li>
       </ul>
 
       <div class="wrap_login_shoppingcart">
         <div class="header_login">
           <i class="fa-regular fa-user"></i>
-          <a href="#">登入</a>
+          <RouterLink to="/login">登入</RouterLink>
         </div>
 
         <div class="header_shoppingcart">
           <i class="fa-solid fa-bag-shopping"></i>
-          <a href="#">詢價清單(0)</a>
+          <RouterLink to="/cart">詢價清單(0)</RouterLink>
         </div>
       </div>
     </nav>
