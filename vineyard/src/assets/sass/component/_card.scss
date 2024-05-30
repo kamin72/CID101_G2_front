@@ -1,10 +1,11 @@
-//event區塊卡片
-.event-card {
+// 活動卡片1
+.event-card1 {
     .img-wrap {
         width: 100%;
         position: relative;
         aspect-ratio: 1/1;
         object-fit: cover;
+        object-position: center;
         overflow: hidden;
         img {
             width: 100%;
@@ -18,16 +19,15 @@
             justify-content: center;
             align-items: center;
             background-color: $white-transp;
+            font-family: $font-dm;
             transition: bottom 0.3s ease-in-out;
         }
         .card-ribbon {
             position: absolute;
-            display: flex;
             top: 0;
             left: 0;
             padding: 5px 15px;
-            justify-content: center;
-            align-items: center;
+            font-family: $font-dm, $font-noto;
             color: $white;
             background-color: $gray;
             small {
@@ -38,23 +38,83 @@
             bottom: 0;
         }
     }
+    h4 {
+        margin: 15px 0;
+        font-family: $font-dm, $font-noto;
+        font-size: map-get($font-size, h4);
+    }
     .font-wrap {
         h4 {
-            font-size: map-get($font-size, h4);
             margin: 7px 0;
         }
         p {
             margin: 0;
+            font-family: $font-dm, $font-noto;
             font-size: map-get($font-size, p);
         }
     }
-    h4 {
-        font-size: map-get($font-size, h4);
-        margin: 15px 0;
+}
+
+// 活動卡片2
+.event-card2 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: $bgc;
+    height: 200px;
+    &:hover {
+        img {
+            scale: 1.05;
+        }
+    }
+    .img-wrap {
+        width: 45%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        overflow: hidden;
+        img {
+            transition: 0.3s ease-in-out;
+        }
+    }
+    .info-wrap {
+        width: 55%;
+        margin: 20px;
+        display: flex;
+        align-items: flex-end;
+        .right-wrap {
+            width: 25%;
+        }
+        .left-wrap {
+            width: 75%;
+
+            h3, h4, p {
+                margin: 5px 0px;
+                font-family: $font-dm, $font-noto;
+            }
+
+            h3 {
+                font-size: map-get($font-size, h3);
+            }
+
+            h4 {
+                margin-bottom: 10px;
+                font-size: map-get($font-size, h4);
+            }
+
+            p {
+                font-size: map-get($font-size, p);
+            }
+        }
+    }
+    .more-botton {
+        @include big-button($gray);
+        right: 20px;
+        bottom: -10px;
     }
 }
 
-//商品卡片
+// 商品卡片
 .product-card {
     display: flex;
     flex-direction: column;
@@ -72,15 +132,18 @@
         }
     }
     small {
+        font-family: $font-dm, $font-noto;
         font-size: map-get($font-size, small);
     }
     h4 {
-        font-size: map-get($font-size, h4);
         margin: 10px 0;
+        font-family: $font-dm, $font-noto;
+        font-size: map-get($font-size, h4);
     }
     .font-wrap {
         p {
             margin: 0;
+            font-family: $font-dm, $font-noto;
             font-size: map-get($font-size, p);
         }
     }
@@ -95,6 +158,7 @@
         width: 100%;
         height: 45px;
         color: $white;
+        font-family: $font-dm, $font-noto;
         background-color: $secondary-botton-color;
         transition: 0.3s ease-in-out;
         cursor: pointer;
