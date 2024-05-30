@@ -60,6 +60,8 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-left: -15px;
+    margin-right: -15px;
     background-color: $bgc;
     height: 200px;
     &:hover {
@@ -68,6 +70,7 @@
         }
     }
     .img-wrap {
+        left: 0;
         width: 45%;
         height: 100%;
         object-fit: cover;
@@ -107,10 +110,11 @@
             }
         }
     }
-    .more-botton {
-        @include big-button($gray);
+    .big-btn-primary {
+        position: absolute;
         right: 20px;
-        bottom: -10px;
+        bottom: 0px;
+        translate: 0 50%;
     }
 }
 

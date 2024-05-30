@@ -27,10 +27,16 @@
 //桌機
 @include grid(12);
 
-//手機
+//平板
 @include t() {
+  @include grid-t(12);
+}
+
+@include m() {
   @include grid-m(12);
 }
+
+
 
 /* --------------------------------------- */
 // .row-cols-1 .col {
