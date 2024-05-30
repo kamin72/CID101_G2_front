@@ -22,7 +22,7 @@
   }
 }
 // 平板版
-@mixin grid($value) {
+@mixin grid-t($value) {
   @for $i from 1 through $value {
     .col-md-#{$i} {
       width: math.div($i, $value) * 100%;
