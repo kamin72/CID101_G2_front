@@ -7,16 +7,11 @@
 
       <div class="wrap_contactus_aboutus">
         <div class="footer_contactus">
-          <a>聯絡我們</a>
-          <a>0912-345-678</a>
-          <a>123@email.com</a>
-          <a>台北市士林區華興里7鄰123號</a>
+          <a v-for="(contactItem) in contactUs" :key="contactItem.id">{{ contactItem.title }}</a>
         </div>
 
         <div class="footer_aboutus">
-          <a>關於我</a>
-          <a>最新消息</a>
-          <a>品酒課程</a>
+          <a v-for="(aboutItem) in aboutUs" :key="aboutItem.id">{{ aboutItem.title }}</a>
         </div>
       </div>
     </nav>
@@ -29,3 +24,44 @@
     <small>若有侵權疑慮,您可以私訊緯育TibaMe,後續會由專人協助處理。</small>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      contactUs: [
+        {
+          id: 1,
+          title: "聯絡我們"
+        },
+        {
+          id: 2,
+          title: "0912-345-678"
+        },
+        {
+          id: 3,
+          title: "123@email.com"
+        },
+        {
+          id: 4,
+          title: "台北市士林區華興里7鄰123號"
+        }
+      ],
+      aboutUs: [
+        {
+          id: 1,
+          title: "關於我"
+        },
+        {
+          id: 2,
+          title: "最新消息"
+        },
+        {
+          id: 3,
+          title: "品酒課程"
+        }
+      ]
+    }
+  }
+}
+
+</script>
