@@ -1,7 +1,7 @@
 <template>
   <Mainheader />
   <RouterView />
-  <Cards />
+  <!-- <Cards /> -->
   <Mainfooter />
 </template>
 
@@ -14,8 +14,7 @@ export default {
   components: {
     RouterView,
     Mainheader,
-    Mainfooter,
-    Cards,
+    Mainfooter
   }
 }
 </script>

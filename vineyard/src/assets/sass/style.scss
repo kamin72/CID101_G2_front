@@ -6,6 +6,7 @@
 @import 'base/color';
 @import 'base/font';
 @import 'base/setting';
+@import 'base/reset';
 
 // mixin function
 @import 'mixin/mixin';
@@ -17,7 +18,6 @@
 @import 'component/table';
 
 // layout
-@import 'layout/reset';
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/login';
