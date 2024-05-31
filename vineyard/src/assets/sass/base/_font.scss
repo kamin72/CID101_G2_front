@@ -4,6 +4,17 @@
 // 引入 Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Noto+Sans+TC&display=swap');
 
+// 字體
+$font-dm: 'DM Sans', sans-serif;
+$font-noto: 'Noto Sans TC', sans-serif;
+$font-cormorant: 'Cormorant Garamond', serif;
+
+// 粗體
+$font-weight: 400;
+
+// 字體間距
+$letter-spacing: 0.1em;
+
 // 字體大小
 $font-size: (
   h2: clamp(30px, 5vw, 64px),
@@ -14,13 +25,14 @@ $font-size: (
   a: clamp(14px, 2.5vw, 16px)
 );
 
-// 字體
-$font-dm: 'DM Sans', sans-serif;
-$font-noto: 'Noto Sans TC', sans-serif;
-$font-cormorant: 'Cormorant Garamond', serif;
+// 定義要迴圈的標題級別
+$header-levels: 'h2', 'h3', 'h4', 'p', 'small', 'a';
 
-// 粗體
-$font-weight-regular: 400;
-
-// 字體間距
-$letter-spacing: 0.1em;
+// 迴圈產生各個標題級別的樣式
+@each $level in $header-levels {
+  #{$level} {
+    font-size: map-get($font-size, #{$level});
+    font-weight: $font-weight;
+    font-family: $font-dm, $font-noto;
+  }
+}

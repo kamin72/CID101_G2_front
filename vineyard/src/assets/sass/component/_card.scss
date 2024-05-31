@@ -19,7 +19,6 @@
             justify-content: center;
             align-items: center;
             background-color: $white-transp;
-            font-family: $font-dm;
             transition: bottom 0.3s ease-in-out;
         }
         .card-ribbon {
@@ -27,12 +26,8 @@
             top: 0;
             left: 0;
             padding: 5px 15px;
-            font-family: $font-dm, $font-noto;
             color: $white;
             background-color: $gray;
-            small {
-                font-size: map-get($font-size, small);
-            }
         }
         &:hover .book-now {
             bottom: 0;
@@ -40,8 +35,6 @@
     }
     h4 {
         margin: 15px 0;
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, h4);
     }
     .font-wrap {
         h4 {
@@ -49,8 +42,6 @@
         }
         p {
             margin: 0;
-            font-family: $font-dm, $font-noto;
-            font-size: map-get($font-size, p);
         }
     }
 }
@@ -59,6 +50,7 @@
 .event-card2 {
     position: relative;
     display: flex;
+    width: 60%;
     align-items: center;
     margin-left: -15px;
     margin-right: -15px;
@@ -85,36 +77,40 @@
         margin: 20px;
         display: flex;
         align-items: flex-end;
+        justify-content: space-between;
         .right-wrap {
-            width: 25%;
+            width: 30%;
         }
         .left-wrap {
-            width: 75%;
-
-            h3, h4, p {
-                margin: 5px 0px;
-                font-family: $font-dm, $font-noto;
-            }
-
-            h3 {
-                font-size: map-get($font-size, h3);
-            }
-
-            h4 {
-                margin-bottom: 10px;
-                font-size: map-get($font-size, h4);
-            }
-
-            p {
-                font-size: map-get($font-size, p);
-            }
+            width: 65%;
+        }
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+        }
+        h4 {
+            margin: 4px 0px;
+        }
+        p {
+            margin: 4px 0px;
         }
     }
-    .big-btn-primary {
+    .small-btn-primary {
         position: absolute;
         right: 20px;
         bottom: 0px;
         translate: 0 50%;
+    }
+}
+@include t(){
+    .event-card2 {
+        width: 75%;
+    }
+}
+@include m(){
+    .event-card2 {
+        display: none;
     }
 }
 
@@ -135,20 +131,12 @@
             width: 100%;
         }
     }
-    small {
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, small);
-    }
     h4 {
         margin: 10px 0;
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, h4);
     }
     .font-wrap {
         p {
             margin: 0;
-            font-family: $font-dm, $font-noto;
-            font-size: map-get($font-size, p);
         }
     }
     .info-wrap {
@@ -162,7 +150,6 @@
         width: 100%;
         height: 45px;
         color: $white;
-        font-family: $font-dm, $font-noto;
         background-color: $secondary-botton-color;
         transition: 0.3s ease-in-out;
         cursor: pointer;

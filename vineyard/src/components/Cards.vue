@@ -17,24 +17,28 @@
                 </div>
                 <h4>NT. 3,200</h4>
             </div> -->
-            <div class="col-6 event-card2">
+
+            <div class="event-card2">
                 <div class="img-wrap">
                     <img src="https://picsum.photos/600/600/?random=10" />
                 </div>
                 <div class="info-wrap">
                     <div class="left-wrap">
-                        <h3>class</h3>
-                        <h4>class date</h4>
+                        <div class="title-wrap">
+                            <h4>初級品酒課程1</h4>
+                            <p>2024/05/18 開課</p>
+                        </div>
                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                     </div>
                     <div class="right-wrap">
                         <div class="price">
-                            <h4>NT. 3200</h4>
+                            <h4>NT.3200</h4>
                         </div>
                     </div>
                 </div>
-                <div class="big-btn-primary">詳情資訊</div>
+                <div class="small-btn-primary">詳情資訊</div>
             </div>
+
             <!-- <div class="col-3 col-md-3 col-sm-6 product-card">
                 <div class="img-wrap">
                     <img src="https://picsum.photos/300/200/?random=10">
