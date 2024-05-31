@@ -1,6 +1,7 @@
 // 活動卡片1
 .event-card1 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     .img-wrap {
         width: 100%;
         position: relative;
@@ -34,6 +35,8 @@
             bottom: 0;
         }
 =======
+=======
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
   .img-wrap {
     width: 100%;
     position: relative;
@@ -43,6 +46,9 @@
     overflow: hidden;
     img {
       width: 100%;
+<<<<<<< HEAD
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
+=======
 >>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
     .book-now {
@@ -82,6 +88,7 @@
   .font-wrap {
     h4 {
 <<<<<<< HEAD
+<<<<<<< HEAD
         margin: 15px 0;
     }
     .font-wrap {
@@ -100,6 +107,15 @@
       font-size: map-get($font-size, p);
 >>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
+=======
+      margin: 7px 0;
+    }
+    p {
+      margin: 0;
+      font-family: $font-dm, $font-noto;
+      font-size: map-get($font-size, p);
+    }
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
   }
 }
 
@@ -132,6 +148,7 @@
     width: 55%;
     margin: 20px;
     display: flex;
+<<<<<<< HEAD
 <<<<<<< HEAD
     width: 60%;
     align-items: center;
@@ -189,6 +206,12 @@
     .right-wrap {
       width: 25%;
     }
+=======
+    align-items: flex-end;
+    .right-wrap {
+      width: 25%;
+    }
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     .left-wrap {
       width: 75%;
 
@@ -211,6 +234,7 @@
       p {
         font-size: map-get($font-size, p);
       }
+<<<<<<< HEAD
 >>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
   }
@@ -229,7 +253,16 @@
 @include m(){
     .event-card2 {
         display: none;
+=======
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
+  }
+  .big-btn-primary {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+    translate: 0 50%;
+  }
 }
 
 // 商品卡片
@@ -273,6 +306,7 @@
     display: flex;
     justify-content: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
     background-color: $white;
     .img-wrap {
         position: relative;
@@ -310,6 +344,8 @@
             background-color: darken($secondary-botton-color, 20);
         }
 =======
+=======
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     align-items: center;
     width: 100%;
     height: 45px;
@@ -320,6 +356,9 @@
     cursor: pointer;
     &:hover {
       background-color: darken($secondary-botton-color, 20);
+<<<<<<< HEAD
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
+=======
 >>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
   }

@@ -41,6 +41,7 @@
                 <h4>NT. 3,200</h4>
             </div> -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             <div class="event-card2">
                 <div class="img-wrap">
@@ -75,6 +76,18 @@
               <h4>class date</h4>
               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
             </div>
+=======
+        <div class="event-card2">
+          <div class="img-wrap">
+            <img src="https://picsum.photos/600/600/?random=10" />
+          </div>
+          <div class="info-wrap">
+            <div class="left-wrap">
+              <h3>class</h3>
+              <h4>class date</h4>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
             <div class="right-wrap">
               <div class="price">
                 <h4>NT. 3200</h4>
@@ -84,6 +97,9 @@
           <div class="big-btn-primary">詳情資訊</div>
         </div>
         <!-- <div class="col-3 col-md-3 col-sm-6 product-card">
+<<<<<<< HEAD
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
+=======
 >>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
                 <div class="img-wrap">
                     <img src="https://picsum.photos/300/200/?random=10">
