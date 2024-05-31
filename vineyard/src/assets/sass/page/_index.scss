@@ -1,0 +1,110 @@
+// 開場輪播圖
+.homeBanner {
+    background: #949494b1;
+    height: 90vh;
+    align-content: center;
+    .homeBanner_container {
+        // outline: 1px solid red;
+        width: 90%;
+        margin: auto;
+        // position: absolute;
+        // .homeBanner_wine {
+        //     outline: 1px solid red;
+        //     width: 600px;
+        //     position: relative;
+        //     right: 50%;
+        //     left: 50%;
+        //     img {
+        //         width: 100%;
+        //     }
+        // }
+        h3 {
+            // outline: 1px solid red;
+            font-size: 35px;
+            width: 70%;
+            margin: auto;
+            color: #000000;
+        }
+        h2 {
+            font-size: 300px;
+            text-align: center;
+            // outline: 1px solid red;
+            color: #5e5e5e;
+        }
+        h4 {
+            // outline: 1px solid red;
+            font-size: 35px;
+            text-align: right;
+            width: 70%;
+            margin: auto;
+            color: #000000;
+        }
+    }
+}
+
+// 關於我們
+.homeAboutus {
+    background-color: #eadece;
+    .homeAboutus_container {
+        // outline: 1px solid red;
+        padding: 174px 0;
+        width: 90%;
+        display: flex;
+        margin: auto;
+    }
+    .homeAboutus_pic {
+        width: 100%;
+        img {
+            width: 100%;
+        }
+    }
+    .wrap_homeAboutus {
+        // outline: 1px solid red;
+        position: relative;
+        margin: 0 50px;
+        .homeAboutus_txt {
+            letter-spacing: $letter-spacing;
+            h3 {
+                font-size: 54px;
+                margin-bottom: 37px;
+            }
+            p {
+                width: 75%;
+                margin-bottom: 37px;
+            }
+        }
+        .wrap_homeAboutus_detail {
+            // outline: 1px solid red;
+
+            margin-bottom: 40px;
+            .homeAboutus_detail {
+                // outline: 1px solid red;
+                display: flex;
+                margin-bottom: 16px;
+                p {
+                    margin-left: 10px;
+                    letter-spacing: $letter-spacing;
+                }
+            }
+        }
+        button {
+            border: none;
+            padding: 16px 85px;
+            background-color: #7f1023;
+            a {
+                text-decoration: none;
+                color: #ffffff;
+                letter-spacing: $letter-spacing;
+            }
+        }
+        .homeAboutus_BarrelImg {
+            width: 300px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
