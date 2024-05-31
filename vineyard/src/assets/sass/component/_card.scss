@@ -1,42 +1,5 @@
 // 活動卡片1
 .event-card1 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    .img-wrap {
-        width: 100%;
-        position: relative;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        object-position: center;
-        overflow: hidden;
-        img {
-            width: 100%;
-        }
-        .book-now {
-            position: absolute;
-            display: flex;
-            width: 100%;
-            height: 40px;
-            bottom: -40px;
-            justify-content: center;
-            align-items: center;
-            background-color: $white-transp;
-            transition: bottom 0.3s ease-in-out;
-        }
-        .card-ribbon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 5px 15px;
-            color: $white;
-            background-color: $gray;
-        }
-        &:hover .book-now {
-            bottom: 0;
-        }
-=======
-=======
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
   .img-wrap {
     width: 100%;
     position: relative;
@@ -46,10 +9,6 @@
     overflow: hidden;
     img {
       width: 100%;
-<<<<<<< HEAD
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
-=======
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
     .book-now {
       position: absolute;
@@ -87,27 +46,6 @@
   }
   .font-wrap {
     h4 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        margin: 15px 0;
-    }
-    .font-wrap {
-        h4 {
-            margin: 7px 0;
-        }
-        p {
-            margin: 0;
-        }
-=======
-      margin: 7px 0;
-    }
-    p {
-      margin: 0;
-      font-family: $font-dm, $font-noto;
-      font-size: map-get($font-size, p);
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
-    }
-=======
       margin: 7px 0;
     }
     p {
@@ -115,7 +53,6 @@
       font-family: $font-dm, $font-noto;
       font-size: map-get($font-size, p);
     }
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
   }
 }
 
@@ -148,134 +85,46 @@
     width: 55%;
     margin: 20px;
     display: flex;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> dev
-    width: 60%;
-    align-items: center;
-    margin-left: -15px;
-    margin-right: -15px;
-    background-color: $bgc;
-    height: 200px;
-    &:hover {
-        img {
-            scale: 1.05;
-        }
-    }
-    .img-wrap {
-        left: 0;
-        width: 45%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        overflow: hidden;
-        img {
-            transition: 0.3s ease-in-out;
-        }
-    }
-    .info-wrap {
-        width: 55%;
-        margin: 20px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        .right-wrap {
-            width: 30%;
-        }
-        .left-wrap {
-            width: 65%;
-        }
-        .title-wrap {
-            display: flex;
-            flex-direction: column;
-            align-content: space-between;
-        }
-        h4 {
-            margin: 4px 0px;
-        }
-        p {
-            margin: 4px 0px;
-        }
-    }
-    .small-btn-primary {
-        position: absolute;
-        right: 20px;
-        bottom: 0px;
-        translate: 0 50%;
-=======
     align-items: flex-end;
     .right-wrap {
       width: 25%;
     }
-=======
-    align-items: flex-end;
-    .right-wrap {
-      width: 25%;
-    }
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     .left-wrap {
       width: 75%;
-
       h3,
       h4,
       p {
-        margin: 5px 0px;
+        margin: 5px 0;
         font-family: $font-dm, $font-noto;
       }
-
       h3 {
         font-size: map-get($font-size, h3);
       }
-
       h4 {
         margin-bottom: 10px;
         font-size: map-get($font-size, h4);
       }
-
       p {
         font-size: map-get($font-size, p);
       }
-<<<<<<< HEAD
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
   }
   .big-btn-primary {
     position: absolute;
     right: 20px;
-    bottom: 0px;
+    bottom: 0;
     translate: 0 50%;
   }
 }
-@include t(){
-    .event-card2 {
-        width: 75%;
-    }
-}
-@include m(){
-    .event-card2 {
-        display: none;
-=======
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
-    }
-  }
-  .big-btn-primary {
-    position: absolute;
-    right: 20px;
-    bottom: 0px;
-    translate: 0 50%;
+@include t() {
+  .event-card2 {
+    width: 75%;
   }
 }
-@include t(){
-    .event-card2 {
-        width: 75%;
-    }
-}
-@include m(){
-    .event-card2 {
-        display: none;
-    }
+@include m() {
+  .event-card2 {
+    display: none;
+  }
 }
 
 // 商品卡片
@@ -318,47 +167,6 @@
   .add-card {
     display: flex;
     justify-content: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    background-color: $white;
-    .img-wrap {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 2/1;
-        img {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-    }
-    h4 {
-        margin: 10px 0;
-    }
-    .font-wrap {
-        p {
-            margin: 0;
-        }
-    }
-    .info-wrap {
-        width: 90%;
-        margin-bottom: 10px;
-    }
-    .add-card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 45px;
-        color: $white;
-        background-color: $secondary-botton-color;
-        transition: 0.3s ease-in-out;
-        cursor: pointer;
-        &:hover {
-            background-color: darken($secondary-botton-color, 20);
-        }
-=======
-=======
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     align-items: center;
     width: 100%;
     height: 45px;
@@ -369,10 +177,6 @@
     cursor: pointer;
     &:hover {
       background-color: darken($secondary-botton-color, 20);
-<<<<<<< HEAD
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
-=======
->>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
   }
 }
