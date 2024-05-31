@@ -1,5 +1,6 @@
 // 活動卡片1
 .event-card1 {
+<<<<<<< HEAD
     .img-wrap {
         width: 100%;
         position: relative;
@@ -19,7 +20,6 @@
             justify-content: center;
             align-items: center;
             background-color: $white-transp;
-            font-family: $font-dm;
             transition: bottom 0.3s ease-in-out;
         }
         .card-ribbon {
@@ -27,21 +27,62 @@
             top: 0;
             left: 0;
             padding: 5px 15px;
-            font-family: $font-dm, $font-noto;
             color: $white;
             background-color: $gray;
-            small {
-                font-size: map-get($font-size, small);
-            }
         }
         &:hover .book-now {
             bottom: 0;
         }
+=======
+  .img-wrap {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    img {
+      width: 100%;
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
+    .book-now {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 40px;
+      bottom: -40px;
+      justify-content: center;
+      align-items: center;
+      background-color: $white-transp;
+      font-family: $font-dm;
+      transition: bottom 0.3s ease-in-out;
+    }
+    .card-ribbon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 5px 15px;
+      font-family: $font-dm, $font-noto;
+      color: $white;
+      background-color: $gray;
+      small {
+        font-size: map-get($font-size, small);
+      }
+    }
+    &:hover .book-now {
+      bottom: 0;
+      cursor: pointer;
+    }
+  }
+  h4 {
+    margin: 15px 0;
+    font-family: $font-dm, $font-noto;
+    font-size: map-get($font-size, h4);
+  }
+  .font-wrap {
     h4 {
+<<<<<<< HEAD
         margin: 15px 0;
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, h4);
     }
     .font-wrap {
         h4 {
@@ -49,16 +90,50 @@
         }
         p {
             margin: 0;
-            font-family: $font-dm, $font-noto;
-            font-size: map-get($font-size, p);
         }
+=======
+      margin: 7px 0;
     }
+    p {
+      margin: 0;
+      font-family: $font-dm, $font-noto;
+      font-size: map-get($font-size, p);
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
+    }
+  }
 }
 
 // 活動卡片2
 .event-card2 {
-    position: relative;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: -15px;
+  padding-right: -15px;
+  background-color: $bgc;
+  height: 200px;
+  &:hover {
+    img {
+      scale: 1.05;
+    }
+  }
+  .img-wrap {
+    left: 0;
+    width: 45%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    img {
+      transition: 0.3s ease-in-out;
+    }
+  }
+  .info-wrap {
+    width: 55%;
+    margin: 20px;
     display: flex;
+<<<<<<< HEAD
+    width: 60%;
     align-items: center;
     margin-left: -15px;
     margin-right: -15px;
@@ -85,45 +160,119 @@
         margin: 20px;
         display: flex;
         align-items: flex-end;
+        justify-content: space-between;
         .right-wrap {
-            width: 25%;
+            width: 30%;
         }
         .left-wrap {
-            width: 75%;
-
-            h3, h4, p {
-                margin: 5px 0px;
-                font-family: $font-dm, $font-noto;
-            }
-
-            h3 {
-                font-size: map-get($font-size, h3);
-            }
-
-            h4 {
-                margin-bottom: 10px;
-                font-size: map-get($font-size, h4);
-            }
-
-            p {
-                font-size: map-get($font-size, p);
-            }
+            width: 65%;
+        }
+        .title-wrap {
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+        }
+        h4 {
+            margin: 4px 0px;
+        }
+        p {
+            margin: 4px 0px;
         }
     }
-    .big-btn-primary {
+    .small-btn-primary {
         position: absolute;
         right: 20px;
         bottom: 0px;
         translate: 0 50%;
+=======
+    align-items: flex-end;
+    .right-wrap {
+      width: 25%;
+    }
+    .left-wrap {
+      width: 75%;
+
+      h3,
+      h4,
+      p {
+        margin: 5px 0px;
+        font-family: $font-dm, $font-noto;
+      }
+
+      h3 {
+        font-size: map-get($font-size, h3);
+      }
+
+      h4 {
+        margin-bottom: 10px;
+        font-size: map-get($font-size, h4);
+      }
+
+      p {
+        font-size: map-get($font-size, p);
+      }
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
+    }
+  }
+  .big-btn-primary {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+    translate: 0 50%;
+  }
+}
+@include t(){
+    .event-card2 {
+        width: 75%;
+    }
+}
+@include m(){
+    .event-card2 {
+        display: none;
     }
 }
 
 // 商品卡片
 .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  .img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/1;
+    img {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+  small {
+    font-family: $font-dm, $font-noto;
+    font-size: map-get($font-size, small);
+  }
+  h4 {
+    margin: 10px 0;
+    font-family: $font-dm, $font-noto;
+    font-size: map-get($font-size, h4);
+  }
+  .font-wrap {
+    p {
+      margin: 0;
+      font-family: $font-dm, $font-noto;
+      font-size: map-get($font-size, p);
+    }
+  }
+  .info-wrap {
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  .add-card {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     background-color: $white;
     .img-wrap {
         position: relative;
@@ -135,20 +284,12 @@
             width: 100%;
         }
     }
-    small {
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, small);
-    }
     h4 {
         margin: 10px 0;
-        font-family: $font-dm, $font-noto;
-        font-size: map-get($font-size, h4);
     }
     .font-wrap {
         p {
             margin: 0;
-            font-family: $font-dm, $font-noto;
-            font-size: map-get($font-size, p);
         }
     }
     .info-wrap {
@@ -162,12 +303,24 @@
         width: 100%;
         height: 45px;
         color: $white;
-        font-family: $font-dm, $font-noto;
         background-color: $secondary-botton-color;
         transition: 0.3s ease-in-out;
         cursor: pointer;
         &:hover {
             background-color: darken($secondary-botton-color, 20);
         }
+=======
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    color: $white;
+    font-family: $font-dm, $font-noto;
+    background-color: $secondary-botton-color;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($secondary-botton-color, 20);
+>>>>>>> 86859cdc49012a6c50b53f0c69ca50bee93aa8bc
     }
+  }
 }
