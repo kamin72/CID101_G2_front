@@ -2,11 +2,11 @@
 @use 'sass:math';
 
 // base 變數
+@import 'base/reset';
 @import 'base/var';
 @import 'base/color';
 @import 'base/font';
 @import 'base/setting';
-@import 'base/reset';
 
 // mixin function
 @import 'mixin/mixin';

@@ -1,45 +1,61 @@
 <template>
   <CartFlow_list />
   <div class="container">
-    <section class="list">
-      <div class="textItem">
-        <div class="check">
-          <input type="checkbox" name="checkbox" id="checkbox" />
-          <p class="item">詢價清單</p>
-        </div>
-        <p class="item">單價</p>
-        <p class="item">數量</p>
-        <p class="item">總金額</p>
-      </div>
-      <div class="listItem" v-for="(productItem, productIndex) in products" :key="productItem.id">
-        <div class="image">
-          <input type="checkbox" name="checkbox" id="checkbox" />
-          <img :src="productItem.image" />
-          <div class="description">
-            {{ productItem.desc }}
+    <div class="wrapper">
+      <section class="list">
+        <div class="textItem">
+          <div class="check">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <p class="item">詢價清單</p>
           </div>
+          <p class="item">單價</p>
+          <p class="item">數量</p>
+          <p class="item">總金額</p>
         </div>
-        <div class="price">NT. {{ productItem.price }}</div>
-        <div class="amount">
-          <button class="small-btn-invalid">-</button>
-          <span class="num">{{ productItem.count }}</span>
-          <button class="small-btn-invalid">+</button>
+        <div class="listItem" v-for="(productItem, productIndex) in products" :key="productItem.id">
+          <div class="image">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <img :src="productItem.image" />
+            <div class="description">
+              {{ productItem.desc }}
+            </div>
+          </div>
+          <div class="price">NT. {{ productItem.price }}</div>
+          <div class="amount">
+            <button @click="reduce(productIndex)" class="small-btn-invalid">-</button>
+            <span class="num">{{ productItem.count }}</span>
+            <button @click="add(productIndex)" class="small-btn-invalid">+</button>
+          </div>
+          <div class="total">NT. {{ total(productIndex) }}</div>
         </div>
-        <div class="total">NT. {{ total(productIndex) }}</div>
-      </div>
-      <div class="sum">
-        <p>總價</p>
-        <p>NT. 1200</p>
-      </div>
-      <div class="discount">
-        <p>折扣</p>
-        <p>-NT. 120</p>
-      </div>
-      <div class="actualPaid">
-        <p>結帳金額</p>
-        <p>NT. 1080</p>
-      </div>
-    </section>
+        <div class="sum">
+          <p>總價</p>
+          <p>NT. {{ sum }}</p>
+        </div>
+        <div class="discount">
+          <p>折扣</p>
+          <p>-NT. 120</p>
+        </div>
+        <div class="actualPaid">
+          <p>結帳金額</p>
+          <p>NT. 1080</p>
+        </div>
+      </section>
+      <aside class="coupon">
+        <h4>優惠券</h4>
+        <div class="usage">
+          <input type="text" placeholder="輸入優惠碼" class="import" />
+          <button class="enter small-btn-primary">使用</button>
+        </div>
+        <div class="tickets">
+          <div class="content">
+            <span class="material-symbols-outlined"> local_activity </span>
+            <p>首購九折優惠</p>
+          </div>
+          <span class="material-symbols-outlined"> close </span>
+        </div>
+      </aside>
+    </div>
   </div>
 </template>
 
@@ -87,6 +103,14 @@ export default {
     total(index) {
       let price = this.products[index].price * this.products[index].count
       return price
+    },
+    add(index) {
+      if (this.products[index].count == 10) return
+      this.products[index].count++
+    },
+    reduce(index) {
+      if (this.products[index].count == 0) return
+      this.products[index].count--
     }
   },
   computed: {

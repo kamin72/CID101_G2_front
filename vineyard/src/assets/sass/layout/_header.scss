@@ -25,6 +25,7 @@
         color: $white;
         font-size: map-get($font-size, a);
         letter-spacing: $letter-spacing;
+        font-family: $font-cormorant;
       }
     }
   }
@@ -39,6 +40,7 @@
       color: #fff;
       font-size: map-get($font-size, a);
       letter-spacing: $letter-spacing;
+      font-family: $font-cormorant;
     }
     .fa-regular {
       color: $white;
