@@ -8,6 +8,7 @@
       </div>
       <div class="dot"></div>
     </section>
+
     <div class="wrap">
       <p
         class="text"
@@ -29,7 +30,7 @@ export default {
         {
           id: 1,
           icon: 'receipt_long',
-          opacity: '1'
+          opacity: '0.3'
         },
         {
           id: 2,
@@ -44,15 +45,15 @@ export default {
         {
           id: 4,
           icon: 'check',
-          opacity: '0.3'
+          opacity: '1'
         }
       ],
       wrap: [
         {
           id: 1,
           text: '詢價清單',
-          opacity: '1',
-          bold: '400'
+          opacity: '0.3',
+          bold: '0'
         },
         {
           id: 2,
@@ -69,8 +70,8 @@ export default {
         {
           id: 4,
           text: '完成詢價',
-          opacity: '0.3',
-          bold: '0'
+          opacity: '1',
+          bold: '400'
         }
       ]
     }
