@@ -6,7 +6,7 @@
       </div>
 
       <div class="header_logo">
-        <RouterLink to="/"><img src="/img/logo/logo2-w.png" /></RouterLink>
+        <RouterLink to="/"><img src="/src/assets/img/logo/logo2-w.png" /></RouterLink>
       </div>
 
       <ul class="header_link">

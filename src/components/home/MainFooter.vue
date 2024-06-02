@@ -2,7 +2,7 @@
   <footer class="footer">
     <nav class="container">
       <div class="footer_logo">
-        <a href="#"><img src="/img/logo/logo2-w.png" alt="" /></a>
+        <a href="#"><img src="/src/assets/img/logo/logo2-w.png" alt="" /></a>
       </div>
 
       <div class="wrap_contactus_aboutus">

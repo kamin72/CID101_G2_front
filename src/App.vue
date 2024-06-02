@@ -1,20 +1,20 @@
 <template>
-  <Mainheader />
+  <MainHeader />
   <RouterView />
   <!-- <Cards /> -->
-  <Mainfooter />
+  <MainFooter />
 </template>
 
 <script>
 import { RouterView } from 'vue-router'
-import Mainheader from '@/components/Mainheader.vue'
-import Mainfooter from '@/components/Mainfooter.vue'
+import MainHeader from '@/components/home/MainHeader.vue'
+import MainFooter from '@/components/home/MainFooter.vue'
 // import Cards from '@/components/Cards.vue'
 export default {
   components: {
     RouterView,
-    Mainheader,
-    Mainfooter
+    MainHeader,
+    MainFooter
   }
 }
 </script>
