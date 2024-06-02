@@ -9,7 +9,7 @@
 import { RouterView } from 'vue-router'
 import Mainheader from '@/components/Mainheader.vue'
 import Mainfooter from '@/components/Mainfooter.vue'
-import Cards from '@/components/Cards.vue'
+// import Cards from '@/components/Cards.vue'
 export default {
   components: {
     RouterView,
