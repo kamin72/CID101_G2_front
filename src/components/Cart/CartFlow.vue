@@ -1,19 +1,19 @@
 <template>
-  <div class="container">
-    <section class="flow">
-      <div class="circle" v-for="circle in flow" :key="circle.id">
-        <span class="material-symbols-outlined" :style="{ opacity: circle.opacity }">
-          {{ circle.icon }}
-        </span>
-      </div>
-      <div class="dot"></div>
-    </section>
-    <div class="wrap">
-      <p class="text" v-for="p in wrap" :key="p.id" :style="{ opacity: p.opacity, fontWeight: p.bold }">
-        {{ p.text }}
-      </p>
+
+  <section class="flow">
+    <div class="circle" v-for="circle in flow" :key="circle.id">
+      <span class="material-symbols-outlined" :style="{ opacity: circle.opacity }">
+        {{ circle.icon }}
+      </span>
     </div>
+    <div class="dot"></div>
+  </section>
+  <div class="wrap_text">
+    <p class="text" v-for="p in wrap" :key="p.id" :style="{ opacity: p.opacity, fontWeight: p.bold }">
+      {{ p.text }}
+    </p>
   </div>
+
 </template>
 
 <script>
