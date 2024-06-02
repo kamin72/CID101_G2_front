@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import CartFlow_list from '@/components/CartFlow_list.vue'
+import CartFlow_list from '@/components/CartFlowList.vue'
 export default {
   components: {
     CartFlow_list
