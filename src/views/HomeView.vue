@@ -19,7 +19,7 @@
     <div class="homeAboutus_container">
 
       <div class="homeAboutus_pic">
-        <img src="../../public/img/home/homeAboutus_pic.png">
+        <img src="/src/assets/img/home/homeAboutus_pic.png">
       </div>
 
       <div class="wrap_homeAboutus">
@@ -34,15 +34,15 @@
 
         <div class="wrap_homeAboutus_detail">
           <div class="homeAboutus_detail">
-            <img src="../../public/img/home/grape.png">
+            <img src="/src/assets/img/home/grape.png">
             <p>歷史悠久的釀酒傳統</p>
           </div>
           <div class="homeAboutus_detail">
-            <img src="../../public/img/home/wine.png">
+            <img src="/src/assets/img/home/wine.png">
             <p>獨特的品酒體驗</p>
           </div>
           <div class="homeAboutus_detail">
-            <img src="../../public/img/home/star.png">
+            <img src="/src/assets/img/home/star.png">
             <p>熱愛葡萄酒文化的釀酒師創立</p>
           </div>
         </div>
@@ -52,7 +52,7 @@
         </button>
 
         <div class="homeAboutus_BarrelImg">
-          <img src="../../public/img/home/BarrelImg.png">
+          <img src="/src/assets/img/home/BarrelImg.png">
         </div>
       </div>
     </div>

@@ -9,12 +9,7 @@
       <div class="dot"></div>
     </section>
     <div class="wrap">
-      <p
-        class="text"
-        v-for="p in wrap"
-        :key="p.id"
-        :style="{ opacity: p.opacity, fontWeight: p.bold }"
-      >
+      <p class="text" v-for="p in wrap" :key="p.id" :style="{ opacity: p.opacity, fontWeight: p.bold }">
         {{ p.text }}
       </p>
     </div>
