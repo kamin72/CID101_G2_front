@@ -1,31 +1,43 @@
 <template>
-  <CartFlow />
+
   <div class="container">
-    <div class="textItem">
-      <div class="check">
-        <input type="checkbox" name="checkbox" id="checkbox" />
-        <p class="item">詢價清單</p>
+    <CartFlow />
+
+    <div class="wrap_all">
+      <div class="wrap_list">
+        <div class="textItem">
+          <div class="check">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <p class="item">詢價清單</p>
+          </div>
+          <p class="item">單價</p>
+          <p class="item">數量</p>
+          <p class="item">總金額</p>
+        </div>
+        <CartList :item="productItem" :index="productIndex" v-for="(productItem, productIndex) in products"
+          :key="productItem.id" @add="add(productIndex)" @reduce="reduce(productIndex)" />
+        <div class="sum">
+          <p>總價</p>
+          <p>NT. {{ sum }}</p>
+        </div>
+        <div class="discount">
+          <p>折扣</p>
+          <p>-NT. 120</p>
+        </div>
+        <div class="actualPaid">
+          <p>結帳金額</p>
+          <p>NT. 1080</p>
+        </div>
       </div>
-      <p class="item">單價</p>
-      <p class="item">數量</p>
-      <p class="item">總金額</p>
+      <Coupon />
     </div>
-  </div>
-  <CartList :item="productItem" :index="productIndex" v-for="(productItem, productIndex) in products"
-    :key="productItem.id" @add="add(productIndex)" @reduce="reduce(productIndex)" />
-  <div class="container">
-    <div class="sum">
-      <p>總價</p>
-      <p>NT. {{ sum }}</p>
-    </div>
-    <div class="discount">
-      <p>折扣</p>
-      <p>-NT. 120</p>
-    </div>
-    <div class="actualPaid">
-      <p>結帳金額</p>
-      <p>NT. 1080</p>
-    </div>
+
+
+
+
+
+
+
   </div>
 
 </template>
@@ -33,11 +45,13 @@
 <script>
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartList from '@/components/Cart/CartList.vue'
+import Coupon from '@/components/Cart/Coupon.vue'
 
 export default {
   components: {
     CartFlow,
-    CartList
+    CartList,
+    Coupon
   },
   data() {
     return {
