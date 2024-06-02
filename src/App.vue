@@ -14,8 +14,13 @@ export default {
   components: {
     RouterView,
     MainHeader,
-    MainFooter,
+    MainFooter
     // CardsExample
   }
 }
 </script>
+<style>
+body {
+  background-color: #eadece;
+}
+</style>
