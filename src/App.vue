@@ -1,7 +1,7 @@
 <template>
   <MainHeader />
   <RouterView />
-  <!-- <Cards /> -->
+  <!-- <CardsExample /> -->
   <MainFooter />
 </template>
 
@@ -9,12 +9,13 @@
 import { RouterView } from 'vue-router'
 import MainHeader from '@/components/home/MainHeader.vue'
 import MainFooter from '@/components/home/MainFooter.vue'
-// import Cards from '@/components/Cards.vue'
+// import CardsExample from '@/components/CardsExample.vue'
 export default {
   components: {
     RouterView,
     MainHeader,
-    MainFooter
+    MainFooter,
+    // CardsExample
   }
 }
 </script>
