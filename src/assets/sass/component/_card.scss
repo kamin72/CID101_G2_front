@@ -7,6 +7,7 @@
     object-fit: cover;
     object-position: center;
     overflow: hidden;
+    margin-bottom: 15px;
     img {
       width: 100%;
     }
@@ -39,10 +40,10 @@
   }
   .font-wrap {
     h4 {
-      margin: 7px 0;
+      margin: 10px 0;
     }
     p {
-      margin: 0;
+      margin: 6px 0;
     }
   }
 }
@@ -92,16 +93,15 @@
       .price {
         span {
           font-size: map-get($font-size, p);
-          font-weight: $font-weight;
+          font-weight: 500;
           font-family: $font-dm, $font-noto;
         }
       }
     }
   }
   .small-btn-primary {
-    display: flex;
-    align-items: center;
     position: absolute;
+    vertical-align: middle;
     right: 20px;
     bottom: 0;
     translate: 0 50%;

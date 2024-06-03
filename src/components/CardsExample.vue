@@ -2,11 +2,11 @@
   <!-- 活動卡片1 -->
   <div class="container">
     <div class="row">
-      <div class="col-3 col-md-3 col-sm-6 event-card1">
+      <div class="col-3 col-md-4 col-sm-6 event-card1">
         <div class="img-wrap">
           <img src="https://picsum.photos/300/300/?random=10" />
           <div class="card-ribbon">
-            <small>早鳥優惠</small>
+            <p>早鳥優惠</p>
           </div>
           <div class="book-now">
             <p>BOOK NOW</p>
@@ -16,7 +16,9 @@
           <h4>品酒初級課程1</h4>
           <p>2024/5/18 開課</p>
         </div>
-        <h4>NT.3,200</h4>
+        <div class="price">
+          <h4><span>NT. </span>3200</h4>
+        </div>
       </div>
     </div>
   </div>
