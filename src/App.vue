@@ -14,8 +14,8 @@ export default {
   components: {
     RouterView,
     MainHeader,
-    MainFooter
-    // CardsExample
+    MainFooter,
+    // CardsExample,
   }
 }
 </script>
