@@ -1,12 +1,11 @@
 <template>
   <div class="container">
     <div class="row">
-      <small class="col-12 scrumble">
-        首頁<span class="material-symbols-outlined">arrow_forward_ios</span>品酒課程
+      <small class="col-12 scrumble">首頁<span class="material-symbols-outlined">arrow_forward_ios</span>品酒課程
       </small>
     </div>
   </div>
-  <section>
+  <section class="section-recom-course">
     <div class="container">
       <div class="row">
         <div class="col-12 recom-course">
@@ -87,5 +86,38 @@
       </div>
     </div>
   </section>
+  <section class="section-search-course">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 search-course">
+          <div class="title-wrap">
+            <div class="line"></div>
+            <h2>Search</h2>
+            <div class="line"></div>
+          </div>
+          <div class="col-11 search-course-list-wrap">
+            <div class="search-course-month">
+              <h4><a class="material-symbols-outlined">arrow_back_ios</a>2024.05<a class="material-symbols-outlined">arrow_forward_ios</a></h4>
+            </div>
+            <div class="search-course-tabs-panel">
+              <div class="search-course-calen-tab">
+                <div class="big-btn-primary">
+                  從日曆中選擇
+                  <div class="triangle"></div>
+                </div>
+              </div>
+              <div class="search-course-list-tab">
+                <div class="big-btn-secondary">
+                  從清單中選擇
+                  <div class="triangle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   
 </template>
+

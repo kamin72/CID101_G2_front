@@ -25,7 +25,7 @@ $font-size: (
   h4: clamp(18px, 3vw, 24px),
   p: clamp(13px, 2vw, 14px),
   small: clamp(11px, 1.5vw, 12px),
-  a: clamp(14px, 2.5vw, 16px)
+  a: clamp(14px, 2.5vw, 16px),
 );
 
 // 定義要迴圈的標題級別
@@ -38,4 +38,7 @@ $header-levels: 'h2', 'h3', 'h4', 'p', 'small', 'a';
     font-weight: $font-weight;
     font-family: $font-dm, $font-noto;
   }
+}
+a {
+  cursor: pointer;;
 }
