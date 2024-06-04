@@ -1,43 +1,50 @@
 //付款流程
-.flow {
-  padding: 100px 0 0;
+section {
   display: flex;
-  gap: 100px;
   justify-content: center;
-  align-items: center;
-  .circle {
+  .flow {
     width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #aea495;
+    height: 150px;
     position: relative;
-    .material-symbols-outlined {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
-      color: $white;
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #aea495;
+      .material-symbols-outlined {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, 0);
+        font-size: 50px;
+        color: $white;
+      }
+      .wrap_text {
+        position: absolute;
+        bottom: 0;
+        .text {
+          width: 100px;
+          text-align: center;
+          color: $gray;
+          font-size: map-get($font-size, p);
+        }
+      }
     }
   }
-  .dot {
-    position: absolute;
-    border: 4px dashed #efefef;
-    width: 660px;
-    z-index: -1;
-  }
-}
-.wrap_text {
-  padding: 0 0 50px;
-  display: flex;
-  gap: 100px;
-  justify-content: center;
-  margin: 20px;
-  .text {
+  .box {
+    position: relative;
     width: 100px;
-    text-align: center;
-    color: $gray;
-    font-size: map-get($font-size, p);
+    height: 100px;
+    .dot {
+      border: 4px dashed #efefef;
+      width: 100px;
+      height: 0;
+      top: 50%;
+      position: absolute;
+    }
+  }
+  .box:nth-child(8) {
+    display: none;
   }
 }
 
