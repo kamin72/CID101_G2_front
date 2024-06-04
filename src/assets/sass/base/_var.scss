@@ -1,6 +1,12 @@
 // 斷點
 $t: 995px;
-$m: 429px;
+$m: 450px;
 
 // container最大寬度
 $max-width: 1200px;
+
+// section上下間距
+$section-space: 80px;
+section {
+    padding: $section-space 0;
+}

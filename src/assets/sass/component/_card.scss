@@ -7,6 +7,7 @@
     object-fit: cover;
     object-position: center;
     overflow: hidden;
+    margin-bottom: 15px;
     img {
       width: 100%;
     }
@@ -39,10 +40,10 @@
   }
   .font-wrap {
     h4 {
-      margin: 7px 0;
+      margin: 10px 0;
     }
     p {
-      margin: 0;
+      margin: 6px 0;
     }
   }
 }
@@ -52,7 +53,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: $bgc;
+  background-color: $white;
   height: 200px;
   &:hover {
     img {
@@ -78,31 +79,76 @@
     margin: 20px;
     display: flex;
     align-items: flex-end;
-    .right-wrap {
-      width: 25%;
-    }
     .left-wrap {
-      width: 75%;
+      width: 60%;
+      .title-wrap {
+        margin-bottom: 15px;
+        h4 {
+          white-space: nowrap;
+        }
+      }
     }
-    .title-wrap {
-      margin-bottom: 10px;
+    .right-wrap {
+      width: 40%;
+      .price {
+        span {
+          font-size: map-get($font-size, p);
+          font-weight: 500;
+          font-family: $font-dm, $font-noto;
+        }
+      }
     }
   }
   .small-btn-primary {
     position: absolute;
+    vertical-align: middle;
     right: 20px;
     bottom: 0;
     translate: 0 50%;
+    .material-symbols-outlined {
+      font-size: clamp(13px, 2vw, 14px);
+      font-weight: 300;
+      margin-left: 5px;
+    }
   }
 }
 @include t() {
   .event-card2 {
-    width: 75%;
+    height: 170px;
+    .info-wrap {
+      .left-wrap {
+        .title-wrap {
+          white-space: nowrap;
+        }
+      }
+    }
   }
 }
 @include m() {
   .event-card2 {
-    display: none;
+    height: 120px;
+    .info-wrap {
+      flex-direction: column;
+      align-items: unset;
+      margin: 0 15px;
+      height: 65%;
+      .left-wrap {
+        width: 100%;
+        .title-wrap {
+          white-space: nowrap;
+        }
+        .intro-wrap {
+          display: none;
+          white-space: nowrap;
+        }
+      }
+      .right-wrap {
+        width: 100%;
+      }
+    }
+    .small-btn-primary {
+      right: 10px;
+    }
   }
 }
 
@@ -113,10 +159,11 @@
   align-items: center;
   justify-content: center;
   background-color: $sand;
+  margin-top: 120px;
   .img-wrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 2/1;
+    aspect-ratio: 5/2;
     img {
       position: absolute;
       bottom: 0;
@@ -126,14 +173,22 @@
   h4 {
     margin: 10px 0;
   }
-  .font-wrap {
-    p {
-      margin: 0;
-    }
-  }
   .info-wrap {
     width: 90%;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
+    .font-wrap {
+      margin-bottom: 12px;
+      p {
+        margin-bottom: 6px;
+      }
+    }
+    .price {
+      span {
+        font-size: map-get($font-size, p);
+        font-weight: 500;
+        font-family: $font-dm, $font-noto;
+      }
+    }
   }
   .add-card {
     display: flex;
@@ -147,6 +202,20 @@
     cursor: pointer;
     &:hover {
       background-color: darken($secondary-botton-color, 20);
+    }
+  }
+}
+@include m() {
+  .product-card{
+    .add-card {
+      height: 38px;
+    }
+  }
+}
+@include t() {
+  .product-card{
+    .add-card {
+      height: 41px;
     }
   }
 }

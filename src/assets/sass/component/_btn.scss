@@ -2,7 +2,7 @@
 @mixin big-button($btn-color) {
   border: 0;
   border-radius: 0;
-  padding: 7px 27px;
+  padding: 8px 24px;
   font-family: $font-dm;
   color: $white;
   background-color: $btn-color; // 按鈕背景顏色為傳入的顏色變數
