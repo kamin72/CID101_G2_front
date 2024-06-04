@@ -1,8 +1,6 @@
 <template>
   <MainHeader />
   <RouterView />
-  <!-- <SrumbleExample /> -->
-  <!-- <CardsExample /> -->
   <MainFooter />
 </template>
 
@@ -10,20 +8,16 @@
 import { RouterView } from 'vue-router'
 import MainHeader from '@/components/home/MainHeader.vue'
 import MainFooter from '@/components/home/MainFooter.vue'
-// import SrumbleExample from '@/components/SrumbleExample.vue'
-// import CardsExample from '@/components/CardsExample.vue'
 export default {
   components: {
     RouterView,
     MainHeader,
     MainFooter,
-    // CardsExample,
-    // SrumbleExample,
   }
 }
 </script>
 <style>
 body {
-  background-color: #EDE7DE;
+  background-color: #EDE7DE;  
 }
 </style>
