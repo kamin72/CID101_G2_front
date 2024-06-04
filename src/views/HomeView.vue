@@ -2,9 +2,9 @@
   <!-- 開場輪播圖 -->
   <div class="homeBanner">
     <div class="homeBanner_container">
-      <!-- <div class="homeBanner_wine">
-        <img src="../../public/img/wine/bannerwine.png">
-      </div> -->
+      <div class="homeBanner_wine">
+        <!-- <img src=""> -->
+      </div>
 
       <h3>MEMORABLE</h3>
       <h2>WINE</h2>
