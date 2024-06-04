@@ -30,7 +30,24 @@
           <p>NT. 1080</p>
         </div>
       </div>
-      <Coupon />
+      <aside class="coupon">
+        <Coupon />
+        <div class="terms">
+          <p>
+            本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
+            所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
+          </p>
+          <label><input type="checkbox" class="eighteen" />我已年滿18歲</label>
+          <label><input type="checkbox" class="agree" />我同意所有交易條款[查看條款]</label>
+          <label>
+            <input type="checkbox" class="reciveMeg" /> 是否願意收到Silken SipsVineyard的最新消息</label>
+        </div>
+        <RouterLink to="/cart_delivery_comp">
+          <button class="big-btn-primary cartSubmit">
+            送出詢價單
+          </button>
+        </RouterLink>
+      </aside>
     </div>
   </div>
 
@@ -85,7 +102,7 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400'
+          bold: '4000'
         },
         {
           id: 2,
