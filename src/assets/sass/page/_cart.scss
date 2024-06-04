@@ -9,7 +9,7 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: $bgc;
+    background-color: #aea495;
     position: relative;
     .material-symbols-outlined {
       position: absolute;
@@ -17,7 +17,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       font-size: 50px;
-      color: $gray;
+      color: $white;
     }
   }
   .dot {
@@ -175,7 +175,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: $sand;
+      background-color: #aea495;
       margin: 50px 10px;
       padding: 0 10px;
       height: 50px;
@@ -192,12 +192,24 @@
         cursor: pointer;
       }
     }
-    p {
-      padding: 50px 10px 20px;
-      border-top: 1px solid;
+    .terms {
+      p {
+        padding: 50px 10px 20px;
+        border-top: 1px solid;
+        line-height: 25px;
+      }
+      label {
+        float: left;
+        padding: 10px 0 0;
+      }
+      label:nth-child(4) {
+        padding: 10px 0px 50px;
+        border-bottom: 1px solid;
+      }
     }
-    label {
-      float: left;
+    .cartSubmit {
+      width: 100%;
+      margin-top: 20px;
     }
   }
 }
