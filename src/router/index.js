@@ -48,9 +48,9 @@ const router = createRouter({
       component: () => import('@/views/ProductView.vue')
     },
     {
-      path: '/cart_delivery_comp',
-      name: 'cart_delivery_comp',
-      component: () => import('@/views/Cart_delivery_comp.vue')
+      path: '/cartdelivery_comp',
+      name: 'cartdelivery_comp',
+      component: () => import('@/views/CartDeliveryComp.vue')
     }
   ]
 })

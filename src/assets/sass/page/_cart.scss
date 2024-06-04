@@ -156,48 +156,51 @@ section {
   //優惠券
   .coupon {
     width: 30%;
-    max-height: 200px;
-    background-color: rgb(255, 255, 255, 0.6);
-    h4 {
-      padding: 10px 10px 0;
-    }
-    .usage {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 10px;
-      .import {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 60%;
-        border: 0;
-        border-radius: 0;
-        background-color: $white;
-        outline: none;
-        cursor: auto;
-        vertical-align: middle;
-        padding: 0 10px;
+    .box {
+      background-color: rgb(255, 255, 255, 0.6);
+      padding: 20px 0;
+      margin: 0 0 50px;
+      h4 {
+        padding: 10px 10px 0;
       }
-    }
-    .tickets {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #aea495;
-      margin: 50px 10px;
-      padding: 0 10px;
-      height: 50px;
-      .content {
+      .usage {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        .material-symbols-outlined {
-          font-size: 40px;
+        justify-content: space-between;
+        margin: 20px 10px;
+        .import {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          width: 60%;
+          border: 0;
+          border-radius: 0;
+          background-color: $white;
+          outline: none;
           cursor: auto;
+          vertical-align: middle;
+          padding: 0 10px;
         }
       }
-      span {
-        cursor: pointer;
+      .tickets {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #aea495;
+        margin: 0px 10px;
+        padding: 0 10px;
+        height: 50px;
+        .content {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .material-symbols-outlined {
+            font-size: 40px;
+            cursor: auto;
+          }
+        }
+        span {
+          cursor: pointer;
+        }
       }
     }
     .terms {
@@ -227,3 +230,84 @@ section {
 }
 
 //購物車運送資訊_批發商
+.deliveryInfo div:nth-child(n + 3) {
+  margin: 20px 0;
+  width: 100%;
+}
+.deliveryInfo div .title {
+  padding: 10px 0;
+}
+.deliveryInfo {
+  width: 70%;
+  padding: 0 0 50px;
+  .column {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding: 0 0 10px;
+    p {
+      padding: 0 10px;
+    }
+  }
+  .phone {
+    #phone::-webkit-outer-spin-button,
+    #phone::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    #phone {
+      width: 100%;
+      padding: 8px 10px;
+    }
+  }
+  .email {
+    #email {
+      width: 100%;
+      padding: 8px 10px;
+    }
+  }
+}
+//購物車付款方式
+.paymethod {
+  width: 30%;
+  .box {
+    background-color: rgb(255, 255, 255, 0.6);
+    padding: 20px;
+    div input {
+      margin: 0 10px;
+    }
+    .creditcard {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+    .store {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+    .yardself {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
+  .hr {
+    border: 1px solid black;
+    height: 0;
+    margin-top: 50px;
+  }
+  .deliverySubmit {
+    margin-top: 50px;
+    width: 100%;
+  }
+}

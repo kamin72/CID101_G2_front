@@ -1,5 +1,4 @@
 <template>
-
   <div class="container">
     <section>
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
@@ -15,8 +14,14 @@
           <p class="item">數量</p>
           <p class="item">總金額</p>
         </div>
-        <CartList :item="productItem" :index="productIndex" v-for="(productItem, productIndex) in products"
-          :key="productItem.id" @add="add(productIndex)" @reduce="reduce(productIndex)" />
+        <CartList
+          :item="productItem"
+          :index="productIndex"
+          v-for="(productItem, productIndex) in products"
+          :key="productItem.id"
+          @add="add(productIndex)"
+          @reduce="reduce(productIndex)"
+        />
         <div class="sum">
           <p>總價</p>
           <p>NT. {{ sum }}</p>
@@ -40,17 +45,16 @@
           <label><input type="checkbox" class="eighteen" />我已年滿18歲</label>
           <label><input type="checkbox" class="agree" />我同意所有交易條款[查看條款]</label>
           <label>
-            <input type="checkbox" class="reciveMeg" /> 是否願意收到Silken SipsVineyard的最新消息</label>
+            <input type="checkbox" class="reciveMeg" /> 是否願意收到Silken
+            SipsVineyard的最新消息</label
+          >
         </div>
-        <RouterLink to="/cart_delivery_comp">
-          <button class="big-btn-primary cartSubmit">
-            送出詢價單
-          </button>
+        <RouterLink to="/cartDelivery_comp">
+          <button class="big-btn-primary cartSubmit">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -102,7 +106,7 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '4000'
+          bold: '400'
         },
         {
           id: 2,
@@ -125,7 +129,7 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ],
+      ]
     }
   },
   methods: {
