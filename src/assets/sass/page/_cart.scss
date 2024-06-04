@@ -1,46 +1,54 @@
 //付款流程
-.flow {
-  padding: 100px 0 0;
+section {
   display: flex;
-  gap: 100px;
   justify-content: center;
-  align-items: center;
-  .circle {
+  .flow {
     width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #aea495;
+    height: 150px;
     position: relative;
-    .material-symbols-outlined {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
-      color: $white;
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: $invalid-button-color;
+      .material-symbols-outlined {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, 0);
+        font-size: 50px;
+        color: $white;
+      }
+      .wrap_text {
+        position: absolute;
+        bottom: 0;
+        .text {
+          width: 100px;
+          text-align: center;
+          color: $gray;
+          font-size: map-get($font-size, p);
+        }
+      }
     }
   }
-  .dot {
-    position: absolute;
-    border: 4px dashed #efefef;
-    width: 660px;
-    z-index: -1;
-  }
-}
-.wrap_text {
-  padding: 0 0 50px;
-  display: flex;
-  gap: 100px;
-  justify-content: center;
-  margin: 20px;
-  .text {
+  .box {
+    position: relative;
     width: 100px;
-    text-align: center;
-    color: $gray;
-    font-size: map-get($font-size, p);
+    height: 100px;
+    .dot {
+      border: 4px dashed $invalid-button-color;
+      width: 100px;
+      height: 0;
+      top: 50%;
+      position: absolute;
+    }
+  }
+  .box:nth-child(8) {
+    display: none;
   }
 }
 
+//購物車列表及優惠券
 .wrap_all {
   display: flex;
   gap: 50px;
@@ -148,48 +156,51 @@
   //優惠券
   .coupon {
     width: 30%;
-    max-height: 200px;
-    background-color: rgb(255, 255, 255, 0.6);
-    h4 {
-      padding: 10px 10px 0;
-    }
-    .usage {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 10px;
-      .import {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        width: 60%;
-        border: 0;
-        border-radius: 0;
-        background-color: $white;
-        outline: none;
-        cursor: auto;
-        vertical-align: middle;
-        padding: 0 10px;
+    .box {
+      background-color: rgb(255, 255, 255, 0.6);
+      padding: 20px 0;
+      margin: 0 0 50px;
+      h4 {
+        padding: 10px 10px 0;
       }
-    }
-    .tickets {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #aea495;
-      margin: 50px 10px;
-      padding: 0 10px;
-      height: 50px;
-      .content {
+      .usage {
         display: flex;
-        align-items: center;
-        gap: 10px;
-        .material-symbols-outlined {
-          font-size: 40px;
+        justify-content: space-between;
+        margin: 20px 10px;
+        .import {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          width: 60%;
+          border: 0;
+          border-radius: 0;
+          background-color: $white;
+          outline: none;
           cursor: auto;
+          vertical-align: middle;
+          padding: 0 10px;
         }
       }
-      span {
-        cursor: pointer;
+      .tickets {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #aea495;
+        margin: 0px 10px;
+        padding: 0 10px;
+        height: 50px;
+        .content {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .material-symbols-outlined {
+            font-size: 40px;
+            cursor: auto;
+          }
+        }
+        span {
+          cursor: pointer;
+        }
       }
     }
     .terms {
@@ -199,8 +210,12 @@
         line-height: 25px;
       }
       label {
+        width: 100%;
         float: left;
         padding: 10px 0 0;
+        font-size: map-get($font-size, p);
+        font-weight: $font-weight;
+        font-family: $font-dm, $font-noto;
       }
       label:nth-child(4) {
         padding: 10px 0px 50px;
@@ -211,5 +226,88 @@
       width: 100%;
       margin-top: 20px;
     }
+  }
+}
+
+//購物車運送資訊_批發商
+.deliveryInfo div:nth-child(n + 3) {
+  margin: 20px 0;
+  width: 100%;
+}
+.deliveryInfo div .title {
+  padding: 10px 0;
+}
+.deliveryInfo {
+  width: 70%;
+  padding: 0 0 50px;
+  .column {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding: 0 0 10px;
+    p {
+      padding: 0 10px;
+    }
+  }
+  .phone {
+    #phone::-webkit-outer-spin-button,
+    #phone::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    #phone {
+      width: 100%;
+      padding: 8px 10px;
+    }
+  }
+  .email {
+    #email {
+      width: 100%;
+      padding: 8px 10px;
+    }
+  }
+}
+//購物車付款方式
+.paymethod {
+  width: 30%;
+  .box {
+    background-color: rgb(255, 255, 255, 0.6);
+    padding: 20px;
+    div input {
+      margin: 0 10px;
+    }
+    .creditcard {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+    .store {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+    .yardself {
+      display: flex;
+      align-items: center;
+      background-color: #aea495;
+      margin: 20px 0;
+      height: 50px;
+      cursor: pointer;
+    }
+  }
+  .hr {
+    border: 1px solid black;
+    height: 0;
+    margin-top: 50px;
+  }
+  .deliverySubmit {
+    margin-top: 50px;
+    width: 100%;
   }
 }
