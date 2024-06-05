@@ -1,3 +1,9 @@
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 //付款流程
 section {
   display: flex;
@@ -250,11 +256,6 @@ section {
     }
   }
   .phone {
-    #phone::-webkit-outer-spin-button,
-    #phone::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
     #phone {
       width: 100%;
       padding: 8px 10px;
@@ -267,6 +268,7 @@ section {
     }
   }
 }
+
 //購物車付款方式
 .paymethod {
   width: 30%;
@@ -310,4 +312,55 @@ section {
     margin-top: 50px;
     width: 100%;
   }
+}
+
+//購物車信用卡付款
+.paidInfo {
+  width: 70%;
+  padding: 0 0 50px;
+  .column {
+    border-bottom: 2px solid black;
+    padding: 0 0 10px;
+  }
+  .creditTerm {
+    width: 50%;
+  }
+  .cardNumber {
+    input[type='number'] {
+      width: 20%;
+      padding: 8px 10px;
+    }
+    span {
+      padding: 0 5px;
+    }
+  }
+  .box {
+    width: 70%;
+    display: flex;
+    .cardUser {
+      width: 20%;
+      input[type='number'] {
+        width: 100%;
+        padding: 8px 10px;
+      }
+    }
+    .cardDate {
+      width: 20%;
+      input[type='text'] {
+        width: 30%;
+        padding: 8px 10px;
+        margin: 0 5px;
+      }
+    }
+    .cvv2 {
+      width: 20%;
+      input[type='number'] {
+        width: 100%;
+        padding: 8px 10px;
+      }
+    }
+  }
+}
+.paidInfo > div {
+  padding: 10px 0;
 }

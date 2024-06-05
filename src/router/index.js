@@ -51,6 +51,11 @@ const router = createRouter({
       path: '/cartdelivery_comp',
       name: 'cartdelivery_comp',
       component: () => import('@/views/CartDeliveryComp.vue')
+    },
+    {
+      path: '/credit_card',
+      name: 'credit_card',
+      component: () => import('@/views/CartPaidinfo.vue')
     }
   ]
 })

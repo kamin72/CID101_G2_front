@@ -4,11 +4,11 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormComp />
+      <CreditCard />
       <aside class="paymethod">
         <PayMethod />
         <div class="hr"></div>
-        <RouterLink to="/credit_card" from="">
+        <RouterLink to="/cartDelivery_comp" from="">
           <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
         </RouterLink>
       </aside>
@@ -18,13 +18,13 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
-import FormComp from '@/components/Cart/FormComp.vue'
+import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
 export default {
   components: {
     CartFlow,
-    FormComp,
+    CreditCard,
     PayMethod
   },
   data() {
