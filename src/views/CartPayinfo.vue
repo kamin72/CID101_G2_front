@@ -8,7 +8,7 @@
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
-        <RouterLink to="/cartDelivery_comp" from="">
+        <RouterLink to="/" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
