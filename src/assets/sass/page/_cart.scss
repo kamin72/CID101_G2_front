@@ -378,8 +378,24 @@ section {
 .paidInfo > div {
   padding: 10px 0;
 }
+
 //提交付款資訊
 .paySubmit {
   margin: 50px 0;
   width: 100%;
+}
+
+//711超商自取
+.selectStore {
+  h4 {
+    padding: 20px 0;
+  }
+}
+.storeAddress {
+  h4 {
+    padding: 10px 0;
+  }
+  p {
+    padding: 20px 0;
+  }
 }

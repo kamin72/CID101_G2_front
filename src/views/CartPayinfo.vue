@@ -4,7 +4,8 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <CreditCard />
+      <!-- <CreditCard /> -->
+      <PaybyStore />
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
@@ -18,14 +19,16 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
-import CreditCard from '@/components/Cart/CreditCard.vue'
+// import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
+import PaybyStore from '@/components/Cart/PaybyStore.vue'
 
 export default {
   components: {
     CartFlow,
-    CreditCard,
-    PayMethod
+    // CreditCard,
+    PayMethod,
+    PaybyStore
   },
   data() {
     return {
