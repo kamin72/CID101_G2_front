@@ -15,3 +15,5 @@ app.use(createPinia())
 app.use(router)
 
 app.mount('#app')
+//swiper
+import 'swiper/swiper-bundle.css';

@@ -57,4 +57,48 @@
       </div>
     </div>
   </div>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide s1">Slide 1</div>
+      <div class="swiper-slide s2">Slide 2</div>
+      <div class="swiper-slide s3">Slide 3</div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
 </template>
+
+<!-- swiper -->
+<script setup>
+import { onMounted } from 'vue';
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
+
+onMounted(() => {
+  new Swiper('.swiper-container', {
+    pagination: {
+      el: '.swiper-pagination',
+    },
+  });
+});
+</script>
+<!-- swiper隨意的css -->
+<style>
+.swiper-slide{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.s1{
+  background: #ff0000;
+  height: 100px;
+}
+.s2{
+  background: #0062ff;
+  height: 100px;
+}
+.s3{
+  background: #15ff00;
+  height: 100px;
+}
+</style>
