@@ -5,11 +5,11 @@
     </section>
     <div class="wrap_all">
       <CreditCard />
-      <aside class="paymethod">
+      <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
         <RouterLink to="/cartDelivery_comp" from="">
-          <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
+          <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
     </div>

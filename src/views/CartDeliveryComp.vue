@@ -5,7 +5,7 @@
     </section>
     <div class="wrap_all">
       <FormComp />
-      <aside class="paymethod">
+      <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
         <RouterLink to="/credit_card" from="">

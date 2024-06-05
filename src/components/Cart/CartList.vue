@@ -1,7 +1,7 @@
 <template>
 
   <div class="wrapper">
-    <section class="list">
+    <div class="list">
       <div class="listItem">
         <div class="image">
           <input type="checkbox" name="checkbox" id="checkbox" />
@@ -18,7 +18,7 @@
         </div>
         <p class="total">{{ sum(index) }}</p>
       </div>
-    </section>
+    </div>
   </div>
 
 </template>

@@ -1,26 +1,3 @@
 <template>
-  <div id="app">
-    <ProductList />
-  </div>
+  <p>123</p>
 </template>
-
-<script>
-import ProductList from '@/components/Product/ProductList.vue'
-
-export default {
-  name: 'App',
-  components: {
-    ProductList
-  },
-  data(){
-    return{
-   
-    }
-  }
-};
-</script>
-
-<style>
-
-</style>
-

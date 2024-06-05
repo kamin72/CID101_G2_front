@@ -11,13 +11,15 @@
     </div>
     <div class="cardNumber">
       <p>卡片號碼</p>
-      <input type="number" />
-      <span>-</span>
-      <input type="number" />
-      <span>-</span>
-      <input type="number" />
-      <span>-</span>
-      <input type="number" />
+      <div class="cardNumber-input-wrap">
+        <input type="number" />
+        <span>-</span>
+        <input type="number" />
+        <span>-</span>
+        <input type="number" />
+        <span>-</span>
+        <input type="number" />
+      </div>
     </div>
     <div class="box">
       <div class="cardUser">

@@ -2,7 +2,7 @@
   <div class="box">
     <h4>付款方式</h4>
     <div class="methods">
-      <div class="creditcard">
+      <div class="creditCard">
         <input type="radio" name="methods" />
         <span class="material-symbols-outlined"> credit_card </span>
         <p>信用卡支付</p>
@@ -12,7 +12,7 @@
         <span class="material-symbols-outlined"> storefront </span>
         <p>7-11貨到付款</p>
       </div>
-      <div class="yardself">
+      <div class="yardSelf">
         <input type="radio" name="methods" />
         <span class="material-symbols-outlined"> liquor </span>
         <p>園區自取</p>
