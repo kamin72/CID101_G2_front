@@ -12,27 +12,27 @@
     <div class="cardNumber">
       <p>卡片號碼</p>
       <div class="cardNumber-input-wrap">
-        <input type="number" />
+        <input type="number" placeholder="0000" />
         <span>-</span>
-        <input type="number" />
+        <input type="number" placeholder="0000" />
         <span>-</span>
-        <input type="number" />
+        <input type="number" placeholder="0000" />
         <span>-</span>
-        <input type="number" />
+        <input type="number" placeholder="0000" />
       </div>
     </div>
     <div class="box">
       <div class="cardUser">
         <p>卡片持有人</p>
-        <input type="number" />
+        <input type="number" placeholder="請輸入姓名" />
       </div>
       <div class="cardDate">
         <p>有效期限</p>
-        <input type="text" />
+        <input type="text" placeholder="M/Y" />
       </div>
       <div class="cvv2">
         <p>CVV2</p>
-        <input type="number" />
+        <input type="number" placeholder="請輸入安全碼" />
       </div>
     </div>
   </div>

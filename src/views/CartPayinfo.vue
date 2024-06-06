@@ -4,11 +4,13 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <CreditCard />
+      <!-- <CreditCard /> -->
+      <!-- <PaybyStore /> -->
+      <YardSelf />
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
-        <RouterLink to="/cartDelivery_comp" from="">
+        <RouterLink to="/cart_finish" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
@@ -20,12 +22,16 @@
 import CartFlow from '@/components/Cart/CartFlow.vue'
 import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
+import PaybyStore from '@/components/Cart/PaybyStore.vue'
+import YardSelf from '@/components/Cart/YardSelf.vue'
 
 export default {
   components: {
     CartFlow,
-    CreditCard,
-    PayMethod
+    PayMethod,
+    // CreditCard
+    // PaybyStore
+    YardSelf
   },
   data() {
     return {

@@ -53,9 +53,24 @@ const router = createRouter({
       component: () => import('@/views/CartDeliveryComp.vue')
     },
     {
-      path: '/credit_card',
-      name: 'credit_card',
+      path: '/pay_info',
+      name: 'pay_info',
       component: () => import('@/views/CartPayinfo.vue')
+    },
+    {
+      path: '/cart_finish',
+      name: 'cart_finish',
+      component: () => import('@/views/CartFinish.vue')
+    },
+    {
+      path: '/cartdelivery_account',
+      name: 'cartdelivery_account',
+      component: () => import('@/views/CartDeliveryAccount.vue')
+    },
+    {
+      path: '/cart_finish_account',
+      name: 'cart_finish_account',
+      component: () => import('@/views/CartFinishAccount.vue')
     }
       path: '/signup',
       name: 'signup',

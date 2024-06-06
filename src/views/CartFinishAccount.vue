@@ -1,31 +1,27 @@
 <template>
   <div class="container">
-    <section>
+    <section class="account">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
-    <div class="wrap_all">
-      <FormComp />
-      <aside class="payMethod">
-        <PayMethod />
-        <div class="hr"></div>
-        <RouterLink to="/pay_info" from="">
-          <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
-        </RouterLink>
-      </aside>
+    <div class="wrapFinish">
+      <div class="finish">
+        <div class="finishIcon">
+          <span class="material-symbols-outlined"> task_alt </span>
+          <h2>完成詢價</h2>
+        </div>
+        <h3>5 幾秒後跳轉至首頁......</h3>
+      </div>
+      <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
     </div>
   </div>
 </template>
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
-import FormComp from '@/components/Cart/FormComp.vue'
-import PayMethod from '@/components/Cart/PayMethod.vue'
 
 export default {
   components: {
-    CartFlow,
-    FormComp,
-    PayMethod
+    CartFlow
   },
   data() {
     return {
@@ -39,21 +35,14 @@ export default {
         },
         {
           id: 2,
-          icon: 'local_shipping',
+          icon: 'edit_document',
           opacity: '0.3',
-          text: '填寫配送資訊',
+          text: '填寫個人資料',
           bold: '0'
         },
         {
           id: 3,
           icon: 'paid',
-          opacity: '0.3',
-          text: '選擇付款方式',
-          bold: '0'
-        },
-        {
-          id: 4,
-          icon: 'check',
           opacity: '0.3',
           text: '完成詢價',
           bold: '0'
