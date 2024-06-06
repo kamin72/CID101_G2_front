@@ -96,6 +96,9 @@ const router = createRouter({
       path: '/wholesalerform',
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
+      path: '/product-detail',
+      name: 'product-detail',
+      component: () => import('@/views/Product-Detail-View.vue')
     }
   ]
 })
