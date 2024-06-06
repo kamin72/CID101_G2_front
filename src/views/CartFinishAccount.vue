@@ -3,30 +3,25 @@
     <section class="account">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
-    <div class="wrap_all">
-      <FormAccount />
-      <aside class="yardInfo">
-        <YardInfo />
-      </aside>
-    </div>
-    <div class="button">
-      <RouterLink to="/cart_finish_account" from="">
-        <button class="big-btn-primary accountSubmit">提交資料</button>
-      </RouterLink>
+    <div class="wrapFinish">
+      <div class="finish">
+        <div class="finishIcon">
+          <span class="material-symbols-outlined"> task_alt </span>
+          <h2>完成詢價</h2>
+        </div>
+        <h3>5 幾秒後跳轉至首頁......</h3>
+      </div>
+      <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
     </div>
   </div>
 </template>
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
-import FormAccount from '@/components/Cart/FormAccount.vue'
-import YardInfo from '@/components/Cart/YardInfo.vue'
 
 export default {
   components: {
-    CartFlow,
-    FormAccount,
-    YardInfo
+    CartFlow
   },
   data() {
     return {
