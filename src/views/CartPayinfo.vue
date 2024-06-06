@@ -5,7 +5,8 @@
     </section>
     <div class="wrap_all">
       <!-- <CreditCard /> -->
-      <PaybyStore />
+      <!-- <PaybyStore /> -->
+      <YardSelf />
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
@@ -22,13 +23,15 @@ import CartFlow from '@/components/Cart/CartFlow.vue'
 // import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 import PaybyStore from '@/components/Cart/PaybyStore.vue'
+import YardSelf from '@/components/Cart/YardSelf.vue'
 
 export default {
   components: {
     CartFlow,
     // CreditCard,
     PayMethod,
-    PaybyStore
+    // PaybyStore,
+    YardSelf
   },
   data() {
     return {
