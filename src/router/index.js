@@ -57,6 +57,31 @@ const router = createRouter({
       name: 'credit_card',
       component: () => import('@/views/CartPayinfo.vue')
     }
+      path: '/signup',
+      name: 'signup',
+      component: () => import('@/views/SignupView.vue')
+    },
+    {
+      path: '/forget',
+      name: 'forget',
+      component: () => import('@/views/ForgetView.vue')
+    },
+    {
+      path: '/forgetok',
+      name: 'forgetok',
+      component: () => import('@/views/ForgetokView.vue')
+    },
+    {
+      path: '/memberform',
+      name: 'memberform',
+      component: () => import('@/views/MemberformView.vue')
+    },
+    {
+      path: '/wholesalerform',
+      name: 'wholesalerform',
+      component: () => import('@/views/WholesalerformView.vue')
+    },
+    
   ]
 })
 
