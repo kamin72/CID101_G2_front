@@ -410,3 +410,31 @@ section {
     padding: 0px 0 50px;
   }
 }
+
+//完成詢價
+.wrapFinish {
+  margin: 0 auto;
+  padding: 0 0 50px;
+  text-align: center;
+  .finish {
+    .finishIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .material-symbols-outlined {
+        font-size: 120px;
+        padding: 0 10px;
+      }
+      h2 {
+        padding: 20px 0;
+      }
+    }
+
+    h3 {
+      padding: 20px 0;
+    }
+  }
+  button {
+    margin-top: 20px;
+  }
+}

@@ -10,7 +10,7 @@
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
-        <RouterLink to="/" from="">
+        <RouterLink to="/cart_finish" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
@@ -28,8 +28,8 @@ import YardSelf from '@/components/Cart/YardSelf.vue'
 export default {
   components: {
     CartFlow,
-    // CreditCard,
     PayMethod,
+    // CreditCard,
     // PaybyStore,
     YardSelf
   },
