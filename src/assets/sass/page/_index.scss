@@ -108,3 +108,107 @@
         }
     }
 }
+// event輪播圖
+.eventleftline {
+    width: 100px;
+    height: 1px;
+    background-color: #000000;
+    margin-top: 20px;
+    // outline: 1px solid red;
+}
+.eventrightline {
+    width: 100px;
+    height: 1px;
+    background-color: #000000;
+    margin-top: 20px;
+}
+.wrap_eventTitle {
+    // outline: 1px solid red;
+    display: flex;
+    justify-content: center;
+}
+.eventTitle {
+    margin: 0 10px;
+    // outline: 1px solid red;
+}
+
+// swiper
+
+.swiper {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.swiper-slide {
+    text-align: center;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+.swiper-image {
+    position: relative;
+}
+.swiper-image .tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #4a4a4a;
+    color: #ffffff;
+    width: 35%;
+    aspect-ratio: 2.7/1;
+    display: flex;
+    justify-content: center;
+}
+.swiper-image .tag p {
+    align-content: center;
+}
+
+.swiper-image .book {
+    position: absolute;
+    width: 100%;
+    padding: 10px 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    color: transparent;
+    text-decoration: none;
+
+    &:hover {
+        background-color: #ffffff99;
+        color: #000000;
+    }
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    color: #000000;
+}
+.slide-content {
+    text-align: center;
+}
+
+.slide-content img {
+    width: 100%;
+    height: auto;
+}
+
+.slide-content p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+h5 {
+    text-align: left;
+}
+p {
+    text-align: left;
+}
