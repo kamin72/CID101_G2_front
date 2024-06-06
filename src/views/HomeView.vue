@@ -1,21 +1,18 @@
 <template>
   <!-- 開場輪播圖 -->
-  <div class="homeBanner">
+  <section class="homeBanner">
     <div class="homeBanner_container">
       <div class="homeBanner_wine">
         <!-- <img src=""> -->
       </div>
-
       <h3>MEMORABLE</h3>
       <h2>WINE</h2>
       <h4>JOURNEYS</h4>
-
     </div>
-
-  </div>
+  </section>
 
   <!-- 關於我們 -->
-  <div class="homeAboutus">
+  <section class="homeAboutus">
     <div class="homeAboutus_container">
 
       <div class="homeAboutus_pic">
@@ -54,51 +51,31 @@
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png">
         </div>
+
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide s1">Slide 1</div>
-      <div class="swiper-slide s2">Slide 2</div>
-      <div class="swiper-slide s3">Slide 3</div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
+<!-- event輪播圖 -->
+<section>
+  <div class="container">
+		<SwiperComponent swiperTitle="Event"></SwiperComponent>
+		<SwiperComponent swiperTitle="News"></SwiperComponent>
+	</div>
+</section>
 </template>
 
-<!-- swiper -->
-<script setup>
-import { onMounted } from 'vue';
-import Swiper from 'swiper';
-import 'swiper/swiper-bundle.css';
 
-onMounted(() => {
-  new Swiper('.swiper-container', {
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  });
-});
+<!-- swiper -->
+<script>
+import SwiperComponent from '@/components/home/SwiperComponent.vue'
+export default {
+	components: {
+		SwiperComponent
+	}
+}
 </script>
-<!-- swiper隨意的css -->
-<style>
-.swiper-slide{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.s1{
-  background: #ff0000;
-  height: 100px;
-}
-.s2{
-  background: #0062ff;
-  height: 100px;
-}
-.s3{
-  background: #15ff00;
-  height: 100px;
-}
-</style>
+
+
+
+
