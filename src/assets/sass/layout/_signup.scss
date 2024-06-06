@@ -1,0 +1,62 @@
+// 會員帳號
+.container {
+    .wrap_signup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 20px;
+        .form_ltem_list {
+            display: flex;
+            border-bottom: 2px solid white;
+            background-color: #AEA495;
+            .form_item {
+                width: 250px;
+                label {
+                    font-size: 24px;
+                    color: white;
+                    background-color: #AEA495;
+                    padding: 10px 20px;
+                    text-align: center;
+                    display: block;
+                }
+            }
+            .form_box{
+                width: 600px;
+                background-color: #F8F5F2;
+                input {
+                    font-size: 16px;
+                    display: inline-block;
+                    outline: none;
+                    border: none;
+                    padding: 5px;
+                    margin-top: 5px;
+                }
+                .address-select {
+                    height: 30px;
+                    border: none;
+                    width: 200;
+                    font-size: 16px;
+                    border: none;
+                    margin: 10px 5px;
+                }
+                .s-input {
+                    width: 30px;
+                    margin: 5px;
+                }
+                #avatar {
+                    font-size: 16px;
+                }
+            }
+            
+        }
+        .form_privacy_policy {
+            display: flex;
+            margin: 20px 0;
+            span {
+                display: flex;
+                margin: 2px 0;
+            }
+        }
+    }
+}
