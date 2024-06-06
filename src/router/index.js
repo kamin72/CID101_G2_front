@@ -71,7 +71,8 @@ const router = createRouter({
       path: '/cart_finish_account',
       name: 'cart_finish_account',
       component: () => import('@/views/CartFinishAccount.vue')
-    }
+    },
+    {
       path: '/signup',
       name: 'signup',
       component: () => import('@/views/SignupView.vue')
@@ -95,8 +96,7 @@ const router = createRouter({
       path: '/wholesalerform',
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
-    },
-    
+    }
   ]
 })
 
