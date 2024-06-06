@@ -61,6 +61,11 @@ const router = createRouter({
       path: '/cart_finish',
       name: 'cart_finish',
       component: () => import('@/views/CartFinish.vue')
+    },
+    {
+      path: '/cartdelivery_account',
+      name: 'cartdelivery_account',
+      component: () => import('@/views/CartDeliveryAccount.vue')
     }
   ]
 })

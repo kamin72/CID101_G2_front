@@ -20,7 +20,7 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
-// import CreditCard from '@/components/Cart/CreditCard.vue'
+import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 import PaybyStore from '@/components/Cart/PaybyStore.vue'
 import YardSelf from '@/components/Cart/YardSelf.vue'
@@ -29,8 +29,8 @@ export default {
   components: {
     CartFlow,
     PayMethod,
-    // CreditCard,
-    // PaybyStore,
+    // CreditCard
+    // PaybyStore
     YardSelf
   },
   data() {

@@ -79,7 +79,7 @@ section {
         gap: 10px;
       }
     }
-    //購物車列表
+    //購物車商品列表
     .list {
       display: flex;
       flex-direction: column;
@@ -232,8 +232,8 @@ section {
   }
 }
 
-//購物車運送資訊_批發商
-.deliveryInfo div:nth-child(n + 3) {
+//運送資訊_批發商
+.deliveryInfo div:nth-child(n + 2) {
   margin: 20px 0;
   width: 100%;
 }
@@ -254,21 +254,21 @@ section {
   }
   .phone {
     #phone {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;
     }
   }
   .email {
     #email {
-      width: 100%;
+      width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;
     }
   }
 }
 
-//購物車付款方式
+//付款方式
 .payMethod {
   width: 30%;
   .box {
@@ -313,7 +313,7 @@ section {
   }
 }
 
-//購物車信用卡付款
+//信用卡付款
 .paidInfo {
   width: 70%;
   .column {
@@ -322,6 +322,9 @@ section {
   }
   .creditTerm {
     width: 50%;
+    small {
+      line-height: 20px;
+    }
   }
   .cardNumber {
     width: 100%;
@@ -397,6 +400,7 @@ section {
   }
   p {
     padding: 20px 0;
+    list-style-type: decimal;
   }
 }
 
@@ -408,6 +412,7 @@ section {
   p {
     width: 70%;
     padding: 0px 0 50px;
+    line-height: 25px;
   }
 }
 
@@ -436,5 +441,120 @@ section {
   }
   button {
     margin-top: 20px;
+  }
+}
+
+//購物流程_一般會員
+.account {
+  display: flex;
+  justify-content: center;
+  .flow {
+    width: 100px;
+    height: 150px;
+    position: relative;
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: $invalid-button-color;
+      .material-symbols-outlined {
+        position: absolute;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, 0);
+        font-size: 50px;
+        color: $white;
+      }
+      .wrap_text {
+        position: absolute;
+        bottom: 0;
+        .text {
+          width: 100px;
+          text-align: center;
+          color: $gray;
+          font-size: map-get($font-size, p);
+        }
+      }
+    }
+  }
+  .box {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    .dot {
+      border: 4px dashed $invalid-button-color;
+      width: 100px;
+      height: 0;
+      top: 50%;
+      position: absolute;
+    }
+  }
+  .box:nth-child(6) {
+    display: none;
+  }
+}
+
+//填寫個人資料_一般會員
+.deliveryInfo {
+  .column {
+    justify-content: space-between;
+    .syn {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      input {
+        height: fit-content;
+      }
+      p {
+        padding: 0 5px;
+      }
+    }
+  }
+  .name {
+    #name {
+      width: calc(100% - 20px);
+      padding: 8px 10px;
+      border: 0;
+    }
+  }
+  .receiveAddress {
+    #address {
+      width: calc(100% - 20px);
+      padding: 8px 10px;
+      border: 0;
+    }
+  }
+}
+
+//園區資訊_一般會員
+.yardInfo {
+  width: 40%;
+  .column {
+    border-bottom: 2px solid black;
+    padding: 0 0 10px;
+    height: 60px;
+    .title {
+      padding: 8px 0;
+    }
+  }
+  .info {
+    h4 {
+      padding: 8px 0;
+    }
+    iframe {
+      width: 100%;
+      padding: 20px 0;
+    }
+    p {
+      // letter-spacing: $letter-spacing;
+      line-height: 25px;
+    }
+  }
+}
+.button {
+  width: fit-content;
+  margin: 0 auto;
+  .accountSubmit {
+    margin: 50px 0;
   }
 }
