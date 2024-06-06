@@ -19,12 +19,12 @@ const router = createRouter({
     },
     {
       path: '/cart_comp',
-      name: 'cart',
+      name: 'cart_comp',
       component: () => import('@/views/CartViewComp.vue')
     },
     {
       path: '/cart_account',
-      name: 'cart',
+      name: 'cart_account',
       component: () => import('@/views/CartViewAccount.vue')
     },
     {
@@ -101,6 +101,8 @@ const router = createRouter({
       path: '/wholesalerform',
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
+    },
+    {
       path: '/product-detail',
       name: 'product-detail',
       component: () => import('@/views/Product-Detail-View.vue')

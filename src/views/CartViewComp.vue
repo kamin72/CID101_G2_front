@@ -52,9 +52,6 @@
         <RouterLink to="/cartDelivery_comp">
           <button class="big-btn-primary cartSubmit">送出詢價單</button>
         </RouterLink>
-        <!-- <RouterLink to="/cartdelivery_account">
-          <button class="big-btn-primary cartSubmit">送出詢價單</button>
-        </RouterLink> -->
       </aside>
     </div>
   </div>
@@ -109,7 +106,8 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 2,

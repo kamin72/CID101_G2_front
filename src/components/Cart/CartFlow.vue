@@ -1,6 +1,6 @@
 <template>
   <div class="flow">
-    <div class="circle">
+    <div class="circle" :style="{ backgroundColor: flow.color }">
       <span class="material-symbols-outlined" :style="{ opacity: flow.opacity }">
         {{ flow.icon }}
       </span>
@@ -20,9 +20,7 @@
 export default {
   props: ['flow'],
   data() {
-    return {
-
-    }
+    return {}
   }
 }
 </script>

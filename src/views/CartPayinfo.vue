@@ -41,21 +41,24 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 2,
           icon: 'local_shipping',
-          opacity: '0.3',
+          opacity: '1',
           text: '填寫配送資訊',
-          bold: '0'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 3,
           icon: 'paid',
-          opacity: '0.3',
+          opacity: '1',
           text: '選擇付款方式',
-          bold: '0'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 4,
