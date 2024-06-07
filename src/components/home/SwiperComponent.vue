@@ -62,7 +62,7 @@
 <template>
     <h2>{{ swiperTitle }}</h2>
     <Swiper
-:slidesPerView="2"
+    :slidesPerView="2"
 	:breakpoints="{
 		768: {slidesPerView: 4}
 	}"
@@ -71,25 +71,23 @@
 	:loop="true"
 	:modules="modules"
 >
-    
-    <!-- <swiper-slide v-for="(item) in content" :key="item.id">
-			<img :src="item.img" alt="item.title">
-            {{ item.title }}
-	</swiper-slide> -->
 
     <swiper-slide v-for="(item) in content" :key="item.id">
       
         <div class="swiper-image">
-        <img :src="item.img" alt="item.title">
-        <div class="tag">
-            <p>{{item.tag}}</p>
-        </div>
-        <a class="book" href="#">BOOK NOW</a>
+            <img :src="item.img" alt="item.title">
+            <div class="tag">
+                <p>{{item.tag}}</p>
+            </div>
+            <a class="book" href="#">BOOK NOW</a>
         </div>
         
-        <h5>{{ item.title }}</h5>
-        <p>{{ item.price }}</p>
-        <p>{{ item.date }}</p>
+        <div class="swiper-txt">
+            <h5>{{ item.title }}</h5>
+            <p>{{ item.price }}</p>
+            <p>{{ item.date }}</p>
+        </div>
+        
     </swiper-slide>
 </Swiper>
 </template>

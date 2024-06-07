@@ -133,7 +133,6 @@
 }
 
 // swiper
-
 .swiper {
     width: 100%;
     margin: 20px auto;
@@ -187,7 +186,9 @@
         color: #000000;
     }
 }
-
+.swiper-txt {
+    margin-top: 10px;
+}
 .swiper-button-prev:after,
 .swiper-button-next:after {
     color: #000000;
