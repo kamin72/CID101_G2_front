@@ -154,39 +154,54 @@
     aspect-ratio: 1/1;
     object-fit: cover;
 }
-.swiper-image {
+.img-wrap {
+    width: 100%;
     position: relative;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center;
+    overflow: hidden;
+    margin-bottom: 15px;
+    img {
+      width: 100%;
+    }
+    .card-ribbon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px 15px;
+        color: $white;
+        background-color: $gray;
+        padding: 5px 15px;
+        // aspect-ratio: 2.7/1;
+        display: flex;
+        justify-content: center;
+    }
+    .book-now {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 40px;
+        bottom: -40px;
+        text-decoration: none;
+        justify-content: center;
+        align-items: center;
+        background-color: $white-transp;
+        color: #000000;
+        transition: bottom 0.3s ease-in-out;
+    }
+    &:hover .book-now {
+        bottom: 0;
+        cursor: pointer;
+      }
+
 }
-.swiper-image .tag {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #4a4a4a;
-    color: #ffffff;
-    width: 35%;
-    aspect-ratio: 2.7/1;
-    display: flex;
-    justify-content: center;
-}
-.swiper-image .tag p {
+.img-wrap 
+.img-wrap .card-ribbon p {
     align-content: center;
 }
 
-.swiper-image .book {
-    position: absolute;
-    width: 100%;
-    padding: 10px 0;
-    bottom: 0;
-    left: 0;
-    background-color: transparent;
-    color: transparent;
-    text-decoration: none;
 
-    &:hover {
-        background-color: #ffffff99;
-        color: #000000;
-    }
-}
 
 .swiper-button-prev:after,
 .swiper-button-next:after {
@@ -206,7 +221,7 @@
     font-size: 16px;
     color: #333;
 }
-h5 {
+h4 {
     text-align: left;
 }
 p {
