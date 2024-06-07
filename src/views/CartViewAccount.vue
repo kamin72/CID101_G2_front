@@ -49,9 +49,6 @@
             SipsVineyard的最新消息</label
           >
         </div>
-        <!-- <RouterLink to="/cartDelivery_comp">
-          <button class="big-btn-primary cartSubmit">送出詢價單</button>
-        </RouterLink> -->
         <RouterLink to="/cartdelivery_account">
           <button class="big-btn-primary cartSubmit">送出詢價單</button>
         </RouterLink>
