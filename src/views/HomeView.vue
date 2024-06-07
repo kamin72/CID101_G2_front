@@ -56,7 +56,7 @@
     </div>
   </section>
 
-<!-- event輪播圖 -->
+  <!-- event輪播圖 -->
 <section>
   <div class="container">
 		<SwiperComponent swiperTitle="Event"></SwiperComponent>
@@ -75,7 +75,3 @@ export default {
 	}
 }
 </script>
-
-
-
-
