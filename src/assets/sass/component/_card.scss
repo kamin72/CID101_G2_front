@@ -74,14 +74,14 @@
   h4, p {
     margin: 5px 0;
   }
-  .info-wrap {
+  .event-card2-info-wrap {
     width: 55%;
     margin: 20px;
     display: flex;
     align-items: flex-end;
-    .left-wrap {
+    .event-card2-left-wrap {
       width: 60%;
-      .title-wrap {
+      .event-card2-title-wrap {
         margin-bottom: 15px;
         h4 {
           white-space: nowrap;
@@ -115,9 +115,9 @@
 @include t() {
   .event-card2 {
     height: 170px;
-    .info-wrap {
-      .left-wrap {
-        .title-wrap {
+    .event-card2-info-wrap {
+      .event-card2-left-wrap {
+        .event-card2-title-wrap {
           white-space: nowrap;
         }
       }
@@ -127,14 +127,14 @@
 @include m() {
   .event-card2 {
     height: 120px;
-    .info-wrap {
+    .event-card2-info-wrap {
       flex-direction: column;
       align-items: unset;
       margin: 0 15px;
       height: 65%;
-      .left-wrap {
+      .event-card2-left-wrap {
         width: 100%;
-        .title-wrap {
+        .event-card2-title-wrap {
           white-space: nowrap;
         }
         .intro-wrap {

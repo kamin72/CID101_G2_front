@@ -14,20 +14,13 @@
             flex-direction: column;
             align-items: center;
             background-color: $bgc;
-            .search-course-month {
-                padding: $pad-1 0;
-                .material-symbols-outlined {
-                    vertical-align: middle;
-                    font-size: clamp(17px, 3vw, 23px);
-                    padding: 0 $pad-1;
-                }
-            }
             .search-course-tabs-panel {
                 position: absolute;
                 display: flex;
                 top: 0;
                 translate: 0 -100%;
-                .big-btn-primary, .big-btn-secondary {
+                .big-btn-primary,
+                .big-btn-secondary {
                     padding: 18px 75px;
                 }
                 .big-btn-primary {
@@ -39,9 +32,9 @@
                         translate: -50% 100%;
                         width: 0;
                         height: 0;
-                        border-top: 16px solid $gray;
-                        border-left: 12px solid transparent;
-                        border-right: 12px solid transparent;
+                        border-top: 14px solid $gray;
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
                     }
                     &:hover {
                         .triangle {
@@ -61,7 +54,6 @@
         margin: 0 5px;
     }
 }
-
 .title-wrap {
     display: flex;
     align-items: center;
@@ -72,16 +64,84 @@
         padding: 0 30px;
     }
 }
-
 .line {
     background-color: $gray;
     width: 161.003px;
     height: 1.5px;
 }
-
 .recom-course {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+.calendar {
+    font-family: $font-dm, $font-noto;
+    padding-bottom: $pad-1;
+    .calendar-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: $pad-1 10px;
+        .material-symbols-outlined {
+            vertical-align: middle;
+            font-size: clamp(17px, 3vw, 23px);
+            cursor: pointer;
+        }
+        .month-year {
+            padding: 0 $pad-1;
+        }
+    }
+    .calendar-body {
+        border: 2px solid $sand;
+        background-color: #fff;
+        .weekdays,
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            div {
+                padding: 10px;
+            }
+        }
+        .weekdays {
+            p {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                text-transform: uppercase;
+                border: 1.1px solid $bgc;
+                height: 45px;
+            }
+        }
+        .days {
+            div {
+                cursor: pointer;
+                border: 1px solid $bgc;
+                display: flex;
+                height: 120px;
+            }
+            .today {
+                padding: 5px;
+                padding-bottom: 15px;
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                    background-color: $bgc;
+                    height: 30px;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                    background-color: #5188f6;
+                }
+            }
+            .empty {
+                cursor: default;
+            }
+        }
+        .day.has-course {
+        }
+        .course-name {
+        }
+    }
+}
