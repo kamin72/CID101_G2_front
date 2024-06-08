@@ -6,10 +6,12 @@
     <div class="wrap_all">
       <FormComp />
       <aside class="payMethod">
-        <PayMethod />
+        <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink to="/pay_info" from="">
-          <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
+        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
+          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
+            提交配送資訊
+          </button>
         </RouterLink>
       </aside>
     </div>
@@ -60,11 +62,26 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ]
+      ],
+      selectedPaymentMethod: null
     }
   },
   mounted() {
     window.scrollTo(0, 0)
+  },
+  methods: {
+    changePaymentMethod(index) {
+      this.selectedPaymentMethod = index
+    }
+  },
+  computed: {
+    canSubmit() {
+      if (this.selectedPaymentMethod !== null) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>

@@ -60,7 +60,8 @@ const router = createRouter({
     {
       path: '/pay_info',
       name: 'pay_info',
-      component: () => import('@/views/CartPayinfo.vue')
+      component: () => import('@/views/CartPayinfo.vue'),
+      props: (route) => ({ method: route.query.method })
     },
     {
       path: '/cart_finish',

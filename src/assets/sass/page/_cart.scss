@@ -293,6 +293,9 @@ section {
     margin-top: 50px;
     width: 100%;
   }
+  .deliverySubmit:disabled {
+    cursor: not-allowed;
+  }
 }
 
 //信用卡付款

@@ -4,11 +4,12 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <CreditCard v-show="n == current[0]" :creditCard="current[0]" />
-      <PaybyStore v-show="n == current[1]" :store="current[1]" />
-      <YardSelf v-show="n == current[2]" :yardSelf="current[2]" />
+      <CreditCard v-show="selectedMethod === '0'" />
+      <PaybyStore v-show="selectedMethod === '1'" />
+      <YardSelf v-show="selectedMethod === '2'" />
       <aside class="payMethod">
         <PayMethod />
+        <!-- <PayMethod :checked="selectedMethod" /> -->
         <div class="hr"></div>
         <RouterLink to="/cart_finish" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
@@ -32,6 +33,12 @@ export default {
     CreditCard,
     PaybyStore,
     YardSelf
+  },
+  props: {
+    method: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -68,12 +75,21 @@ export default {
           bold: '0'
         }
       ],
-      current: ['creditCard', 'store', 'yardSelf'],
-      n: ''
+      // current: [0, 1, 2],
+      selectedMethod: null
     }
   },
+  methods: {
+    changePaymentMethod(index) {
+      this.selectedMethod = index
+    }
+  },
+  created() {
+    // const method = this.$route.query.method
+    // this.selectedMethod = method ? parseInt(method) : 0
+  },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), (this.selectedMethod = this.method)
   }
 }
 </script>
