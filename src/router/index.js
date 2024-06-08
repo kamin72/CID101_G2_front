@@ -98,6 +98,11 @@ const router = createRouter({
       component: () => import('@/views/MemberformView.vue')
     },
     {
+      path: '/memberformok',
+      name: 'memberformok',
+      component: () => import('@/views/MemberformokView.vue')
+    },
+    {
       path: '/wholesalerform',
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
@@ -106,6 +111,16 @@ const router = createRouter({
       path: '/product-detail',
       name: 'product-detail',
       component: () => import('@/views/Product-Detail-View.vue')
+    },
+    {
+      path: '/wholesalerformok',
+      name: 'wholesalerformok',
+      component: () => import('@/views/WholesalerformokView.vue')
+    },
+    {
+      path: '/membercenter',
+      name: 'membercenter',
+      component: () => import('@/views/MemberCenterView.vue')
     }
   ]
 })

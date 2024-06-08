@@ -8,7 +8,7 @@
         margin: 20px;
         .form_ltem_list {
             display: flex;
-            border-bottom: 2px solid white;
+            border-bottom: 2px solid #FFFFFF;
             background-color: #AEA495;
             .form_item {
                 width: 250px;
@@ -32,6 +32,10 @@
                     padding: 5px;
                     margin-top: 5px;
                 }
+                .material-symbols-outlined {
+                    font-size: 16px;
+                    padding-top: 10px;
+                }
                 .address-select {
                     height: 30px;
                     border: none;
@@ -47,8 +51,7 @@
                 #avatar {
                     font-size: 16px;
                 }
-            }
-            
+            } 
         }
         .form_privacy_policy {
             display: flex;
