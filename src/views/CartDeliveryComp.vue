@@ -4,12 +4,14 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormComp />
+      <FormComp v-model:phone="phone" v-model:email="email" />
       <aside class="payMethod">
-        <PayMethod />
+        <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink to="/pay_info" from="">
-          <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
+        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
+          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
+            提交配送資訊
+          </button>
         </RouterLink>
       </aside>
     </div>
@@ -35,14 +37,16 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 2,
           icon: 'local_shipping',
-          opacity: '0.3',
+          opacity: '1',
           text: '填寫配送資訊',
-          bold: '0'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 3,
@@ -58,11 +62,26 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ]
+      ],
+      selectedPaymentMethod: null,
+      phone: '',
+      email: ''
     }
   },
   mounted() {
     window.scrollTo(0, 0)
+  },
+  methods: {
+    changePaymentMethod(index) {
+      this.selectedPaymentMethod = index
+    }
+  },
+  computed: {
+    canSubmit() {
+      const phoneValid = /^\d{10}$/.test(this.phone)
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+      return this.selectedPaymentMethod !== null && phoneValid && emailValid
+    }
   }
 }
 </script>

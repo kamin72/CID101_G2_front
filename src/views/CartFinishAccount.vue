@@ -31,21 +31,24 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 2,
           icon: 'edit_document',
-          opacity: '0.3',
+          opacity: '1',
           text: '填寫個人資料',
-          bold: '0'
+          bold: '400',
+          color: '#AEA495'
         },
         {
           id: 3,
           icon: 'paid',
-          opacity: '0.3',
+          opacity: '1',
           text: '完成詢價',
-          bold: '0'
+          bold: '400',
+          color: '#AEA495'
         }
       ]
     }

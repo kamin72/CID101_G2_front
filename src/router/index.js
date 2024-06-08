@@ -19,12 +19,12 @@ const router = createRouter({
     },
     {
       path: '/cart_comp',
-      name: 'cart',
+      name: 'cart_comp',
       component: () => import('@/views/CartViewComp.vue')
     },
     {
       path: '/cart_account',
-      name: 'cart',
+      name: 'cart_account',
       component: () => import('@/views/CartViewAccount.vue')
     },
     {
@@ -60,7 +60,8 @@ const router = createRouter({
     {
       path: '/pay_info',
       name: 'pay_info',
-      component: () => import('@/views/CartPayinfo.vue')
+      component: () => import('@/views/CartPayinfo.vue'),
+      props: (route) => ({ method: route.query.method })
     },
     {
       path: '/cart_finish',
@@ -121,8 +122,7 @@ const router = createRouter({
       path: '/membercenter',
       name: 'membercenter',
       component: () => import('@/views/MemberCenterView.vue')
-    },
-    
+    }
   ]
 })
 
