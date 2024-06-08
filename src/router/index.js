@@ -108,12 +108,11 @@ const router = createRouter({
       component: () => import('@/views/WholesalerformView.vue')
     },
     {
-<<<<<<< HEAD
       path: '/product-detail',
       name: 'product-detail',
       component: () => import('@/views/Product-Detail-View.vue')
-    }
-=======
+    },
+    {
       path: '/wholesalerformok',
       name: 'wholesalerformok',
       component: () => import('@/views/WholesalerformokView.vue')
@@ -124,7 +123,6 @@ const router = createRouter({
       component: () => import('@/views/MemberCenterView.vue')
     },
     
->>>>>>> peipei
   ]
 })
 
