@@ -42,15 +42,21 @@
             本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
-          <label><input type="checkbox" class="eighteen" />我已年滿18歲</label>
-          <label><input type="checkbox" class="agree" />我同意所有交易條款[查看條款]</label>
+          <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
+          <label
+            ><input
+              type="checkbox"
+              class="agree"
+              v-model="agreeTerms"
+            />我同意所有交易條款[查看條款]</label
+          >
           <label>
-            <input type="checkbox" class="reciveMeg" /> 是否願意收到Silken
-            SipsVineyard的最新消息</label
+            <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
+            是否願意收到Silken SipsVineyard的最新消息</label
           >
         </div>
         <RouterLink to="/cartDelivery_comp">
-          <button class="big-btn-primary cartSubmit">送出詢價單</button>
+          <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
@@ -130,7 +136,10 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ]
+      ],
+      isEighteen: false,
+      agreeTerms: false,
+      receiveMessages: false
     }
   },
   methods: {
@@ -151,6 +160,9 @@ export default {
     sum() {
       const price = this.products.reduce((total, items) => total + items.price * items.count, 0)
       return price
+    },
+    canSubmit() {
+      return this.isEighteen && this.agreeTerms && this.receiveMessages
     }
   },
   provide() {

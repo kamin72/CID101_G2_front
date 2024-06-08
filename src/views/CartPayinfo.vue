@@ -4,9 +4,9 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <!-- <CreditCard /> -->
-      <!-- <PaybyStore /> -->
-      <YardSelf />
+      <CreditCard v-show="n == current[0]" :creditCard="current[0]" />
+      <PaybyStore v-show="n == current[1]" :store="current[1]" />
+      <YardSelf v-show="n == current[2]" :yardSelf="current[2]" />
       <aside class="payMethod">
         <PayMethod />
         <div class="hr"></div>
@@ -29,8 +29,8 @@ export default {
   components: {
     CartFlow,
     PayMethod,
-    // CreditCard
-    // PaybyStore
+    CreditCard,
+    PaybyStore,
     YardSelf
   },
   data() {
@@ -67,7 +67,9 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ]
+      ],
+      current: ['creditCard', 'store', 'yardSelf'],
+      n: ''
     }
   },
   mounted() {
