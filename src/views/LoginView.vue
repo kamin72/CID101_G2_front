@@ -20,9 +20,11 @@
             <RouterLink to="/forget"> 
                 <a href="#" class="forget">忘記密碼?</a>
             </RouterLink>
-            <div class="login_btn">
-                <button type="button" class="big-btn-primary">會員登入</button>
-            </div>
+            <RouterLink to="/membercenter"> 
+                <div class="login_btn">
+                    <button type="button" class="big-btn-primary">會員登入</button>
+                </div>
+            </RouterLink>
         </div>
     </div>
 </template>
@@ -31,8 +33,8 @@
 </script>
 
 <style>
-.material-symbols-outlined {
+.password_list span  {
     font-size: 16px;
-    padding-left: 180px;
+    padding-left: 220px;
 }
 </style>

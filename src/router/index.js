@@ -56,7 +56,8 @@ const router = createRouter({
       path: '/credit_card',
       name: 'credit_card',
       component: () => import('@/views/CartPayinfo.vue')
-    }
+    },
+    {
       path: '/signup',
       name: 'signup',
       component: () => import('@/views/SignupView.vue')
@@ -77,9 +78,24 @@ const router = createRouter({
       component: () => import('@/views/MemberformView.vue')
     },
     {
+      path: '/memberformok',
+      name: 'memberformok',
+      component: () => import('@/views/MemberformokView.vue')
+    },
+    {
       path: '/wholesalerform',
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
+    },
+    {
+      path: '/wholesalerformok',
+      name: 'wholesalerformok',
+      component: () => import('@/views/WholesalerformokView.vue')
+    },
+    {
+      path: '/membercenter',
+      name: 'membercenter',
+      component: () => import('@/views/MemberCenterView.vue')
     },
     
   ]
