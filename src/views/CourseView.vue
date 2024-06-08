@@ -112,7 +112,7 @@
               </div>
             </div>
             <!-- 預約日曆 -->
-            <!-- <div class="col-10 calendar">
+            <div class="col-10 calendar">
               <div class="calendar-header">
                 <span class="prev material-symbols-outlined" @click="prevMonth">arrow_back_ios</span>
                 <h4 class="month-year">{{ currentYear }}.{{ currentMonth }}</h4>
@@ -127,9 +127,9 @@
                   <div v-for="day in days" :key="day.date" class="day" :class="{ today: day.isToday, 'has-course': hasCourse(day.date)}" @click="selectDate(day.date)"><span>{{ day.date.getDate() }}</span><span v-if="hasCourse(day.date)" class="course-name">{{ getCourseNameByDate(day.date) }}</span></div><div v-for="n in endDayOfWeek" :key="n" class="day empty"></div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
-            <!-- 活動卡片1 -->
+            <!-- 活動卡片1
             <div class="col-8 col-md-7 col-sm-12">
               <div class="event-card2">
                 <div class="img-wrap">
@@ -155,7 +155,7 @@
                   詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
