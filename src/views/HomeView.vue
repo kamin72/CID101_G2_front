@@ -2,12 +2,19 @@
   <!-- 開場輪播圖 -->
   <section class="homeBanner">
     <div class="homeBanner_container">
+
       <div class="homeBanner_wine">
-        <!-- <img src=""> -->
+        <div class="homeBanner_wine_wapper">
+          <img src="/src/assets/img/wine/bannerwine.png" class="image">
+          <img src="/src/assets/img/home/Mask group.png" class="reflection">
+        </div>
+        
       </div>
-      <h3>MEMORABLE</h3>
-      <h2>WINE</h2>
-      <h4>JOURNEYS</h4>
+      <div class="homeBanner_txt">
+        <h3>MEMORABLE</h3>
+        <h2>WINE</h2>
+        <h4>JOURNEYS</h4>
+      </div>
     </div>
   </section>
 
