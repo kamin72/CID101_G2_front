@@ -4,7 +4,7 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormComp />
+      <FormComp v-model:phone="phone" v-model:email="email" />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
@@ -63,7 +63,9 @@ export default {
           bold: '0'
         }
       ],
-      selectedPaymentMethod: null
+      selectedPaymentMethod: null,
+      phone: '',
+      email: ''
     }
   },
   mounted() {
@@ -76,11 +78,9 @@ export default {
   },
   computed: {
     canSubmit() {
-      if (this.selectedPaymentMethod !== null) {
-        return true
-      } else {
-        return false
-      }
+      const phoneValid = /^\d{10}$/.test(this.phone)
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+      return this.selectedPaymentMethod !== null && phoneValid && emailValid
     }
   }
 }

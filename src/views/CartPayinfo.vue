@@ -4,12 +4,12 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <CreditCard v-show="selectedMethod === '0'" />
-      <PaybyStore v-show="selectedMethod === '1'" />
-      <YardSelf v-show="selectedMethod === '2'" />
+      <CreditCard v-show="selectedMethod == 0" />
+      <PaybyStore v-show="selectedMethod == 1" />
+      <YardSelf v-show="selectedMethod == 2" />
       <aside class="payMethod">
-        <PayMethod />
-        <!-- <PayMethod :checked="selectedMethod" /> -->
+        <!-- <PayMethod /> -->
+        <PayMethod :checked="selectedMethod" />
         <div class="hr"></div>
         <RouterLink to="/cart_finish" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
@@ -84,10 +84,7 @@ export default {
       this.selectedMethod = index
     }
   },
-  created() {
-    // const method = this.$route.query.method
-    // this.selectedMethod = method ? parseInt(method) : 0
-  },
+  created() {},
   mounted() {
     window.scrollTo(0, 0), (this.selectedMethod = this.method)
   }
