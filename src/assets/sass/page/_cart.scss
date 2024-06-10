@@ -556,4 +556,7 @@ section {
   .accountSubmit {
     margin: 50px 0;
   }
+  .accountSubmit:disabled {
+    cursor: not-allowed;
+  }
 }
