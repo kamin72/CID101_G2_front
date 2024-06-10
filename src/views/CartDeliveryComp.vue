@@ -75,6 +75,20 @@ export default {
     changePaymentMethod(index) {
       this.selectedPaymentMethod = index
     }
+    // submitForm() {
+    //   if (this.canSubmit) {
+    //     this.$router.push({
+    //       path: '/pay_info',
+    //       query: {
+    //         method: this.selectedPaymentMethod,
+    //         phone: this.phone,
+    //         email: this.email
+    //       }
+    //     })
+    //   } else {
+    //     alert('請填寫所有必填字段並確保電話為10個數字和電子郵件格式正確')
+    //   }
+    // }
   },
   computed: {
     canSubmit() {
