@@ -9,25 +9,72 @@
     </div>
     <div class="name">
       <p class="title">姓名</p>
-      <input type="text" placeholder="請輸入姓名" id="cartName" />
+      <input
+        type="text"
+        placeholder="請輸入姓名"
+        id="cartName"
+        :value="name"
+        @input="$emit('update:name', $event.target.value)"
+        required
+      />
     </div>
     <div class="receiveAddress">
       <p class="title">收件地址</p>
-      <input type="text" placeholder="請輸入姓名" id="cartAddress" />
+      <input
+        type="text"
+        placeholder="請輸入姓名"
+        id="cartAddress"
+        :value="address"
+        @input="$emit('update:address', $event.target.value)"
+        required
+      />
     </div>
     <div class="phone">
       <p class="title">連絡電話</p>
-      <input type="number" placeholder="請輸入連絡電話" id="cartPhone" />
+      <input
+        type="number"
+        placeholder="請輸入連絡電話"
+        id="cartPhone"
+        :value="phone"
+        @input="$emit('update:phone', $event.target.value)"
+        required
+      />
     </div>
     <div class="email">
       <p class="title">Email</p>
-      <input type="text" placeholder="請輸入email" id="cartEmail" />
+      <input
+        type="text"
+        placeholder="請輸入email"
+        id="cartEmail"
+        :value="email"
+        @input="$emit('update:email', $event.target.value)"
+        required
+      />
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    address: {
+      type: String,
+      required: true
+    },
+    phone: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    }
+  },
+  emit: ['update:phone', 'update:email', 'update:address', 'update:name'],
   data() {
     return {}
   }

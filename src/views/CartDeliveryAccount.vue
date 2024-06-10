@@ -4,14 +4,19 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormAccount />
+      <FormAccount
+        v-model:name="name"
+        v-model:address="address"
+        v-model:phone="phone"
+        v-model:email="email"
+      />
       <aside class="yardInfo">
         <YardInfo />
       </aside>
     </div>
     <div class="button">
       <RouterLink to="/cart_finish_account" from="">
-        <button class="big-btn-primary accountSubmit">提交資料</button>
+        <button class="big-btn-primary accountSubmit" :disabled="!canSubmit">提交資料</button>
       </RouterLink>
     </div>
   </div>
@@ -54,11 +59,28 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ]
+      ],
+      name: '',
+      address: '',
+      phone: '',
+      email: ''
     }
   },
   mounted() {
     window.scrollTo(0, 0)
+  },
+  computed: {
+    canSubmit() {
+      const phoneValid = /^\d{10}$/.test(this.phone)
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+      return (
+        this.selectedPaymentMethod !== null &&
+        phoneValid &&
+        emailValid &&
+        this.address != '' &&
+        this.name != ''
+      )
+    }
   }
 }
 </script>

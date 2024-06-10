@@ -2,13 +2,11 @@
   <!-- 開場輪播圖 -->
   <section class="homeBanner">
     <div class="homeBanner_container">
-
       <div class="homeBanner_wine">
         <div class="homeBanner_wine_wapper">
-          <img src="/src/assets/img/wine/bannerwine.png" class="image">
-          <img src="/src/assets/img/home/Mask group.png" class="reflection">
+          <img src="/src/assets/img/wine/bannerwine.png" class="image" />
+          <img src="/src/assets/img/home/Mask group.png" class="reflection" />
         </div>
-        
       </div>
       <div class="homeBanner_txt">
         <h3>MEMORABLE</h3>
@@ -21,13 +19,11 @@
   <!-- 關於我們 -->
   <section class="homeAboutus">
     <div class="homeAboutus_container">
-
       <div class="homeAboutus_pic">
-        <img src="/src/assets/img/home/homeAboutus_pic.png">
+        <img src="/src/assets/img/home/homeAboutus_pic.png" />
       </div>
 
       <div class="wrap_homeAboutus">
-
         <div class="homeAboutus_txt">
           <h3>About Us</h3>
           <p>
@@ -35,18 +31,17 @@
           </p>
         </div>
 
-
         <div class="wrap_homeAboutus_detail">
           <div class="homeAboutus_detail">
-            <img src="/src/assets/img/home/grape.png">
+            <img src="/src/assets/img/home/grape.png" />
             <p>歷史悠久的釀酒傳統</p>
           </div>
           <div class="homeAboutus_detail">
-            <img src="/src/assets/img/home/wine.png">
+            <img src="/src/assets/img/home/wine.png" />
             <p>獨特的品酒體驗</p>
           </div>
           <div class="homeAboutus_detail">
-            <img src="/src/assets/img/home/star.png">
+            <img src="/src/assets/img/home/star.png" />
             <p>熱愛葡萄酒文化的釀酒師創立</p>
           </div>
         </div>
@@ -56,29 +51,30 @@
         </button>
 
         <div class="homeAboutus_BarrelImg">
-          <img src="/src/assets/img/home/BarrelImg.png">
+          <img src="/src/assets/img/home/BarrelImg.png" />
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- event輪播圖 -->
-<section>
-  <div class="container">
-		<SwiperComponent swiperTitle="Event"></SwiperComponent>
-		<SwiperComponent swiperTitle="News"></SwiperComponent>
-	</div>
-</section>
+  <section>
+    <div class="container">
+      <SwiperComponent swiperTitle="Event"></SwiperComponent>
+      <SwiperComponent swiperTitle="News"></SwiperComponent>
+    </div>
+  </section>
 </template>
-
 
 <!-- swiper -->
 <script>
 import SwiperComponent from '@/components/home/SwiperComponent.vue'
 export default {
-	components: {
-		SwiperComponent
-	}
+  components: {
+    SwiperComponent
+  },
+  mounted() {
+    window.scrollTo(0, 0)
+  }
 }
 </script>

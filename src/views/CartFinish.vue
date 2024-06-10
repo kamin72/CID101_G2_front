@@ -9,7 +9,7 @@
           <span class="material-symbols-outlined"> task_alt </span>
           <h2>完成詢價</h2>
         </div>
-        <h3>5 幾秒後跳轉至首頁......</h3>
+        <h3>{{ countdown }} 幾秒後跳轉至首頁......</h3>
       </div>
       <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
     </div>
@@ -58,11 +58,24 @@ export default {
           bold: '400',
           color: '#AEA495'
         }
-      ]
+      ],
+      countdown: 5
     }
   },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), this.startCountdown()
+  },
+  methods: {
+    startCountdown() {
+      const interval = setInterval(() => {
+        if (this.countdown > 0) {
+          this.countdown--
+        } else {
+          clearInterval(interval)
+          this.$router.push('/')
+        }
+      }, 1000) // 每1秒更新一次倒计时
+    }
   }
 }
 </script>
