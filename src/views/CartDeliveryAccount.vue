@@ -36,16 +36,14 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400',
-          color: '#AEA495'
+          bold: '400'
         },
         {
           id: 2,
           icon: 'edit_document',
-          opacity: '1',
+          opacity: '0.3',
           text: '填寫個人資料',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 3,

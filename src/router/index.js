@@ -19,23 +19,18 @@ const router = createRouter({
     },
     {
       path: '/cart_comp',
-      name: 'cart_comp',
+      name: 'cart',
       component: () => import('@/views/CartViewComp.vue')
     },
     {
       path: '/cart_account',
-      name: 'cart_account',
+      name: 'cart',
       component: () => import('@/views/CartViewAccount.vue')
     },
     {
       path: '/course',
       name: 'course',
       component: () => import('@/views/CourseView.vue')
-    },
-    {
-      path: '/course_detail',
-      name: 'course_detail',
-      component: () => import('@/views/CourseDetail.vue')
     },
     {
       path: '/game',
@@ -65,8 +60,7 @@ const router = createRouter({
     {
       path: '/pay_info',
       name: 'pay_info',
-      component: () => import('@/views/CartPayinfo.vue'),
-      props: (route) => ({ method: route.query.method })
+      component: () => import('@/views/CartPayinfo.vue')
     },
     {
       path: '/cart_finish',
@@ -127,7 +121,8 @@ const router = createRouter({
       path: '/membercenter',
       name: 'membercenter',
       component: () => import('@/views/MemberCenterView.vue')
-    }
+    },
+    
   ]
 })
 

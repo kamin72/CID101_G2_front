@@ -3,6 +3,7 @@
   <RouterView />
   <!-- <CardsExample /> -->
   <MainFooter />
+  
 </template>
 
 <script>
@@ -14,13 +15,13 @@ export default {
   components: {
     RouterView,
     MainHeader,
-    MainFooter
+    MainFooter,
     // CardsExample
   }
 }
 </script>
 <style>
 body {
-  background-color: #ede7de;
+  background-color: #EDE7DE;  
 }
 </style>

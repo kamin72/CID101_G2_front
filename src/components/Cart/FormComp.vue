@@ -18,45 +18,19 @@
     </div>
     <div class="phone">
       <p class="title">連絡電話</p>
-      <input
-        type="text"
-        placeholder="請輸入連絡電話"
-        id="cartPhone_comp"
-        :value="phone"
-        @input="$emit('update:phone', $event.target.value)"
-        required
-      />
+      <input type="number" placeholder="請輸入連絡電話" id="phone" />
     </div>
     <div class="email">
       <p class="title">Email</p>
-      <input
-        type="text"
-        placeholder="請輸入email"
-        id="cartEmail_comp"
-        :value="email"
-        @input="$emit('update:email', $event.target.value)"
-        required
-      />
+      <input type="text" placeholder="請輸入email" id="email" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    phone: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true
-    }
-  },
-  emit: ['update:phone', 'update:email'],
   data() {
     return {}
-  },
-  computed: {}
+  }
 }
 </script>

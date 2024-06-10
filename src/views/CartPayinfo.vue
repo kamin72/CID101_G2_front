@@ -4,12 +4,11 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <CreditCard v-show="selectedMethod == 0" />
-      <PaybyStore v-show="selectedMethod == 1" />
-      <YardSelf v-show="selectedMethod == 2" />
+      <!-- <CreditCard /> -->
+      <!-- <PaybyStore /> -->
+      <YardSelf />
       <aside class="payMethod">
-        <!-- <PayMethod /> -->
-        <PayMethod :checked="selectedMethod" />
+        <PayMethod />
         <div class="hr"></div>
         <RouterLink to="/cart_finish" from="">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
@@ -30,15 +29,9 @@ export default {
   components: {
     CartFlow,
     PayMethod,
-    CreditCard,
-    PaybyStore,
+    // CreditCard
+    // PaybyStore
     YardSelf
-  },
-  props: {
-    method: {
-      type: String,
-      required: true
-    }
   },
   data() {
     return {
@@ -48,24 +41,21 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400',
-          color: '#AEA495'
+          bold: '400'
         },
         {
           id: 2,
           icon: 'local_shipping',
-          opacity: '1',
+          opacity: '0.3',
           text: '填寫配送資訊',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 3,
           icon: 'paid',
-          opacity: '1',
+          opacity: '0.3',
           text: '選擇付款方式',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 4,
@@ -74,19 +64,11 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ],
-      // current: [0, 1, 2],
-      selectedMethod: null
+      ]
     }
   },
-  methods: {
-    changePaymentMethod(index) {
-      this.selectedMethod = index
-    }
-  },
-  created() {},
   mounted() {
-    window.scrollTo(0, 0), (this.selectedMethod = this.method)
+    window.scrollTo(0, 0)
   }
 }
 </script>
