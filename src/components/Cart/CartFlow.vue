@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="box">
-    <div class="dot"></div>
+    <div class="dot" :style="{ borderColor: flow.color }"></div>
   </div>
 </template>
 
