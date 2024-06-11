@@ -19,21 +19,22 @@
                     padding: 10px 20px;
                     text-align: center;
                     display: block;
+                    margin: auto;
                 }
             }
             .form_box{
                 width: 600px;
                 background-color: #F8F5F2;
                 input {
-                    font-size: 16px;
+                    font-size: 24px;
                     display: inline-block;
                     outline: none;
                     border: none;
-                    padding: 5px;
+                    padding: 3px;
                     margin-top: 5px;
                 }
                 .material-symbols-outlined {
-                    font-size: 16px;
+                    font-size: 14px;
                     padding-top: 10px;
                 }
                 .address-select {
@@ -44,17 +45,15 @@
                     border: none;
                     margin: 10px 5px;
                 }
-                .s-input {
-                    width: 30px;
-                    margin: 5px;
-                }
-                #avatar {
-                    font-size: 16px;
+                #file_path {
+                    font-size: 14px;
                 }
             } 
         }
         .form_privacy_policy {
             display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 20px 0;
             span {
                 display: flex;

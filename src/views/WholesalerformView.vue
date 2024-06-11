@@ -10,7 +10,7 @@
                         <label>會員帳號</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入帳號">
+                        <input type="text" id="account"  autocomplete="account" placeholder="請輸入帳號">
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -18,8 +18,9 @@
                         <label>會員密碼</label>
                     </div>
                     <div class="form_box">
-                        <input type="password" id="pass" name="password" placeholder="請輸入密碼" minlength="8" required />
-                        <span class="material-symbols-outlined">visibility_off </span>
+                        <input type="password" id="password" autocomplete="password"  placeholder="請輸入密碼" minlength="8" required />
+                        <span class="material-symbols-outlined" style="font-size: 16px;
+                        padding-top: 10px;">visibility_off </span>
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -27,8 +28,9 @@
                         <label>再輸入一次密碼</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="再輸入一次密碼">
-                        <span class="material-symbols-outlined">visibility_off </span>
+                        <input type="password" id="password_check" autocomplete="password_check"  placeholder="再輸入一次密碼">
+                        <span class="material-symbols-outlined" style="font-size: 16px;
+                        padding-top: 10px;">visibility_off </span>
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -36,7 +38,7 @@
                         <label>姓名</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入姓名">
+                        <input type="text" id="name" placeholder="請輸入姓名">
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -44,7 +46,7 @@
                         <label>電話</label>
                     </div>
                     <div class="form_box">
-                        <input type="tel" id="phone" name="phone" placeholder="請輸入電話"
+                        <input type="tel" id="phone" placeholder="請輸入電話"
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
                     </div>
                 </div>
@@ -62,7 +64,7 @@
                         <label>公司名稱</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入公司名稱">
+                        <input type="text" id="company_name" placeholder="請輸入公司名稱">
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -70,7 +72,7 @@
                         <label>公司統編</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入公司統編">
+                        <input type="text" id="tax_id" placeholder="請輸入公司統編">
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -78,7 +80,11 @@
                         <label>地址</label>
                     </div>
                     <div class="form_box">
-                        <select class="address-select" id="address" name="address">
+                        <input type="text" id="address" style="width: 550px;" placeholder="請輸入地址">
+                        
+                        <!-- 
+                        考慮到是否有外國地址 以及資料表欄位只有address 由單一input比較好做
+                        <select class="address-select" id="address">
                             <option value="disabled selected">縣市</option>
                             <option value="台北市">台北市</option>
                             <option value="新北市">新北市</option>
@@ -110,7 +116,7 @@
                         <input type="text" class="s-input">弄
                         <input type="text" class="s-input">號之
                         <input type="text" class="s-input">樓之
-                        <input type="text" class="s-input">室
+                        <input type="text" class="s-input">室 -->
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -118,17 +124,19 @@
                         <label>公司資料電子檔</label>
                     </div>
                     <div class="form_box">
-                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                        <input type="file" id="file_path" accept="image/png, image/jpeg" />
+                        <!-- 後台需新增file_path相對應的欄位 用來存取檔案路徑 -->
                     </div>
                 </div>
+                <div class="form_privacy_policy">
+                    <input type="checkbox" id="privacy_policy">
+                    <span>我同意隱私條款政策 [隱私條款政策]</span>
+                </div>
+                <RouterLink to="/wholesalerformok" style="text-decoration: none;"> 
+                    <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
+                    margin: 10px auto;"/>
+                </RouterLink>
             </form>
-            <div class="form_privacy_policy">
-                <input type="checkbox">
-                <span>我同意隱私條款政策 [隱私條款政策]</span>
-            </div>
-            <RouterLink to="/wholesalerformok"> 
-                <input type="submit" value="下一步" class="big-btn-primary" />
-            </RouterLink>
         </div>
     </div>
 </template>
@@ -163,13 +171,4 @@ export default {
 }
 </script>
 
-<style>
-.big-btn-primary {
-    margin: 10px 0;
-}
-
-.material-symbols-outlined {
-    font-size: 16px;
-    padding-top: 10px;
-}
-</style>
+<style></style>

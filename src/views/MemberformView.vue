@@ -4,14 +4,14 @@
             <section>
                 <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
             </section>
-            <from>
+            <form>
                 <!-- 會員帳號 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
                         <label for="account">會員帳號</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入帳號">
+                        <input type="text" id="account"  autocomplete="account" placeholder="請輸入帳號">
                     </div>
                 </div>
                 <!-- 會員密碼 -->
@@ -20,7 +20,7 @@
                         <label for="password">會員密碼</label>
                     </div>
                     <div class="form_box">
-                        <input type="password" id="password" placeholder="請輸入密碼">
+                        <input type="password" id="password"  autocomplete="password" placeholder="請輸入密碼">
                         <span class="material-symbols-outlined">visibility_off </span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <label for="password">再輸入一次密碼</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="password" placeholder="再輸入一次密碼">
+                        <input type="text" id="password_check" placeholder="再輸入一次密碼">
                         <span class="material-symbols-outlined">visibility_off </span>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <label>姓名</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入姓名">
+                        <input type="text" id="name" placeholder="請輸入姓名">
                     </div>
                 </div>
                 <!-- 電話 -->
@@ -49,7 +49,7 @@
                         <label>電話</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account" placeholder="請輸入電話">
+                        <input type="text" id="phone" placeholder="請輸入電話">
                     </div>
                 </div>
                 <!-- Email -->
@@ -61,14 +61,15 @@
                         <input type="email" id="email" placeholder="請輸入Email">
                     </div>
                 </div>
-            </from>
-            <div class="form_privacy_policy">
-                <input type="checkbox">
-                <span>我同意隱私條款政策 [隱私條款政策]</span>
-            </div>
-            <RouterLink to="/memberformok"> 
-                <input type="submit" value="下一步" class="big-btn-primary" />
-            </RouterLink>
+                <div class="form_privacy_policy">
+                    <input type="checkbox">
+                    <span>我同意隱私條款政策 [隱私條款政策]</span>
+                </div>
+                <RouterLink to="/memberformok" style="text-decoration: none;"> 
+                    <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
+                    margin: 10px auto;"/>
+                </RouterLink>
+            </form>
         </div>
     </div>
 </template>

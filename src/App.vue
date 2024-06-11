@@ -1,7 +1,7 @@
 <template>
   <MainHeader />
   <RouterView />
-  <CardsExample />
+  <!-- <CardsExample /> -->
   <MainFooter />
   
 </template>
@@ -16,7 +16,7 @@ export default {
     RouterView,
     MainHeader,
     MainFooter,
-    CardsExample
+    // CardsExample
   }
 }
 </script>

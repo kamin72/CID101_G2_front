@@ -1,15 +1,12 @@
 <template>
     <div class="container">
         <div class="row">
-            <small class="col-12 scrumble">首頁
-            <span class="material-symbols-outlined">arrow_forward_ios</span>會員中心
-            <span class="material-symbols-outlined">arrow_forward_ios</span>會員資料</small>
+            <small class="col-12 scrumble">首頁<span
+                    class="material-symbols-outlined">arrow_forward_ios</span>我們的酒</small>
         </div>
         <div class="center_menu">
-            <RouterLink to="/membercenter"> <button class="big-btn-secondary">會員資料</button></RouterLink>
-            <RouterLink to="/memberorderhistory"> <button class="big-btn-primary">訂單紀錄</button></RouterLink>
-            <RouterLink to="/bookinghistory"> <button class="big-btn-primary">預約紀錄</button></RouterLink>
-            <RouterLink to="/discounthistory"> <button class="big-btn-primary">優惠券紀錄</button></RouterLink>
+            <button type="button" class="big-btn-primary">會員資料</button>
+            <button type="button" class="big-btn-secondary">訂單紀錄</button>
         </div>
         <div class="wrap_mem_center">
             <div class="member_info_list">
@@ -35,7 +32,6 @@
                 </div>
                 <button class="big-btn-primary cart">儲存</button>
             </div>
-            
         </div>
     </div>
 </template>
@@ -43,4 +39,62 @@
 <script></script>
 
 <style>
+.center_menu {
+    margin: 40px 0;
+    border-bottom: 1px solid #322D26;
+    padding-bottom: 20px;
+}
+
+.wrap_mem_center {
+    margin: auto;
+}
+
+.member_info_list {
+    width: 500px;
+    background-color: #F8F5F2;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.member_type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 10px solid #EDE7DE;
+}
+.member_type h3 {
+    margin: 10px 0 ;
+}
+.member_type h4 {
+    margin: 10px 0 0 50px ;
+}
+
+.member_icon {
+    display: flex;
+    padding: 30px;
+}
+
+.member_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.member_info input {
+    outline: none;
+    border: none;
+    background: #FFFFFF;
+    padding: 10px;
+}
+
+.member_info label {
+    display: block;
+    width: 100px;
+    padding: 10px;
+}
+
+.member_info_list button {
+    margin: 30px 0;
+}
 </style>

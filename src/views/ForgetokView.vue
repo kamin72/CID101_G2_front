@@ -19,8 +19,8 @@
                 <span class="material-symbols-outlined">
                     visibility_off </span>
             </div>
-            <div class="function_btn">
-                <button type="button" class="big-btn-primary">完成</button>
+            <div class="function_btn" style="margin-top: 40px">
+                <button type="button" class="big-btn-primary" style="margin-top: 30px;">完成</button>
             </div>
         </div>
     </div>
@@ -30,30 +30,6 @@
 </script>
 
 <style>
-.process {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0 40px 0;
-}
-.process p {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    color: white;
-    border-radius: 100%;
-    background-color: #AEA495;
-    text-align: center;
-}
-.process span {
-    width: 200px;
-    height: 1px;
-    background-color: #AEA495;
-    margin: 0 10px;
-}
-.function_btn {
-    margin-top: 30px;
-}
 .material-symbols-outlined {
     font-size: 16px;
     padding-left: 220px;
