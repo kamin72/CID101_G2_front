@@ -55,6 +55,12 @@
       </div>
     </div>
   </section>
+<!-- 酒瓶輪播 -->
+  <section>
+  <div class="container">
+		<WineCarousel></WineCarousel>
+	</div>
+</section>
 
   <!-- event輪播圖 -->
 <section>
@@ -69,9 +75,12 @@
 <!-- swiper -->
 <script>
 import SwiperComponent from '@/components/home/SwiperComponent.vue'
+import WineCarousel from '@/components/home/WineCarousel.vue'
+
 export default {
 	components: {
-		SwiperComponent
+		SwiperComponent,
+    WineCarousel
 	}
 }
 </script>

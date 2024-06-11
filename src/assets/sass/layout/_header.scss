@@ -1,52 +1,131 @@
 .header {
   background: $gray;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
   .container {
+    max-width: 1200px;
     display: flex;
-    justify-content: space-between;
+    justify-content:space-around;
     align-items: center;
-    .header_hamburger {
+    .header-hamburger {
       display: none;
+      i{
+        font-size: 30px;
+        color: #fff;
+      }
+      @include t{
+        display: block;
+        width: fit-content;
+      }
     }
-    .header_logo {
+    .header-logo {
       padding: 10px 0;
-      flex-grow: 1;
+      display: flex;
+      justify-content: center;
       img {
         width: 125px;
         display: block;
       }
-    }
-    .header_link {
-      flex-grow: 1;
-      text-align: center;
-      list-style: none;
-      a {
-        margin: 0 20px;
-        text-decoration: none;
-        color: $white;
-        font-size: map-get($font-size, a);
-        letter-spacing: $letter-spacing;
-        font-family: $font-cormorant;
+      @include t{
+        flex-grow: 1;
       }
+      }
+    .header-nav{
+        display: flex;
+        justify-content: flex-end;
+        width: 75%;
+        @include t{
+          position: absolute;
+          flex-direction: column;
+          top: 78px;
+          left: 0;
+          max-height: 0;
+          overflow: hidden;
+        }
+        .header-link {
+          text-align: center;
+          list-style: none;
+          width: 65%;
+          a {
+            margin: 0 2%;
+            text-decoration: none;
+            color: $white;
+            font-size: map-get($font-size, a);
+            letter-spacing: $letter-spacing;
+            font-family: $font-cormorant;
+          }
+  
+        }
+        .wrap-login-shoppingcart {
+          display: flex;
+          a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: map-get($font-size, a);
+            letter-spacing: $letter-spacing;
+            font-family: $font-cormorant;
+          }
+          .fa-regular {
+            color: $white;
+          }
+          .fa-solid {
+            color: $white;
+          }
+        }
     }
+    .header-nav-open {
+      @include t{
+      background-color: #fff;
+      // position: absolute;
+      // top: 78px;
+      // left: 0;
+      width: fit-content;
+      max-height: 1000px;
+      padding: 0 5vw;
+      .header-link{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        flex-grow: 1;
+        a{
+          display: flex;
+          flex-wrap: wrap;
+          width: 100%;
+          color: $gray;
+          margin: 50px 0;
+        }
+      }
+      .wrap-login-shoppingcart {
+        display: flex;
+        order: -1;
+        margin: 0;
+        text-align: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 40px 0;
+        border-bottom: 1px solid $gray;
+        a {
+          margin: 0 10px;
+          text-decoration: none;
+          color: $gray;
+        }
+        .fa-regular {
+          color: $gray;
+        }
+        .fa-solid {
+          color: $gray;
+        }
+
+      }
+      }
+      
+    }
+    
   }
-  .wrap_login_shoppingcart {
-    //   outline: 1px solid red;
-    width: 205px;
-    display: flex;
-    justify-content: space-between;
-    a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #fff;
-      font-size: map-get($font-size, a);
-      letter-spacing: $letter-spacing;
-      font-family: $font-cormorant;
-    }
-    .fa-regular {
-      color: $white;
-    }
-    .fa-solid {
-      color: $white;
-    }
+    
   }
-}
+  
+
