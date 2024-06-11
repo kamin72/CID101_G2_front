@@ -13,6 +13,9 @@
         <h2>WINE</h2>
         <h4>JOURNEYS</h4>
       </div>
+      <h3>MEMORABLE</h3>
+      <h2>WINE</h2>
+      <h4>JOURNEYS</h4>
     </div>
   </section>
 

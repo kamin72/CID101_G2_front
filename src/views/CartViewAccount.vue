@@ -112,8 +112,7 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400',
-          color: '#AEA495'
+          bold: '400'
         },
         {
           id: 2,

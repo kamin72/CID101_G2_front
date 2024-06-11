@@ -184,6 +184,27 @@ section {
           padding: 0 10px;
         }
       }
+      .tickets {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #aea495;
+        margin: 0px 10px;
+        padding: 0 10px;
+        height: 50px;
+        .content {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .material-symbols-outlined {
+            font-size: 40px;
+            cursor: auto;
+          }
+        }
+        span {
+          cursor: pointer;
+        }
+      }
     }
     .terms {
       p {
@@ -207,9 +228,6 @@ section {
     .cartSubmit {
       width: 100%;
       margin-top: 20px;
-    }
-    .cartSubmit:disabled {
-      cursor: not-allowed;
     }
   }
 }
@@ -235,14 +253,14 @@ section {
     }
   }
   .phone {
-    #cartPhone_comp {
+    #phone {
       width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;
     }
   }
   .email {
-    #cartEmail_comp {
+    #email {
       width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;
@@ -292,9 +310,6 @@ section {
   .deliverySubmit {
     margin-top: 50px;
     width: 100%;
-  }
-  .deliverySubmit:disabled {
-    cursor: not-allowed;
   }
 }
 
@@ -496,28 +511,14 @@ section {
     }
   }
   .name {
-    #cartName {
+    #name {
       width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;
     }
   }
   .receiveAddress {
-    #cartAddress {
-      width: calc(100% - 20px);
-      padding: 8px 10px;
-      border: 0;
-    }
-  }
-  .phone {
-    #cartPhone {
-      width: calc(100% - 20px);
-      padding: 8px 10px;
-      border: 0;
-    }
-  }
-  .email {
-    #cartEmail {
+    #address {
       width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;

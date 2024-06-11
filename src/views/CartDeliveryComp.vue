@@ -4,14 +4,12 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormComp v-model:phone="phone" v-model:email="email" />
+      <FormComp />
       <aside class="payMethod">
-        <PayMethod @change-method="changePaymentMethod" />
+        <PayMethod />
         <div class="hr"></div>
-        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
-          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
-            提交配送資訊
-          </button>
+        <RouterLink to="/pay_info" from="">
+          <button class="big-btn-primary deliverySubmit">提交配送資訊</button>
         </RouterLink>
       </aside>
     </div>
@@ -37,16 +35,14 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400',
-          color: '#AEA495'
+          bold: '400'
         },
         {
           id: 2,
           icon: 'local_shipping',
-          opacity: '1',
+          opacity: '0.3',
           text: '填寫配送資訊',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 3,
@@ -62,40 +58,11 @@ export default {
           text: '完成詢價',
           bold: '0'
         }
-      ],
-      selectedPaymentMethod: null,
-      phone: '',
-      email: ''
+      ]
     }
   },
   mounted() {
     window.scrollTo(0, 0)
-  },
-  methods: {
-    changePaymentMethod(index) {
-      this.selectedPaymentMethod = index
-    }
-    // submitForm() {
-    //   if (this.canSubmit) {
-    //     this.$router.push({
-    //       path: '/pay_info',
-    //       query: {
-    //         method: this.selectedPaymentMethod,
-    //         phone: this.phone,
-    //         email: this.email
-    //       }
-    //     })
-    //   } else {
-    //     alert('請填寫所有必填字段並確保電話為10個數字和電子郵件格式正確')
-    //   }
-    // }
-  },
-  computed: {
-    canSubmit() {
-      const phoneValid = /^\d{10}$/.test(this.phone)
-      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
-      return this.selectedPaymentMethod !== null && phoneValid && emailValid
-    }
   }
 }
 </script>

@@ -31,32 +31,28 @@ export default {
           icon: 'receipt_long',
           opacity: '1',
           text: '詢價清單',
-          bold: '400',
-          color: '#AEA495'
+          bold: '400'
         },
         {
           id: 2,
           icon: 'local_shipping',
-          opacity: '1',
+          opacity: '0.3',
           text: '填寫配送資訊',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 3,
           icon: 'paid',
-          opacity: '1',
+          opacity: '0.3',
           text: '選擇付款方式',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         },
         {
           id: 4,
           icon: 'check',
-          opacity: '1',
+          opacity: '0.3',
           text: '完成詢價',
-          bold: '400',
-          color: '#AEA495'
+          bold: '0'
         }
       ],
       countdown: 5

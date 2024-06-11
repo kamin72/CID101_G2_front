@@ -17,7 +17,7 @@
 
 @mixin small-button($btn-color) {
   @include big-button($btn-color);
-  padding: 8px 24px;
+  padding: 10px 24px;
   font-size: map-get($font-size, p);
 }
 
