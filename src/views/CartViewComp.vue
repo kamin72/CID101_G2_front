@@ -114,7 +114,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
         },
         {
           id: 2,
@@ -162,7 +163,7 @@ export default {
     }
   },
   watch: {
-    $route(to, from) {
+    $route(to) {
       // 当路由改变时检查是否是子路由
       this.isChildRouteActive = to.path.includes('/cart_comp/cartdelivery_comp')
     }

@@ -20,6 +20,7 @@
 import CartFlow from '@/components/Cart/CartFlow.vue'
 
 export default {
+  emits: ['route-change'],
   components: {
     CartFlow
   },
@@ -32,7 +33,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 2,
@@ -40,7 +42,8 @@ export default {
           opacity: '1',
           text: '填寫配送資訊',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 3,
@@ -48,7 +51,8 @@ export default {
           opacity: '1',
           text: '選擇付款方式',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 4,
@@ -56,7 +60,8 @@ export default {
           opacity: '1',
           text: '完成詢價',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         }
       ],
       countdown: 5

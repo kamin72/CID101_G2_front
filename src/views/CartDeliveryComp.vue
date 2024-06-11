@@ -25,6 +25,7 @@ import FormComp from '@/components/Cart/FormComp.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
 export default {
+  emits: ['route-change'],
   components: {
     CartFlow,
     FormComp,
@@ -39,7 +40,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 2,
@@ -47,7 +49,8 @@ export default {
           opacity: '1',
           text: '填寫配送資訊',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
         },
         {
           id: 3,
@@ -100,7 +103,7 @@ export default {
     // }
   },
   watch: {
-    $route(to, from) {
+    $route(to) {
       // 当路由改变时检查是否是子路由
       this.isChildRouteActive = to.path.includes('/cart_comp/pay_info')
     }
