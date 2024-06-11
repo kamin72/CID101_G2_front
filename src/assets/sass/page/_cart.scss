@@ -9,6 +9,7 @@ section {
   display: flex;
   justify-content: center;
   .flow {
+    margin-top: 20px;
     width: 100px;
     height: 150px;
     position: relative;
@@ -38,6 +39,7 @@ section {
     }
   }
   .box {
+    margin-top: 20px;
     position: relative;
     width: 100px;
     height: 100px;
