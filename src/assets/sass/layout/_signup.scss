@@ -1,3 +1,60 @@
+// 表單流程
+.form_flow {
+    display: flex;
+    justify-content: center;
+
+    .flow {
+        width: 100px;
+        height: 150px;
+        position: relative;
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: $invalid-button-color;
+
+            .material-symbols-outlined {
+                position: absolute;
+                left: 50%;
+                top: 20%;
+                transform: translate(-50%, 0);
+                font-size: 50px;
+                color: $white;
+            }
+
+            .wrap_text {
+                position: absolute;
+                bottom: 0;
+
+                .text {
+                    width: 100px;
+                    text-align: center;
+                    color: $gray;
+                    font-size: map-get($font-size, p);
+                }
+            }
+        }
+    }
+
+    .box {
+        position: relative;
+        width: 100px;
+        height: 100px;
+
+        .dot {
+            border: 4px dashed $invalid-button-color;
+            width: 100px;
+            height: 0;
+            top: 50%;
+            position: absolute;
+        }
+    }
+    .box:nth-child(4) {
+        display: none;
+    }
+}
+
 // 會員帳號
 .container {
     .wrap_signup {
@@ -6,12 +63,15 @@
         align-items: center;
         justify-content: center;
         margin: 20px;
+
         .form_ltem_list {
             display: flex;
             border-bottom: 2px solid #FFFFFF;
             background-color: #AEA495;
+
             .form_item {
                 width: 250px;
+
                 label {
                     font-size: 24px;
                     color: white;
@@ -19,23 +79,28 @@
                     padding: 10px 20px;
                     text-align: center;
                     display: block;
+                    margin: auto;
                 }
             }
-            .form_box{
+
+            .form_box {
                 width: 600px;
                 background-color: #F8F5F2;
+
                 input {
-                    font-size: 16px;
+                    font-size: 24px;
                     display: inline-block;
                     outline: none;
                     border: none;
-                    padding: 5px;
+                    padding: 3px;
                     margin-top: 5px;
                 }
+
                 .material-symbols-outlined {
-                    font-size: 16px;
+                    font-size: 14px;
                     padding-top: 10px;
                 }
+
                 .address-select {
                     height: 30px;
                     border: none;
@@ -44,18 +109,19 @@
                     border: none;
                     margin: 10px 5px;
                 }
-                .s-input {
-                    width: 30px;
-                    margin: 5px;
+
+                #file_path {
+                    font-size: 14px;
                 }
-                #avatar {
-                    font-size: 16px;
-                }
-            } 
+            }
         }
+
         .form_privacy_policy {
             display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 20px 0;
+
             span {
                 display: flex;
                 margin: 2px 0;

@@ -1,0 +1,35 @@
+.container {
+    .center_menu {
+        border-bottom: 1px solid #322D26;
+        padding-bottom: 20px;
+        margin: 40px 0;
+    }
+    .wrap_order_history {
+        margin: 30px auto;
+        .items_list {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            p {
+                margin: 0 45px;
+                padding: 5px;
+            }
+        }
+        .items {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            padding: 5px 0;
+            border: 1px solid #322D26;
+            p {
+                margin: 0 40px;
+                padding: 5px;
+            }
+            button {
+                margin: 0 5px;
+            }
+        }
+    }
+}

@@ -1,17 +1,17 @@
 <template>
     <div class="container">
-        <div class="wrap_signup_finsh">
-            <section>
-                <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
-            </section>
-            <div class="finsh">
-                <img src="https://picsum.photos/200/200/?random=12">
-                <h2>完成註冊</h2>
+        <section>
+            <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+        </section>
+        <div class="wrapFinish">
+            <div class="finish">
+                <div class="finishIcon">
+                    <span class="material-symbols-outlined"> task_alt </span>
+                    <h2>完成註冊</h2>
+                </div>
+                <h3>5 幾秒後跳轉至首頁......</h3>
             </div>
-            <h3>5 幾秒後跳轉至首頁......</h3>
-            <RouterLink to="/">
-                <button class="big-btn-primary cart" style="margin: 20px 0;">回首頁</button>
-            </RouterLink>
+            <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
         </div>
     </div>
 </template>
@@ -33,7 +33,7 @@ export default {
                     bold: '400'
                 },
                 {
-                    id: 4,
+                    id: 2,
                     icon: 'check',
                     opacity: '0.3',
                     text: '註冊完成',
@@ -41,6 +41,9 @@ export default {
                 }
             ]
         }
+    },
+    mounted() {
+    window.scrollTo(0, 0)
     }
 }
 </script>
@@ -48,13 +51,8 @@ export default {
 .wrap_signup_finsh {
     text-align: center;
 }
-.finsh {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 h3 {
     margin: 20px 0;
 }
-
 </style>

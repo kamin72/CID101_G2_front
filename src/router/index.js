@@ -114,6 +114,11 @@ const router = createRouter({
       component: () => import('@/views/WholesalerformView.vue')
     },
     {
+      path: '/product-detail',
+      name: 'product-detail',
+      component: () => import('@/views/Product-Detail-View.vue')
+    },
+    {
       path: '/wholesalerformok',
       name: 'wholesalerformok',
       component: () => import('@/views/WholesalerformokView.vue')
@@ -123,11 +128,36 @@ const router = createRouter({
       name: 'membercenter',
       component: () => import('@/views/MemberCenterView.vue')
     },
-{
+    {
       path: '/ProductDetail',
       name: 'ProductDetail',
       component: () => import('@/views/ProductdetailView.vue')
-    }
+    },
+    {
+      path: '/memberorderhistory',
+      name: 'memberorderhistory',
+      component: () => import('@/views/MemberOrderHistoryView.vue')
+    },
+    {
+      path: '/bookinghistory',
+      name: 'bookinghistory',
+      component: () => import('@/views/BookingHistoryView.vue')
+    },
+    {
+      path: '/discounthistory',
+      name: 'discounthistory',
+      component: () => import('@/views/DiscountHistoryView.vue')
+    },
+    {
+      path: '/memberorderhistorydetails',
+      name: 'memberorderhistorydetail',
+      component: () => import('@/views/MemberOrderHistoryDetailsView.vue')
+    },
+    {
+      path: '/bookinghistorydetails',
+      name: 'bookinghistorydetails',
+      component: () => import('@/views/BookingHistoryDetailsView.vue')
+    },
   ]
 })
 

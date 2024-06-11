@@ -1,7 +1,7 @@
 .container {
     .wrap_login {
         width: 500px;
-        height: 400px;
+        height: 425px;
         background-color: #F8F5F2;
         margin: 30px auto;
         padding: 20px 0 0 0 ;
@@ -9,6 +9,9 @@
         .login_item {
             text-align: center;
             padding-top: 30px;
+            h4 {
+                text-align: center;
+            }
             .log_in {
                 background-color: #F8F5F2;
                 // border-bottom: 2px solid #322D26;
@@ -30,6 +33,28 @@
                 display: inline-block;
                 // margin: 20px 0;
                 margin: 30px 25px;
+            }
+        }
+        .process {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0 40px 0;
+            p {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                color: white;
+                border-radius: 100%;
+                background-color: #AEA495;
+                text-align: center;
+                padding: 5px;
+            }
+            span {
+                width: 200px;
+                height: 2px;
+                background-color: #AEA495;
+                margin: 0 10px;
             }
         }
         .account_list {
@@ -54,6 +79,11 @@
                 border: none;
                 outline: none;
                 background-color: #F8F5F2;
+            }
+        }
+        .function_btn {
+            a {
+                text-decoration: none;
             }
         }
         .forget {
