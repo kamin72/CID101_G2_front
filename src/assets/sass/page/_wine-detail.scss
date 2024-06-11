@@ -1,0 +1,82 @@
+.product-detail{
+    display: flex;
+    position: relative;
+    .product-img{
+        width: 50%;
+        overflow: hidden; /* 確保圖片超出容器部分被隱藏 */      
+        .img-wrap{
+             padding: 0 10%;
+             background-image: url('./src/assets/img/wine/Background-image.png');
+             background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
+             background-position: center;
+             background-repeat: no-repeat;
+             background-position: top left 30%;
+            //  height: 40vh;
+             position: fixed;
+
+             img{
+                width: 100%;
+                height: auto; /* 高度自動調整，保持圖片比例 */
+                object-fit: cover; /* 讓圖片按照比例放大來適應容器 */
+
+
+             }
+             
+        }
+
+    }
+
+    .product-info-wrap{
+        width: 50%;
+        line-height: 25px;
+
+        .detail-item{
+            padding: 15px;
+        }
+
+        .detail-button{
+            padding: 15px;
+            display: flex;
+
+            .amount {
+                background-color: $white;
+                position: relative;
+                & > button {
+                  font-size: map-get($font-size, a);
+                  padding: 7px 20px;
+                  background-color: $white;
+                  cursor: pointer;
+                  color: $gray;
+                }
+                .num {
+                  position: absolute;
+                  top: 50%;
+                  transform: translate(0, -50%);
+                  display: inline-block;
+                  background-color: transparent;
+                  font-size: map-get($font-size, a);
+                }
+              }
+
+            .add-card{
+                margin-left: 20px;
+                background-color: #322D26;
+                color: $white;
+                padding: 7px 27px;
+                border: 0
+            }
+        }
+
+        .line{
+            width: 600px;
+            height: 1.5px;
+            margin: 30px 5px;
+        }
+
+        .container .product-title{
+            text-align: center;
+            padding: 30px 0;
+            margin: 20px 0;
+        }
+    }
+}

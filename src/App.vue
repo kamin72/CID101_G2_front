@@ -1,7 +1,6 @@
 <template>
   <MainHeader />
   <RouterView />
-  <CardsExample />
   <MainFooter />
   
 </template>
@@ -15,8 +14,7 @@ export default {
   components: {
     RouterView,
     MainHeader,
-    MainFooter,
-    CardsExample
+    MainFooter
   }
 }
 </script>
