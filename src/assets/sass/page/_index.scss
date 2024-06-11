@@ -10,18 +10,35 @@
     height: 77vh;
     align-content: center;
     position: relative;
+    @include t {
+        background-image: url(/src/assets/img/home/homebanner2.png), url(/src/assets/img/home/Vector\ 11.png),
+            url(/src/assets/img/home/home-bannerRWD.png);
+        background-position:
+            bottom 15% left 50%,
+            bottom 50% left 50%,
+            bottom 50% left 50%;
+        background-size: clamp(100%, 100%, 100%), clamp(250px, 19.53125vw, 280px), clamp(230px, 17.96875vw, 260px);
+    }
     .homeBanner_container {
         // outline: 1px solid red;
         width: 100%;
         margin: auto;
         .homeBanner_wine {
             .homeBanner_wine_wapper {
+                // outline: 1px solid red;
                 .image {
-                    width: 44%;
+                    // outline: 1px solid red;
+                    width: clamp(500px, 39.0625vw, 600px);
                     position: absolute;
-                    top: 20%;
-                    left: 29%;
+                    bottom: 5%;
+                    left: 31%;
                     filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.8));
+                    @include t {
+                        // display: none;
+                        // width: clamp(300px, 23.4375vw, 400px);
+                        // bottom: 5%;
+                        // left: 0;
+                    }
                 }
                 .reflection {
                     width: 24%;
@@ -29,35 +46,49 @@
                     // outline: 1px solid red;
                     margin: 0 auto;
                     position: absolute;
-                    bottom: -83%;
-                    left: 38.2%;
+                    bottom: -76%;
+                    left: 38%;
+                    @include t {
+                        display: none;
+                    }
                 }
             }
         }
         .homeBanner_txt {
             h3 {
                 // outline: 1px solid red;
-                font-size: 35px;
+                font-size: clamp(1.5rem, 3vw, 5rem);
                 width: 70%;
                 margin: auto;
                 color: #ffffff;
                 letter-spacing: 2px;
+                @include t {
+                    width: 90%;
+                    color: #520802;
+                }
             }
             h2 {
-                font-size: 350px;
+                font-size: clamp(8rem, 32vw, 19rem);
                 text-align: center;
                 // outline: 1px solid red;
                 color: #ffffff;
                 letter-spacing: 24px;
+                @include t {
+                    color: #520802;
+                }
             }
             h4 {
                 // outline: 1px solid red;
-                font-size: 35px;
+                font-size: clamp(1.5rem, 3vw, 5rem);
                 text-align: right;
                 width: 70%;
                 margin: auto;
                 color: #ffffff;
                 letter-spacing: 2px;
+                @include t {
+                    width: 90%;
+                    color: #520802;
+                }
             }
         }
     }
@@ -66,11 +97,17 @@
 // 關於我們
 .homeAboutus {
     .homeAboutus_container {
-        // outline: 1px solid red;
+        outline: 1px solid red;
         padding: 174px 0;
         width: 70%;
         display: flex;
         margin: auto;
+        position: relative;
+        @include t {
+            width: 50%;
+            // outline: 1px solid red;
+            flex-direction: column;
+        }
     }
     .homeAboutus_pic {
         // outline: 1px solid red;
@@ -81,9 +118,12 @@
     }
     .wrap_homeAboutus {
         // outline: 1px solid red;
-        position: relative;
+        // position: relative;
         width: 50%;
         margin: 0 0 0 50px;
+        @include t {
+            margin: 0;
+        }
         .homeAboutus_txt {
             letter-spacing: $letter-spacing;
             h3 {
@@ -127,11 +167,17 @@
             }
         }
         .homeAboutus_BarrelImg {
+            outline: 1px solid red;
             width: 390px;
             position: absolute;
-            right: -160px;
-            bottom: -10px;
+            right: -20%;
+            bottom: 20%;
             z-index: -1;
+            @include t {
+                // outline: 1px solid red;
+                right: -40%;
+                top: 10%;
+            }
             img {
                 width: 100%;
             }
