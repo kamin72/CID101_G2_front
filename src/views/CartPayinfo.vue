@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!isChildRouteActive">
     <section>
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -11,12 +11,13 @@
         <!-- <PayMethod /> -->
         <PayMethod :checked="selectedMethod" />
         <div class="hr"></div>
-        <RouterLink to="/cart_finish" from="">
+        <RouterLink to="/cart_comp/cart_finish">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
     </div>
   </div>
+  <RouterView @route-changes="handleRouteChange" />
 </template>
 
 <script>
@@ -75,18 +76,31 @@ export default {
           bold: '0'
         }
       ],
-      // current: [0, 1, 2],
-      selectedMethod: null
+      selectedMethod: null,
+      isChildRouteActive: false
     }
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedMethod = index
+    },
+    handleRouteChange(isActive) {
+      this.isChildRouteActive = isActive
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // 当路由改变时检查是否是子路由
+      this.isChildRouteActive = to.path.includes('/cart_comp/cart_finish')
     }
   },
   created() {},
   mounted() {
-    window.scrollTo(0, 0), (this.selectedMethod = this.method)
+    window.scrollTo(0, 0), (this.selectedMethod = this.method), this.$emit('route-change', true)
+  },
+  beforeUnmount() {
+    // 当组件销毁时，通知父组件显示其内容
+    this.$emit('route-change', false)
   }
 }
 </script>

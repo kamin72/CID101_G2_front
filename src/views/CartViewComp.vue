@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!isChildRouteActive">
     <section>
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -55,12 +55,13 @@
             是否願意收到Silken SipsVineyard的最新消息</label
           >
         </div>
-        <RouterLink to="/cartDelivery_comp">
+        <RouterLink to="/cart_comp/cartdelivery_comp">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
   </div>
+  <RouterView @route-change="handleRouteChange" />
 </template>
 
 <script>
@@ -139,7 +140,8 @@ export default {
       ],
       isEighteen: false,
       agreeTerms: false,
-      receiveMessages: false
+      receiveMessages: false,
+      isChildRouteActive: false
     }
   },
   methods: {
@@ -154,6 +156,15 @@ export default {
     reduce(index) {
       if (this.products[index].count == 0) return
       this.products[index].count--
+    },
+    handleRouteChange(isActive) {
+      this.isChildRouteActive = isActive
+    }
+  },
+  watch: {
+    $route(to, from) {
+      // 当路由改变时检查是否是子路由
+      this.isChildRouteActive = to.path.includes('/cart_comp/cartdelivery_comp')
     }
   },
   computed: {

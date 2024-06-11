@@ -63,7 +63,11 @@ export default {
     }
   },
   mounted() {
-    window.scrollTo(0, 0), this.startCountdown()
+    window.scrollTo(0, 0), this.startCountdown(), this.$emit('route-change', true)
+  },
+  beforeUnmount() {
+    // 当组件销毁时，通知父组件显示其内容
+    this.$emit('route-change', false)
   },
   methods: {
     startCountdown() {

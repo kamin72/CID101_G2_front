@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!isChildRouteActive">
     <section>
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -8,7 +8,7 @@
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
+        <RouterLink :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }">
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>
@@ -16,6 +16,7 @@
       </aside>
     </div>
   </div>
+  <RouterView @route-change="handleRouteChange" />
 </template>
 
 <script>
@@ -65,15 +66,23 @@ export default {
       ],
       selectedPaymentMethod: null,
       phone: '',
-      email: ''
+      email: '',
+      isChildRouteActive: false
     }
   },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), this.$emit('route-change', true)
+  },
+  beforeUnmount() {
+    // 当组件销毁时，通知父组件显示其内容
+    this.$emit('route-change', false)
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedPaymentMethod = index
+    },
+    handleRouteChange(isActive) {
+      this.isChildRouteActive = isActive
     }
     // submitForm() {
     //   if (this.canSubmit) {
@@ -89,6 +98,12 @@ export default {
     //     alert('請填寫所有必填字段並確保電話為10個數字和電子郵件格式正確')
     //   }
     // }
+  },
+  watch: {
+    $route(to, from) {
+      // 当路由改变时检查是否是子路由
+      this.isChildRouteActive = to.path.includes('/cart_comp/pay_info')
+    }
   },
   computed: {
     canSubmit() {
