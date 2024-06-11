@@ -1,11 +1,71 @@
+// 課程清單頁面
+.course-page-container {
+  max-width: $max-width;
+  width: 100%;
+  margin: auto;
+  .row {
+    width: 100%;
+    margin: unset;
+    justify-content: center;
+  }
+}
+
+.scrumble {
+  padding-top: $pad-1;
+  .material-symbols-outlined {
+    vertical-align: middle;
+    font-size: clamp(11px, 1.5vw, 12px);
+    margin: 0 5px;
+  }
+}
+
+.course-title-wrap {
+  display: flex;
+  align-items: center;
+  padding-top: $pad-1;
+  padding-bottom: $pad-2;
+  .line {
+    background-color: $gray;
+    width: 161.003px;
+    height: 1.5px;
+  }
+  h2 {
+    font-family: $font-cormorant;
+    padding: 0 30px;
+  }
+}
+
+.section-recom-course {
+  .recom-course {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .section-search-course {
   background-color: $white-transp;
   .search-course {
     display: flex;
     flex-direction: column;
     align-items: center;
-    .title-wrap {
-      padding-bottom: 120px;
+    .search-course-calendar-header,
+    .search-course-calendar-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $pad-1 10px;
+      .material-symbols-outlined {
+        vertical-align: middle;
+        font-size: clamp(17px, 3vw, 23px);
+        cursor: pointer;
+      }
+      .month-year {
+        padding: 0 $pad-1;
+      }
+    }
+    .course-title-wrap {
+      padding-bottom: 150px;
     }
     .search-course-list-wrap {
       position: relative;
@@ -43,108 +103,105 @@
           }
         }
       }
-    }
-  }
-}
-.scrumble {
-  padding-top: $pad-1;
-  .material-symbols-outlined {
-    vertical-align: middle;
-    font-size: clamp(11px, 1.5vw, 12px);
-    margin: 0 5px;
-  }
-}
-.title-wrap {
-  display: flex;
-  align-items: center;
-  padding-top: $pad-1;
-  padding-bottom: $pad-2;
-  h2 {
-    font-family: $font-cormorant;
-    padding: 0 30px;
-  }
-}
-.line {
-  background-color: $gray;
-  width: 161.003px;
-  height: 1.5px;
-}
-.recom-course {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.calendar {
-  font-family: $font-dm, $font-noto;
-  padding-bottom: $pad-1;
-  .calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: $pad-1 10px;
-    .material-symbols-outlined {
-      vertical-align: middle;
-      font-size: clamp(17px, 3vw, 23px);
-      cursor: pointer;
-    }
-    .month-year {
-      padding: 0 $pad-1;
-    }
-  }
-  .calendar-body {
-    border: 2px solid $sand;
-    background-color: #fff;
-    .weekdays,
-    .days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      div {
-        padding: 10px;
-      }
-    }
-    .weekdays {
-      p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        text-transform: uppercase;
-        border: 1.1px solid $bgc;
-        height: 45px;
-      }
-    }
-    .days {
-      div {
-        cursor: pointer;
-        border: 1px solid $bgc;
-        display: flex;
-        height: 120px;
-      }
-      .today {
-        padding: 5px;
-        padding-bottom: 15px;
-        span {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: #fff;
-          background-color: $bgc;
-          height: 30px;
-          aspect-ratio: 1/1;
-          border-radius: 50%;
-          background-color: #5188f6;
+      .search-course-calendar {
+        font-family: $font-dm, $font-noto;
+        padding-bottom: $pad-1;
+        .search-course-calendar-body {
+          border: 2px solid $sand;
+          background-color: #fff;
+          .weekdays,
+          .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+          }
+          .weekdays {
+            .weekday {
+              padding: 10px;
+            }
+            p {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: bold;
+              text-transform: uppercase;
+              border: 1.1px solid $bgc;
+              height: 45px;
+            }
+          }
+          .days {
+            .day {
+              position: relative;
+              padding: 10px;
+              border: 1px solid $bgc;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-content: center;
+              height: 120px;
+              .day-number {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+              }
+              .course-name {
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 65%;
+                background-color: $bgc;
+                transition: 0.3s ease-in-out;
+                p {
+                  padding-top: 10px;
+                }
+                .course-tag {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  padding: 6px 8px;
+                  background-color: $wine;
+                  color: $white;
+                }
+                &:hover {
+                  box-shadow: 3px 3px 5px #322d2641;
+                  transform: translate(-1%, -1%);
+                }
+              }
+            }
+            .today {
+              padding: 5px;
+              padding-bottom: 15px;
+              div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                background-color: $bgc;
+                height: 30px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                background-color: #5188f6;
+              }
+            }
+          }
         }
       }
-      .empty {
-        cursor: default;
+      .event-card-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .event-card2 {
+          margin-bottom: $margin-1;
+        }
       }
-    }
-    .day.has-course {
-    }
-    .course-name {
     }
   }
 }
+
 
 //課程詳情資訊
 .courseBanner {
