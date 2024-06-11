@@ -4,8 +4,13 @@
     <div class="homeBanner_container">
       <div class="homeBanner_wine">
         <div class="homeBanner_wine_wapper">
+<<<<<<< HEAD
           <img src="/src/assets/img/wine/bannerwine.png" class="image" />
           <img src="/src/assets/img/home/Mask group.png" class="reflection" />
+=======
+          <img src="/src/assets/img/wine/bannerwine.png" class="image">
+          <img src="/src/assets/img/home/wineshadow.png" class="reflection">
+>>>>>>> mita
         </div>
       </div>
       <div class="homeBanner_txt">
@@ -46,14 +51,31 @@
           </div>
         </div>
 
-        <button>
-          <a href="#">MORE</a>
-        </button>
+
+          <div class="wrap_homeAboutus_detail">
+            <div class="homeAboutus_detail">
+              <img src="/src/assets/img/home/grape.png">
+              <p>歷史悠久的釀酒傳統</p>
+            </div>
+            <div class="homeAboutus_detail">
+              <img src="/src/assets/img/home/wine.png">
+              <p>獨特的品酒體驗</p>
+            </div>
+            <div class="homeAboutus_detail">
+              <img src="/src/assets/img/home/star.png">
+              <p>熱愛葡萄酒文化的釀酒師創立</p>
+            </div>
+          </div>
+
+          <button>
+            <a href="#">MORE</a>
+          </button>
 
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png" />
         </div>
       </div>
+      
     </div>
   </section>
 
