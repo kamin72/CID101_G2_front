@@ -49,26 +49,26 @@
                         <div class="search-course-tabs-panel">
                             <div class="search-course-calen-tab">
                                 <div @click="
-                                    showCalen = true
-                                showList = false
-                                toggleButton('calen')
-                                    " :class="{
-                    'big-btn-primary': activeButton === 'calen',
-                    'big-btn-secondary': activeButton !== 'calen'
-                }">
+                                    showCalen = true;
+                                showList = false;
+                                toggleButton('calen');
+                                " :class="{
+                                    'big-btn-primary': activeButton === 'calen',
+                                    'big-btn-secondary': activeButton !== 'calen',
+                                }">
                                     從日曆中選擇
                                     <div class="triangle"></div>
                                 </div>
                             </div>
                             <div class="search-course-list-tab">
                                 <div @click="
-                                    showCalen = false
-                                showList = true
-                                toggleButton('list')
-                                    " :class="{
-                    'big-btn-primary': activeButton === 'list',
-                    'big-btn-secondary': activeButton !== 'list'
-                }">
+                                    showCalen = false;
+                                showList = true;
+                                toggleButton('list');
+                                " :class="{
+                                    'big-btn-primary': activeButton === 'list',
+                                    'big-btn-secondary': activeButton !== 'list',
+                                }">
                                     從清單中選擇
                                     <div class="triangle"></div>
                                 </div>
@@ -92,7 +92,7 @@
                                     <div v-for="n in startDayOfWeek" :key="n" class="day empty"></div>
                                     <div v-for="day in days" :key="day.date" class="day" :class="{
                                         today: day.isToday,
-                                        'has-course': hasCourse(day.date)
+                                        'has-course': hasCourse(day.date),
                                     }">
                                         <div class="day-number">{{ day.date.getDate() }}</div>
                                         <div v-if="hasCourse(day.date)" class="course-name">
@@ -100,7 +100,7 @@
                                                 {{ getCourseTagByDate(day.date) }}
                                             </small>
                                             <p :style="{
-                                                paddingTop: getCourseTagByDate(day.date) ? '' : 'unset'
+                                                paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
                                             }">
                                                 {{ getCourseNameByDate(day.date) }}
                                             </p>
@@ -117,13 +117,16 @@
                                 <span class="prev material-symbols-outlined"
                                     @click="prevListMonth">arrow_back_ios</span>
                                 <h4 class="month-year">
-                                    {{ currentListDate.getFullYear() }}.{{ currentListDate.getMonth() + 1 }}
+                                    {{ currentListDate.getFullYear() }}.{{
+                                        currentListDate.getMonth() + 1
+                                    }}
                                 </h4>
                                 <span class="next material-symbols-outlined"
                                     @click="nextListMonth">arrow_forward_ios</span>
                             </div>
-                            <div v-for="([date, course], index) in getMonthCourses(currentListDate)" :key="index"
-                                class="event-card2">
+                            <div v-for="([date, course], index) in getMonthCourses(
+                                currentListDate
+                            )" :key="index" class="event-card2">
                                 <div v-if="course.tag" class="event-card2-tag">
                                     <p>{{ course.tag }}</p>
                                 </div>
@@ -162,161 +165,196 @@
 export default {
     data() {
         return {
-            weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             currentDate: new Date(),
             currentListDate: new Date(),
             courses: new Map(),
             showCalen: true,
             showList: false,
-            activeButton: 'calen',
-            recommendedCourses: []
-        }
+            activeButton: "calen",
+            recommendedCourses: [],
+            courseData: [],
+        };
     },
     computed: {
         currentMonth() {
-            return this.currentDate.getMonth() + 1
+            return this.currentDate.getMonth() + 1;
         },
         currentYear() {
-            return this.currentDate.getFullYear()
+            return this.currentDate.getFullYear();
         },
         startDayOfWeek() {
-            const startDate = new Date(this.currentYear, this.currentDate.getMonth(), 1)
-            return startDate.getDay()
+            const startDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth(),
+                1
+            );
+            return startDate.getDay();
         },
         endDayOfWeek() {
-            const endDate = new Date(this.currentYear, this.currentDate.getMonth() + 1, 0)
-            const endDay = endDate.getDay()
-            return 6 - endDay
+            const endDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth() + 1,
+                0
+            );
+            const endDay = endDate.getDay();
+            return 6 - endDay;
         },
         days() {
-            const days = []
-            const startDate = new Date(this.currentYear, this.currentDate.getMonth(), 1)
-            const endDate = new Date(this.currentYear, this.currentDate.getMonth() + 1, 0)
-
-            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-                const day = new Date(date)
+            const days = [];
+            const startDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth(),
+                1
+                );
+                const endDate = new Date(
+                    this.currentYear,
+                    this.currentDate.getMonth() + 1,
+                    0
+                );
+                    
+                for (
+                    let date = startDate;
+                    date <= endDate;
+                    date.setDate(date.getDate() + 1)
+                ) {
+                const day = new Date(date);
                 days.push({
                     date: day,
-                    isToday: day.toDateString() === new Date().toDateString()
-                })
+                    isToday: day.toDateString() === new Date().toDateString(),
+                });
             }
-            return days
+            return days;
         },
         getMonthCourses() {
             return (date) => {
-                const monthStart = new Date(date.getFullYear(), date.getMonth(), 1)
-                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0)
+                const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
                 return Array.from(this.courses).filter(([courseDate]) => {
-                    const formattedDate = new Date(courseDate)
-                    return formattedDate >= monthStart && formattedDate <= monthEnd
-                })
-            }
-        }
+                    const formattedDate = new Date(courseDate);
+                    return formattedDate >= monthStart && formattedDate <= monthEnd;
+                });
+            };
+        },
     },
 
     methods: {
         prevMonth() {
-            this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1)
+            this.currentDate = new Date(
+                this.currentDate.getFullYear(),
+                this.currentDate.getMonth() - 1
+            );
         },
         nextMonth() {
-            this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1)
+            this.currentDate = new Date(
+                this.currentDate.getFullYear(),
+                this.currentDate.getMonth() + 1
+            );
         },
         prevListMonth() {
             this.currentListDate = new Date(
                 this.currentListDate.getFullYear(),
                 this.currentListDate.getMonth() - 1
-            )
+            );
         },
         nextListMonth() {
             this.currentListDate = new Date(
                 this.currentListDate.getFullYear(),
                 this.currentListDate.getMonth() + 1
-            )
+            );
         },
         formatDisplayDate(date) {
-            const formattedDate = date.toISOString().split('T')[0]
-            return formattedDate.split('-').join('/')
+            const formattedDate = date.toISOString().split("T")[0];
+            return formattedDate.split("-").join("/");
         },
         formatDate(date) {
-            return date.toISOString().split('T')[0]
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
         },
         hasCourse(date) {
             // 使用 has 方法檢查 Map 中是否存在該日期
-            const formattedDate = this.formatDate(date)
-            return this.courses.has(formattedDate)
+            const formattedDate = this.formatDate(date);
+            return this.courses.has(formattedDate);
         },
         getCourseTagByDate(date) {
-            const formattedDate = this.formatDate(date)
-            const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null
-            return course ? course.tag : null
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null;
+            return course ? course.tag : null;
         },
         getCourseNameByDate(date) {
-            const formattedDate = this.formatDate(date)
-            const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null
-            return course ? course.name : ''
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.has(formattedDate)
+                ? this.courses.get(formattedDate)
+                : null;
+            return course ? course.name : "";
         },
         toggleButton(button) {
             // 如果點擊的是 a 按鈕且已經被選中,則不做任何操作
-            if (button === 'calen' && this.activeButton === 'calen') {
-                return
+            if (button === "calen" && this.activeButton === "calen") {
+                return;
             }
             // 否則切換按鈕狀態
-            this.activeButton = button
+            this.activeButton = button;
         },
         parseImg(file) {
-            return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
+            return new URL(`../assets/img/course/courselist/${file}`, import.meta.url)
+                .href;
         },
         getRecommendedCourses() {
-            const currentDate = new Date()
+            const currentDate = new Date();
             const futureCoursesArray = Array.from(this.courses).filter(
                 ([date]) => new Date(date) >= currentDate
-            )
+            );
 
             if (futureCoursesArray.length <= 4) {
                 this.recommendedCourses = futureCoursesArray.map(([date, course]) => ({
                     ...course,
-                    date
-                }))
+                    date,
+                }));
             } else {
-                const shuffledCourses = futureCoursesArray.sort(() => 0.5 - Math.random())
+                const shuffledCourses = futureCoursesArray.sort(
+                    () => 0.5 - Math.random()
+                );
                 this.recommendedCourses = shuffledCourses
                     .slice(0, 4)
-                    .map(([date, course]) => ({ ...course, date }))
+                    .map(([date, course]) => ({ ...course, date }));
             }
-        }
+        },
     },
 
     created() {
-        this.courses.set('2024-06-13', {
-            img: '1.jpg',
+        this.courses.set("2024-06-13", {
+            img: "1.jpg",
             tag: null,
-            name: '品酒初級課程1',
+            name: "品酒初級課程1",
             price: 3200,
-            desc: '課程內容包括葡萄酒的基本知識、品酒技巧、如何選酒等。透過理論與實作快速掌握品酒的要領，開啟探索葡萄酒世界的大門。'
-        })
-        this.courses.set('2024-06-15', {
-            img: '2.jpg',
+            desc: "課程內容包括葡萄酒的基本知識、品酒技巧、如何選酒等。透過理論與實作快速掌握品酒的要領，開啟探索葡萄酒世界的大門。",
+        });
+        this.courses.set("2024-06-15", {
+            img: "2.jpg",
             tag: null,
-            name: '品酒中級課程1',
+            name: "品酒中級課程1",
             price: 3600,
-            desc: '深入探討葡萄酒風土、品種、釀造工藝及熟成，並透過系統化品評訓練，提升品酒技巧。'
-        })
-        this.courses.set('2024-07-05', {
-            img: '3.jpg',
+            desc: "深入探討葡萄酒風土、品種、釀造工藝及熟成，並透過系統化品評訓練，提升品酒技巧。",
+        });
+        this.courses.set("2024-07-05", {
+            img: "3.jpg",
             tag: null,
-            name: '品酒進階課程1',
+            name: "品酒進階課程1",
             price: 4200,
-            desc: '深入剖析頂級葡萄酒的特色，探討稀有品種與產區，透過大師級講師的指導，磨練品酒技藝成為真正的品酒專家。'
-        })
-        this.courses.set('2024-07-30', {
-            img: '4.jpg',
-            tag: '早鳥優惠',
-            name: '品酒初級課程2',
+            desc: "深入剖析頂級葡萄酒的特色，探討稀有品種與產區，透過大師級講師的指導，磨練品酒技藝成為真正的品酒專家。",
+        });
+        this.courses.set("2024-07-30", {
+            img: "4.jpg",
+            tag: "早鳥優惠",
+            name: "品酒初級課程2",
             price: 3800,
-            desc: '進一步探索葡萄酒的風味特性。透過品嚐不同產區與風格的葡萄酒，訓練您的味蕾，學習如何描述與分享品酒心得。'
-        })
-        this.getRecommendedCourses()
-        setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000)
-    }
-}
+            desc: "進一步探索葡萄酒的風味特性。透過品嚐不同產區與風格的葡萄酒，訓練您的味蕾，學習如何描述與分享品酒心得。",
+        });
+        this.getRecommendedCourses();
+        setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000);
+    },
+};
 </script>
