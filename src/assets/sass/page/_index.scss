@@ -11,7 +11,7 @@
     align-content: center;
     position: relative;
     @include t {
-        background-image: url(/src/assets/img/home/homebanner2.png), url(/src/assets/img/home/Vector\ 11.png),
+        background-image: url(/src/assets/img/home/homebanner2RWD.png), url(/src/assets/img/home/Vector\ 11.png),
             url(/src/assets/img/home/home-bannerRWD.png);
         background-position:
             bottom 15% left 50%,
@@ -35,9 +35,9 @@
                     filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.8));
                     @include t {
                         // display: none;
-                        // width: clamp(300px, 23.4375vw, 400px);
-                        // bottom: 5%;
-                        // left: 0;
+                        width: clamp(400px, 31.25vw, 500px);
+                        bottom: 15%;
+                        left: 10%;
                     }
                 }
                 .reflection {
@@ -85,6 +85,13 @@
                 margin: auto;
                 color: #ffffff;
                 letter-spacing: 2px;
+                // position: relative;
+                // img {
+                //     position: absolute;
+                //     top: -350px;
+                //     left: 0;
+                //     width: clamp(500px, 39.0625vw, 600px);
+                // }
                 @include t {
                     width: 90%;
                     color: #520802;
@@ -97,47 +104,56 @@
 // 關於我們
 .homeAboutus {
     .homeAboutus_container {
-        outline: 1px solid red;
+        // outline: 1px solid red;
         padding: 174px 0;
         width: 70%;
         display: flex;
         margin: auto;
         position: relative;
         @include t {
-            width: 50%;
+            width: 80%;
             // outline: 1px solid red;
             flex-direction: column;
+            padding: 0;
         }
     }
     .homeAboutus_pic {
         // outline: 1px solid red;
-        width: 50%;
+        width: 55%;
         img {
             width: 100%;
         }
     }
     .wrap_homeAboutus {
         // outline: 1px solid red;
-        // position: relative;
         width: 50%;
         margin: 0 0 0 50px;
         @include t {
             margin: 0;
+            width: 100%;
         }
         .homeAboutus_txt {
             letter-spacing: $letter-spacing;
             h3 {
                 font-family: $font-cormorant;
-                font-size: map-get($font-size, h3);
+                // font-size: map-get($font-size, h3);
+                font-size: 28px;
                 margin-bottom: 37px;
+                @include t {
+                    margin: 15px 0;
+                }
             }
             p {
+                // outline: 1px solid red;
                 font-size: map-get($font-size, p);
                 width: 90%;
                 margin-bottom: 37px;
                 letter-spacing: $letter-spacing;
                 line-height: 1.5;
                 font-family: $font-noto;
+                @include t {
+                    width: 100%;
+                }
             }
         }
         .wrap_homeAboutus_detail {
@@ -157,9 +173,14 @@
             }
         }
         button {
+            // outline: 1px solid red;
             border: none;
             padding: 15px 90px;
             background-color: #7f1023;
+            @include t {
+                display: block;
+                margin: auto;
+            }
             a {
                 text-decoration: none;
                 color: #ffffff;
@@ -167,7 +188,7 @@
             }
         }
         .homeAboutus_BarrelImg {
-            outline: 1px solid red;
+            // outline: 1px solid red;
             width: 390px;
             position: absolute;
             right: -20%;
@@ -175,8 +196,9 @@
             z-index: -1;
             @include t {
                 // outline: 1px solid red;
-                right: -40%;
-                top: 10%;
+                width: 60%;
+                right: -15%;
+                top: 12%;
             }
             img {
                 width: 100%;
