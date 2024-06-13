@@ -12,9 +12,9 @@
             <div class="account_list">
                 <input type="text" id="account" placeholder="請輸入電子信箱">
             </div>
-            <div class="function_btn">
-                <button type="button" class="big-btn-primary">發送信件</button>
-            </div>
+            <RouterLink to="/forgetok" class="function_btn"> 
+                <button type="button" class="big-btn-primary" style="margin: 20px;">發送信件</button>
+            </RouterLink>
             <!-- 
             由信件內容提供連結forgetok
             <div class="account_list">
