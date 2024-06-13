@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <section>
+        <section class="form_flow">
             <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
         </section>
         <div class="wrapFinish">
