@@ -111,6 +111,11 @@ const router = createRouter({
       name: 'wholesalerform',
       component: () => import('@/views/WholesalerformView.vue')
     },
+    // {
+    //   path: '/product-detail',
+    //   name: 'product-detail',
+    //   component: () => import('@/views/Product-Detail-View.vue')
+    // },
     {
       path: '/wholesalerformok',
       name: 'wholesalerformok',

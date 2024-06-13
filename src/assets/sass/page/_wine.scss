@@ -18,6 +18,13 @@
             width: 161.003px;
             height: 1.5px;
         }
+        @include m() {
+          .line {
+            background-color: $gray;
+            width: 70.003px;
+            height: 1.3px;
+          }
+        }
       }
    }
    .filter-block-sm{
@@ -51,9 +58,32 @@
       .button-text{
          margin-left: 5px;
       }
+      .fa-solid {
+        margin-right: 5px;
+        font-size: 12px;
+    }
      }
    }
    }
+  }
+
+  .selected-filters {
+     margin: 25px 20px;
+    .selected-filter {
+      display: inline-block;
+      background-color: #f0f0f0;
+      padding: 5px 10px;
+      margin-right: 8px;
+      border-radius: 15px;
+     .selected-filter i {
+       margin-left: 5px;
+       cursor: pointer;
+     }
+   }
+  }
+
+  .selected-filters-sm{
+    display: none;
   }
 
   @include t() {
@@ -74,6 +104,26 @@
 }
 
    @include m() {
+    .selected-filters{
+      display: none;
+    }
+
+
+    .selected-filters-sm {
+      margin: 25px 20px;
+     .selected-filter {
+       display: inline-block;
+       background-color: #f0f0f0;
+       padding: 5px 10px;
+       margin-right: 5px;
+       border-radius: 15px;
+      .selected-filter i {
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+   }
+
     .filter-block{
       display: none;
     }
@@ -110,16 +160,18 @@
 
    }
   }
+    .selected-filters-sm{
+      display: block;
+    }
  }
 
 
 
-
+//  手機版篩選選單
  @include m() {
   .menu-filter-sm{
-     background-color: #fff;
+     background-color: #EDE7DE;
      width: 100%;
-     height: 100%;
      position: absolute;
      top: 0;
      left: 0;
@@ -137,32 +189,185 @@
           transform: translate(-50%, -50%);
         }
       }
-
-        .menu-filter-item-sm{
+      .menu-filter-item-sm{
           display: flex;
-        }
+          padding: 2%;
+          position: relative;
+        .menu-filter-close-sm{
+            margin-left: 5px;
+          }
+        .menu-filter-clear{
+           position: absolute;
+           right: 10px;
+       }
      }
 
-     .menu-filter-title-sm{
-       text-align: center;
+    .menu-filter-options-sm{
+     .line-sm{
+      background-color: gray;
+      width: 100%;
+      height: 1px;
+      margin: auto;
      }
+
+       .menu-filter-title-sm{
+         text-align: center;
+         padding: 5%;
+         margin: 2%;
+       }
 
       .menu-filter-content-sm ul{
+        padding-left: 3%;
+        padding-bottom: 5%;
 
         li{
-          padding:4px;
+          padding: 3%;
           cursor: pointer;
+          display: flex;
+          align-items: center;
+
+          label{
+            margin-left: 2%;
+          }
         }
       }
+      .menu-filter-outcome-sm{
+        text-align: center;
 
-    //  .line-sm{
-    //   background-color: gray;
-    //   width: 100%;
-    //   height: 1px;
-    //   margin: auto;
-    //  }
+        height: 45px;
+        background-color: black;
+        position: relative;
+        h3{
+          color: #fff;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+
+
+
+
+
+      }
+     } 
     }
+  }
  }
+
+
+//選單樣式
+  .menu-filter ul {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #DFD4C3;
+    border: 1px solid #ddd;
+    list-style: none;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index:1;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+        input {
+         margin-bottom: 8px;
+         margin-right: 5px;
+        }
+        .menu-filter-button{
+         background-color: #322D26;
+         color: white;
+         padding: 5px 8px;
+        }
+       }
+    }
+
+
+// 商品卡片
+.product-cards{
+    margin-bottom: 80px;
+      .product-card{
+        .product-img {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 5/2;
+          img {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 200px;
+          }
+        }
+     }
+        .product-card .add-card {
+            background-color: #322D26;
+            font-family: "DM Sans", sans-serif;
+     }
+        .info-wrap a{
+             color: black;
+             text-decoration: none;
+            }
+}
+
+
+@include t() {
+  .product-cards{
+      .product-card{
+        .product-img {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 5/2;
+          img {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 180px;
+          }
+        }
+     }
+        .product-card .add-card {
+            background-color: #322D26;
+            font-family: "DM Sans", sans-serif;
+     }
+        .info-wrap a{
+             color: black;
+             text-decoration: none;
+            }
+ }
+}
+
+
+
+@include m() {
+  .product-cards{
+      .product-card{
+        .product-img {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 5/2;
+          img {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+          }
+        }
+     }
+        .product-card .add-card {
+            background-color: #322D26;
+            font-family: "DM Sans", sans-serif;
+     }
+        .info-wrap a{
+             color: black;
+             text-decoration: none;
+            }
+}
+
+
+}
 
 
 

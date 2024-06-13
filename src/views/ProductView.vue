@@ -12,10 +12,9 @@ export default {
     ProductList
   },
   data(){
-    // return{
-   
-    // }
-  }
+
+  },
+
 };
 </script>
 
