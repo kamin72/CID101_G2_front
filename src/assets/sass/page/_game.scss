@@ -2,17 +2,20 @@
     background-image: url(/src/assets/img/game/gameBg.png);
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
     .game-container {
         // outline: 1px solid red;
         width: 70%;
         height: 412px;
-        align-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         background-color: #ffffff94;
         box-shadow:
             3px 3px 5px rgba(0, 0, 0, 0.3),
             -1px -1px 2px rgba(255, 255, 255, 0.8);
-        margin: 50px;
-        margin: 50px;
+        position: relative;
         .game-txt {
             // outline: 1px solid red;
             h3 {
@@ -29,15 +32,59 @@
                 letter-spacing: $letter-spacing;
             }
         }
-        button {
+        .button {
             // outline: 1px solid red;
-            display: block;
-            margin: auto;
-            padding: 10px 40px;
-            background-color: #7f1023;
-            color: #ffffff;
             border: none;
-            letter-spacing: $letter-spacing;
+            margin-top: 20px;
+            a {
+                // outline: 1px solid red;
+                text-decoration: none;
+                padding: 10px 40px;
+                background-color: #7f1023;
+                color: #ffffff;
+                letter-spacing: $letter-spacing;
+            }
+        }
+        .wrap-game-ansButton {
+            // outline: 1px solid red;
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            margin-top: 30px;
+            .game-ansButton {
+                border: none;
+                width: 150px;
+                height: 40px;
+                background-color: #322d26;
+                a {
+                    // outline: 1px solid red;
+                    text-decoration: none;
+                    color: #ffffff;
+                    letter-spacing: $letter-spacing;
+                    padding: 35px;
+                }
+            }
+        }
+        .wineglass {
+            position: absolute;
+            right: 2%;
+            bottom: -10%;
+            width: 120px;
+            z-index: 2;
+            img {
+                width: 100%;
+            }
+        }
+
+        .winebottle {
+            position: absolute;
+            width: 350px;
+            right: -30%;
+            bottom: 45%;
+            overflow: hidden;
+            img {
+                width: 100%;
+            }
         }
     }
 }
