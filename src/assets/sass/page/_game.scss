@@ -1,0 +1,43 @@
+.game {
+    background-image: url(/src/assets/img/game/gameBg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .game-container {
+        // outline: 1px solid red;
+        width: 70%;
+        height: 412px;
+        align-content: center;
+        background-color: #ffffff94;
+        box-shadow:
+            3px 3px 5px rgba(0, 0, 0, 0.3),
+            -1px -1px 2px rgba(255, 255, 255, 0.8);
+        margin: 50px;
+        margin: 50px;
+        .game-txt {
+            // outline: 1px solid red;
+            h3 {
+                text-align: center;
+                font-family: $font-cormorant;
+                margin: 20px 0;
+                // outline: 1px solid red;
+                font-size: map-get($font-size, h3);
+            }
+            p {
+                text-align: center;
+                margin: 20px 0;
+                font-size: map-get($font-size, p);
+                letter-spacing: $letter-spacing;
+            }
+        }
+        button {
+            // outline: 1px solid red;
+            display: block;
+            margin: auto;
+            padding: 10px 40px;
+            background-color: #7f1023;
+            color: #ffffff;
+            border: none;
+            letter-spacing: $letter-spacing;
+        }
+    }
+}
