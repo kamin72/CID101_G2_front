@@ -2,6 +2,12 @@
   <div class="container" v-if="!isChildRouteActive">
     <section>
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+      <CartFlow
+        :flowRwd="itemRwd"
+        v-for="itemRwd in flowRwd"
+        :key="itemRwd.id"
+        v-show="windowChange"
+      />
     </section>
     <div class="wrap_all">
       <div class="wrap_list">
@@ -139,6 +145,25 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'receipt_long',
+          opacity: '1',
+          text: '詢價清單',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'local_shipping',
+          opacity: '0.3',
+          text: '填寫配送資訊',
+          bold: '0'
+        }
+      ],
+      windowChange: false,
       isEighteen: false,
       agreeTerms: false,
       receiveMessages: false,
@@ -160,6 +185,11 @@ export default {
     },
     handleRouteChange(isActive) {
       this.isChildRouteActive = isActive
+    },
+    resize() {
+      if (document.width < 450) {
+        this.windowChange = true
+      }
     }
   },
   watch: {

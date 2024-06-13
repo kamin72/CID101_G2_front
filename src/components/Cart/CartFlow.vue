@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  props: ['flow'],
+  props: ['flow', 'flowRwd'],
   data() {
     return {}
   }
