@@ -1,36 +1,43 @@
 <template>
     <div class="container">
         <div class="wrap_signup">
-            <section>
+            <section class="form_flow">
                 <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
             </section>
             <form>
+                <!-- 會員帳號 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
                         <label>會員帳號</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="account"  autocomplete="account" placeholder="請輸入帳號">
+                        <input type="text" id="account" autocomplete="account" placeholder="請輸入帳號">
                     </div>
                 </div>
+                <!-- 會員密碼 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
                         <label>會員密碼</label>
                     </div>
-                    <div class="form_box">
-                        <input type="password" id="password" autocomplete="password"  placeholder="請輸入密碼" minlength="8" required />
-                        <span class="material-symbols-outlined" style="font-size: 16px;
-                        padding-top: 10px;">visibility_off </span>
+                    <div class="form_box" style="position: relative;">
+                        <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password"
+                            placeholder="請輸入密碼" minlength="8" required />
+                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                            style="font-size: 18px;position: absolute;">visibility_off </span>
+                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                            style="font-size: 18px;position: absolute;">visibility</span>
                     </div>
                 </div>
                 <div class="form_ltem_list">
                     <div class="form_item">
                         <label>再輸入一次密碼</label>
                     </div>
-                    <div class="form_box">
-                        <input type="password" id="password_check" autocomplete="password_check"  placeholder="再輸入一次密碼">
-                        <span class="material-symbols-outlined" style="font-size: 16px;
-                        padding-top: 10px;">visibility_off </span>
+                    <div class="form_box" style="position: relative;">
+                        <input :type='pwdFlag ? "password" : "text"' id="password_check" autocomplete="password_check" placeholder="再輸入一次密碼">
+                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                            style="font-size: 18px;position: absolute;">visibility_off </span>
+                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                            style="font-size: 18px;position: absolute;">visibility</span>
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -46,8 +53,8 @@
                         <label>電話</label>
                     </div>
                     <div class="form_box">
-                        <input type="tel" id="phone" placeholder="請輸入電話"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                        <input type="tel" id="phone" placeholder="請輸入電話" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            required />
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -81,7 +88,7 @@
                     </div>
                     <div class="form_box">
                         <input type="text" id="address" style="width: 550px;" placeholder="請輸入地址">
-                        
+
                         <!-- 
                         考慮到是否有外國地址 以及資料表欄位只有address 由單一input比較好做
                         <select class="address-select" id="address">
@@ -119,7 +126,7 @@
                         <input type="text" class="s-input">室 -->
                     </div>
                 </div>
-                <div class="form_ltem_list">
+                <div class="form_ltem_list" style="border: none;">
                     <div class="form_item">
                         <label>公司資料電子檔</label>
                     </div>
@@ -132,9 +139,9 @@
                     <input type="checkbox" id="privacy_policy">
                     <span>我同意隱私條款政策 [隱私條款政策]</span>
                 </div>
-                <RouterLink to="/wholesalerformok" style="text-decoration: none;"> 
+                <RouterLink to="/wholesalerformok" style="text-decoration: none;">
                     <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
-                    margin: 10px auto;"/>
+                    margin: 10px auto;" />
                 </RouterLink>
             </form>
         </div>
@@ -150,6 +157,7 @@ export default {
     },
     data() {
         return {
+            pwdFlag: true,
             flow: [
                 {
                     id: 1,
@@ -167,8 +175,14 @@ export default {
                 }
             ]
         }
+    },
+    methods: {
+        togglePassword() {
+            this.pwdFlag = !this.pwdFlag;
+        }
     }
 }
 </script>
+
 
 <style></style>

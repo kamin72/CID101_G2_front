@@ -15,9 +15,11 @@
                     <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password" placeholder="密碼">
                     <div>
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;margin-left: 220px;">visibility_off </span>
+                            style="font-size: 18px;position: absolute;margin-left: 210px;">visibility_off 
+                        </span>
                         <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;margin-left: 220px;">visibility</span>
+                            style="font-size: 18px;position: absolute;margin-left: 210px;">visibility
+                        </span>
                     </div>
                 </div>
                 <RouterLink to="/forget">
@@ -36,7 +38,6 @@
 <script>
 export default {
     components: {
-
     },
     data() {
         return {
@@ -47,9 +48,7 @@ export default {
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
         }
-    },
-    mounted() {
-    }
+    }  
 }
 </script>
 
