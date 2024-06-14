@@ -12,13 +12,13 @@
     </div>
   </div>
   <div class="box">
-    <div class="dot" :style="{ borderColor: flow.color }"></div>
+    <div class="dot" :style="{ borderColor: flow.borderColor }"></div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['flow'],
+  props: ['flow', 'flowRwd'],
   data() {
     return {}
   }

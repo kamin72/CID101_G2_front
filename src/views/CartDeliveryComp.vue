@@ -1,14 +1,17 @@
 <template>
-  <div class="container">
-    <section>
+  <div class="container" v-if="$route.path === '/cart_comp/cartdelivery_comp'">
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-show="isMobile" class="cartFlowRWD">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrap_all">
       <FormComp v-model:phone="phone" v-model:email="email" />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
+        <RouterLink :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }">
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>
@@ -16,18 +19,22 @@
       </aside>
     </div>
   </div>
+  <RouterView />
 </template>
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import FormComp from '@/components/Cart/FormComp.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
 export default {
+  emits: ['route-change'],
   components: {
     CartFlow,
     FormComp,
-    PayMethod
+    PayMethod,
+    CartFlowRWD
   },
   data() {
     return {
@@ -38,7 +45,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 2,
@@ -46,7 +54,8 @@ export default {
           opacity: '1',
           text: '填寫配送資訊',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
         },
         {
           id: 3,
@@ -63,17 +72,42 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'local_shipping',
+          opacity: '1',
+          text: '填寫配送資訊',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'paid',
+          opacity: '0.3',
+          text: '選擇付款方式',
+          bold: '0'
+        }
+      ],
+      windowWidth: window.innerWidth,
       selectedPaymentMethod: null,
       phone: '',
       email: ''
     }
   },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), window.addEventListener('resize', this.updateWindowWidth)
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedPaymentMethod = index
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
     }
     // submitForm() {
     //   if (this.canSubmit) {
@@ -90,11 +124,20 @@ export default {
     //   }
     // }
   },
+  watch: {
+    $route(to) {
+      // 當路由改變時檢查是否是子路由
+      this.isChildRouteActive = to.path.includes('/cart_comp/pay_info')
+    }
+  },
   computed: {
     canSubmit() {
       const phoneValid = /^\d{10}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
       return this.selectedPaymentMethod !== null && phoneValid && emailValid
+    },
+    isMobile() {
+      return this.windowWidth < 450
     }
   }
 }

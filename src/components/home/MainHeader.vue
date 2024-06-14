@@ -34,28 +34,28 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
-    const isNavOpen = ref(false);
-    const router = useRouter();
+    const isNavOpen = ref(false)
+    const router = useRouter()
 
     const toggleNav = () => {
-      isNavOpen.value = !isNavOpen.value;
-    };
+      isNavOpen.value = !isNavOpen.value
+    }
 
     onMounted(() => {
       router.afterEach(() => {
-        isNavOpen.value = false;
-      });
-    });
+        isNavOpen.value = false
+      })
+    })
 
     return {
       isNavOpen,
-      toggleNav,
-    };
-  },
-};
+      toggleNav
+    }
+  }
+}
 </script>
