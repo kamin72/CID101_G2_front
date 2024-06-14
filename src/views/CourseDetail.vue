@@ -5,43 +5,51 @@
   <section class="info">
     <div class="container">
       <div class="row">
-        <div class="courseInfo">
-          <h2>品酒初級課程1</h2>
-          <div class="courseTime">
-            <span>|</span>
-            <div class="courseWrap">
-              <h4>上課時間 | 2024/5/1(三)</h4>
-              <p>14:00-16:00，2小時</p>
+        <div class="col-12 courseTopInfoWrap">
+          <div class="courseInfo">
+            <h3>品酒初級課程1</h3>
+            <div class="courseDetailWrap">
+              <div class="courseTime">
+                <div class="line"></div>
+                <div class="courseWrap">
+                  <h4>上課時間 | 2024/5/1(三)</h4>
+                  <p>14:00-16:00，2小時</p>
+                </div>
+              </div>
+              <div class="courseAdress">
+                <div class="line"></div>
+                <div class="courseWrap">
+                  <h4>上課教室 | 教室A</h4>
+                  <p>台北市士林區華興里7鄰123號</p>
+                </div>
+              </div>
+              <div class="coursePrice">
+                <div class="line"></div>
+                <div class="courseWrap">
+                  <h4>課程價格 | NT. 3,200</h4>
+                  <p>原價NT. 4,800</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="courseAdress">
-            <span>|</span>
-            <div class="courseWrap">
-              <h4>上課教室 | 教室A</h4>
-              <p>台北市士林區華興里7鄰123號</p>
-            </div>
+          <div class="courseIntro">
+            <p>
+              品酒是一門充滿樂趣且富有挑戰性的藝術。這門初級課程將帶您踏上這段嶄新的酒途旅程。課程內容涵蓋基礎品酒理論、常見葡萄酒款式介紹,以及如何分辨不同酒體、酒色、香氣等感官體驗。我們將教您運用視覺、嗅覺與味覺,細細品賞每一口美酒的層次風味。
+              除了理論知識外,實作演練更是本課程的重點所在。您將有機會品嘗多達6種不同類型的葡萄酒,透過專業品酒手法,領略各款酒品的獨特個性。不論您是對葡萄酒充滿熱忱,抑或只是好奇心理,這門課程將為您打開嶄新的味蕾視野,讓您在輕鬆愉快的氛圍中,體驗品酒的樂趣與魅力。
+            </p>
+            <button class="big-btn-primary reserveCourse">
+              <span class="material-symbols-outlined"> edit_calendar </span>預約課程
+            </button>
           </div>
-          <div class="coursePrice">
-            <span>|</span>
-            <div class="courseWrap">
-              <h4>課程價格 | NT. 3,200</h4>
-              <p>原價NT. 4,800</p>
-            </div>
-          </div>
-        </div>
-        <div class="courseIntro">
-          <p>
-            品酒是一門充滿樂趣且富有挑戰性的藝術。這門初級課程將帶您踏上這段嶄新的酒途旅程。課程內容涵蓋基礎品酒理論、常見葡萄酒款式介紹,以及如何分辨不同酒體、酒色、香氣等感官體驗。我們將教您運用視覺、嗅覺與味覺,細細品賞每一口美酒的層次風味。
-            除了理論知識外,實作演練更是本課程的重點所在。您將有機會品嘗多達6種不同類型的葡萄酒,透過專業品酒手法,領略各款酒品的獨特個性。不論您是對葡萄酒充滿熱忱,抑或只是好奇心理,這門課程將為您打開嶄新的味蕾視野,讓您在輕鬆愉快的氛圍中,體驗品酒的樂趣與魅力。
-          </p>
-          <button class="big-btn-primary reserveCourse">
-            <span class="material-symbols-outlined"> edit_calendar </span>預約課程
-          </button>
         </div>
       </div>
     </div>
   </section>
-  <hr class="container" />
+  <section>
+    <div class="container">
+      <div class="courseDetailDivider"></div>
+    </div>
+  </section>
   <!-- 課程介紹 -->
   <section class="introduction">
     <div class="container">
