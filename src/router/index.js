@@ -34,7 +34,19 @@ const router = createRouter({
     {
       path: '/cart_account',
       name: 'cart_account',
-      component: () => import('@/views/CartViewAccount.vue')
+      component: () => import('@/views/CartViewAccount.vue'),
+      children: [
+        {
+          path: 'cartdelivery_account',
+          name: 'cartdelivery_account',
+          component: () => import('@/views/CartDeliveryAccount.vue')
+        },
+        {
+          path: 'cart_finish_account',
+          name: 'cart_finish_account',
+          component: () => import('@/views/CartFinishAccount.vue')
+        }
+      ]
     },
     {
       path: '/course',
@@ -66,21 +78,7 @@ const router = createRouter({
       name: 'product',
       component: () => import('@/views/ProductView.vue')
     },
-    // {
-    //   path: '/cart_finish',
-    //   name: 'cart_finish',
-    //   component: () => import('@/views/CartFinish.vue')
-    // },
-    {
-      path: '/cartdelivery_account',
-      name: 'cartdelivery_account',
-      component: () => import('@/views/CartDeliveryAccount.vue')
-    },
-    {
-      path: '/cart_finish_account',
-      name: 'cart_finish_account',
-      component: () => import('@/views/CartFinishAccount.vue')
-    },
+
     {
       path: '/signup',
       name: 'signup',

@@ -25,7 +25,7 @@
 
           <div class="header-shoppingcart">
             <i class="fa-solid fa-bag-shopping"></i>
-            <RouterLink to="/cart_comp">詢價清單(0)</RouterLink>
+            <RouterLink to="/cart_account">詢價清單(0)</RouterLink>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="$route.path === '/cart_account/cartdelivery_account'">
     <section class="account">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -15,11 +15,12 @@
       </aside>
     </div>
     <div class="button">
-      <RouterLink to="/cart_finish_account" from="">
+      <RouterLink to="/cart_account/cart_finish_account" from="">
         <button class="big-btn-primary accountSubmit" :disabled="!canSubmit">提交資料</button>
       </RouterLink>
     </div>
   </div>
+  <RouterView />
 </template>
 
 <script>

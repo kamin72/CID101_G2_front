@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isChildRouteActive">
+  <div class="container" v-if="$route.path === '/cart_account'">
     <section class="account">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -62,13 +62,13 @@
             是否願意收到Silken SipsVineyard的最新消息</label
           >
         </div>
-        <RouterLink to="/cartdelivery_account">
+        <RouterLink to="/cart_account/cartdelivery_account">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
   </div>
-  <!-- <RouterView @route-change="handleRouteChange" /> -->
+  <RouterView />
 </template>
 <script>
 import CartFlow from '@/components//Cart/CartFlow.vue'
