@@ -13,9 +13,9 @@
     </td>
     <td class="price">NT. {{ item.price }}</td>
     <td class="amount">
-      <button @click="$emit('reduce')" class="small-btn-invalid">-</button>
+      <button @click="$emit('reduce')" class="cartButton">-</button>
       <span class="num">{{ item.count }}</span>
-      <button @click="$emit('add')" class="small-btn-invalid">+</button>
+      <button @click="$emit('add')" class="cartButton">+</button>
     </td>
     <td class="total">NT. {{ sum(index) }}</td>
   </tr>

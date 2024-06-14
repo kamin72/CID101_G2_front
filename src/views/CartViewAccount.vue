@@ -8,7 +8,7 @@
       <table class="wrap_list">
         <tr class="textItem">
           <th class="check">
-            <input type="checkbox" name="checkbox" id="checkbox" />
+            <input type="checkbox" name="checkbox" id="checkbox" v-model="allChecked" />
             <p class="item">詢價清單</p>
           </th>
           <th class="item">單價</th>
@@ -16,10 +16,12 @@
           <th class="item">總金額</th>
         </tr>
         <CartList
-          :item="productItem"
-          :index="productIndex"
           v-for="(productItem, productIndex) in products"
           :key="productItem.id"
+          :item="productItem"
+          :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
           @add="add(productIndex)"
           @reduce="reduce(productIndex)"
         />
@@ -155,6 +157,7 @@ export default {
           bold: '0'
         }
       ],
+      allChecked: false,
       isEighteen: false,
       agreeTerms: false,
       receiveMessages: false
@@ -172,6 +175,15 @@ export default {
     reduce(index) {
       if (this.products[index].count == 0) return
       this.products[index].count--
+    },
+    updateItemCheck() {
+      // 檢查是否所有產品都被選中
+      this.allChecked = this.products.every((product) => product.isChecked)
+    },
+    toggleAllChecks() {
+      this.products.forEach((product) => {
+        product.isChecked = this.allChecked
+      })
     }
   },
   computed: {
@@ -181,6 +193,9 @@ export default {
     },
     canSubmit() {
       return this.isEighteen && this.agreeTerms && this.receiveMessages
+    },
+    isMobile() {
+      return this.windowWidth < 450
     }
   },
   provide() {
