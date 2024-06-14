@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isChildRouteActive">
+  <div class="container" v-if="$route.path === '/cart_comp/cartdelivery_comp'">
     <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -19,7 +19,7 @@
       </aside>
     </div>
   </div>
-  <RouterView @route-change="handleRouteChange" />
+  <RouterView />
 </template>
 
 <script>
@@ -93,25 +93,18 @@ export default {
       windowWidth: window.innerWidth,
       selectedPaymentMethod: null,
       phone: '',
-      email: '',
-      isChildRouteActive: false
+      email: ''
     }
   },
   mounted() {
-    window.scrollTo(0, 0),
-      this.$emit('route-change', true),
-      window.addEventListener('resize', this.updateWindowWidth)
+    window.scrollTo(0, 0), window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
-    // 当组件销毁时，通知父组件显示其内容
-    this.$emit('route-change', false), window.removeEventListener('resize', this.updateWindowWidth)
+    window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedPaymentMethod = index
-    },
-    handleRouteChange(isActive) {
-      this.isChildRouteActive = isActive
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth

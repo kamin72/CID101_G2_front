@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isChildRouteActive">
+  <div class="container" v-if="$route.path.includes('/cart_comp/pay_info')">
     <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -20,7 +20,7 @@
       </aside>
     </div>
   </div>
-  <RouterView @route-changes="handleRouteChange" />
+  <RouterView />
 </template>
 
 <script>
@@ -104,27 +104,18 @@ export default {
         }
       ],
       windowWidth: window.innerWidth,
-      selectedMethod: null,
-      isChildRouteActive: false
+      selectedMethod: null
     }
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedMethod = index
     },
-    handleRouteChange(isActive) {
-      this.isChildRouteActive = isActive
-    },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
     }
   },
-  watch: {
-    $route(to) {
-      // 当路由改变时检查是否是子路由
-      this.isChildRouteActive = to.path.includes('/cart_comp/cart_finish')
-    }
-  },
+  watch: {},
   computed: {
     isMobile() {
       return this.windowWidth < 450
@@ -133,12 +124,10 @@ export default {
   mounted() {
     window.scrollTo(0, 0),
       (this.selectedMethod = this.method),
-      this.$emit('route-change', true),
       window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
-    // 当组件销毁时，通知父组件显示其内容
-    this.$emit('route-change', false), window.removeEventListener('resize', this.updateWindowWidth)
+    window.removeEventListener('resize', this.updateWindowWidth)
   }
 }
 </script>

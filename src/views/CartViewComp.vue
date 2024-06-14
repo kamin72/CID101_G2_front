@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!isChildRouteActive">
+  <div class="container" v-if="$route.path === '/cart_comp'">
     <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
@@ -10,7 +10,7 @@
       <table class="wrap_list">
         <tr class="textItem">
           <th class="check">
-            <input type="checkbox" name="checkbox" id="checkbox" />
+            <input type="checkbox" name="checkbox" id="checkbox" v-model="allChecked" />
             <p class="item">詢價清單</p>
           </th>
           <th class="item">單價</th>
@@ -22,6 +22,8 @@
           :key="productItem.id"
           :item="productItem"
           :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
           @add="add(productIndex)"
           @reduce="reduce(productIndex)"
         />
@@ -70,7 +72,7 @@
       </aside>
     </div>
   </div>
-  <RouterView @route-change="handleRouteChange" />
+  <RouterView />
 </template>
 
 <script>
@@ -94,28 +96,32 @@ export default {
           image: 'https://picsum.photos/150/200/?random=10',
           desc: 'efhjhfjhfjhdfdf',
           price: 300,
-          count: 1
+          count: 1,
+          isChecked: false
         },
         {
           id: 2,
           image: 'https://picsum.photos/150/200/?random=11',
           desc: 'efhjhfjhfjhdfdf',
           price: 400,
-          count: 1
+          count: 1,
+          isChecked: false
         },
         {
           id: 3,
           image: 'https://picsum.photos/150/200/?random=12',
           desc: 'efhjhfjhfjhdfdf',
           price: 500,
-          count: 1
+          count: 1,
+          isChecked: false
         },
         {
           id: 4,
           image: 'https://picsum.photos/150/200/?random=15',
           desc: 'efhjhfjhfjhdfdf',
           price: 600,
-          count: 1
+          count: 1,
+          isChecked: false
         }
       ],
       flow: [
@@ -168,11 +174,11 @@ export default {
           bold: '0'
         }
       ],
+      allChecked: false,
       windowWidth: window.innerWidth,
       isEighteen: false,
       agreeTerms: false,
-      receiveMessages: false,
-      isChildRouteActive: false
+      receiveMessages: false
     }
   },
   methods: {
@@ -188,19 +194,20 @@ export default {
       if (this.products[index].count == 0) return
       this.products[index].count--
     },
-    handleRouteChange(isActive) {
-      this.isChildRouteActive = isActive
-    },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
+    },
+    updateItemCheck() {
+      // 檢查是否所有產品都被選中
+      this.allChecked = this.products.every((product) => product.isChecked)
+    },
+    toggleAllChecks() {
+      this.products.forEach((product) => {
+        product.isChecked = this.allChecked
+      })
     }
   },
-  watch: {
-    $route(to) {
-      // 當路由改變時檢查是否是子路由
-      this.isChildRouteActive = to.path.includes('/cart_comp/cartdelivery_comp')
-    }
-  },
+  watch: {},
   computed: {
     sum() {
       const price = this.products.reduce((total, items) => total + items.price * items.count, 0)

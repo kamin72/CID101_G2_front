@@ -1,7 +1,13 @@
 <template>
   <tr class="list">
     <td class="image">
-      <input type="checkbox" name="checkbox" id="checkbox" />
+      <input
+        type="checkbox"
+        name="checkbox"
+        id="checkbox"
+        :checked="isChecked"
+        @change="updateCheck"
+      />
       <img :src="item.image" />
       <p class="description">{{ item.desc }}</p>
     </td>
@@ -17,7 +23,11 @@
 
 <script>
 export default {
-  props: ['item', 'index'],
+  props: {
+    item: Object,
+    index: Number,
+    isChecked: Boolean
+  },
   inject: ['total'],
   data() {
     return {}
@@ -25,6 +35,9 @@ export default {
   methods: {
     sum(n) {
       return this.total(n)
+    },
+    updateCheck(event) {
+      this.$emit('update:isChecked', event.target.checked)
     }
   }
 }
