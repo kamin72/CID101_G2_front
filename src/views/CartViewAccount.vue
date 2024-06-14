@@ -1,19 +1,20 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="!isChildRouteActive">
     <section class="account">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
+
     <div class="wrap_all">
-      <div class="wrap_list">
-        <div class="textItem">
-          <div class="check">
+      <table class="wrap_list">
+        <tr class="textItem">
+          <th class="check">
             <input type="checkbox" name="checkbox" id="checkbox" />
             <p class="item">詢價清單</p>
-          </div>
-          <p class="item">單價</p>
-          <p class="item">數量</p>
-          <p class="item">總金額</p>
-        </div>
+          </th>
+          <th class="item">單價</th>
+          <th class="item">數量</th>
+          <th class="item">總金額</th>
+        </tr>
         <CartList
           :item="productItem"
           :index="productIndex"
@@ -22,19 +23,25 @@
           @add="add(productIndex)"
           @reduce="reduce(productIndex)"
         />
-        <div class="sum">
-          <p>總價</p>
-          <p>NT. {{ sum }}</p>
-        </div>
-        <div class="discount">
-          <p>折扣</p>
-          <p>-NT. 120</p>
-        </div>
-        <div class="actualPaid">
-          <p>結帳金額</p>
-          <p>NT. 1080</p>
-        </div>
-      </div>
+        <tr class="sum">
+          <td>總價</td>
+          <td></td>
+          <td></td>
+          <td>NT. {{ sum }}</td>
+        </tr>
+        <tr class="discount">
+          <td>折扣</td>
+          <td></td>
+          <td></td>
+          <td>-NT. 120</td>
+        </tr>
+        <tr class="actualPaid">
+          <td>結帳金額</td>
+          <td></td>
+          <td></td>
+          <td>NT. 1080</td>
+        </tr>
+      </table>
       <aside class="coupon">
         <Coupon />
         <div class="terms">
@@ -51,8 +58,8 @@
             />我同意所有交易條款[查看條款]</label
           >
           <label>
-            <input type="checkbox" class="reciveMeg" v-model="receiveMessages" /> 是否願意收到Silken
-            SipsVineyard的最新消息</label
+            <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
+            是否願意收到Silken SipsVineyard的最新消息</label
           >
         </div>
         <RouterLink to="/cartdelivery_account">
@@ -61,8 +68,8 @@
       </aside>
     </div>
   </div>
+  <!-- <RouterView @route-change="handleRouteChange" /> -->
 </template>
-
 <script>
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartList from '@/components/Cart/CartList.vue'
@@ -127,6 +134,24 @@ export default {
           icon: 'paid',
           opacity: '0.3',
           text: '完成詢價',
+          bold: '0'
+        }
+      ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'receipt_long',
+          opacity: '1',
+          text: '詢價清單',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'local_shipping',
+          opacity: '0.3',
+          text: '填寫配送資訊',
           bold: '0'
         }
       ],

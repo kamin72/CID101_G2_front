@@ -1,7 +1,10 @@
 <template>
   <div class="container" v-if="!isChildRouteActive">
-    <section>
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-show="isMobile" class="cartFlowRWD">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrap_all">
       <CreditCard v-show="selectedMethod == 0" />
@@ -22,6 +25,7 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 import PaybyStore from '@/components/Cart/PaybyStore.vue'
@@ -34,7 +38,8 @@ export default {
     PayMethod,
     CreditCard,
     PaybyStore,
-    YardSelf
+    YardSelf,
+    CartFlowRWD
   },
   props: {
     method: {
@@ -80,6 +85,25 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'paid',
+          opacity: '1',
+          text: '選擇付款方式',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'check',
+          opacity: '0.3',
+          text: '完成詢價',
+          bold: '0'
+        }
+      ],
+      windowWidth: window.innerWidth,
       selectedMethod: null,
       isChildRouteActive: false
     }
@@ -90,6 +114,9 @@ export default {
     },
     handleRouteChange(isActive) {
       this.isChildRouteActive = isActive
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
     }
   },
   watch: {
@@ -98,13 +125,20 @@ export default {
       this.isChildRouteActive = to.path.includes('/cart_comp/cart_finish')
     }
   },
-  created() {},
+  computed: {
+    isMobile() {
+      return this.windowWidth < 450
+    }
+  },
   mounted() {
-    window.scrollTo(0, 0), (this.selectedMethod = this.method), this.$emit('route-change', true)
+    window.scrollTo(0, 0),
+      (this.selectedMethod = this.method),
+      this.$emit('route-change', true),
+      window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
     // 当组件销毁时，通知父组件显示其内容
-    this.$emit('route-change', false)
+    this.$emit('route-change', false), window.removeEventListener('resize', this.updateWindowWidth)
   }
 }
 </script>

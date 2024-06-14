@@ -1,7 +1,10 @@
 <template>
   <div class="container" v-if="!isChildRouteActive">
-    <section>
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-show="isMobile" class="cartFlowRWD">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrap_all">
       <FormComp v-model:phone="phone" v-model:email="email" />
@@ -21,6 +24,7 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import FormComp from '@/components/Cart/FormComp.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
@@ -29,7 +33,8 @@ export default {
   components: {
     CartFlow,
     FormComp,
-    PayMethod
+    PayMethod,
+    CartFlowRWD
   },
   data() {
     return {
@@ -67,6 +72,25 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'local_shipping',
+          opacity: '1',
+          text: '填寫配送資訊',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'paid',
+          opacity: '0.3',
+          text: '選擇付款方式',
+          bold: '0'
+        }
+      ],
+      windowWidth: window.innerWidth,
       selectedPaymentMethod: null,
       phone: '',
       email: '',
@@ -74,11 +98,13 @@ export default {
     }
   },
   mounted() {
-    window.scrollTo(0, 0), this.$emit('route-change', true)
+    window.scrollTo(0, 0),
+      this.$emit('route-change', true),
+      window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
     // 当组件销毁时，通知父组件显示其内容
-    this.$emit('route-change', false)
+    this.$emit('route-change', false), window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
     changePaymentMethod(index) {
@@ -86,6 +112,9 @@ export default {
     },
     handleRouteChange(isActive) {
       this.isChildRouteActive = isActive
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
     }
     // submitForm() {
     //   if (this.canSubmit) {
@@ -104,7 +133,7 @@ export default {
   },
   watch: {
     $route(to) {
-      // 当路由改变时检查是否是子路由
+      // 當路由改變時檢查是否是子路由
       this.isChildRouteActive = to.path.includes('/cart_comp/pay_info')
     }
   },
@@ -113,6 +142,9 @@ export default {
       const phoneValid = /^\d{10}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
       return this.selectedPaymentMethod !== null && phoneValid && emailValid
+    },
+    isMobile() {
+      return this.windowWidth < 450
     }
   }
 }
