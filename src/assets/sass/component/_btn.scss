@@ -1,8 +1,13 @@
 // 按鈕混合器
 @mixin big-button($btn-color) {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0;
   border-radius: 0;
-  padding: 18px 52px;
+  height: 65px;
+  width: 210px;
   font-family: $font-dm;
   color: $white;
   background-color: $btn-color; // 按鈕背景顏色為傳入的顏色變數

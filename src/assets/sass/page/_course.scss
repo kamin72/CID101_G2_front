@@ -1,5 +1,6 @@
 // 課程清單頁面
 .course-page-container {
+  color: $gray;
   max-width: $max-width;
   width: 100%;
   margin: auto;
@@ -27,7 +28,7 @@
   .line {
     background-color: $gray;
     width: 161.003px;
-    height: 1.5px;
+    height: 1px;
   }
   h2 {
     font-family: $font-cormorant;
@@ -137,14 +138,15 @@
               flex-direction: column;
               justify-content: center;
               align-content: center;
-              height: 120px;
+              height: 125px;
               .day-number {
                 position: absolute;
                 left: 10px;
                 top: 10px;
               }
-              .course-name {
-                cursor: pointer;
+              .course-item {
+                margin-top: 22px;
+                color:$gray;
                 position: relative;
                 display: flex;
                 flex-direction: column;
@@ -154,6 +156,7 @@
                 height: 65%;
                 background-color: $bgc;
                 transition: 0.3s ease-in-out;
+                text-decoration:none;
                 p {
                   padding-top: 10px;
                 }
@@ -174,13 +177,15 @@
             .today {
               padding: 5px;
               padding-bottom: 15px;
-              div {
+              .day-number {
+                z-index: 1;
+                margin-top: -5px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 color: #fff;
                 background-color: $bgc;
-                height: 30px;
+                height: 27px;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 background-color: #5188f6;
@@ -232,37 +237,53 @@
       padding: 5px 0 0;
     }
     .row {
-      .courseInfo {
+      .courseTopInfoWrap {
+        padding: $pad-1 0;
         display: flex;
-        h2 {
-          padding: 0 20px;
-        }
-        .coursePrice {
-          p {
-            text-decoration: line-through;
+        flex-direction: column;
+        .courseInfo {
+          display: flex;
+          justify-content: space-between;
+          .courseDetailWrap {
+            display: flex;
+            width: 70%;
+            justify-content: space-between;
+            .line {
+              height: 100%;
+              width: 3px;
+              background-color: #aea495;
+              margin: 0 20px;
+            }
+            p, h4 {
+              padding: 5px 0;
+            }
+            .courseTime, .courseAdress, .coursePrice{
+              display: flex;
+            }
+            .coursePrice {
+              p {
+                text-decoration: line-through;
+              }
+            }
           }
         }
-      }
-      .courseIntro {
-        padding: 50px 20px 0;
-        display: flex;
-        justify-content: space-between;
-        p {
-          width: 70%;
-          line-height: 25px;
-        }
-        .reserveCourse {
-          height: 70px;
-          span {
-            padding: 0 8px;
+        .courseIntro {
+          padding: $pad-1 0;
+          display: flex;
+          justify-content: space-between;
+          p {
+            width: 70%;
+            line-height: 25px;
+          }
+          .reserveCourse {
+            span {
+              margin-right: 5px;
+            }
           }
         }
       }
     }
   }
-}
-hr {
-  border-width: 2px;
 }
 .introduction {
   .container {
