@@ -4,14 +4,15 @@
     <div class="homeBanner_container">
       <div class="homeBanner_wine">
         <div class="homeBanner_wine_wapper">
-          <img src="/src/assets/img/wine/bannerwine.png" class="image">
-          <img src="/src/assets/img/home/wineshadow.png" class="reflection">
+          <img src="/src/assets/img/wine/bannerwine.png" class="image" />
+          <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
         </div>
       </div>
       <div class="homeBanner_txt">
         <h3>MEMORABLE</h3>
         <h2>WINE</h2>
-        <h4>JOURNEYS
+        <h4>
+          JOURNEYS
           <!-- <img src="/src/assets/img/wine/bannerwine.png" class="image">  -->
         </h4>
       </div>
@@ -48,25 +49,24 @@
           </div>
         </div>
 
-          <button>
-            <a href="#">MORE</a>
-          </button>
+        <button>
+          <a href="#">MORE</a>
+        </button>
 
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png" />
         </div>
       </div>
-      
     </div>
   </section>
-<!-- 酒瓶輪播 -->
+  <!-- 酒瓶輪播 -->
   <section>
-  <div class="container">
-		<WineCarousel></WineCarousel>
-	</div>
-</section>
-<!-- 地圖 -->
-<!-- <section class="home-map">
+    <div class="container">
+      <WineCarousel></WineCarousel>
+    </div>
+  </section>
+  <!-- 地圖 -->
+  <!-- <section class="home-map">
 <div class="container">
     <img src="../assets/img/home/home-map.png" alt="">
     <div class="card card-grape">
@@ -98,31 +98,24 @@
   
 </div>
 </section> -->
-<div id="app">
+  <div id="app">
     <section class="home-map">
       <div class="container">
-        <img src="../assets/img/home/home-map.png" alt="">
-        
-        <div 
-          v-for="(card, index) in cards" 
-          :key="index" 
-          class="card" 
-          :class="card.type"
-        >
-          <div class="dot" @click="toggleInfo(index)">
-          </div>
-          <div class="card-wrap":class="{ active: card.isActive }">
+        <img src="../assets/img/home/home-map.png" alt="" />
+
+        <div v-for="(card, index) in cards" :key="index" class="card" :class="card.type">
+          <div class="dot" @click="toggleInfo(index)"></div>
+          <div class="card-wrap" :class="{ active: card.isActive }">
             <span class="line"></span>
             <div class="card-info">
               <div class="card-info-image">
-                <img :src="card.img" :alt="card.title">
+                <img :src="card.img" :alt="card.title" />
               </div>
               <div class="card-info-txt">
                 <h4>{{ card.title }}</h4>
                 <p>{{ card.description }}</p>
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -138,7 +131,6 @@
   </section>
 </template>
 
-
 <script>
 // swiper
 import SwiperComponent from '@/components/home/SwiperComponent.vue'
@@ -146,75 +138,78 @@ import WineCarousel from '@/components/home/WineCarousel.vue'
 
 export default {
   components: {
-		SwiperComponent,
+    SwiperComponent,
     WineCarousel
-	},
+  },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), document.addEventListener('click', this.handleClickOutside)
   },
   data() {
-        return {
-          cards: [
-            {
-              type: 'card-grape',
-              title: '黑皮諾葡萄園',
-              description: '這是一座翠綠山麓的小酒莊,擁有得天獨厚的火山岩土壤及涼爽宜人的氣候,非常適合栽種黑皮諾葡萄。陽光充足而夜涼的環境,孕育出獨特的酒香與層次豐富的口感。',
-              img: 'src/assets/img/home/home-map-grapegarden.png',
-              isActive: false
-            },
-            {
-              type: 'card-service',
-              title: '客服中心',
-              description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
-              img: 'src/assets/img/home/home-map-service.png',
-              isActive: false
-            },
-            {
-              type: 'card-class',
-              title: '品酒學堂',
-              description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
-              img: 'src/assets/img/home/home-map-class.png',
-              isActive: false
-            },
-            {
-              type: 'card-oak',
-              title: '橡木桶室',
-              description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
-              img: 'src/assets/img/home/home-map-oak.png',
-              isActive: false
-            },
-            {
-              type: 'card-vintage',
-              title: '釀造室',
-              description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
-              img: 'src/assets/img/home/home-map-vintage.png',
-              isActive: false
-            }
-          ]
-        };
-      },
-      methods: {
-        toggleInfo(index) {
-          // Toggle the active state of the clicked card
-          this.cards.forEach((card, idx) => {
-            if (idx === index) {
-              card.isActive = !card.isActive;
-            } else {
-              card.isActive = false;
-            }
-          });
+    return {
+      cards: [
+        {
+          type: 'card-grape',
+          title: '黑皮諾葡萄園',
+          description:
+            '這是一座翠綠山麓的小酒莊,擁有得天獨厚的火山岩土壤及涼爽宜人的氣候,非常適合栽種黑皮諾葡萄。陽光充足而夜涼的環境,孕育出獨特的酒香與層次豐富的口感。',
+          img: 'src/assets/img/home/home-map-grapegarden.png',
+          isActive: false
         },
-        handleClickOutside(event) {
-          if (!event.target.closest('.card')) {
-            this.cards.forEach(card => card.isActive = false);
-          }
+        {
+          type: 'card-service',
+          title: '客服中心',
+          description:
+            '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
+          img: 'src/assets/img/home/home-map-service.png',
+          isActive: false
+        },
+        {
+          type: 'card-class',
+          title: '品酒學堂',
+          description:
+            '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
+          img: 'src/assets/img/home/home-map-class.png',
+          isActive: false
+        },
+        {
+          type: 'card-oak',
+          title: '橡木桶室',
+          description:
+            '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
+          img: 'src/assets/img/home/home-map-oak.png',
+          isActive: false
+        },
+        {
+          type: 'card-vintage',
+          title: '釀造室',
+          description:
+            '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
+          img: 'src/assets/img/home/home-map-vintage.png',
+          isActive: false
         }
-      },
-      mounted() {
-        document.addEventListener('click', this.handleClickOutside);
-      },
-      beforeUnmount() {
-        document.removeEventListener('click', this.handleClickOutside);
+      ]
+    }
+  },
+  methods: {
+    toggleInfo(index) {
+      // Toggle the active state of the clicked card
+      this.cards.forEach((card, idx) => {
+        if (idx === index) {
+          card.isActive = !card.isActive
+        } else {
+          card.isActive = false
+        }
+      })
+    },
+    handleClickOutside(event) {
+      if (!event.target.closest('.card')) {
+        this.cards.forEach((card) => (card.isActive = false))
       }
+    }
+  },
+
+  beforeUnmount() {
+    document.removeEventListener('click', this.handleClickOutside)
+  }
 }
 </script>
