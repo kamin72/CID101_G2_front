@@ -14,7 +14,7 @@
         <!-- <PayMethod /> -->
         <PayMethod :checked="selectedMethod" />
         <div class="hr"></div>
-        <RouterLink to="/cart_comp/cart_finish">
+        <RouterLink to="/cart_comp/cart_finish" style="text-decoration: none">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>

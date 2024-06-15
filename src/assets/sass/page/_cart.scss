@@ -187,6 +187,10 @@ section {
         align-items: center;
         gap: 5px;
       }
+      .allDelet_icon {
+        vertical-align: bottom;
+        cursor: pointer;
+      }
     }
 
     //購物車商品列表
@@ -194,7 +198,9 @@ section {
       border-bottom: 1px solid #d5d5d5;
       .image {
         display: flex;
+        text-align: left;
         padding: 10px 0;
+        // width: 50%;
         @include m() {
           flex-direction: column;
           width: 100px;
@@ -206,12 +212,13 @@ section {
         img {
           object-fit: cover;
           object-position: center;
+          width: 40%;
           @include m() {
             width: 100%;
           }
         }
         .description {
-          padding: 0 10px;
+          padding: 8px 10px;
           @include m() {
             padding: 10px 0;
           }
@@ -219,8 +226,10 @@ section {
       }
       .price {
         vertical-align: middle;
+        width: 10%;
       }
       .amount {
+        width: 20%;
         vertical-align: middle;
         position: relative;
         & > button {
@@ -240,7 +249,12 @@ section {
         }
       }
       .total {
+        width: 15%;
         vertical-align: middle;
+      }
+      .delet_icon {
+        vertical-align: middle;
+        cursor: pointer;
       }
     }
     //總金額、折扣金額、結帳金額
@@ -596,6 +610,7 @@ section {
   }
   button {
     margin-top: 20px;
+    display: inline-block;
   }
 }
 
