@@ -181,10 +181,10 @@ export default {
       .then((jsonData) => (this.products = jsonData))
   },
   computed: {
-    // sum() {
-    //   const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
-    //   return price
-    // },
+    sum() {
+      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
+      return price
+    },
     canSubmit() {
       return this.isEighteen && this.agreeTerms && this.receiveMessages
     },
