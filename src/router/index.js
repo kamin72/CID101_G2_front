@@ -129,8 +129,9 @@ const router = createRouter({
       component: () => import('@/views/MemberCenterView.vue')
     },
     {
-      path: '/ProductDetail',
+      path: '/ProductDetail/:id',
       name: 'ProductDetail',
+      props: true,
       component: () => import('@/views/ProductdetailView.vue')
     },
     {

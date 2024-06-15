@@ -8,7 +8,8 @@
       "year": "2014年",
       "price": "NT$ 7,500",
       "price2": 7500,
-      "image": "Elegant-Red-Wine.png"
+      "image": "Elegant-Red-Wine.png",
+      "describe": "這款紅酒散發出迷人的紅櫻桃、覆盆子和玫瑰花香氣，伴隨著淡淡的香料和泥土氣息。入口細膩，口感絲滑，酸度明亮且平衡，展現出優雅的結構和層次感。餘味持久且清新，帶有一絲薄荷和甘草的回味。"
     },
     {
       "id": 2,
@@ -19,7 +20,8 @@
       "year": "2013年",
       "price": "NT$ 7,600",
       "price2": 7600,
-      "image": "Elegant-Red-Wine.png"
+      "image": "Elegant-Red-Wine.png",
+      "describe": "這款紅酒散發出迷人的紅櫻桃、覆盆子和玫瑰花香氣，伴隨著淡淡的香料和泥土氣息。入口細膩，口感絲滑，酸度明亮且平衡，展現出優雅的結構和層次感。餘味持久且清新，帶有一絲薄荷和甘草的回味。"
     },
     {
       "id": 3,
@@ -30,7 +32,8 @@
       "year": "2012年",
       "price": "NT$ 8,000",
       "price2": 8000,
-      "image": "Elegant-Red-Wine.png"
+      "image": "Elegant-Red-Wine.png",
+      "describe": "這款紅酒散發出迷人的紅櫻桃、覆盆子和玫瑰花香氣，伴隨著淡淡的香料和泥土氣息。入口細膩，口感絲滑，酸度明亮且平衡，展現出優雅的結構和層次感。餘味持久且清新，帶有一絲薄荷和甘草的回味。"
     },
     {
       "id": 4,
@@ -41,7 +44,8 @@
       "year": "2009年",
       "price": "NT$ 8,200",
       "price2": 8200,
-      "image": "Elegant-Red-Wine.png"
+      "image": "Elegant-Red-Wine.png",
+      "describe": "這款紅酒散發出迷人的紅櫻桃、覆盆子和玫瑰花香氣，伴隨著淡淡的香料和泥土氣息。入口細膩，口感絲滑，酸度明亮且平衡，展現出優雅的結構和層次感。餘味持久且清新，帶有一絲薄荷和甘草的回味。"
     },
     {
       "id": 5,
@@ -52,7 +56,8 @@
       "year": "2020年",
       "price": "NT$ 2,920",
       "price2": 2920,
-      "image": "Pearl-White-Wine.png"
+      "image": "Pearl-White-Wine.png",
+      "describe": "這款白酒具有柑橘類水果和白桃的香氣，伴隨著一絲礦物質和海鹽的味道。口感清爽，酸度活潑，餘味悠長。是搭配海鮮的絕佳選擇。"
     },
     {
       "id": 6,
@@ -63,7 +68,8 @@
       "year": "2019年",
       "price": "NT$ 3,600",
       "price2": 3600,
-      "image": "Pearl-White-Wine.png"
+      "image": "Pearl-White-Wine.png",
+      "describe": "這款白酒具有柑橘類水果和白桃的香氣，伴隨著一絲礦物質和海鹽的味道。口感清爽，酸度活潑，餘味悠長。是搭配海鮮的絕佳選擇。"
     },
     {
       "id": 7,
@@ -74,7 +80,8 @@
       "year": "2018年",
       "price": "NT$ 1,000",
       "price2": 1000,
-      "image": "Ice-White-Wine.png"
+      "image": "Ice-White-Wine.png",
+      "describe": "這款白酒口感輕盈、清爽，帶有綠蘋果、梨和柑橘的香氣。酸度中等，餘味乾爽。是一款非常適合炎熱天氣飲用的白酒，可以搭配各類清淡料理。"
     },
     {
       "id": 8,
@@ -85,95 +92,8 @@
       "year": "2017年",
       "price": "NT$ 1,100",
       "price2": 1100,
-      "image": "Ice-White-Wine.png"
-    },
-    {
-      "id": 9,
-      "name": "星光粉紅酒 2011",
-      "ename": "Star Rosé Wine 2011",
-      "category": "粉紅酒",
-      "variety": "黑皮諾",
-      "year": "2011年",
-      "price": "NT$ 2,750",
-      "price2": 2750,
-      "image": "Star-Rosé-Wine.png"
-    },
-    {
-      "id": 10,
-      "name": "星光粉紅酒 2010",
-      "ename": "Star Rosé Wine 2010",
-      "category": "粉紅酒",
-      "variety": "黑皮諾",
-      "year": "2010年",
-      "price": "NT$ 3,000",
-      "price2": 3000,
-      "image": "Star-Rosé-Wine.png"
-    },
-    {
-      "id": 11,
-      "name": "粉露粉紅酒 2016",
-      "ename": "Dew Rosé Wine 2016",
-      "category": "粉紅酒",
-      "variety": "黑皮諾",
-      "year": "2016年",
-      "price": "NT$ 5,050",
-      "price2": 5050,
-      "image": "Dew-Rosé-Wine.png"
-    },
-    {
-      "id": 12,
-      "name": "粉露粉紅酒 2012",
-      "ename": "Dew Rosé Wine 2012",
-      "category": "粉紅酒",
-      "variety": "黑皮諾",
-      "year": "2012年",
-      "price": "NT$ 5,250",
-      "price2": 5250,
-      "image": "Dew-Rosé-Wine.png"
-    },
-    {
-      "id": 13,
-      "name": "藍天氣泡酒 2016 ",
-      "ename": "Sky Sparkling Wine 2016",
-      "category": "氣泡酒",
-      "variety": "夏多內",
-      "year": "2016年",
-      "price": "NT$ 1,720",
-      "price2": 1720,
-      "image": "Sky-Sparkling-Wine.png"
-    },
-    {
-      "id": 14,
-      "name": "藍天氣泡酒 2015",
-      "ename": "Sky Sparkling Wine 2015",
-      "category": "氣泡酒",
-      "variety": "夏多內",
-      "year": "2015年",
-      "price": "NT$ 2,000",
-      "price2": 2000,
-      "image": "Sky-Sparkling-Wine.png"
-    },
-    {
-      "id": 15,
-      "name": "星辰加烈酒 2016",
-      "ename": "Star Fortified Wine 2016",
-      "category": "加烈酒",
-      "variety": "帕洛米諾",
-      "year": "2016年", 
-      "price": "NT$ 830",
-      "price2": 830,
-      "image": "Star-Fortified-Wine.png"
-    },
-    {
-      "id": 16,
-      "name": "星辰加烈酒 2014",
-      "ename": "Star Fortified Wine 2014",
-      "category": "加烈酒",
-      "variety": "帕洛米諾",
-      "year": "2014年",
-      "price": "NT$ 900",
-      "price2": 900,
-      "image": "Star-Fortified-Wine.png"
+      "image": "Ice-White-Wine.png",
+      "describe": "這款白酒口感輕盈、清爽，帶有綠蘋果、梨和柑橘的香氣。酸度中等，餘味乾爽。是一款非常適合炎熱天氣飲用的白酒，可以搭配各類清淡料理。"
     }
   ]
   
