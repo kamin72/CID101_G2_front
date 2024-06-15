@@ -1,17 +1,16 @@
 <template>
     <div class="container">
-        
-            <section>
-                <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
-            </section>
-            <div class="wrapFinish">
+        <section class="form_flow">
+            <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+        </section>
+        <div class="wrapFinish">
             <div class="finish">
                 <div class="finishIcon">
                     <span class="material-symbols-outlined"> task_alt </span>
                     <h2>完成註冊</h2>
                 </div>
                 <h3>帳號審核需2-3個工作天，<br>
-                審核結果將會寄送至電子信箱，請留意信箱</h3>
+                    審核結果將會寄送至電子信箱，請留意信箱</h3>
                 <h3>5 幾秒後跳轉至首頁......</h3>
             </div>
             <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
@@ -56,8 +55,8 @@ export default {
     align-items: center;
     justify-content: center;
 }
+
 h3 {
     margin: 20px 0;
 }
-
 </style>

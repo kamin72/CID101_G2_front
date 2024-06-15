@@ -16,8 +16,8 @@
                     </div>
                 </div>
                 <!-- 推薦卡片清單 -->
-                <div v-for="(course, index) in recommendedCourses" :key="index"
-                    class="col-3 col-md-4 col-sm-6 event-card1">
+                <router-link v-for="(course, index) in recommendedCourses" :key="index"
+                    class="col-3 col-md-4 col-sm-6 event-card1" :to="'/'+course.id">
                     <div class="event-card1-img-wrap">
                         <img :src="parseImg(course.img)" />
                         <div v-if="course.tag" class="event-card1-tag">
@@ -32,7 +32,7 @@
                         <p>{{ formatDisplayDate(new Date(course.date)) }} 開課</p>
                     </div>
                     <h4>NT. {{ course.price }}</h4>
-                </div>
+                </router-link>
             </div>
         </div>
     </section>
@@ -95,16 +95,16 @@
                                         'has-course': hasCourse(day.date),
                                     }">
                                         <div class="day-number">{{ day.date.getDate() }}</div>
-                                        <div v-if="hasCourse(day.date)" class="course-name">
-                                            <small v-if="getCourseTagByDate(day.date)" class="course-tag">
-                                                {{ getCourseTagByDate(day.date) }}
-                                            </small>
-                                            <p :style="{
-                                                paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
-                                            }">
-                                                {{ getCourseNameByDate(day.date) }}
-                                            </p>
-                                        </div>
+                                        <router-link v-if="hasCourse(day.date)" :to="'/' + getCourseIdByDate(day.date)" class="course-item">
+                                                <small v-if="getCourseTagByDate(day.date)" class="course-tag">
+                                                    {{ getCourseTagByDate(day.date) }}
+                                                </small>
+                                                <p :style="{
+                                                    paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
+                                                }">
+                                                    {{ getCourseNameByDate(day.date) }}
+                                                </p>
+                                        </router-link>
                                     </div>
                                     <div v-for="n in endDayOfWeek" :key="n" class="day empty"></div>
                                 </div>
@@ -149,9 +149,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="small-btn-primary">
+                                <router-link :to="'/' + course.id " class="small-btn-primary">
                                     詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
-                                </div>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@ export default {
         getMonthCourses() {
             return (date) => {
                 const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
-                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 1);
                 return Array.from(this.courses).filter(([courseDate]) => {
                     const formattedDate = new Date(courseDate);
                     return formattedDate >= monthStart && formattedDate <= monthEnd;
@@ -264,8 +264,10 @@ export default {
             );
         },
         formatDisplayDate(date) {
-            const formattedDate = date.toISOString().split("T")[0];
-            return formattedDate.split("-").join("/");
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}/${month}/${day}`;
         },
         formatDate(date) {
             const year = date.getFullYear();
@@ -322,31 +324,41 @@ export default {
                     .map(([date, course]) => ({ ...course, date }));
             }
         },
+        getCourseIdByDate(date) {
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.get(formattedDate);
+            return course ? course.id : '';
+        },
     },
 
     created() {
-        this.courses.set("2024-06-13", {
+        this.courses.set("2024-06-14", {
+            id: "course_detail",
             img: "1.jpg",
+            link: "/CourseDetail.vue",
             tag: null,
             name: "品酒初級課程1",
             price: 3200,
             desc: "課程內容包括葡萄酒的基本知識、品酒技巧、如何選酒等。透過理論與實作快速掌握品酒的要領，開啟探索葡萄酒世界的大門。",
         });
-        this.courses.set("2024-06-15", {
+        this.courses.set("2024-06-30", {
+            id: "course_detail",
             img: "2.jpg",
             tag: null,
             name: "品酒中級課程1",
             price: 3600,
             desc: "深入探討葡萄酒風土、品種、釀造工藝及熟成，並透過系統化品評訓練，提升品酒技巧。",
         });
-        this.courses.set("2024-07-05", {
+        this.courses.set("2024-07-01", {
+            id: "course_detail",
             img: "3.jpg",
             tag: null,
             name: "品酒進階課程1",
             price: 4200,
             desc: "深入剖析頂級葡萄酒的特色，探討稀有品種與產區，透過大師級講師的指導，磨練品酒技藝成為真正的品酒專家。",
         });
-        this.courses.set("2024-07-30", {
+        this.courses.set("2024-07-10", {
+            id: "course_detail",
             img: "4.jpg",
             tag: "早鳥優惠",
             name: "品酒初級課程2",

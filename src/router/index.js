@@ -20,12 +20,33 @@ const router = createRouter({
     {
       path: '/cart_comp',
       name: 'cart_comp',
-      component: () => import('@/views/CartViewComp.vue')
+      component: () => import('@/views/CartViewComp.vue'),
+      children: [
+        { path: 'cartdelivery_comp', component: () => import('@/views/CartDeliveryComp.vue') },
+        {
+          path: 'pay_info',
+          component: () => import('@/views/CartPayinfo.vue'),
+          props: (route) => ({ method: route.query.method })
+        },
+        { path: 'cart_finish', component: () => import('@/views/CartFinish.vue') }
+      ]
     },
     {
       path: '/cart_account',
       name: 'cart_account',
-      component: () => import('@/views/CartViewAccount.vue')
+      component: () => import('@/views/CartViewAccount.vue'),
+      children: [
+        {
+          path: 'cartdelivery_account',
+          name: 'cartdelivery_account',
+          component: () => import('@/views/CartDeliveryAccount.vue')
+        },
+        {
+          path: 'cart_finish_account',
+          name: 'cart_finish_account',
+          component: () => import('@/views/CartFinishAccount.vue')
+        }
+      ]
     },
     {
       path: '/course',
@@ -43,6 +64,16 @@ const router = createRouter({
       component: () => import('@/views/GameView.vue')
     },
     {
+      path: '/gameRule',
+      name: 'gameRule',
+      component: () => import('@/views/GameRuleView.vue')
+    },
+    {
+      path: '/gameQuestion',
+      name: 'gameQuestion',
+      component: () => import('@/views/GameQuestionView.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue')
@@ -57,32 +88,7 @@ const router = createRouter({
       name: 'product',
       component: () => import('@/views/ProductView.vue')
     },
-    {
-      path: '/cartdelivery_comp',
-      name: 'cartdelivery_comp',
-      component: () => import('@/views/CartDeliveryComp.vue')
-    },
-    {
-      path: '/pay_info',
-      name: 'pay_info',
-      component: () => import('@/views/CartPayinfo.vue'),
-      props: (route) => ({ method: route.query.method })
-    },
-    {
-      path: '/cart_finish',
-      name: 'cart_finish',
-      component: () => import('@/views/CartFinish.vue')
-    },
-    {
-      path: '/cartdelivery_account',
-      name: 'cartdelivery_account',
-      component: () => import('@/views/CartDeliveryAccount.vue')
-    },
-    {
-      path: '/cart_finish_account',
-      name: 'cart_finish_account',
-      component: () => import('@/views/CartFinishAccount.vue')
-    },
+
     {
       path: '/signup',
       name: 'signup',
@@ -158,7 +164,7 @@ const router = createRouter({
       path: '/bookinghistorydetails',
       name: 'bookinghistorydetails',
       component: () => import('@/views/BookingHistoryDetailsView.vue')
-    },
+    }
   ]
 })
 

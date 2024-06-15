@@ -1,5 +1,6 @@
 // 課程清單頁面
 .course-page-container {
+  color: $gray;
   max-width: $max-width;
   width: 100%;
   margin: auto;
@@ -8,6 +9,11 @@
     margin: unset;
     justify-content: center;
   }
+}
+
+.courseDetailRow {
+  display: flex;
+  justify-content: center;
 }
 
 .scrumble {
@@ -27,7 +33,7 @@
   .line {
     background-color: $gray;
     width: 161.003px;
-    height: 1.5px;
+    height: 1px;
   }
   h2 {
     font-family: $font-cormorant;
@@ -79,10 +85,6 @@
         display: flex;
         top: 0;
         translate: 0 -100%;
-        .big-btn-primary,
-        .big-btn-secondary {
-          padding: 18px 75px;
-        }
         .big-btn-primary {
           position: relative;
           .triangle {
@@ -137,14 +139,15 @@
               flex-direction: column;
               justify-content: center;
               align-content: center;
-              height: 120px;
+              height: 125px;
               .day-number {
                 position: absolute;
                 left: 10px;
                 top: 10px;
               }
-              .course-name {
-                cursor: pointer;
+              .course-item {
+                margin-top: 22px;
+                color: $gray;
                 position: relative;
                 display: flex;
                 flex-direction: column;
@@ -154,6 +157,7 @@
                 height: 65%;
                 background-color: $bgc;
                 transition: 0.3s ease-in-out;
+                text-decoration: none;
                 p {
                   padding-top: 10px;
                 }
@@ -174,13 +178,15 @@
             .today {
               padding: 5px;
               padding-bottom: 15px;
-              div {
+              .day-number {
+                z-index: 1;
+                margin-top: -5px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 color: #fff;
                 background-color: $bgc;
-                height: 30px;
+                height: 27px;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 background-color: #5188f6;
@@ -205,18 +211,37 @@
 
 //課程詳情資訊
 .courseBanner {
-  background-image: url(/src/assets/img/home/homebanner2.png),
-    url(/src/assets/img/course/Mask\ group.jpg);
-  background-repeat: no-repeat, no-repeat;
-  background-position: bottom 0 left 0;
-  background-size:
-    100%,
-    100% 90%;
-  height: 77vh;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  .bgImgWrap, .maskWrap {
+    width: 100%;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+  }
+  .bgImgWrap {
+    position: fixed;
+    height: 100%;
+    bottom: 0px;
+    z-index: -1;
+  }
+  .maskWrap {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    z-index: 2;
+  }
 }
+
+
 .info {
+  background-color: $bgc;
   .container {
-    .row > .courseInfo > div {
+    .courseDetailRow > .courseInfo > div {
       padding: 0 5px;
       display: flex;
       align-items: center;
@@ -225,97 +250,152 @@
         font-weight: bolder;
       }
     }
-    .row > .courseInfo > div > .courseWrap {
+    .courseDetailRow > .courseInfo > div > .courseWrap {
       padding: 0 10px;
     }
-    .row > .courseInfo > div > .courseWrap > p {
+    .courseDetailRow > .courseInfo > div > .courseWrap > p {
       padding: 5px 0 0;
     }
-    .row {
-      .courseInfo {
+    .courseDetailRow {
+      .courseTopInfoWrap {
         display: flex;
-        h2 {
-          padding: 0 20px;
-        }
-        .coursePrice {
-          p {
-            text-decoration: line-through;
+        flex-direction: column;
+        .courseInfo {
+          padding: 25px 0;
+          display: flex;
+          justify-content: space-between;
+          .courseDetailWrap {
+            display: flex;
+            width: 75%;
+            justify-content: space-between;
+            .line {
+              height: 100%;
+              width: 3px;
+              background-color: #aea495;
+              margin: 0 20px;
+            }
+            p,
+            h4 {
+              padding: 5px 0;
+              text-wrap: nowrap;
+            }
+            .courseTime,
+            .courseAdress,
+            .coursePrice {
+              display: flex;
+            }
+            .coursePrice {
+              p {
+                text-decoration: line-through;
+              }
+            }
           }
         }
-      }
-      .courseIntro {
-        padding: 50px 20px 0;
-        display: flex;
-        justify-content: space-between;
-        p {
-          width: 70%;
-          line-height: 25px;
-        }
-        .reserveCourse {
-          height: 70px;
-          span {
-            padding: 0 8px;
+        .courseIntro {
+          padding: 25px 0;
+          display: flex;
+          justify-content: space-between;
+          p {
+            width: 70%;
+            line-height: 25px;
+          }
+          .big-btn-primary {
+            padding: 0;
+            height: 70px;
+            width: 230px;
+          }
+          .reserveCourse {
+            span {
+              margin-right: 5px;
+            }
           }
         }
       }
     }
   }
 }
-hr {
-  border-width: 2px;
-}
+
 .introduction {
+  background-color: $bgc;
   .container {
-    .row {
-      .teacher {
+    .courseDetailRow {
+      padding-bottom: $pad-1;
+      .courseBottomInfoWrap {
         display: flex;
-        gap: 50px;
-        .teacherImg {
-          width: 40%;
-          img {
-            width: 100%;
+        flex-direction: column;
+        align-items: center;
+        .teacher {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .teacherImg {
+            width: 40%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            img {
+              object-fit: cover;
+              object-position: center;
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .teacherInfo {
+            width: 53%;
+            p {
+              line-height: 25px;
+            }
+          }
+          .teacherInfo > h3, h4 {
+            padding: 10px 0;
+          }
+          .teacherInfo > p {
+            padding: 20px 0;
           }
         }
-        .teacherInfo {
-          width: 50%;
-          flex-grow: 1;
-          p {
-            line-height: 25px;
-          }
-        }
-        .teacherInfo > h3,
-        h4,
-        p {
-          padding: 10px 0;
-        }
-      }
-      .feature {
-        padding: 50px 0;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        .featWrap {
-          text-align: center;
-          ul {
-            li {
-              text-align: left;
-              list-style-type: disc;
+        .feature {
+          padding: 50px 0;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          .featWrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            h4 {
+              padding: 25px 0;
+            }
+            .iconWrap {
+              width: 100px;
+              height: 100px;
+              overflow: hidden;
+              img {
+                object-fit: cover;
+                object-position: center;
+                height: 100%;
+              }
+            }
+            ul {
+              li {
+                text-align: left;
+                list-style-type: disc;
+                padding: 5px 0;
+                font-family: $font-dm, $font-noto;
+              }
             }
           }
         }
-      }
-      button {
-        margin: 0 auto;
-        span {
-          padding: 0 8px;
+        button {
+          padding: 0;
+          height: 70px;
+          width: 230px;
+          span {
+            margin-right: 5px;
+          }
         }
-      }
-      .feature > .featWrap {
-        padding: 50px 50px;
-      }
-      .feature > .featWrap > h3,
-      li {
-        padding: 8px 0;
+        .feature > .featWrap {
+          padding: $pad-1;
+        }
       }
     }
   }

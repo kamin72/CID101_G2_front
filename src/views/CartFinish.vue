@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <section>
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-show="isMobile" class="cartFlowRWD_finish">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrapFinish">
       <div class="finish">
@@ -18,10 +21,13 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 
 export default {
+  emits: ['route-change'],
   components: {
-    CartFlow
+    CartFlow,
+    CartFlowRWD
   },
   data() {
     return {
@@ -32,7 +38,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 2,
@@ -40,7 +47,8 @@ export default {
           opacity: '1',
           text: '填寫配送資訊',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 3,
@@ -48,7 +56,8 @@ export default {
           opacity: '1',
           text: '選擇付款方式',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 4,
@@ -56,14 +65,32 @@ export default {
           opacity: '1',
           text: '完成詢價',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'check',
+          opacity: '1',
+          text: '完成詢價',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#AEA495'
+        }
+      ],
+      windowWidth: window.innerWidth,
       countdown: 5
     }
   },
   mounted() {
-    window.scrollTo(0, 0), this.startCountdown()
+    window.scrollTo(0, 0),
+      this.startCountdown(),
+      window.addEventListener('resize', this.updateWindowWidth)
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
     startCountdown() {
@@ -75,6 +102,14 @@ export default {
           this.$router.push('/')
         }
       }, 1000) // 每1秒更新一次倒计时
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    }
+  },
+  computed: {
+    isMobile() {
+      return this.windowWidth < 450
     }
   }
 }

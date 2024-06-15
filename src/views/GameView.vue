@@ -5,7 +5,11 @@
         <h3>Wine Quiz</h3>
         <p>品酒達人</p>
       </div>
-      <button>GO!</button>
+      <RouterLink to="/GameRule">
+        <button class="button">
+          <a href="#">GO!</a>
+        </button>
+      </RouterLink>
     </div>
   </section>
 </template>

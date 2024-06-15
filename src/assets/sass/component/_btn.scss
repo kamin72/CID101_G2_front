@@ -1,15 +1,22 @@
 // 按鈕混合器
 @mixin big-button($btn-color) {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 0;
   border-radius: 0;
-  padding: 18px 52px;
+  padding: 20px 47px;
   font-family: $font-dm;
   color: $white;
   background-color: $btn-color; // 按鈕背景顏色為傳入的顏色變數
   transition: 0.3s;
   font-size: map-get($font-size, h4);
   cursor: pointer;
-
+  h4 {
+    padding: 0;
+    margin: 0;
+  }
   &:hover {
     background-color: darken($btn-color, 20);
   }
@@ -17,8 +24,12 @@
 
 @mixin small-button($btn-color) {
   @include big-button($btn-color);
-  padding: 10px 24px;
+  padding: 10px 23px;
   font-size: map-get($font-size, p);
+  p {
+    padding: 0;
+    margin: 0;
+  }
 }
 
 // 大按鈕樣式
