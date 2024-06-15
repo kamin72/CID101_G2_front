@@ -1,0 +1,58 @@
+// 關於我們
+.container {
+    .section-about-us {
+        .about-info {
+            display: flex;
+            .about-text{
+                margin: 20px;
+                p {
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+    .section-key-people {
+        .people-info {
+            display: flex;
+            gap:10px;
+            img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    }
+    .about-our-history { 
+        .history-process {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+            .history-info {
+                display: flex;
+                margin: 40px auto;
+            }
+        }
+    }
+    .traffic-information {
+        .traffic-item {
+            display: flex;
+            iframe {
+                margin: 10px 20px;
+            }
+            .traffic-list {
+                margin: 20px;
+                .traffic-text {
+                    display: flex;
+                    margin: 15px 5px;
+                    .material-symbols-outlined{
+                        font-size: 24px;
+                    }
+                    h4 {
+                        margin: 5px 0;
+                    }
+                }
+            }
+        }
+    }
+}
