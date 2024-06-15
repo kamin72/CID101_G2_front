@@ -81,7 +81,8 @@ export default {
         }
       ],
       windowWidth: window.innerWidth,
-      countdown: 5
+      countdown: 5,
+      interval: null
     }
   },
   mounted() {
@@ -90,18 +91,24 @@ export default {
       window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.updateWindowWidth)
+    window.removeEventListener('resize', this.updateWindowWidth), this.stopCountDown()
   },
   methods: {
     startCountdown() {
-      const interval = setInterval(() => {
+      this.interval = setInterval(() => {
         if (this.countdown > 0) {
           this.countdown--
         } else {
-          clearInterval(interval)
+          clearInterval(this.interval)
+          this.interval = null
           this.$router.push('/')
         }
       }, 1000) // 每1秒更新一次倒计时
+    },
+    stopCountDown() {
+      if (this.interval) {
+        clearInterval(this.interval)
+      }
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
