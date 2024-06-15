@@ -5,8 +5,21 @@
     </div>
     <div class="selectStore">
       <h4>選擇7-11取貨門市</h4>
-      <button class="map big-btn-primary">依地圖選擇門市</button>
-      <button class="ussdStore big-btn-primary">★ 選擇常用門市</button>
+
+      <button
+        class="map big-btn-primary"
+        @click="click1"
+        :class="isClicked ? 'clicked' : 'unclicked'"
+      >
+        依地圖選擇門市
+      </button>
+      <button
+        class="ussdStore big-btn-primary"
+        @click="click2"
+        :class="isClicked ? 'unclicked' : 'clicked'"
+      >
+        ★ 選擇常用門市
+      </button>
     </div>
     <div class="storeAddress">
       <h4>門市名稱 | 新鎮興門市</h4>
@@ -18,3 +31,30 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isClicked: Boolean
+    }
+  },
+  methods: {
+    click1() {
+      this.isClicked = true
+    },
+    click2() {
+      this.isClicked = false
+    }
+  }
+}
+</script>
+
+<style scoped>
+.clicked {
+  background-color: #aea495;
+}
+.unclicked {
+  background-color: #322d26;
+}
+</style>

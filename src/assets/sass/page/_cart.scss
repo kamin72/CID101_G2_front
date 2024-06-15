@@ -227,11 +227,17 @@ section {
       .price {
         vertical-align: middle;
         width: 10%;
+        @include t() {
+          width: 20%;
+        }
       }
       .amount {
         width: 20%;
         vertical-align: middle;
         position: relative;
+        @include t() {
+          width: 30%;
+        }
         & > button {
           font-size: map-get($font-size, a);
           padding: 7px 20px;
@@ -541,11 +547,13 @@ section {
 
 //711超商自取
 .selectStore {
+  width: 100%;
   h4 {
     padding: 20px 0;
   }
   button {
-    margin: 0 5px;
+    display: inline-block;
+    margin: 0px 5px;
     @include t() {
       width: 100%;
       margin: 5px 0;

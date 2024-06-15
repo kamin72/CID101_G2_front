@@ -36,8 +36,6 @@ export default {
       this.$emit('change-method', index)
     }
   },
-  mounted() {
-    // this.$emit('change-method', this.checked)
-  }
+  mounted() {}
 }
 </script>

@@ -12,9 +12,6 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
@@ -28,7 +25,18 @@ const router = createRouter({
           component: () => import('@/views/CartPayinfo.vue'),
           props: (route) => ({ method: route.query.method })
         },
-        { path: 'cart_finish', component: () => import('@/views/CartFinish.vue') }
+        {
+          path: 'cart_finish',
+          component: () => import('@/views/CartFinish.vue'),
+          // 避免從購物車頁面直接訪問到購物完成頁面
+          beforeEnter: (to, from, next) => {
+            if (from.query.method && from.path.includes('pay_info')) {
+              next()
+            } else {
+              next('/cart_comp')
+            }
+          }
+        }
       ]
     },
     {
@@ -44,7 +52,17 @@ const router = createRouter({
         {
           path: 'cart_finish_account',
           name: 'cart_finish_account',
-          component: () => import('@/views/CartFinishAccount.vue')
+          component: () => import('@/views/CartFinishAccount.vue'),
+          beforeEnter: (to, from, next) => {
+            if (
+              from.path === '/cart_account/cartdelivery_account' &&
+              to.path === '/cart_account/cart_finish_account'
+            ) {
+              next()
+            } else {
+              next('/cart_account')
+            }
+          }
         }
       ]
     },
