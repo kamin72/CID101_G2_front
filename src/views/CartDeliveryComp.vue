@@ -11,7 +11,10 @@
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }">
+        <RouterLink
+          :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }"
+          style="text-decoration: none"
+        >
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>

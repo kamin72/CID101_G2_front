@@ -64,7 +64,7 @@
             是否願意收到Silken SipsVineyard的最新消息</label
           >
         </div>
-        <RouterLink to="/cart_account/cartdelivery_account">
+        <RouterLink to="/cart_account/cartdelivery_account" style="text-decoration: none">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
         </RouterLink>
       </aside>

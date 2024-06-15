@@ -15,7 +15,7 @@
       </aside>
     </div>
     <div class="button">
-      <RouterLink to="/cart_account/cart_finish_account" from="">
+      <RouterLink to="/cart_account/cart_finish_account" from="" style="text-decoration: none">
         <button class="big-btn-primary accountSubmit" :disabled="!canSubmit">提交資料</button>
       </RouterLink>
     </div>

@@ -14,7 +14,7 @@
         </div>
         <h3>{{ countdown }} 幾秒後跳轉至首頁......</h3>
       </div>
-      <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
+      <RouterLink to="/"><button class="big-btn-primary">回首頁</button></RouterLink>
     </div>
   </div>
 </template>
