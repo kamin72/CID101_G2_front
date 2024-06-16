@@ -134,10 +134,9 @@
         }
         .homeAboutus_txt {
             letter-spacing: $letter-spacing;
-            h3 {
+            h2 {
                 font-family: $font-cormorant;
-                // font-size: map-get($font-size, h3);
-                font-size: 28px;
+                font-size: map-get($font-size, h2);
                 margin-bottom: 37px;
                 @include t {
                     margin: 15px 0;
@@ -322,6 +321,6 @@ p {
 }
 
 //wineSwiper
-.wineSwiper{
+.wineSwiper {
     width: 100%;
 }
