@@ -11,9 +11,6 @@ export default {
   components: {
     ProductList
   },
-  data(){
-
-  },
 
 };
 </script>
