@@ -12,20 +12,59 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
     {
       path: '/cart_comp',
       name: 'cart_comp',
-      component: () => import('@/views/CartViewComp.vue')
+      component: () => import('@/views/CartViewComp.vue'),
+      children: [
+        { path: 'cartdelivery_comp', component: () => import('@/views/CartDeliveryComp.vue') },
+        {
+          path: 'pay_info',
+          component: () => import('@/views/CartPayinfo.vue'),
+          props: (route) => ({ method: route.query.method })
+        },
+        {
+          path: 'cart_finish',
+          component: () => import('@/views/CartFinish.vue'),
+          // 避免從購物車頁面直接訪問到購物完成頁面
+          beforeEnter: (to, from, next) => {
+            if (from.query.method && from.path.includes('pay_info')) {
+              next()
+            } else {
+              next('/cart_comp')
+            }
+          }
+        }
+      ]
     },
     {
       path: '/cart_account',
       name: 'cart_account',
-      component: () => import('@/views/CartViewAccount.vue')
+      component: () => import('@/views/CartViewAccount.vue'),
+      children: [
+        {
+          path: 'cartdelivery_account',
+          name: 'cartdelivery_account',
+          component: () => import('@/views/CartDeliveryAccount.vue')
+        },
+        {
+          path: 'cart_finish_account',
+          name: 'cart_finish_account',
+          component: () => import('@/views/CartFinishAccount.vue'),
+          beforeEnter: (to, from, next) => {
+            if (
+              from.path === '/cart_account/cartdelivery_account' &&
+              to.path === '/cart_account/cart_finish_account'
+            ) {
+              next()
+            } else {
+              next('/cart_account')
+            }
+          }
+        }
+      ]
     },
     {
       path: '/course',
@@ -33,9 +72,10 @@ const router = createRouter({
       component: () => import('@/views/CourseView.vue')
     },
     {
-      path: '/course_detail',
+      path: '/course_detail/:id',
       name: 'course_detail',
-      component: () => import('@/views/CourseDetail.vue')
+      props: true,
+      component: () => import('@/views/CourseDetailView.vue')
     },
     {
       path: '/game',
@@ -67,32 +107,7 @@ const router = createRouter({
       name: 'product',
       component: () => import('@/views/ProductView.vue')
     },
-    {
-      path: '/cartdelivery_comp',
-      name: 'cartdelivery_comp',
-      component: () => import('@/views/CartDeliveryComp.vue')
-    },
-    {
-      path: '/pay_info',
-      name: 'pay_info',
-      component: () => import('@/views/CartPayinfo.vue'),
-      props: (route) => ({ method: route.query.method })
-    },
-    {
-      path: '/cart_finish',
-      name: 'cart_finish',
-      component: () => import('@/views/CartFinish.vue')
-    },
-    {
-      path: '/cartdelivery_account',
-      name: 'cartdelivery_account',
-      component: () => import('@/views/CartDeliveryAccount.vue')
-    },
-    {
-      path: '/cart_finish_account',
-      name: 'cart_finish_account',
-      component: () => import('@/views/CartFinishAccount.vue')
-    },
+
     {
       path: '/signup',
       name: 'signup',
@@ -139,8 +154,9 @@ const router = createRouter({
       component: () => import('@/views/MemberCenterView.vue')
     },
     {
-      path: '/ProductDetail',
+      path: '/ProductDetail/:id',
       name: 'ProductDetail',
+      props: true,
       component: () => import('@/views/ProductdetailView.vue')
     },
     {
@@ -167,8 +183,19 @@ const router = createRouter({
       path: '/bookinghistorydetails',
       name: 'bookinghistorydetails',
       component: () => import('@/views/BookingHistoryDetailsView.vue')
-    },
-  ]
+    }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    // return 期望滾動到哪個位置
+    // 始終滾動到頂部
+    return { top: 0 }
+  }
 })
 
 export default router
+
+router.beforeEach(async (to, from) => {
+  if (to.meta && to.meta.title) {
+    document.title = to.meta.title
+  }
+})

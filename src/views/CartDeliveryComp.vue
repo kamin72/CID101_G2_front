@@ -1,14 +1,25 @@
 <template>
-  <div class="container">
-    <section>
+  <div class="container" v-if="$route.path === '/cart_comp/cartdelivery_comp'">
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
+    <section v-show="isMobile" class="cartFlowRWD">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
+    </section>
     <div class="wrap_all">
-      <FormComp v-model:phone="phone" v-model:email="email" />
+      <FormComp
+        v-model:phone="phone"
+        v-model:email="email"
+        @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage"
+      />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: '/pay_info', query: { method: selectedPaymentMethod } }">
+        <RouterLink
+          :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }"
+          style="text-decoration: none"
+        >
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>
@@ -16,18 +27,22 @@
       </aside>
     </div>
   </div>
+  <RouterView />
 </template>
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import FormComp from '@/components/Cart/FormComp.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
 export default {
+  emits: ['route-change'],
   components: {
     CartFlow,
     FormComp,
-    PayMethod
+    PayMethod,
+    CartFlowRWD
   },
   data() {
     return {
@@ -38,7 +53,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#AEA495'
         },
         {
           id: 2,
@@ -46,7 +62,8 @@ export default {
           opacity: '1',
           text: '填寫配送資訊',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
         },
         {
           id: 3,
@@ -63,18 +80,47 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'local_shipping',
+          opacity: '1',
+          text: '填寫配送資訊',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'paid',
+          opacity: '0.3',
+          text: '選擇付款方式',
+          bold: '0'
+        }
+      ],
+      deliveryInfo_comp: [],
+      windowWidth: window.innerWidth,
       selectedPaymentMethod: null,
       phone: '',
       email: ''
     }
   },
+  created() {},
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0),
+      window.addEventListener('resize', this.updateWindowWidth),
+      this.showLocalstorage()
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
     changePaymentMethod(index) {
       this.selectedPaymentMethod = index
-    }
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
     // submitForm() {
     //   if (this.canSubmit) {
     //     this.$router.push({
@@ -89,12 +135,30 @@ export default {
     //     alert('請填寫所有必填字段並確保電話為10個數字和電子郵件格式正確')
     //   }
     // }
+    saveToLocalstorage() {
+      this.deliveryInfo_comp = {
+        phone: this.phone,
+        email: this.email
+      }
+      localStorage.setItem('deliveryInfo_comp', JSON.stringify(this.deliveryInfo_comp))
+    },
+    showLocalstorage() {
+      if (localStorage.getItem('deliveryInfo_comp')) {
+        this.deliveryInfo_comp = JSON.parse(localStorage.getItem('deliveryInfo_comp'))
+        this.phone = this.deliveryInfo_comp.phone
+        this.email = this.deliveryInfo_comp.email
+      }
+    }
   },
+  watch: {},
   computed: {
     canSubmit() {
       const phoneValid = /^\d{10}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
       return this.selectedPaymentMethod !== null && phoneValid && emailValid
+    },
+    isMobile() {
+      return this.windowWidth < 450
     }
   }
 }

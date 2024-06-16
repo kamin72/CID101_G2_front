@@ -1,3 +1,6 @@
+section{
+    overflow: hidden;
+}
 // 開場輪播圖
 .homeBanner {
     // outline: 1px solid red;
@@ -201,6 +204,155 @@
             }
             img {
                 width: 100%;
+            }
+        }
+    }
+}
+//map
+.home-map{
+    .container{
+        width: 80%;
+        position: relative;
+        img{
+            width: 100%;
+            display: block;
+        }
+        .card{
+            width: 50%;
+            position: absolute;
+            .dot{
+                width: 20px;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                background-color: #7f1023;
+                border: 2px solid #ffffff;
+                position: relative;
+                top: 0;
+                left: 50%;   
+                cursor: pointer;
+                pointer-events:auto;
+                z-index: 1;
+            }
+            .card-wrap{
+                display: none;
+                overflow: hidden;
+                .line{
+                    width: 100%;
+                    display: block;
+                    &::before{
+                        content: "";
+                        display: block;
+                        position: relative;
+                        top: 0;
+                        left: 52.1%;
+                        border-left: 3px solid #ffffff;
+                        height: 10vh;
+                    }
+                }
+                .card-info{
+                    background-color: #ffffff;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px;
+                    margin: auto;
+                    .card-info-image{
+                        width: 45%;
+                        margin: auto;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .card-info-txt{
+                        width: 50%;
+                        margin: auto;
+                        h4 {
+                            font-family: $font-cormorant;
+                            font-size: map-get($font-size, h4);
+                        }
+                        p {
+                            font-size: map-get($font-size, p);
+                            margin-top: 10px;
+                            letter-spacing: $letter-spacing;
+                            font-family: $font-noto;
+
+                        }
+                    }
+                    
+                }
+                
+            }
+            .card-wrap.active {
+                display: block;
+                position: relative;
+                z-index: 10;
+                pointer-events: none;
+            }
+        }
+        .card-grape{
+            top:65%;
+            left: 55%;
+            
+        }
+        .card-service{
+            top:50%;
+            left: 6%;
+        }
+        .card-class{
+            top: 63%;
+            left: -8%;
+        }
+        .card-oak {
+            top: 60%;
+            left: -5%;
+        }
+        .card-vintage{
+            top: 60%;
+            left: 25%;
+        }
+    }
+    @include t {
+        .container{
+            position: relative;
+            width: 100%;
+            .card{
+                width: 50%;
+                position: absolute;;
+                .dot{
+                    width: 15px;
+                }
+                .card-wrap{
+                    position: relative;
+                    width: 100%;
+                    .line{
+                            display: none;
+                    }
+                    .card-info{
+                        flex-direction: column;
+                        position: fixed;
+                        top:56%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 45%;
+                        z-index: 11;
+                        .card-info-image{
+                            width: 100%;
+                        }
+                        .card-info-txt{
+                            width: 100%;
+                            h4{
+                                margin-top: 10px;
+                            }
+                        }
+                        
+                    }
+                    
+                }
+                .card-wrap.active {
+                    display: block;
+                    position: relative;
+                    z-index: 10;
+                    pointer-events: none;
+                }
             }
         }
     }

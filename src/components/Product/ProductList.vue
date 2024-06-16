@@ -2,7 +2,12 @@
   <div class="container">
     <div class="row">
       <!-- 頁面導航顯示 -->
-      <small class="col-12 scrumble">首頁<span class="material-symbols-outlined">arrow_forward_ios</span>我們的酒</small>
+      <small class="col-12 scrumble">
+        <span class="frontPage-bread">
+          <RouterLink to="/">首頁</RouterLink></span>
+        <span class="material-symbols-outlined">arrow_forward_ios</span>
+        我們的酒
+      </small>
     </div>
   </div>
 
@@ -150,14 +155,16 @@
       <div class="col-3 col-md-4 col-sm-6" v-for="product in filteredProducts" :key="product.id">
         <div class="product-card">
           <div class="product-img">
-            <RouterLink to="/ProductDetail"> 
+            <RouterLink :to="'/ProductDetail/' + product.id">
+            <!-- <RouterLink to="/ProductDetail">  -->
               <!-- <img :src="product.image" alt="Product Image" style="width: 277.5px; height: 200px; object-fit: contain;" /> -->
               <img :src="parseImg(product.image)" alt="Product Image" style="object-fit: contain;" />
             </RouterLink>
           </div>
 
           <div class="info-wrap">
-           <RouterLink to="/ProductDetail"> 
+            <RouterLink :to="'/ProductDetail/' + product.id">
+           <!-- <RouterLink to="/ProductDetail">  -->
               <div class="font-wrap">
                 <h4>{{ product.name }}</h4>
                 <p>{{ product.ename }}</p>
@@ -186,7 +193,7 @@
 export default {
   data() {
     return {
-      //商品資訊
+     //商品資訊
       products: [],
 
       // 定義下拉選單的資料結構
@@ -195,19 +202,19 @@ export default {
           label: '葡萄酒類別',
           isOpen: false,
           isMenuVisible: false,
-          options: ['紅酒', '白酒', '粉紅酒', '氣泡酒', '加烈酒'],
+          options: ['紅酒', '白酒'],
         },
         {
           label: '葡萄品種',
           isOpen: false,
           isMenuVisible: false,
-          options: ['波爾多混釀', '阿里戈蝶', '黑皮諾', '夏多內', '帕洛米諾'],
+          options: ['波爾多混釀', '阿里戈蝶'],
         },
         {
           label: '年份',
           isOpen: false,
           isMenuVisible: false,
-          options: ['2020年', '2019年', '2018年', '2017年', '2016年', '2015年', '2014年', '2013年', '2012年', '2011年', '2010年', '2009年'],
+          options: ['2020年', '2019年', '2018年', '2017年', '2014年', '2013年', '2012年', '2009年'],
         },
 
       ],

@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "name": "2024年度紅酒報告：市場最新趨勢",
+        "image": "wine-report.jpg",
+        "time": "2024/1/5"
+    },
+    {
+        "id": 2,
+        "name": "新年特惠：紅酒限時折扣活動",
+        "image": "new-year.jpg",
+        "time": "2024/1/15"
+    },
+    {
+        "id": 3,
+        "name": "紅酒知識：如何正確儲存您的珍藏",
+        "image": "knowledge.jpg",
+        "time": "2024/1/30"
+    },
+    {
+        "id": 4,
+        "name": "葡萄酒百科：深度解讀不同葡萄品種",
+        "image": "encyclopedia.jpg",
+        "time": "2024/3/30"
+    },
+    {
+        "id": 5,
+        "name": "母親節特惠：紅酒限時折扣活動",
+        "image": "mothers-day.jpg",
+        "time": "2024/5/12"
+    },
+    {
+        "id": 6,
+        "name": "綠色釀造與可持續發展",
+        "image": "green-brewing.jpg",
+        "time": "2024/5/26"
+    },
+    {
+        "id": 7,
+        "name": "父親節佳釀：為爸爸準備的紅酒驚喜",
+        "image": "fathers-day.jpg",
+        "time": "2024/8/8"
+    },
+    {
+        "id": 8,
+        "name": "國慶歡慶：與紅酒共度美好時光",
+        "image": "ten-ten.jpg",
+        "time": "2024/10/10"
+    },
+    {
+        "id": 9,
+        "name": "冬季佳節：溫暖身心的紅酒推薦",
+        "image": "winter-festival.jpg",
+        "time": "2024/12/15"
+    }
+
+]

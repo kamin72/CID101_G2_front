@@ -11,7 +11,7 @@
         </div>
         <h3>{{ countdown }} 幾秒後跳轉至首頁......</h3>
       </div>
-      <RouterLink to="/"> <button class="big-btn-primary">回首頁</button> </RouterLink>
+      <RouterLink to="/"><button class="big-btn-primary">回首頁</button></RouterLink>
     </div>
   </div>
 </template>
@@ -51,22 +51,33 @@ export default {
           color: '#AEA495'
         }
       ],
-      countdown: 5
+      countdown: 5,
+      interval: null
     }
   },
   mounted() {
     window.scrollTo(0, 0), this.startCountdown()
   },
+  beforeUnmount() {
+    this.stopCountdown()
+  },
   methods: {
     startCountdown() {
-      const interval = setInterval(() => {
+      this.interval = setInterval(() => {
         if (this.countdown > 0) {
           this.countdown--
         } else {
-          clearInterval(interval)
+          clearInterval(this.interval)
+          this.interval = null
           this.$router.push('/')
         }
-      }, 1000) // 每1秒更新一次倒计时
+      }, 1000)
+    },
+    stopCountdown() {
+      if (this.interval) {
+        clearInterval(this.interval)
+        this.interval = null
+      }
     }
   }
 }

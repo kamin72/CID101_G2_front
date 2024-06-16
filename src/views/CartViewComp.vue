@@ -1,40 +1,52 @@
 <template>
-  <div class="container">
-    <section>
+  <div class="container" v-if="$route.path === '/cart_comp'">
+    <section v-show="!isMobile">
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
+    <section v-show="isMobile" class="cartFlowRWD">
+      <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
+    </section>
     <div class="wrap_all">
-      <div class="wrap_list">
-        <div class="textItem">
-          <div class="check">
-            <input type="checkbox" name="checkbox" id="checkbox" />
+      <table class="wrap_list">
+        <tr class="textItem">
+          <th class="check">
+            <input type="checkbox" name="checkbox" id="checkbox" v-model="allChecked" />
             <p class="item">詢價清單</p>
-          </div>
-          <p class="item">單價</p>
-          <p class="item">數量</p>
-          <p class="item">總金額</p>
-        </div>
+          </th>
+          <th class="item">單價</th>
+          <th class="item">數量</th>
+          <th class="item">總金額</th>
+          <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
+        </tr>
         <CartList
-          :item="productItem"
-          :index="productIndex"
           v-for="(productItem, productIndex) in products"
           :key="productItem.id"
+          :item="productItem"
+          :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
           @add="add(productIndex)"
           @reduce="reduce(productIndex)"
         />
-        <div class="sum">
-          <p>總價</p>
-          <p>NT. {{ sum }}</p>
-        </div>
-        <div class="discount">
-          <p>折扣</p>
-          <p>-NT. 120</p>
-        </div>
-        <div class="actualPaid">
-          <p>結帳金額</p>
-          <p>NT. 1080</p>
-        </div>
-      </div>
+        <tr class="sum">
+          <td>總價</td>
+          <td></td>
+          <td></td>
+          <td>NT. {{ sum }}</td>
+        </tr>
+        <tr class="discount">
+          <td>折扣</td>
+          <td></td>
+          <td></td>
+          <td>- NT. {{ discount }}</td>
+        </tr>
+        <tr class="actualPaid">
+          <td>結帳金額</td>
+          <td></td>
+          <td></td>
+          <td>NT. {{ actualPaid }}</td>
+        </tr>
+      </table>
       <aside class="coupon">
         <Coupon />
         <div class="terms">
@@ -50,21 +62,23 @@
               v-model="agreeTerms"
             />我同意所有交易條款[查看條款]</label
           >
-          <label>
-            <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
-            是否願意收到Silken SipsVineyard的最新消息</label
+          <label
+            ><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
+            SipsVineyard的最新消息</label
           >
         </div>
-        <RouterLink to="/cartDelivery_comp">
+        <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
   </div>
+  <RouterView />
 </template>
 
 <script>
 import CartFlow from '@/components//Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import CartList from '@/components/Cart/CartList.vue'
 import Coupon from '@/components/Cart/Coupon.vue'
 
@@ -72,40 +86,12 @@ export default {
   components: {
     CartFlow,
     CartList,
-    Coupon
+    Coupon,
+    CartFlowRWD
   },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          image: 'https://picsum.photos/150/200/?random=10',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 300,
-          count: 1
-        },
-        {
-          id: 2,
-          image: 'https://picsum.photos/150/200/?random=11',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 400,
-          count: 1
-        },
-        {
-          id: 3,
-          image: 'https://picsum.photos/150/200/?random=12',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 500,
-          count: 1
-        },
-        {
-          id: 4,
-          image: 'https://picsum.photos/150/200/?random=15',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 600,
-          count: 1
-        }
-      ],
+      products: [],
       flow: [
         {
           id: 1,
@@ -113,7 +99,8 @@ export default {
           opacity: '1',
           text: '詢價清單',
           bold: '400',
-          color: '#AEA495'
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
         },
         {
           id: 2,
@@ -137,6 +124,26 @@ export default {
           bold: '0'
         }
       ],
+      flowRwd: [
+        {
+          id: 1,
+          icon: 'receipt_long',
+          opacity: '1',
+          text: '詢價清單',
+          bold: '400',
+          color: '#AEA495',
+          borderColor: '#D5D5D5'
+        },
+        {
+          id: 2,
+          icon: 'local_shipping',
+          opacity: '0.3',
+          text: '填寫配送資訊',
+          bold: '0'
+        }
+      ],
+      allChecked: false,
+      windowWidth: window.innerWidth,
       isEighteen: false,
       agreeTerms: false,
       receiveMessages: false
@@ -144,7 +151,7 @@ export default {
   },
   methods: {
     total(index) {
-      let price = this.products[index].price * this.products[index].count
+      let price = this.products[index].price2 * this.products[index].count
       return price
     },
     add(index) {
@@ -154,15 +161,41 @@ export default {
     reduce(index) {
       if (this.products[index].count == 0) return
       this.products[index].count--
+    },
+    updateWindowWidth() {
+      this.windowWidth = window.innerWidth
+    },
+    updateItemCheck() {
+      // 檢查是否所有產品都被選中
+      this.allChecked = this.products.every((product) => product.isChecked)
+    },
+    toggleAllChecks() {
+      this.products.forEach((product) => {
+        product.isChecked = this.allChecked
+      })
     }
+  },
+  mounted() {
+    fetch(`../../public/product.json`)
+      .then((res) => res.json())
+      .then((jsonData) => (this.products = jsonData))
   },
   computed: {
     sum() {
-      const price = this.products.reduce((total, items) => total + items.price * items.count, 0)
+      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
       return price
     },
     canSubmit() {
       return this.isEighteen && this.agreeTerms && this.receiveMessages
+    },
+    isMobile() {
+      return this.windowWidth < 450
+    },
+    discount() {
+      return this.sum * 0.8
+    },
+    actualPaid() {
+      return this.sum + this.discount
     }
   },
   provide() {

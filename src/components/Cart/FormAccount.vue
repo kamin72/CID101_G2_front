@@ -1,5 +1,5 @@
 <template>
-  <div class="deliveryInfo">
+  <form class="deliveryInfo" action="">
     <div class="column">
       <h3 class="title">填寫個人資料</h3>
       <div class="syn">
@@ -51,7 +51,7 @@
         required
       />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
@@ -77,6 +77,8 @@ export default {
   emit: ['update:phone', 'update:email', 'update:address', 'update:name'],
   data() {
     return {}
-  }
+  },
+  mounted() {},
+  methods: {}
 }
 </script>

@@ -25,7 +25,7 @@
 
           <div class="header-shoppingcart">
             <i class="fa-solid fa-bag-shopping"></i>
-            <RouterLink to="/cart_account">詢價清單(0)</RouterLink>
+            <RouterLink to="/cart_comp">詢價清單(0)</RouterLink>
           </div>
         </div>
       </div>
@@ -34,28 +34,28 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
-    const isNavOpen = ref(false);
-    const router = useRouter();
+    const isNavOpen = ref(false)
+    const router = useRouter()
 
     const toggleNav = () => {
-      isNavOpen.value = !isNavOpen.value;
-    };
+      isNavOpen.value = !isNavOpen.value
+    }
 
     onMounted(() => {
       router.afterEach(() => {
-        isNavOpen.value = false;
-      });
-    });
+        isNavOpen.value = false
+      })
+    })
 
     return {
       isNavOpen,
-      toggleNav,
-    };
-  },
-};
+      toggleNav
+    }
+  }
+}
 </script>
