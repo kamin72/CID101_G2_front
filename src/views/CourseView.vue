@@ -16,8 +16,9 @@
                     </div>
                 </div>
                 <!-- 推薦卡片清單 -->
-                <router-link v-for="(course, index) in recommendedCourses" :key="index"
-                    class="col-3 col-md-6 col-sm-6 event-card1" :to="'/course/' + course.id">
+                <router-link r-link v-for="(course, index) in recommendedCourses" :key="index"
+                    class="col-3 col-md-6 col-sm-6 event-card1"
+                    :to="{ name: 'course_detail', params: { id: course.id } }">
                     <div class="event-card1-img-wrap">
                         <img :src="parseImg(course.img)" />
                         <div v-if="course.tag" class="event-card1-tag">
@@ -151,7 +152,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <router-link :to="'/course/' + course.id" class="small-btn-primary">
+                                <router-link :to="{ name: 'course_detail', params: { id: course.id } }"
+                                    class="small-btn-primary">
                                     詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
                                 </router-link>
                             </div>

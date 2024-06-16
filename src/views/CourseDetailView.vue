@@ -1,15 +1,15 @@
 <template>
   <!-- 大圖banner -->
-  <div class="courseBanner">
-    <div class="bgImgWrap" v-if="course">
+  <div class="courseBanner" v-if="course">
+    <div class="bgImgWrap">
       <img :src="parseImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
-      <img src="../../assets/img/home/homebanner2.png" alt="" />
+      <img src="../assets/img/home/homebanner2.png" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
-  <section class="info">
+  <section class="info" v-if="course">
     <div class="container">
       <div class="courseDetailRow">
         <div class="col-11 col-md-11 col-sm-12 courseTopInfoWrap">
@@ -20,8 +20,11 @@
                 <div class="line"></div>
                 <div class="courseWrap">
                   <h4>上課時間 | {{ formatDate(course.date) }}</h4>
-                  <p>{{ course.startTime }}-{{ course.endTime }}，{{ durationHours(course.startTime,
-                    course.endTime) }}小時</p>
+                  <p>
+                    {{ course.startTime }}-{{ course.endTime }}，{{
+                      durationHours(course.startTime, course.endTime)
+                    }}小時
+                  </p>
                 </div>
               </div>
               <div class="courseAdress">
@@ -53,7 +56,7 @@
     </div>
   </section>
   <!-- 課程介紹 -->
-  <CourseDetail v-if="course" />
+  <CourseDetail1 />
   <!-- <section class="introduction">
     <div class="container">
       <div class="courseDetailRow">
@@ -137,54 +140,70 @@
 </template>
 
 <script>
+import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
+
 export default {
   data() {
     return {
       course: null,
-    };
+      detail: []
+    }
   },
   components: {
-    CourseDetail: () => import(`@/components/Course/${this.course.id}.vue`),
+    CourseDetail1
   },
   methods: {
     formatDate(dateString) {
-      const date = new Date(dateString);
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
-      const weekday = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
-      return `${year}/${month}/${day} (${weekday})`;
+      const date = new Date(dateString)
+      const year = date.getFullYear()
+      const month = (date.getMonth() + 1).toString().padStart(2, '0')
+      const day = date.getDate().toString().padStart(2, '0')
+      const weekday = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()]
+      return `${year}/${month}/${day} (${weekday})`
     },
     durationHours(startTime, endTime) {
-      const [startHour, startMinute] = startTime.split(':').map(Number);
-      const [endHour, endMinute] = endTime.split(':').map(Number);
+      const [startHour, startMinute] = startTime.split(':').map(Number)
+      const [endHour, endMinute] = endTime.split(':').map(Number)
 
-      const startTotalMinutes = startHour * 60 + startMinute;
-      const endTotalMinutes = endHour * 60 + endMinute;
+      const startTotalMinutes = startHour * 60 + startMinute
+      const endTotalMinutes = endHour * 60 + endMinute
 
-      const durationMinutes = endTotalMinutes - startTotalMinutes;
-      const hours = Math.ceil(durationMinutes / 60);
+      const durationMinutes = endTotalMinutes - startTotalMinutes
+      const hours = Math.ceil(durationMinutes / 60)
 
-      return hours;
+      return hours
     },
     parseImg(file) {
-      return new URL(`../../assets/img/course/courselist/${file}`, import.meta.url)
-        .href;
+      return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
     },
     discountedPrice(price, discount) {
-    return discount ? price * (1 - discount) : price;
+      return discount ? price * (1 - discount) : price
     },
+    fetchCourseData(courseId) {
+      fetch('/courses.json')
+        .then((response) => response.json())
+        .then((data) => {
+          this.course = data.find((course) => course.id == courseId)
+        })
+    }
   },
   mounted() {
-    const courseId = this.$route.params.id;
-    fetch('../../../public/courses.json')
-      .then(response => response.json())
-      .then(data => {
-        this.course = data.find(course => course.id === courseId);
-      })
-      .catch(error => {
-        console.error('Error fetching course data:', error);
-      });
+    // const courseId = this.$route.params.id
+    // fetch('../../../public/courses.json')
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     this.course = data
+    //     this.detail = this.course.find((course) => course.id === courseId)
+    //   })
   },
-};
+  created() {
+    const courseId = this.$route.params.id;
+    this.fetchCourseData(courseId);
+  },
+  watch: {
+    '$route.params.id'(newId) {
+      this.fetchCourseData(newId);
+    }
+  }
+}
 </script>

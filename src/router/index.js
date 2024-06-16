@@ -72,9 +72,10 @@ const router = createRouter({
       component: () => import('@/views/CourseView.vue')
     },
     {
-      path: '/course/:id',
+      path: '/course_detail/:id',
       name: 'course_detail',
-      component: () => import('@/components/Course/CourseDetail.vue')
+      props: true,
+      component: () => import('@/views/CourseDetailView.vue')
     },
     {
       path: '/game',
@@ -184,17 +185,17 @@ const router = createRouter({
       component: () => import('@/views/BookingHistoryDetailsView.vue')
     }
   ],
-  scrollBehavior (to, from, savedPosition) {
-      // return 期望滾動到哪個位置
-      // 始終滾動到頂部
-      return { top: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    // return 期望滾動到哪個位置
+    // 始終滾動到頂部
+    return { top: 0 }
   }
 })
 
 export default router
 
 router.beforeEach(async (to, from) => {
-	if( to.meta && to.meta.title){
-		document.title = to.meta.title
-	}
+  if (to.meta && to.meta.title) {
+    document.title = to.meta.title
+  }
 })
