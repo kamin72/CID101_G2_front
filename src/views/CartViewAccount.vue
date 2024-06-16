@@ -14,6 +14,7 @@
           <th class="item">單價</th>
           <th class="item">數量</th>
           <th class="item">總金額</th>
+          <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
         </tr>
         <CartList
           v-for="(productItem, productIndex) in products"
@@ -35,13 +36,13 @@
           <td>折扣</td>
           <td></td>
           <td></td>
-          <td>-NT. 120</td>
+          <td>- NT. {{ discount }}</td>
         </tr>
         <tr class="actualPaid">
           <td>結帳金額</td>
           <td></td>
           <td></td>
-          <td>NT. 1080</td>
+          <td>NT. {{ actualPaid }}</td>
         </tr>
       </table>
       <aside class="coupon">
@@ -85,36 +86,7 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          image: 'https://picsum.photos/150/200/?random=10',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 300,
-          count: 1
-        },
-        {
-          id: 2,
-          image: 'https://picsum.photos/150/200/?random=11',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 400,
-          count: 1
-        },
-        {
-          id: 3,
-          image: 'https://picsum.photos/150/200/?random=12',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 500,
-          count: 1
-        },
-        {
-          id: 4,
-          image: 'https://picsum.photos/150/200/?random=15',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 600,
-          count: 1
-        }
-      ],
+      products: [],
       flow: [
         {
           id: 1,
@@ -165,7 +137,7 @@ export default {
   },
   methods: {
     total(index) {
-      let price = this.products[index].price * this.products[index].count
+      let price = this.products[index].price2 * this.products[index].count
       return price
     },
     add(index) {
@@ -188,7 +160,7 @@ export default {
   },
   computed: {
     sum() {
-      const price = this.products.reduce((total, items) => total + items.price * items.count, 0)
+      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
       return price
     },
     canSubmit() {
@@ -196,12 +168,23 @@ export default {
     },
     isMobile() {
       return this.windowWidth < 450
+    },
+    discount() {
+      return this.sum * 0.8
+    },
+    actualPaid() {
+      return this.sum + this.discount
     }
   },
   provide() {
     return {
       total: this.total
     }
+  },
+  mounted() {
+    fetch(`../../public/product.json`)
+      .then((res) => res.json())
+      .then((jsonData) => (this.products = jsonData))
   }
 }
 </script>

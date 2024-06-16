@@ -91,7 +91,7 @@ export default {
       window.addEventListener('resize', this.updateWindowWidth)
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.updateWindowWidth), this.stopCountDown()
+    window.removeEventListener('resize', this.updateWindowWidth), this.stopCountdown()
   },
   methods: {
     startCountdown() {
@@ -103,11 +103,12 @@ export default {
           this.interval = null
           this.$router.push('/')
         }
-      }, 1000) // 每1秒更新一次倒计时
+      }, 1000)
     },
-    stopCountDown() {
+    stopCountdown() {
       if (this.interval) {
         clearInterval(this.interval)
+        this.interval = null
       }
     },
     updateWindowWidth() {
