@@ -1,6 +1,3 @@
-section{
-    overflow: hidden;
-}
 // 開場輪播圖
 .homeBanner {
     // outline: 1px solid red;
@@ -108,7 +105,7 @@ section{
 .homeAboutus {
     .homeAboutus_container {
         // outline: 1px solid red;
-        padding: 174px 0;
+        // padding: 174px 0;
         width: 70%;
         display: flex;
         margin: auto;
@@ -298,11 +295,11 @@ section{
             left: 6%;
         }
         .card-class{
-            top: 63%;
+            top: 70%;
             left: -8%;
         }
         .card-oak {
-            top: 60%;
+            top: 62%;
             left: -5%;
         }
         .card-vintage{
@@ -357,122 +354,203 @@ section{
         }
     }
 }
-// event輪播圖
-.eventleftline {
-    width: 100px;
-    height: 1px;
-    background-color: #000000;
-    margin-top: 20px;
-    // outline: 1px solid red;
-}
-.eventrightline {
-    width: 100px;
-    height: 1px;
-    background-color: #000000;
-    margin-top: 20px;
-}
-.wrap_eventTitle {
-    // outline: 1px solid red;
-    display: flex;
-    justify-content: center;
-}
-.eventTitle {
-    margin: 0 10px;
-    // outline: 1px solid red;
-}
 
-// swiper
-.swiper {
-    width: 100%;
-    margin: 20px auto;
-}
-
-.swiper-slide {
-    text-align: center;
-
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.swiper-slide img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-}
-.img-wrap {
-    width: 100%;
-    position: relative;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    object-position: center;
-    overflow: hidden;
-    margin-bottom: 15px;
-    img {
+// swiper-event.news
+.swiper-wrap{
+    .container{
         width: 100%;
+        .title{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap:20px;
+            span{
+                border-bottom: 1px solid #000000;
+                height: 1px;
+                width: 20%;
+                margin:auto 0;
+            }
+            h2{
+                font-family: $font-cormorant;
+            }
+        }
+        .swiper {
+            width: 95%;
+            margin: 3% auto;
+            .swiper-slide {
+                text-align: center;
+                img {
+                    display: block;
+                    width: 100%;
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                }
+                .img-wrap {
+                    width: 100%;
+                    position: relative;
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                    object-position: center;
+                    overflow: hidden;
+                    margin-bottom: 15px;
+                    img {
+                        width: 100%;
+                    }
+                    .card-ribbon {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        padding: 5px 15px;
+                        color: $white;
+                        background-color: $gray;
+                        padding: 5px 15px;
+                        // aspect-ratio: 2.7/1;
+                        display: flex;
+                        justify-content: center;
+                        p {
+                            align-content: center;
+                        }
+                    }
+                    .book-now {
+                        position: absolute;
+                        display: flex;
+                        width: 100%;
+                        height: 40px;
+                        bottom: -40px;
+                        text-decoration: none;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: $white-transp;
+                        color: #000000;
+                        transition: bottom 0.3s ease-in-out;
+                    }
+                    &:hover .book-now {
+                        bottom: 0;
+                        cursor: pointer;
+                    }
+                }
+                .font-wrap{
+                    h4 {
+                        text-align: left;
+                    }
+                    p {
+                        text-align: left;
+                        margin: 5px 0;
+                    }
+                }
+            }
+            // --swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
+            // --swiper-navigation-size: 300px;/* 设置按钮大小 */
+            // --swiper-navigation-top-offset: 50%;
+            // --swiper-navigation-sides-offset: 10px;
+            // --swiper-navigation-color: var(--swiper-theme-color);
+            --swiper-navigation-size: 30px;
+            .swiper-button-prev:after,
+            .swiper-button-next:after {
+                color: #000000;
+            }
+            .swiper-button{
+                background-color: #d9d9d999;
+                border-radius: 50%;
+                border: none;
+                width: 60px;
+                height: 60px;
+                @include m {
+                    display: none;
+                }
+            }
+            
+            .swiper-button-next{
+                top: 50%;
+                right: 20px;
+            }
+            .swiper-button-prev {
+                top: 50%;
+                left: 20px;
+            }
+        }
+        .more-btn{
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            a {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background-color: #7f1023;
+                text-decoration: none;
+                color: #ffffff;
+                letter-spacing: $letter-spacing;
+                width: 20%;
+                aspect-ratio: 30/7;
+                @include t{
+                    width: 30%;
+                }
+                @include m{
+                    width: 50%;
+                }
+            }
+        }
     }
-    .card-ribbon {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 5px 15px;
-        color: $white;
-        background-color: $gray;
-        padding: 5px 15px;
-        // aspect-ratio: 2.7/1;
-        display: flex;
-        justify-content: center;
-    }
-    .book-now {
-        position: absolute;
-        display: flex;
-        width: 100%;
-        height: 40px;
-        bottom: -40px;
-        text-decoration: none;
-        justify-content: center;
-        align-items: center;
-        background-color: $white-transp;
-        color: #000000;
-        transition: bottom 0.3s ease-in-out;
-    }
-    &:hover .book-now {
-        bottom: 0;
-        cursor: pointer;
-    }
-}
-.img-wrap .img-wrap .card-ribbon p {
-    align-content: center;
 }
 
-.swiper-button-prev:after,
-.swiper-button-next:after {
-    color: #000000;
-}
-.slide-content {
-    text-align: center;
-}
-
-.slide-content img {
-    width: 100%;
-    height: auto;
-}
-
-.slide-content p {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-}
-h4 {
-    text-align: left;
-}
-p {
-    text-align: left;
-}
 
 //wineSwiper
-.wineSwiper {
-    width: 100%;
+.wine{
+    .container{
+        width: 100%;
+        display: flex;
+        .wineSwiper{
+            width: 60%;
+        }
+        .wine-content{
+            width: 40%;
+            // margin-left: 20px;
+            h2{
+                font-family: $font-cormorant;
+                font-size: clamp(30px, 5vw, 64px);
+            }
+            h3{
+                font-family: $font-noto;
+                font-size: clamp(20px, 4vw, 36px)
+            }
+            h4{
+                font-family: $font-noto;
+                font-size: (18px, 3vw, 24px)
+            }
+            p{
+                font-family: $font-dm;
+                font-size: clamp(13px, 2vw, 14px);
+                width: 60%;
+                margin: 5% 0;
+            }
+            .more-btn{
+                color: #ffffff;
+                display: flex;
+                // flex-wrap: wrap;
+                // justify-content: center;
+                a {
+                    text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    background-color: #7f1023;
+                    text-decoration: none;
+                    color: #ffffff;
+                    letter-spacing: $letter-spacing;
+                    width: 40%;
+                    aspect-ratio: 30/7;
+                    @include t{
+                        width: 60%;
+                    }
+                    @include m{
+                        width: 90%;
+                    }
+                }
+            }
+        }
+    }
 }
