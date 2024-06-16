@@ -5,7 +5,6 @@
   import 'swiper/css/effect-coverflow';
   import 'swiper/css/navigation';
 
-
   // import required modules
   import { EffectCoverflow, Navigation } from 'swiper/modules';
 
@@ -16,77 +15,92 @@
     },
     data() {
       return {
-            wine:[
-                {
-                    id:1,
-                    nameEn: 'Wine1',
-                    nameCh:'葡萄酒1',
-                    price:'1200',
-                    txt:'我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹',
-                    img:'/src/assets/img/wine/Elegant-Red-Wine.png'
-                },
-                {
-                    id:2,
-                    nameEn: 'Wine2',
-                    nameCh:'葡萄酒2',
-                    price:'1200',
-                    txt:'我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹',
-                    img:'/src/assets/img/wine/Elegant-Red-Wine.png'
-                },
-                {
-                    id:3,
-                    nameEn: 'Wine3',
-                    nameCh:'葡萄酒3',
-                    price:'1200',
-                    txt:'我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹',
-                    img:'/src/assets/img/wine/Elegant-Red-Wine.png'
-                },
-                {
-                    id:4,
-                    nameEn: 'Wine4',
-                    nameCh:'葡萄酒4',
-                    price:'1200',
-                    txt:'我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹',
-                    img:'/src/assets/img/wine/Elegant-Red-Wine.png'
-                },
-                {
-                    id:5,
-                    nameEn: 'Wine5',
-                    nameCh:'葡萄酒5',
-                    price:'1200',
-                    txt:'我是介紹我是介紹我是介紹我是介紹我是介紹我是介紹',
-                    img:'/src/assets/img/wine/Elegant-Red-Wine.png'
-                },
-            ],
-            modules: [EffectCoverflow, Navigation]
+        wine: [
+          {
+            id: 1,
+            nameEn: 'Modern Red Wine',
+            nameCh: '精釀紅酒 2016',
+            price: '1200',
+            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
+            img: '/src/assets/img/wine/Elegant-Red-Wine.png',
+          },
+          {
+            id: 2,
+            nameEn: 'White Wine',
+            nameCh: '精選白葡萄酒',
+            price: '1200',
+            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
+            img: '/src/assets/img/wine/Ice-White-Wine.png',
+          },
+          {
+            id: 3,
+            nameEn: 'Modern Red Wine3',
+            nameCh: '葡萄酒3',
+            price: '1200',
+            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
+            img: '/src/assets/img/wine/Pearl-White-Wine.png',
+          },
+          {
+            id: 4,
+            nameEn: 'Modern Red Wine4',
+            nameCh: '葡萄酒4',
+            price: '1200',
+            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
+            img: '/src/assets/img/wine/Star-Fortified-Wine.png',
+          },
+          {
+            id: 5,
+            nameEn: 'Modern Red Wine5',
+            nameCh: '葡萄酒5',
+            price: '1200',
+            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
+            img: '/src/assets/img/wine/Sky-Sparkling-Wine.png',
+          },
+        ],
+        modules: [EffectCoverflow, Navigation],
+        activeSlide: 2, // Track the active slide index
       };
+    },
+    methods: {
+      onSlideChange(swiper) {
+        this.activeSlide = swiper.realIndex;
+      },
     },
   };
 </script>
+
 <template>
     <swiper
-    ref="mySwiper"
-    :slidesPerView="5"
-    :loop="true"
-    :centeredSlides="true"
-    :initialSlide="2"
-    :loopAdditionalSlides="1"
-    :effect="'coverflow'"
-    :coverflowEffect="{
-      rotate: 0,
-      stretch: 10,
-      depth: 200,
-      modifier: 1,
-      slideShadows: false,
-    }"
-    :navigation="true"
-    :modules="modules"
-    class="wineSwiper"
+      ref="mySwiper"
+      :slidesPerView="5"
+      :loop="true"
+      :centeredSlides="true"
+      :initialSlide="2"
+      :loopAdditionalSlides="1"
+      :effect="'coverflow'"
+      :coverflowEffect="{
+        rotate: 0,
+        stretch: 10,
+        depth: 200,
+        modifier: 1,
+        slideShadows: false,
+      }"
+      :navigation="true"
+      :modules="modules"
+      class="wineSwiper"
+      @slideChange="onSlideChange"
     >
-    <swiper-slide v-for="bottle in wine" :key="bottle.id">
-        <img :src="bottle.img" alt="bottle.nameCh">
-    </swiper-slide>
-    
-  </swiper>
- 
+      <swiper-slide v-for="bottle in wine" :key="bottle.id">
+        <img :src="bottle.img" :alt="bottle.nameCh" />
+      </swiper-slide>
+    </swiper>
+    <div class="wine-content">
+      <h2>{{ wine[activeSlide].nameEn }}</h2>
+      <h3>{{ wine[activeSlide].nameCh }}</h3>
+      <h4>NT. {{ wine[activeSlide].price }}</h4>
+      <p>{{ wine[activeSlide].txt }}</p>
+      <div class="more-btn">
+        <RouterLink to="/product">MORE</RouterLink>
+    </div>
+    </div>  
 </template>
