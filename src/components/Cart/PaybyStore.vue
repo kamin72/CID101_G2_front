@@ -21,6 +21,33 @@
         ★ 選擇常用門市
       </button>
     </div>
+    <div class="area">
+      <label for="county">
+        <select name="county" v-model="selectedCounty">
+          <option value="" disabled selected>請選擇</option>
+          <option :value="countyItem" v-for="(countyItem, index) in counties" :key="index">
+            {{ countyItem }}
+          </option>
+        </select>
+      </label>
+      <label for="district">
+        <select name="district" id="" v-model="selectedDistrict">
+          <option value="" disabled selected>請選擇</option>
+          <option :value="districtItem" v-for="districtItem in districts" :key="districtItem">
+            {{ districtItem }}
+          </option>
+        </select>
+      </label>
+      <label for="street">
+        <select name="street" id="">
+          <option value="" disabled selected>請選擇</option>
+          <option value="" v-for="streetItem in allStreet" :key="streetItem">
+            {{ streetItem }}
+          </option>
+        </select>
+      </label>
+    </div>
+
     <div class="storeAddress">
       <h4>門市名稱 | 新鎮興門市</h4>
       <h4>地址 | 桃園市平鎮區中興路平鎮段349號351號353號</h4>
@@ -36,7 +63,120 @@
 export default {
   data() {
     return {
-      isClicked: Boolean
+      isClicked: Boolean,
+      selectedCounty: '',
+      selectedDistrict: '',
+      counties: [
+        '臺北市',
+        '新北市',
+        '桃園市',
+        '臺中市',
+        '臺南市',
+        '高雄市',
+        '基隆市',
+        '新竹市',
+        '嘉義市',
+        '新竹縣',
+        '苗栗縣',
+        '彰化縣',
+        '南投縣',
+        '雲林縣',
+        '嘉義縣',
+        '屏東縣',
+        '宜蘭縣',
+        '花蓮縣',
+        '臺東縣',
+        '澎湖縣',
+        '金門縣',
+        '連江縣'
+      ],
+      cityData: {
+        臺北市: [
+          '中正區',
+          '大同區',
+          '中山區',
+          '松山區',
+          '大安區',
+          '萬華區',
+          '信義區',
+          '士林區',
+          '北投區',
+          '內湖區',
+          '南港區',
+          '文山區'
+        ],
+        新北市: [
+          '板橋區',
+          '三重區',
+          '中和區',
+          '永和區',
+          '新莊區',
+          '新店區',
+          '樹林區',
+          '鶯歌區',
+          '三峽區',
+          '淡水區',
+          '汐止區',
+          '瑞芳區'
+        ]
+      },
+      streets: {
+        臺北市: {
+          士林區: [
+            '中山北路',
+            '福林路',
+            '士東路',
+            '德行東路',
+            '德行西路',
+            '文林路',
+            '華岡路',
+            '至善路',
+            '承德路',
+            '基河路',
+            '天母西路',
+            '天母東路',
+            '忠誠路',
+            '社子街',
+            '延平北路',
+            '劍潭路',
+            '前港街',
+            '雨聲街',
+            '克強路',
+            '格致路',
+            '通河街',
+            '大東路',
+            '小東路',
+            '中正路',
+            '大南路',
+            '磺溪街',
+            '溪山街',
+            '天玉街',
+            '天母北路',
+            '天母南路',
+            '文昌路',
+            '仰德大道',
+            '平菁街',
+            '永公路',
+            '至誠路',
+            '菁山路',
+            '東山路',
+            '中社路',
+            '福華路',
+            '美崙街',
+            '陽明路',
+            '重慶北路',
+            '光華路',
+            '和豐街',
+            '福港街',
+            '延平北路',
+            '百齡路',
+            '磺港路',
+            '富洲路',
+            '葫蘆街',
+            '環河北路'
+          ]
+        }
+      }
     }
   },
   methods: {
@@ -45,6 +185,14 @@ export default {
     },
     click2() {
       this.isClicked = false
+    }
+  },
+  computed: {
+    districts() {
+      return this.cityData[this.selectedCounty] || []
+    },
+    allStreet() {
+      return this.streets[this.selectedCounty]?.[this.selectedDistrict] || []
     }
   }
 }
