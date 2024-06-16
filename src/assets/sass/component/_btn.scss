@@ -21,6 +21,12 @@
   &:hover {
     background-color: darken($btn-color, 20);
   }
+  @include t(){
+    padding: 18px 40px;
+  }
+  @include m(){
+    padding: 15px 32px;
+  }
 }
 
 @mixin small-button($btn-color) {
@@ -30,6 +36,12 @@
   p {
     padding: 0;
     margin: 0;
+  }
+  @include t(){
+    padding: 10px 23px;
+  }
+  @include m(){
+    padding: 9px 21px;
   }
 }
 
