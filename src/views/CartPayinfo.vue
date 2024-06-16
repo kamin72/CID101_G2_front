@@ -6,15 +6,16 @@
     <section v-show="isMobile" class="cartFlowRWD">
       <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
+    <!-- 付款方式內容 -->
     <div class="wrap_all">
       <CreditCard v-show="selectedMethod == 0" />
       <PaybyStore v-show="selectedMethod == 1" />
       <YardSelf v-show="selectedMethod == 2" />
+      <!-- 付款方式 -->
       <aside class="payMethod">
-        <!-- <PayMethod /> -->
         <PayMethod :checked="selectedMethod" />
         <div class="hr"></div>
-        <RouterLink to="/cart_comp/cart_finish">
+        <RouterLink to="/cart_comp/cart_finish" style="text-decoration: none">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
         </RouterLink>
       </aside>
@@ -32,7 +33,6 @@ import PaybyStore from '@/components/Cart/PaybyStore.vue'
 import YardSelf from '@/components/Cart/YardSelf.vue'
 
 export default {
-  emits: ['route-change'],
   components: {
     CartFlow,
     PayMethod,

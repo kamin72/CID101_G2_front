@@ -9,13 +9,17 @@
         v-model:address="address"
         v-model:phone="phone"
         v-model:email="email"
+        @update:name="saveToLocalstorage"
+        @update:address="saveToLocalstorage"
+        @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage"
       />
       <aside class="yardInfo">
         <YardInfo />
       </aside>
     </div>
     <div class="button">
-      <RouterLink to="/cart_account/cart_finish_account" from="">
+      <RouterLink to="/cart_account/cart_finish_account" from="" style="text-decoration: none">
         <button class="big-btn-primary accountSubmit" :disabled="!canSubmit">提交資料</button>
       </RouterLink>
     </div>
@@ -61,6 +65,7 @@ export default {
           bold: '0'
         }
       ],
+      deliveryInfo: [],
       name: '',
       address: '',
       phone: '',
@@ -68,19 +73,33 @@ export default {
     }
   },
   mounted() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0), this.showLocalstorage()
   },
   computed: {
     canSubmit() {
-      const phoneValid = /^\d{10}$/.test(this.phone)
-      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
-      return (
-        this.selectedPaymentMethod !== null &&
-        phoneValid &&
-        emailValid &&
-        this.address != '' &&
-        this.name != ''
-      )
+      const phoneid = /^\d{10}$/.test(this.phone)
+      const emailid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+      return phoneid && emailid && this.address != '' && this.name != ''
+    }
+  },
+  methods: {
+    saveToLocalstorage() {
+      this.deliveryInfo = {
+        name: this.name,
+        address: this.address,
+        phone: this.phone,
+        email: this.email
+      }
+      localStorage.setItem('deliveryInfo', JSON.stringify(this.deliveryInfo))
+    },
+    showLocalstorage() {
+      if (localStorage.getItem('deliveryInfo')) {
+        this.deliveryInfo = JSON.parse(localStorage.getItem('deliveryInfo'))
+        this.name = this.deliveryInfo.name
+        this.address = this.deliveryInfo.address
+        this.phone = this.deliveryInfo.phone
+        this.email = this.deliveryInfo.email
+      }
     }
   }
 }

@@ -16,8 +16,9 @@
                     </div>
                 </div>
                 <!-- 推薦卡片清單 -->
-                <router-link v-for="(course, index) in recommendedCourses" :key="index"
-                    class="col-3 col-md-4 col-sm-6 event-card1" :to="'/'+course.id">
+                <router-link r-link v-for="(course, index) in recommendedCourses" :key="index"
+                    class="col-3 col-md-6 col-sm-6 event-card1"
+                    :to="{ name: 'course_detail', params: { id: course.id } }">
                     <div class="event-card1-img-wrap">
                         <img :src="parseImg(course.img)" />
                         <div v-if="course.tag" class="event-card1-tag">
@@ -31,7 +32,7 @@
                         <h4>{{ course.name }}</h4>
                         <p>{{ formatDisplayDate(new Date(course.date)) }} 開課</p>
                     </div>
-                    <h4>NT. {{ course.price }}</h4>
+                    <h4>NT. {{ discountedPrice(course.price, course.discount) }}</h4>
                 </router-link>
             </div>
         </div>
@@ -45,7 +46,7 @@
                         <h2>Search</h2>
                         <div class="line"></div>
                     </div>
-                    <div class="col-11 search-course-list-wrap">
+                    <div class="col-11 col-md-12 col-sm-12 search-course-list-wrap">
                         <div class="search-course-tabs-panel">
                             <div class="search-course-calen-tab">
                                 <div @click="
@@ -76,7 +77,7 @@
                         </div>
 
                         <!-- 預約日曆 -->
-                        <div v-show="showCalen" class="col-10 search-course-calendar">
+                        <div v-show="showCalen" class="col-10 col-md-12 col-sm-12 search-course-calendar">
                             <div class="search-course-calendar-header">
                                 <span class="prev material-symbols-outlined" @click="prevMonth">arrow_back_ios</span>
                                 <h4 class="month-year">{{ currentYear }}.{{ currentMonth }}</h4>
@@ -95,15 +96,16 @@
                                         'has-course': hasCourse(day.date),
                                     }">
                                         <div class="day-number">{{ day.date.getDate() }}</div>
-                                        <router-link v-if="hasCourse(day.date)" :to="'/' + getCourseIdByDate(day.date)" class="course-item">
-                                                <small v-if="getCourseTagByDate(day.date)" class="course-tag">
-                                                    {{ getCourseTagByDate(day.date) }}
-                                                </small>
-                                                <p :style="{
-                                                    paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
-                                                }">
-                                                    {{ getCourseNameByDate(day.date) }}
-                                                </p>
+                                        <router-link v-if="hasCourse(day.date)"
+                                            :to="'/course/' + getCourseIdByDate(day.date)" class="course-item">
+                                            <small v-if="getCourseTagByDate(day.date)" class="course-tag">
+                                                {{ getCourseTagByDate(day.date) }}
+                                            </small>
+                                            <p :style="{
+                                                paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
+                                            }">
+                                                {{ getCourseNameByDate(day.date) }}
+                                            </p>
                                         </router-link>
                                     </div>
                                     <div v-for="n in endDayOfWeek" :key="n" class="day empty"></div>
@@ -112,7 +114,7 @@
                         </div>
 
                         <!-- 預約卡片清單 -->
-                        <div v-show="showList" class="col-7 col-md-7 col-sm-12 event-card-wrap">
+                        <div v-show="showList" class="col-7 col-md-11 col-sm-12 event-card-wrap">
                             <div class="search-course-calendar-header">
                                 <span class="prev material-symbols-outlined"
                                     @click="prevListMonth">arrow_back_ios</span>
@@ -145,11 +147,13 @@
                                     </div>
                                     <div class="event-card2-right-wrap">
                                         <div class="price">
-                                            <h4><span>NT. </span>{{ course.price }}</h4>
+                                            <h4><span>NT. </span>{{ discountedPrice(course.price, course.discount) }}
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
-                                <router-link :to="'/' + course.id " class="small-btn-primary">
+                                <router-link :to="{ name: 'course_detail', params: { id: course.id } }"
+                                    class="small-btn-primary">
                                     詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
                                 </router-link>
                             </div>
@@ -161,7 +165,7 @@
     </section>
 </template>
 
-<script>
+<!-- <script>
 export default {
     data() {
         return {
@@ -365,6 +369,200 @@ export default {
             price: 3800,
             desc: "進一步探索葡萄酒的風味特性。透過品嚐不同產區與風格的葡萄酒，訓練您的味蕾，學習如何描述與分享品酒心得。",
         });
+        this.getRecommendedCourses();
+        setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000);
+    },
+};
+</script> -->
+
+<script>
+import courseData from '../../public/courses.json';
+
+export default {
+    data() {
+        return {
+            weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            currentDate: new Date(),
+            currentListDate: new Date(),
+            courses: new Map(),
+            showCalen: true,
+            showList: false,
+            activeButton: "calen",
+            recommendedCourses: [],
+            courseData: courseData, // 將課程資訊存儲在data中
+        };
+    },
+    computed: {
+        currentMonth() {
+            return this.currentDate.getMonth() + 1;
+        },
+        currentYear() {
+            return this.currentDate.getFullYear();
+        },
+        startDayOfWeek() {
+            const startDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth(),
+                1
+            );
+            return startDate.getDay();
+        },
+        endDayOfWeek() {
+            const endDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth() + 1,
+                0
+            );
+            const endDay = endDate.getDay();
+            return 6 - endDay;
+        },
+        days() {
+            const days = [];
+            const startDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth(),
+                1
+            );
+            const endDate = new Date(
+                this.currentYear,
+                this.currentDate.getMonth() + 1,
+                0
+            );
+
+            for (
+                let date = startDate;
+                date <= endDate;
+                date.setDate(date.getDate() + 1)
+            ) {
+                const day = new Date(date);
+                days.push({
+                    date: day,
+                    isToday: day.toDateString() === new Date().toDateString(),
+                });
+            }
+            return days;
+        },
+    },
+
+    methods: {
+        prevMonth() {
+            this.currentDate = new Date(
+                this.currentDate.getFullYear(),
+                this.currentDate.getMonth() - 1
+            );
+        },
+        nextMonth() {
+            this.currentDate = new Date(
+                this.currentDate.getFullYear(),
+                this.currentDate.getMonth() + 1
+            );
+        },
+        prevListMonth() {
+            this.currentListDate = new Date(
+                this.currentListDate.getFullYear(),
+                this.currentListDate.getMonth() - 1
+            );
+        },
+        nextListMonth() {
+            this.currentListDate = new Date(
+                this.currentListDate.getFullYear(),
+                this.currentListDate.getMonth() + 1
+            );
+        },
+        formatDisplayDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}/${month}/${day}`;
+        },
+        formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
+        hasCourse(date) {
+            // 使用 has 方法檢查 Map 中是否存在該日期
+            const formattedDate = this.formatDate(date);
+            return this.courses.has(formattedDate);
+        },
+        getCourseTagByDate(date) {
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null;
+            return course ? course.tag : null;
+        },
+        getCourseNameByDate(date) {
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.has(formattedDate)
+                ? this.courses.get(formattedDate)
+                : null;
+            return course ? course.name : "";
+        },
+        toggleButton(button) {
+            // 如果點擊的是 a 按鈕且已經被選中,則不做任何操作
+            if (button === "calen" && this.activeButton === "calen") {
+                return;
+            }
+            // 否則切換按鈕狀態
+            this.activeButton = button;
+        },
+        parseImg(file) {
+            return new URL(`../assets/img/course/courselist/${file}`, import.meta.url)
+                .href;
+        },
+        getRecommendedCourses() {
+            const currentDate = new Date();
+            const futureCoursesArray = Array.from(this.courses).filter(
+                ([date]) => new Date(date) >= currentDate
+            );
+
+            if (futureCoursesArray.length <= 4) {
+                this.recommendedCourses = futureCoursesArray.map(([date, course]) => ({
+                    ...course,
+                    date,
+                }));
+            } else {
+                const shuffledCourses = futureCoursesArray.sort(
+                    () => 0.5 - Math.random()
+                );
+                this.recommendedCourses = shuffledCourses
+                    .slice(0, 4)
+                    .map(([date, course]) => ({ ...course, date }));
+            }
+        },
+        getCourseIdByDate(date) {
+            const formattedDate = this.formatDate(date);
+            const course = this.courses.get(formattedDate);
+            return course ? course.id : '';
+        },
+        getMonthCourses(date) {
+            const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+            const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+            return Array.from(this.courses).filter(([courseDate]) => {
+                const formattedDate = new Date(courseDate);
+                return formattedDate >= monthStart && formattedDate <= monthEnd;
+            });
+        },
+
+        //不知道為什麼渲染不出來折扣後的價格
+        discountedPrice(price, discount) {
+            return discount ? price * (1 - discount) : price;
+        },
+    },
+
+    created() {
+        // 將課程資訊轉換為Map物件
+        this.courseData.forEach(course => {
+            this.courses.set(course.date, {
+                id: course.id,
+                img: course.image,
+                tag: course.tag,
+                name: course.name,
+                price: course.price,
+                desc: course.desc,
+            });
+        });
+
         this.getRecommendedCourses();
         setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000);
     },

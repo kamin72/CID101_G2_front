@@ -1,48 +1,51 @@
 <template>
   <!-- 大圖banner -->
-  <div class="courseBanner">
+  <div class="courseBanner" v-if="course">
     <div class="bgImgWrap">
-      <img src="../assets/img/course/courseDetail/bgImg.jpg" alt="" />
+      <img :src="parseImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
       <img src="../assets/img/home/homebanner2.png" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
-  <section class="info">
+  <section class="info" v-if="course">
     <div class="container">
       <div class="courseDetailRow">
-        <div class="col-11 courseTopInfoWrap">
-          <div class="courseInfo">
-            <h3>品酒初級課程1</h3>
+        <div class="col-11 col-md-11 col-sm-12 courseTopInfoWrap">
+          <div class="courseInfo" v-if="course">
+            <h3>{{ course.name }}</h3>
             <div class="courseDetailWrap">
               <div class="courseTime">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>上課時間 | 2024/5/1(三)</h4>
-                  <p>14:00-16:00，2小時</p>
+                  <h4>上課時間 | {{ formatDate(course.date) }}</h4>
+                  <p>
+                    {{ course.startTime }}-{{ course.endTime }}，{{
+                      durationHours(course.startTime, course.endTime)
+                    }}小時
+                  </p>
                 </div>
               </div>
               <div class="courseAdress">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>上課教室 | 教室A</h4>
-                  <p>台北市士林區華興里7鄰123號</p>
+                  <h4>上課教室 | 教室{{ course.classroom }}</h4>
+                  <p>桃園市中壢區復興路46號9樓</p>
                 </div>
               </div>
               <div class="coursePrice">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>課程價格 | NT. 3,200</h4>
-                  <p>原價NT. 4,800</p>
+                  <h4>課程價格 | NT. {{ discountedPrice(course.price, course.discount) }}</h4>
+                  <p>原價NT. {{ course.price }}</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="courseIntro">
+          <div class="courseIntro" v-if="course">
             <p>
-              品酒是一門充滿樂趣且富有挑戰性的藝術。這門初級課程將帶您踏上這段嶄新的酒途旅程。課程內容涵蓋基礎品酒理論、常見葡萄酒款式介紹,以及如何分辨不同酒體、酒色、香氣等感官體驗。我們將教您運用視覺、嗅覺與味覺,細細品賞每一口美酒的層次風味。
-              除了理論知識外,實作演練更是本課程的重點所在。您將有機會品嘗多達6種不同類型的葡萄酒,透過專業品酒手法,領略各款酒品的獨特個性。不論您是對葡萄酒充滿熱忱,抑或只是好奇心理,這門課程將為您打開嶄新的味蕾視野,讓您在輕鬆愉快的氛圍中,體驗品酒的樂趣與魅力。
+              {{ course.courseIntro }}
             </p>
             <button class="big-btn-primary reserveCourse">
               <span class="material-symbols-outlined"> edit_calendar </span>預約課程
@@ -53,16 +56,14 @@
     </div>
   </section>
   <!-- 課程介紹 -->
-  <section class="introduction">
+  <CourseDetail1 />
+  <!-- <section class="introduction">
     <div class="container">
       <div class="courseDetailRow">
-        <div class="col-11 courseBottomInfoWrap">
+        <div class="col-11 col-md-11 col-sm-12  courseBottomInfoWrap">
           <div class="teacher">
             <div class="teacherImg">
-              <img
-                src="/src/assets/img/course/courseDetail/teacher.jpg"
-                alt="teacher"
-              />
+              <img src="../../../src/assets/img/course/courseDetail/teacher.jpg" alt="teacher" />
             </div>
             <div class="teacherInfo">
               <h3 class="teacherName">嚴鈺婷 Ms. Yan</h3>
@@ -75,7 +76,7 @@
           <div class="feature">
             <div class="featWrap">
               <div class="iconWrap">
-                <img src="/src/assets/img/course/courseDetail/icon1.png" alt="" />
+                <img src="../../../src/assets/img/course/courseDetail/icon1.png" alt="" />
               </div>
               <h4>葡萄酒基礎知識</h4>
               <ul>
@@ -86,7 +87,7 @@
             </div>
             <div class="featWrap">
               <div class="iconWrap">
-                <img src="/src/assets/img/course/courseDetail/icon2.png" alt="" />
+                <img src="../../../src/assets/img/course/courseDetail/icon2.png" alt="" />
               </div>
               <h4>視覺品酒</h4>
               <ul>
@@ -97,7 +98,7 @@
             </div>
             <div class="featWrap">
               <div class="iconWrap">
-                <img src="/src/assets/img/course/courseDetail/icon3.png" alt="" />
+                <img src="../../../src/assets/img/course/courseDetail/icon3.png" alt="" />
               </div>
               <h4>嗅覺品酒</h4>
               <ul>
@@ -108,7 +109,7 @@
             </div>
             <div class="featWrap">
               <div class="iconWrap">
-                <img src="/src/assets/img/course/courseDetail/icon4.png" alt="" />
+                <img src="../../../src/assets/img/course/courseDetail/icon4.png" alt="" />
               </div>
               <h4>口感品酒</h4>
               <ul>
@@ -119,7 +120,7 @@
             </div>
             <div class="featWrap">
               <div class="iconWrap">
-                <img src="/src/assets/img/course/courseDetail/icon5.png" alt="" />
+                <img src="../../../src/assets/img/course/courseDetail/icon5.png" alt="" />
               </div>
               <h4>醒酒與珍藏</h4>
               <ul>
@@ -135,5 +136,74 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
+
+<script>
+import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
+
+export default {
+  data() {
+    return {
+      course: null,
+      detail: []
+    }
+  },
+  components: {
+    CourseDetail1
+  },
+  methods: {
+    formatDate(dateString) {
+      const date = new Date(dateString)
+      const year = date.getFullYear()
+      const month = (date.getMonth() + 1).toString().padStart(2, '0')
+      const day = date.getDate().toString().padStart(2, '0')
+      const weekday = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()]
+      return `${year}/${month}/${day} (${weekday})`
+    },
+    durationHours(startTime, endTime) {
+      const [startHour, startMinute] = startTime.split(':').map(Number)
+      const [endHour, endMinute] = endTime.split(':').map(Number)
+
+      const startTotalMinutes = startHour * 60 + startMinute
+      const endTotalMinutes = endHour * 60 + endMinute
+
+      const durationMinutes = endTotalMinutes - startTotalMinutes
+      const hours = Math.ceil(durationMinutes / 60)
+
+      return hours
+    },
+    parseImg(file) {
+      return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
+    },
+    discountedPrice(price, discount) {
+      return discount ? price * (1 - discount) : price
+    },
+    fetchCourseData(courseId) {
+      fetch('/courses.json')
+        .then((response) => response.json())
+        .then((data) => {
+          this.course = data.find((course) => course.id == courseId)
+        })
+    }
+  },
+  mounted() {
+    // const courseId = this.$route.params.id
+    // fetch('../../../public/courses.json')
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     this.course = data
+    //     this.detail = this.course.find((course) => course.id === courseId)
+    //   })
+  },
+  created() {
+    const courseId = this.$route.params.id;
+    this.fetchCourseData(courseId);
+  },
+  watch: {
+    '$route.params.id'(newId) {
+      this.fetchCourseData(newId);
+    }
+  }
+}
+</script>

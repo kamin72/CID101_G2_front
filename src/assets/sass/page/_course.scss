@@ -41,6 +41,7 @@
   }
 }
 
+
 .section-recom-course {
   .recom-course {
     display: flex;
@@ -207,6 +208,64 @@
     }
   }
 }
+@include t() {
+  .course-title-wrap {
+    padding-top: 0;
+    padding-bottom: 4rem;
+    .line {
+      width: 130px;
+      height: 0.7px;
+    }
+    h2 {
+      padding: 0 25px;
+    }
+  }
+  .section-search-course {
+    .search-course {
+      .course-title-wrap {
+        padding-top: 0;
+        padding-bottom: 7rem;
+      }
+      .search-course-list-wrap {
+        padding-top: 25px;
+        .search-course-calendar {
+          .search-course-calendar-body {
+            .days {
+              .day {
+                height: 110px;
+                padding: 5px;
+                .course-item {
+                  p {
+                    padding-top: 16px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    line-height: 16px;
+                  }
+                  .course-tag {
+                    width: 100%;
+                    padding: 4px 0;
+                    text-align: center;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@include m() {
+  .course-title-wrap {
+    .line {
+      width: 85px;
+      height: 0.7px;
+    }
+    h2 {
+      padding: 0 18px;
+    }
+  }
+}
 
 
 //課程詳情資訊
@@ -214,29 +273,41 @@
   position: relative;
   width: 100%;
   height: 500px;
-  .bgImgWrap, .maskWrap {
-    width: 100%;
-    overflow: hidden;
-    img {
-      object-fit: cover;
-      object-position: center;
-      width: 100%;
-    }
-  }
   .bgImgWrap {
     position: fixed;
     height: 100%;
-    bottom: 0px;
+    width: 100%;
     z-index: -1;
+    img {
+      object-fit: cover;
+      object-position: bottom;
+      width: 100%;
+    }
   }
   .maskWrap {
     position: absolute;
+    width: 100%;
     left: 0;
     bottom: -5px;
     z-index: 2;
+    img {
+      width: 100%;
+    }
   }
 }
+@include t() {
+}
+@include m() {
+  .courseBanner {
+    height: 200px;
+    .bgImgWrap {
+      img {
+        object-position: top;
+      }
+    }
+  }
 
+}
 
 .info {
   background-color: $bgc;
