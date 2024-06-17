@@ -13,7 +13,7 @@
       <YardSelf v-show="selectedMethod == 2" />
       <!-- 付款方式 -->
       <aside class="payMethod">
-        <PayMethod :checked="selectedMethod" />
+        <PayMethod />
         <div class="hr"></div>
         <RouterLink to="/cart_comp/cart_finish" style="text-decoration: none">
           <button class="big-btn-primary paySubmit">提交付款資訊</button>
@@ -125,9 +125,11 @@ export default {
     window.scrollTo(0, 0),
       (this.selectedMethod = this.method),
       window.addEventListener('resize', this.updateWindowWidth)
+
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
-  }
+  },
+
 }
 </script>

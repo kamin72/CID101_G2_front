@@ -7,19 +7,12 @@
       <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrap_all">
-      <FormComp
-        v-model:phone="phone"
-        v-model:email="email"
-        @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage"
-      />
+      <FormComp v-model:phone="phone" v-model:email="email" @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage" />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink
-          :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }"
-          style="text-decoration: none"
-        >
+        <RouterLink :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }" style="text-decoration: none">
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>
@@ -98,6 +91,7 @@ export default {
           bold: '0'
         }
       ],
+      selectedMethod: null,
       deliveryInfo_comp: [],
       windowWidth: window.innerWidth,
       selectedPaymentMethod: null,
@@ -105,7 +99,7 @@ export default {
       email: ''
     }
   },
-  created() {},
+  created() { },
   mounted() {
     window.scrollTo(0, 0),
       window.addEventListener('resize', this.updateWindowWidth),
@@ -150,11 +144,11 @@ export default {
       }
     }
   },
-  watch: {},
   computed: {
     canSubmit() {
       const phoneValid = /^\d{10}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
+      this.selectedPaymentMethod = localStorage.getItem('selectedMethod')
       return this.selectedPaymentMethod !== null && phoneValid && emailValid
     },
     isMobile() {
