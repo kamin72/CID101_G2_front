@@ -171,7 +171,7 @@
             </RouterLink>
             <h4>{{ product.price }}</h4>
           </div>
-          <button class="add-card" @click="addToInquiry(product)">加入詢價單</button>
+          <button class="add-card" @click="addCart(product)">加入詢價單</button>
         </div>
       </div>
     </div>
@@ -187,6 +187,9 @@
 // import image5 from '@/assets/img/wine/Dew-Rosé-Wine.png'
 // import image6 from '@/assets/img/wine/Sky-Sparkling-Wine.png'
 // import image7 from '@/assets/img/wine/Star-Fortified-Wine.png'
+
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
   data() {
@@ -243,16 +246,17 @@ export default {
     }
   },
   methods: {
-    addToInquiry(product) {
-      // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
-      let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
+    ...mapActions(cartStore, ['checkCart','addCart']),
+    // addToInquiry(product) {
+    //   // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
+    //   let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
 
-      // 將商品資訊加入詢價單
-      inquiry.push(product);
+    //   // 將商品資訊加入詢價單
+    //   inquiry.push(product);
 
-      // 將更新後的詢價單存回 localStorage
-      localStorage.setItem('inquiry', JSON.stringify(inquiry));
-    },
+    //   // 將更新後的詢價單存回 localStorage
+    //   localStorage.setItem('inquiry', JSON.stringify(inquiry));
+    // },
     parseImg(file) {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
       },

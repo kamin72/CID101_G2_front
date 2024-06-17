@@ -53,7 +53,7 @@
                   <button class="cartbutton" @click="increment">+</button>
                 </div>
 
-                <button class="small-btn-primary" @click="addToInquiry(product)">加入詢價單</button>
+                <button class="small-btn-primary" @click="addCart(detail)">加入詢價單</button>
               </div>
             </div>
 
@@ -83,7 +83,7 @@
                       </RouterLink>
                       <h4>{{ like.price }}</h4>
                     </div>
-                    <button class="add-card">加入詢價單</button>
+                    <button class="add-card" @click="addCart(detail)">加入詢價單</button>
                   </div>
                 </div>
               </div>
@@ -135,7 +135,7 @@
             <button class="cartbutton-sm" @click="increment">+</button>
           </div>
 
-          <button class="add-card-sm">加入詢價單</button>
+          <button class="add-card-sm" @click="addCart(detail)">加入詢價單</button>
         </div>
       </div>
     </section>
@@ -165,7 +165,7 @@
                 </RouterLink>
                 <h4>{{ like.price }}</h4>
               </div>
-              <button class="add-card">加入詢價單</button>
+              <button class="add-card" @click="addCart(like)">加入詢價單</button>
             </div>
           </div>
         </div>
@@ -178,6 +178,8 @@
 import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
 import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
 import image3 from '@/assets/img/wine/Ice-White-Wine.png'
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
   data() {
@@ -191,7 +193,9 @@ export default {
     likes() {
       return this.products.filter((v) => v.id !== Number(this.$route.params.id)).slice(0, 4)
       // 篩裡面的id跟頁面的id不一樣的card,然後從裡面抽4個
-    }
+    },
+     // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的state,getters
+     ...mapState(cartStore, ['cart','cartCount']),
   },
   watch: {
     '$route.params.id'() {
@@ -209,16 +213,17 @@ export default {
     })
   },
   methods: {
-    addToInquiry(product) {
-      // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
-      let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
+    ...mapActions(cartStore, ['checkCart','addCart']),
+    // addToInquiry(product) {
+    //   // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
+    //   let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
 
-      // 將商品資訊加入詢價單
-      inquiry.push(product);
+    //   // 將商品資訊加入詢價單
+    //   inquiry.push(product);
 
-      // 將更新後的詢價單存回 localStorage
-      localStorage.setItem('inquiry', JSON.stringify(inquiry));
-    },
+    //   // 將更新後的詢價單存回 localStorage
+    //   localStorage.setItem('inquiry', JSON.stringify(inquiry));
+    // },
     increment() {
       if (this.count < 10) {
         this.count++
