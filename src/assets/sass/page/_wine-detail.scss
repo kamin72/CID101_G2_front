@@ -11,13 +11,14 @@
 }
 .section-product-detail .container{
   width: 100%;
+
+// 酒的圖片
 .product-detail{
     display: flex;
     position: relative;
     .detail-img{
         width: 50%;   
       .detail-img-wrap{
-        // padding: 0 10%;
         background-image: url('../src/assets/img/wine/Background-image.png');
         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
         background-position: center;
@@ -26,10 +27,8 @@
         position: fixed;
         left: 20vh;
         bottom: 5vh;
-      // transform: translate(5%, -10%);
       img{
         width: 100%;
-        // height: auto;
         height: 70vh;
         object-fit: cover; /* 讓圖片按照比例放大來適應容器 */
      }
@@ -38,7 +37,7 @@
   }
 
 
-
+//酒的詳細資訊
    .product-info-wrap{
       width: 50%;
       line-height: 25px;
@@ -46,33 +45,29 @@
         padding: 15px;
     }
     .detail-button{
-       padding: 15px;
-       display: flex;
+        display: flex;
+        position: relative;
       .amount {
         background-color: $white;
-        position: relative;
          & > button {
           font-size: map-get($font-size, a);
-          padding: 7px 30px;
+          padding: 10px 23px;
           background-color: $white;
           cursor: pointer;
           color: $gray;
+          border: none;
         }
         .num {
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            display: inline-block;
-            background-color: transparent;
-            font-size: map-get($font-size, a);
+          position: absolute;
+          transform: translate(0, 35%);
+          margin: auto;
+          display: inline-block;
+          background-color: transparent;
+          font-size: map-get($font-size, a);
         }
       }
-    .add-card{
+    .small-btn-primary{
         margin-left: 20px;
-        background-color: #322D26;
-        color: $white;
-        padding: 7px 27px;
-         border: 0
       }
     }
     .line {
@@ -94,83 +89,6 @@
  }
 }
 
-//   @include t() {
-//     .product-detail{
-//         display: flex;
-//         position: relative;
-//     .detail-img{
-//             width: 50%;  
-//      .detail-img-wrap{
-//         padding: 0 3%;
-//         background-image: url('../src/assets/img/wine/Background-image.png');
-//         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
-//         background-position: center;
-//         background-repeat: no-repeat;
-//         background-position: top left 10%;
-//         position: fixed;
-//         position: fixed;
-//         left: 1vh;
-//         bottom: 2vh;
-//       // transform: translate(5%, -10%);
-//       img{
-//         width: 100%;
-//         height: auto;
-//         object-fit: cover; /* 讓圖片按照比例放大來適應容器 */
-//      }
-//     }
-//    }
-//     .product-info-wrap{
-//         width: 50%;
-//         line-height: 25px;
-//       .detail-item{
-//           padding: 15px;
-//       }
-//       .detail-button{
-//         padding: 10px;
-//         display: flex;
-//        .amount {
-//          background-color: $white;
-//          position: relative;
-//           & > button {
-//            font-size: map-get($font-size, a);
-//            padding: 7px 20px;
-//            background-color: $white;
-//            cursor: pointer;
-//            color: $gray;
-//          }
-//          .num {
-//              position: absolute;
-//              top: 50%;
-//              transform: translate(0, -50%);
-//              display: inline-block;
-//              background-color: transparent;
-//              font-size: map-get($font-size, a);
-//          }
-//        }
-//      .add-card{
-//          margin-left: 5%;
-//          background-color: #322D26;
-//          color: $white;
-//         padding: 7px 20px;
-//           border: 0
-//        }
-//      }
-//       // .line {
-//       //     width: 600px;
-//       //     height: 1.5px;
-//       //     margin: 30px 5px;
-//       // }
-//       .container .product-title{
-//          text-align: center;
-//           padding: 30px 0;
-//           margin: 20px 0;
-//        }
-//      }
-
-//  }
-// }
-
-
 @include t() {
    .section-product-detail{
     display: none;
@@ -182,6 +100,7 @@
     padding: 40px 0;
 }
 
+//酒的圖片和詳細資訊
 .section-product-detail-sm{
     .detail-img-sm{
         width: 90%;
@@ -208,41 +127,51 @@
     .detail-button-sm{
         padding: 10px;
         display: flex;
-        gap: 20px;
+        gap: 30px;
         
        .amount-sm {
          background-color: $white;
          position: relative;
-         width: calc(50% - 10px);
+         width: calc(50% - 15px);
 
           & > button {
-           font-size: map-get($font-size, a);
-           padding: 7px 22%;
-           background-color: $white;
-           cursor: pointer;
-           color: $gray;
-           border: 0;
+            font-size: map-get($font-size, a);
+            padding: 10px 23%;
+            background-color: $white;
+            cursor: pointer;
+            color: $gray;
+            border: none;
+
+            @include t() {
+              padding: 10px 22.5%;
+            }
          }
          .num-sm {
-             position: absolute;
-             top: 50%;
-             transform: translate(0, -50%);
-             display: inline-block;
-             background-color: transparent;
-             font-size: map-get($font-size, a);
+          position: absolute;
+          transform: translate(0, 65%);
+          margin: auto;
+          display: inline-block;
+          background-color: transparent;
+          font-size: map-get($font-size, a);
+
+          @include t() {
+            transform: translate(0, 80%);
+          }
+
          }
        }
        .add-card-sm{
-        width: calc(50% - 10px);
+        width: calc(50% - 15px);
         background-color: #322D26;
         color: $white;
-        padding: 7px 27px;
-         border: 0
+        padding: 10px 27px;
+        border: 0
       }
     }
 
  }
 
+ //可能喜歡的商品
  .section-liked-products-sm{
     .product-title{
         text-align: center;

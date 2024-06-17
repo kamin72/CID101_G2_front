@@ -150,21 +150,19 @@
     </div>
   </div>
 
+  <!-- 商品卡片 -->
   <div class="container">
     <div class="product-cards row">
       <div class="col-3 col-md-4 col-sm-6" v-for="product in filteredProducts" :key="product.id">
         <div class="product-card">
           <div class="product-img">
             <RouterLink :to="'/ProductDetail/' + product.id">
-            <!-- <RouterLink to="/ProductDetail">  -->
-              <!-- <img :src="product.image" alt="Product Image" style="width: 277.5px; height: 200px; object-fit: contain;" /> -->
               <img :src="parseImg(product.image)" alt="Product Image" style="object-fit: contain;" />
             </RouterLink>
           </div>
 
           <div class="info-wrap">
             <RouterLink :to="'/ProductDetail/' + product.id">
-           <!-- <RouterLink to="/ProductDetail">  -->
               <div class="font-wrap">
                 <h4>{{ product.name }}</h4>
                 <p>{{ product.ename }}</p>
@@ -173,7 +171,7 @@
             </RouterLink>
             <h4>{{ product.price }}</h4>
           </div>
-          <button class="add-card">加入詢價單</button>
+          <button class="add-card" @click="addToInquiry(product)">加入詢價單</button>
         </div>
       </div>
     </div>
@@ -245,6 +243,16 @@ export default {
     }
   },
   methods: {
+    addToInquiry(product) {
+      // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
+      let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
+
+      // 將商品資訊加入詢價單
+      inquiry.push(product);
+
+      // 將更新後的詢價單存回 localStorage
+      localStorage.setItem('inquiry', JSON.stringify(inquiry));
+    },
     parseImg(file) {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
       },

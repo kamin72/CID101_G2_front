@@ -11,9 +11,7 @@ export default {
   components: {
     ProductDetail
   },
-  data(){
 
-  }
 };
 </script>
 
