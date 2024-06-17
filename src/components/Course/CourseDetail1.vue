@@ -10,25 +10,25 @@
             </div>
             <div class="teacherInfo">
               <h3 class="teacherName">嚴鈺婷 Ms. Yan</h3>
-              <h4 class="expertise">資深品酒家 / WSET高級認證執酒師</h4>
+              <h4 class="expertise">WSET高級認證執酒師</h4>
               <p class="teacherIntro">
                 嚴鈺婷出身釀酒世家，自幼對酒類深感興趣。她畢業於英國頂尖酒學院，後赴多國實習，累積15年釀酒與品酒經驗。嚴鈺婷精通葡萄酒釀造，是資深品酒家和鑑酒師，對葡萄酒細節有獨到見解。她擁有WSET高級認證，是國內頂尖品酒權威講師，上課風格專注幽默，致力傳承品酒樂趣，啟發更多人熱愛美酒。
               </p>
             </div>
           </div>
           <div class="feature">
-            <div class="featWrap">
+            <div class="col-md-6 featWrap">
               <div class="iconWrap">
                 <img src="../../../src/assets/img/course/courseDetail/icon1.png" alt="" />
               </div>
               <h4>葡萄酒基礎知識</h4>
               <ul>
                 <li>葡萄酒的歷史與分類</li>
-                <li>釀酒工藝和常見葡萄品種介紹</li>
+                <li>釀酒工藝和葡萄品種介紹</li>
                 <li>酒杯的選擇和基本禮儀</li>
               </ul>
             </div>
-            <div class="featWrap">
+            <div class="col-md-6 featWrap">
               <div class="iconWrap">
                 <img src="../../../src/assets/img/course/courseDetail/icon2.png" alt="" />
               </div>
@@ -39,7 +39,7 @@
                 <li>實作:體驗不同顏色和質地的葡萄酒</li>
               </ul>
             </div>
-            <div class="featWrap">
+            <div class="col-md-6 featWrap">
               <div class="iconWrap">
                 <img src="../../../src/assets/img/course/courseDetail/icon3.png" alt="" />
               </div>
@@ -50,7 +50,7 @@
                 <li>實作:培養嗅覺記憶與辨識能力</li>
               </ul>
             </div>
-            <div class="featWrap">
+            <div class="col-md-6 featWrap">
               <div class="iconWrap">
                 <img src="../../../src/assets/img/course/courseDetail/icon4.png" alt="" />
               </div>
@@ -61,7 +61,7 @@
                 <li>實作:品嚐各種葡萄酒並作記錄</li>
               </ul>
             </div>
-            <div class="featWrap">
+            <div class="col-md-6 featWrap">
               <div class="iconWrap">
                 <img src="../../../src/assets/img/course/courseDetail/icon5.png" alt="" />
               </div>
