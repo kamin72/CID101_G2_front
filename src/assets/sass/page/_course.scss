@@ -41,7 +41,6 @@
   }
 }
 
-
 .section-recom-course {
   .recom-course {
     display: flex;
@@ -208,6 +207,7 @@
     }
   }
 }
+
 @include t() {
   .course-title-wrap {
     padding-top: 0;
@@ -255,6 +255,7 @@
     }
   }
 }
+
 @include m() {
   .course-title-wrap {
     .line {
@@ -266,6 +267,7 @@
     }
   }
 }
+
 
 
 //課程詳情資訊
@@ -294,19 +296,6 @@
       width: 100%;
     }
   }
-}
-@include t() {
-}
-@include m() {
-  .courseBanner {
-    height: 200px;
-    .bgImgWrap {
-      img {
-        object-position: top;
-      }
-    }
-  }
-
 }
 
 .info {
@@ -343,7 +332,7 @@
               height: 100%;
               width: 3px;
               background-color: #aea495;
-              margin: 0 20px;
+              margin-right: 20px;
             }
             p,
             h4 {
@@ -369,11 +358,6 @@
           p {
             width: 70%;
             line-height: 25px;
-          }
-          .big-btn-primary {
-            padding: 0;
-            height: 70px;
-            width: 230px;
           }
           .reserveCourse {
             span {
@@ -448,8 +432,9 @@
             }
             ul {
               li {
+                font-size: clamp(13px, 2vw, 14px);
                 text-align: left;
-                list-style-type: disc;
+                list-style-type: "- ";
                 padding: 5px 0;
                 font-family: $font-dm, $font-noto;
               }
@@ -457,15 +442,132 @@
           }
         }
         button {
-          padding: 0;
-          height: 70px;
-          width: 230px;
           span {
             margin-right: 5px;
           }
         }
         .feature > .featWrap {
           padding: $pad-1;
+        }
+      }
+    }
+  }
+}
+
+@include t(){
+  .courseBanner {
+    height: 400px;
+    .bgImgWrap {
+      img {
+        object-position: bottom;
+      }
+    }
+  }
+  .info {
+    padding-bottom: 0;
+    .container {
+      .courseDetailRow {
+        .courseTopInfoWrap {
+          .courseInfo {
+            flex-direction: column;
+            padding-top: 0;
+            padding-bottom: 25px;
+            h3 {
+              margin-bottom: 25px;
+            }
+            .courseDetailWrap {
+              flex-direction: column;
+              width: fit-content;
+              .courseTime, .courseAdress {
+                margin-bottom: 15px ;
+              }
+            }
+          }
+          .courseIntro {
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 0;
+            padding-bottom: 25px;
+            p {
+              width: 100%;
+              margin-bottom: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .introduction {
+    .container {
+      .courseDetailRow {
+        .courseBottomInfoWrap {
+          .feature {
+            .featWrap {
+              padding: 0;
+              padding-bottom: 50px;
+              &:last-child {
+                padding-bottom: 0;
+              }
+              h4 {
+                padding-top: 25px;
+                padding-bottom: 15px;
+              }
+              .iconWrap {
+                height: 80px;
+                width: 80px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include m() {
+  .courseBanner {
+    height: 200px;
+    .bgImgWrap {
+      img {
+        object-position: center;
+      }
+    }
+  }
+  .introduction {
+    .container {
+      .courseDetailRow {
+        .courseTopInfoWrap {
+          .courseInfo {
+            .courseDetailWrap {
+              flex-direction: column;
+              justify-content: unset;
+              align-items: flex-start;
+              width: 50%;
+            }
+          }
+        }
+        .courseBottomInfoWrap {
+          .teacher {
+            flex-direction: column;
+            .teacherImg {
+              width: 100%;
+              padding-bottom: 25px;
+            }
+            .teacherInfo {
+              width: 100%;
+              h3 {
+                padding: 5px 0;
+              }
+              h4 {
+                padding: 8px 0;
+              }
+              p {
+                padding: 0;
+                padding-top: 8px;
+                line-height: 20px;
+              }
+            }
+          }
         }
       }
     }

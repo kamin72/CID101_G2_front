@@ -1,556 +1,545 @@
 // 開場輪播圖
 .homeBanner {
+  // outline: 1px solid red;
+  background-image: url(/src/assets/img/home/homebanner2.png),
+    url(/src/assets/img/home/home-banner.png);
+  background-repeat: no-repeat;
+  background-position: bottom 0 left 0;
+  background-size:
+    100%,
+    100% 100%;
+  height: 77vh;
+  align-content: center;
+  position: relative;
+  @include t {
+    background-image: url(/src/assets/img/home/homebanner2RWD.png),
+      url(/src/assets/img/home/Vector\ 11.png), url(/src/assets/img/home/home-bannerRWD.png);
+    background-position:
+      bottom 15% left 50%,
+      bottom 50% left 50%,
+      bottom 50% left 50%;
+    background-size: clamp(100%, 100%, 100%), clamp(250px, 19.53125vw, 280px),
+      clamp(230px, 17.96875vw, 260px);
+  }
+  .homeBanner_container {
     // outline: 1px solid red;
-    background-image: url(/src/assets/img/home/homebanner2.png), url(/src/assets/img/home/home-banner.png);
-    background-repeat: no-repeat;
-    background-position: bottom 0 left 0;
-    background-size:
-        100%,
-        100% 100%;
-    height: 77vh;
-    align-content: center;
-    position: relative;
-    @include t {
-        background-image: url(/src/assets/img/home/homebanner2RWD.png), url(/src/assets/img/home/Vector\ 11.png),
-            url(/src/assets/img/home/home-bannerRWD.png);
-        background-position:
-            bottom 15% left 50%,
-            bottom 50% left 50%,
-            bottom 50% left 50%;
-        background-size: clamp(100%, 100%, 100%), clamp(250px, 19.53125vw, 280px), clamp(230px, 17.96875vw, 260px);
-    }
-    .homeBanner_container {
+    width: 100%;
+    margin: auto;
+    .homeBanner_wine {
+      .homeBanner_wine_wapper {
         // outline: 1px solid red;
-        width: 100%;
-        margin: auto;
-        .homeBanner_wine {
-            .homeBanner_wine_wapper {
-                // outline: 1px solid red;
-                .image {
-                    // outline: 1px solid red;
-                    width: clamp(500px, 39.0625vw, 600px);
-                    position: absolute;
-                    bottom: 5%;
-                    left: 31%;
-                    filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.8));
-                    @include t {
-                        // display: none;
-                        width: clamp(400px, 31.25vw, 500px);
-                        bottom: 15%;
-                        left: 10%;
-                    }
-                }
-                .reflection {
-                    width: 24%;
-                    display: block;
-                    // outline: 1px solid red;
-                    margin: 0 auto;
-                    position: absolute;
-                    bottom: -76%;
-                    left: 38%;
-                    @include t {
-                        display: none;
-                    }
-                }
-            }
+        .image {
+          // outline: 1px solid red;
+          width: clamp(500px, 39.0625vw, 600px);
+          position: absolute;
+          bottom: 5%;
+          left: 31%;
+          filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.8));
+          @include t {
+            // display: none;
+            width: clamp(400px, 31.25vw, 500px);
+            bottom: 15%;
+            left: 10%;
+          }
         }
-        .homeBanner_txt {
-            h3 {
-                // outline: 1px solid red;
-                font-size: clamp(1.5rem, 3vw, 5rem);
-                width: 70%;
-                margin: auto;
-                color: #ffffff;
-                letter-spacing: 2px;
-                @include t {
-                    width: 90%;
-                    color: #520802;
-                }
-            }
-            h2 {
-                font-size: clamp(8rem, 32vw, 19rem);
-                text-align: center;
-                // outline: 1px solid red;
-                color: #ffffff;
-                letter-spacing: 24px;
-                @include t {
-                    color: #520802;
-                }
-            }
-            h4 {
-                // outline: 1px solid red;
-                font-size: clamp(1.5rem, 3vw, 5rem);
-                text-align: right;
-                width: 70%;
-                margin: auto;
-                color: #ffffff;
-                letter-spacing: 2px;
-                // position: relative;
-                // img {
-                //     position: absolute;
-                //     top: -350px;
-                //     left: 0;
-                //     width: clamp(500px, 39.0625vw, 600px);
-                // }
-                @include t {
-                    width: 90%;
-                    color: #520802;
-                }
-            }
+        .reflection {
+          width: 24%;
+          display: block;
+          // outline: 1px solid red;
+          margin: 0 auto;
+          position: absolute;
+          bottom: -76%;
+          left: 38%;
+          @include t {
+            display: none;
+          }
         }
+      }
     }
+    .homeBanner_txt {
+      h3 {
+        // outline: 1px solid red;
+        font-size: clamp(1.5rem, 3vw, 5rem);
+        width: 70%;
+        margin: auto;
+        color: #ffffff;
+        letter-spacing: 2px;
+        @include t {
+          width: 90%;
+          color: #520802;
+        }
+      }
+      h2 {
+        font-size: clamp(8rem, 32vw, 19rem);
+        text-align: center;
+        // outline: 1px solid red;
+        color: #ffffff;
+        letter-spacing: 24px;
+        @include t {
+          color: #520802;
+        }
+      }
+      h4 {
+        // outline: 1px solid red;
+        font-size: clamp(1.5rem, 3vw, 5rem);
+        text-align: right;
+        width: 70%;
+        margin: auto;
+        color: #ffffff;
+        letter-spacing: 2px;
+        @include t {
+          width: 90%;
+          color: #520802;
+        }
+      }
+    }
+  }
 }
 
 // 關於我們
 .homeAboutus {
-    .homeAboutus_container {
+  .homeAboutus_container {
+    // outline: 1px solid red;
+    // padding: 174px 0;
+    width: 70%;
+    display: flex;
+    margin: auto;
+    position: relative;
+    @include t {
+      width: 80%;
+      // outline: 1px solid red;
+      flex-direction: column;
+      padding: 0;
+    }
+  }
+  .homeAboutus_pic {
+    // outline: 1px solid red;
+    width: 55%;
+    img {
+      width: 100%;
+    }
+  }
+  .wrap_homeAboutus {
+    // outline: 1px solid red;
+    width: 50%;
+    margin: 0 0 0 50px;
+    @include t {
+      margin: 0;
+      width: 100%;
+    }
+    .homeAboutus_txt {
+      letter-spacing: $letter-spacing;
+      h2 {
+        font-family: $font-cormorant;
+        font-size: map-get($font-size, h2);
+        margin-bottom: 37px;
+        @include t {
+          margin: 15px 0;
+        }
+      }
+      p {
         // outline: 1px solid red;
-        // padding: 174px 0;
-        width: 70%;
+        font-size: map-get($font-size, p);
+        width: 90%;
+        margin-bottom: 37px;
+        letter-spacing: $letter-spacing;
+        line-height: 1.5;
+        font-family: $font-noto;
+        @include t {
+          width: 100%;
+        }
+      }
+    }
+    .wrap_homeAboutus_detail {
+      // outline: 1px solid red;
+      margin-bottom: 40px;
+      .homeAboutus_detail {
+        // outline: 1px solid red;
         display: flex;
+        margin-bottom: 16px;
+        p {
+          // outline: 1px solid red;
+          font-size: map-get($font-size, p);
+          margin-left: 10px;
+          letter-spacing: $letter-spacing;
+          font-family: $font-noto;
+        }
+      }
+    }
+    button {
+      // outline: 1px solid red;
+      border: none;
+      padding: 15px 90px;
+      background-color: #7f1023;
+      color: #ffffff;
+
+      @include t {
+        display: block;
         margin: auto;
-        position: relative;
-        @include t {
-            width: 80%;
-            // outline: 1px solid red;
-            flex-direction: column;
-            padding: 0;
-        }
+      }
+      a {
+        text-decoration: none;
+        letter-spacing: $letter-spacing;
+      }
     }
-    .homeAboutus_pic {
+    .homeAboutus_BarrelImg {
+      // outline: 1px solid red;
+      width: 390px;
+      position: absolute;
+      right: -20%;
+      bottom: 20%;
+      z-index: -1;
+      @include t {
         // outline: 1px solid red;
-        width: 55%;
-        img {
-            width: 100%;
-        }
+        width: 60%;
+        right: -15%;
+        top: 12%;
+      }
+      img {
+        width: 100%;
+      }
     }
-    .wrap_homeAboutus {
-        // outline: 1px solid red;
-        width: 50%;
-        margin: 0 0 0 50px;
-        @include t {
-            margin: 0;
-            width: 100%;
-        }
-        .homeAboutus_txt {
-            letter-spacing: $letter-spacing;
-            h2 {
-                font-family: $font-cormorant;
-                font-size: map-get($font-size, h2);
-                margin-bottom: 37px;
-                @include t {
-                    margin: 15px 0;
-                }
-            }
-            p {
-                // outline: 1px solid red;
-                font-size: map-get($font-size, p);
-                width: 90%;
-                margin-bottom: 37px;
-                letter-spacing: $letter-spacing;
-                line-height: 1.5;
-                font-family: $font-noto;
-                @include t {
-                    width: 100%;
-                }
-            }
-        }
-        .wrap_homeAboutus_detail {
-            // outline: 1px solid red;
-            margin-bottom: 40px;
-            .homeAboutus_detail {
-                // outline: 1px solid red;
-                display: flex;
-                margin-bottom: 16px;
-                p {
-                    // outline: 1px solid red;
-                    font-size: map-get($font-size, p);
-                    margin-left: 10px;
-                    letter-spacing: $letter-spacing;
-                    font-family: $font-noto;
-                }
-            }
-        }
-        button {
-            // outline: 1px solid red;
-            border: none;
-            padding: 15px 90px;
-            background-color: #7f1023;
-            @include t {
-                display: block;
-                margin: auto;
-            }
-            a {
-                text-decoration: none;
-                color: #ffffff;
-                letter-spacing: $letter-spacing;
-            }
-        }
-        .homeAboutus_BarrelImg {
-            // outline: 1px solid red;
-            width: 390px;
-            position: absolute;
-            right: -20%;
-            bottom: 20%;
-            z-index: -1;
-            @include t {
-                // outline: 1px solid red;
-                width: 60%;
-                right: -15%;
-                top: 12%;
-            }
-            img {
-                width: 100%;
-            }
-        }
-    }
+  }
 }
 //map
-.home-map{
-    .container{
-        width: 80%;
+.home-map {
+  .container {
+    width: 80%;
+    position: relative;
+    img {
+      width: 100%;
+      display: block;
+    }
+    .card {
+      width: 50%;
+      position: absolute;
+      .dot {
+        width: 20px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: #7f1023;
+        border: 2px solid #ffffff;
         position: relative;
-        img{
-            width: 100%;
+        top: 0;
+        left: 50%;
+        cursor: pointer;
+        pointer-events: auto;
+        z-index: 1;
+      }
+      .card-wrap {
+        display: none;
+        overflow: hidden;
+        .line {
+          width: 100%;
+          display: block;
+          &::before {
+            content: '';
             display: block;
-        }
-        .card{
-            width: 50%;
-            position: absolute;
-            .dot{
-                width: 20px;
-                aspect-ratio: 1/1;
-                border-radius: 50%;
-                background-color: #7f1023;
-                border: 2px solid #ffffff;
-                position: relative;
-                top: 0;
-                left: 50%;   
-                cursor: pointer;
-                pointer-events:auto;
-                z-index: 1;
-            }
-            .card-wrap{
-                display: none;
-                overflow: hidden;
-                .line{
-                    width: 100%;
-                    display: block;
-                    &::before{
-                        content: "";
-                        display: block;
-                        position: relative;
-                        top: 0;
-                        left: 52.1%;
-                        border-left: 3px solid #ffffff;
-                        height: 10vh;
-                    }
-                }
-                .card-info{
-                    background-color: #ffffff;
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px;
-                    margin: auto;
-                    .card-info-image{
-                        width: 45%;
-                        margin: auto;
-                        img{
-                            width: 100%;
-                        }
-                    }
-                    .card-info-txt{
-                        width: 50%;
-                        margin: auto;
-                        h4 {
-                            font-family: $font-cormorant;
-                            font-size: map-get($font-size, h4);
-                        }
-                        p {
-                            font-size: map-get($font-size, p);
-                            margin-top: 10px;
-                            letter-spacing: $letter-spacing;
-                            font-family: $font-noto;
-
-                        }
-                    }
-                    
-                }
-                
-            }
-            .card-wrap.active {
-                display: block;
-                position: relative;
-                z-index: 10;
-                pointer-events: none;
-            }
-        }
-        .card-grape{
-            top:65%;
-            left: 55%;
-            
-        }
-        .card-service{
-            top:50%;
-            left: 6%;
-        }
-        .card-class{
-            top: 70%;
-            left: -8%;
-        }
-        .card-oak {
-            top: 62%;
-            left: -5%;
-        }
-        .card-vintage{
-            top: 60%;
-            left: 25%;
-        }
-    }
-    @include t {
-        .container{
             position: relative;
-            width: 100%;
-            .card{
-                width: 50%;
-                position: absolute;;
-                .dot{
-                    width: 15px;
-                }
-                .card-wrap{
-                    position: relative;
-                    width: 100%;
-                    .line{
-                            display: none;
-                    }
-                    .card-info{
-                        flex-direction: column;
-                        position: fixed;
-                        top:56%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        width: 45%;
-                        z-index: 11;
-                        .card-info-image{
-                            width: 100%;
-                        }
-                        .card-info-txt{
-                            width: 100%;
-                            h4{
-                                margin-top: 10px;
-                            }
-                        }
-                        
-                    }
-                    
-                }
-                .card-wrap.active {
-                    display: block;
-                    position: relative;
-                    z-index: 10;
-                    pointer-events: none;
-                }
-            }
+            top: 0;
+            left: 52.1%;
+            border-left: 3px solid #ffffff;
+            height: 10vh;
+          }
         }
+        .card-info {
+          background-color: #ffffff;
+          display: flex;
+          justify-content: space-between;
+          padding: 10px;
+          margin: auto;
+          .card-info-image {
+            width: 45%;
+            margin: auto;
+            img {
+              width: 100%;
+            }
+          }
+          .card-info-txt {
+            width: 50%;
+            margin: auto;
+            h4 {
+              font-family: $font-cormorant;
+              font-size: map-get($font-size, h4);
+            }
+            p {
+              font-size: map-get($font-size, p);
+              margin-top: 10px;
+              letter-spacing: $letter-spacing;
+              font-family: $font-noto;
+            }
+          }
+        }
+      }
+      .card-wrap.active {
+        display: block;
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+      }
     }
+    .card-grape {
+      top: 65%;
+      left: 55%;
+    }
+    .card-service {
+      top: 50%;
+      left: 6%;
+    }
+    .card-class {
+      top: 70%;
+      left: -8%;
+    }
+    .card-oak {
+      top: 62%;
+      left: -5%;
+    }
+    .card-vintage {
+      top: 60%;
+      left: 25%;
+    }
+  }
+  @include t {
+    .container {
+      position: relative;
+      width: 100%;
+      .card {
+        width: 50%;
+        position: absolute;
+        .dot {
+          width: 15px;
+        }
+        .card-wrap {
+          position: relative;
+          width: 100%;
+          .line {
+            display: none;
+          }
+          .card-info {
+            flex-direction: column;
+            position: fixed;
+            top: 56%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 45%;
+            z-index: 11;
+            .card-info-image {
+              width: 100%;
+            }
+            .card-info-txt {
+              width: 100%;
+              h4 {
+                margin-top: 10px;
+              }
+            }
+          }
+        }
+        .card-wrap.active {
+          display: block;
+          position: relative;
+          z-index: 10;
+          pointer-events: none;
+        }
+      }
+    }
+  }
 }
 
 // swiper-event.news
-.swiper-wrap{
-    .container{
-        width: 100%;
-        .title{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            gap:20px;
-            span{
-                border-bottom: 1px solid #000000;
-                height: 1px;
-                width: 20%;
-                margin:auto 0;
-            }
-            h2{
-                font-family: $font-cormorant;
-            }
-        }
-        .swiper {
-            width: 95%;
-            margin: 3% auto;
-            .swiper-slide {
-                text-align: center;
-                img {
-                    display: block;
-                    width: 100%;
-                    aspect-ratio: 1/1;
-                    object-fit: cover;
-                }
-                .img-wrap {
-                    width: 100%;
-                    position: relative;
-                    aspect-ratio: 1/1;
-                    object-fit: cover;
-                    object-position: center;
-                    overflow: hidden;
-                    margin-bottom: 15px;
-                    img {
-                        width: 100%;
-                    }
-                    .card-ribbon {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        padding: 5px 15px;
-                        color: $white;
-                        background-color: $gray;
-                        padding: 5px 15px;
-                        // aspect-ratio: 2.7/1;
-                        display: flex;
-                        justify-content: center;
-                        p {
-                            align-content: center;
-                        }
-                    }
-                    .book-now {
-                        position: absolute;
-                        display: flex;
-                        width: 100%;
-                        height: 40px;
-                        bottom: -40px;
-                        text-decoration: none;
-                        justify-content: center;
-                        align-items: center;
-                        background-color: $white-transp;
-                        color: #000000;
-                        transition: bottom 0.3s ease-in-out;
-                    }
-                    &:hover .book-now {
-                        bottom: 0;
-                        cursor: pointer;
-                    }
-                }
-                .font-wrap{
-                    h4 {
-                        text-align: left;
-                    }
-                    p {
-                        text-align: left;
-                        margin: 5px 0;
-                    }
-                }
-            }
-            // --swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
-            // --swiper-navigation-size: 300px;/* 设置按钮大小 */
-            // --swiper-navigation-top-offset: 50%;
-            // --swiper-navigation-sides-offset: 10px;
-            // --swiper-navigation-color: var(--swiper-theme-color);
-            --swiper-navigation-size: 30px;
-            .swiper-button-prev:after,
-            .swiper-button-next:after {
-                color: #000000;
-            }
-            .swiper-button{
-                background-color: #d9d9d999;
-                border-radius: 50%;
-                border: none;
-                width: 60px;
-                height: 60px;
-                @include m {
-                    display: none;
-                }
-            }
-            
-            .swiper-button-next{
-                top: 50%;
-                right: 20px;
-            }
-            .swiper-button-prev {
-                top: 50%;
-                left: 20px;
-            }
-        }
-        .more-btn{
-            color: #ffffff;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            a {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                background-color: #7f1023;
-                text-decoration: none;
-                color: #ffffff;
-                letter-spacing: $letter-spacing;
-                width: 20%;
-                aspect-ratio: 30/7;
-                @include t{
-                    width: 30%;
-                }
-                @include m{
-                    width: 50%;
-                }
-            }
-        }
+.swiper-wrap {
+  .container {
+    width: 100%;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      span {
+        border-bottom: 1px solid #000000;
+        height: 1px;
+        width: 20%;
+        margin: auto 0;
+      }
+      h2 {
+        font-family: $font-cormorant;
+      }
     }
+    .swiper {
+      width: 95%;
+      margin: 3% auto;
+      .swiper-slide {
+        text-align: center;
+        img {
+          display: block;
+          width: 100%;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
+        .img-wrap {
+          width: 100%;
+          position: relative;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+          object-position: center;
+          overflow: hidden;
+          margin-bottom: 15px;
+          img {
+            width: 100%;
+          }
+          .card-ribbon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5px 15px;
+            color: $white;
+            background-color: $gray;
+            padding: 5px 15px;
+            // aspect-ratio: 2.7/1;
+            display: flex;
+            justify-content: center;
+            p {
+              align-content: center;
+            }
+          }
+          .book-now {
+            position: absolute;
+            display: flex;
+            width: 100%;
+            height: 40px;
+            bottom: -40px;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            background-color: $white-transp;
+            color: #000000;
+            transition: bottom 0.3s ease-in-out;
+          }
+          &:hover .book-now {
+            bottom: 0;
+            cursor: pointer;
+          }
+        }
+        .font-wrap {
+          h4 {
+            text-align: left;
+          }
+          p {
+            text-align: left;
+            margin: 5px 0;
+          }
+        }
+      }
+      // --swiper-navigation-color: #00ff33;/* 单独设置按钮颜色 */
+      // --swiper-navigation-size: 300px;/* 设置按钮大小 */
+      // --swiper-navigation-top-offset: 50%;
+      // --swiper-navigation-sides-offset: 10px;
+      // --swiper-navigation-color: var(--swiper-theme-color);
+      --swiper-navigation-size: 30px;
+      .swiper-button-prev:after,
+      .swiper-button-next:after {
+        color: #000000;
+      }
+      .swiper-button {
+        background-color: #d9d9d999;
+        border-radius: 50%;
+        border: none;
+        width: 60px;
+        height: 60px;
+        @include m {
+          display: none;
+        }
+      }
+
+      .swiper-button-next {
+        top: 50%;
+        right: 20px;
+      }
+      .swiper-button-prev {
+        top: 50%;
+        left: 20px;
+      }
+    }
+    .more-btn {
+      color: #ffffff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      a {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #7f1023;
+        text-decoration: none;
+        color: #ffffff;
+        letter-spacing: $letter-spacing;
+        width: 20%;
+        aspect-ratio: 30/7;
+        @include t {
+          width: 30%;
+        }
+        @include m {
+          width: 50%;
+        }
+      }
+    }
+  }
 }
 
-
 //wineSwiper
-.wine{
-    .container{
-        width: 100%;
-        display: flex;
-        .wineSwiper{
-            width: 60%;
-        }
-        .wine-content{
-            width: 40%;
-            // margin-left: 20px;
-            h2{
-                font-family: $font-cormorant;
-                font-size: clamp(30px, 5vw, 64px);
-            }
-            h3{
-                font-family: $font-noto;
-                font-size: clamp(20px, 4vw, 36px)
-            }
-            h4{
-                font-family: $font-noto;
-                font-size: (18px, 3vw, 24px)
-            }
-            p{
-                font-family: $font-dm;
-                font-size: clamp(13px, 2vw, 14px);
-                width: 60%;
-                margin: 5% 0;
-            }
-            .more-btn{
-                color: #ffffff;
-                display: flex;
-                // flex-wrap: wrap;
-                // justify-content: center;
-                a {
-                    text-align: center;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    background-color: #7f1023;
-                    text-decoration: none;
-                    color: #ffffff;
-                    letter-spacing: $letter-spacing;
-                    width: 40%;
-                    aspect-ratio: 30/7;
-                    @include t{
-                        width: 60%;
-                    }
-                    @include m{
-                        width: 90%;
-                    }
-                }
-            }
-        }
+.wine {
+  .container {
+    width: 100%;
+    display: flex;
+    .wineSwiper {
+      width: 60%;
     }
+    .wine-content {
+      width: 40%;
+      // margin-left: 20px;
+      h2 {
+        font-family: $font-cormorant;
+        font-size: clamp(30px, 5vw, 64px);
+      }
+      h3 {
+        font-family: $font-noto;
+        font-size: clamp(20px, 4vw, 36px);
+      }
+      h4 {
+        font-family: $font-noto;
+        font-size: (18px, 3vw, 24px);
+      }
+      p {
+        font-family: $font-dm;
+        font-size: clamp(13px, 2vw, 14px);
+        width: 60%;
+        margin: 5% 0;
+      }
+      .more-btn {
+        color: #ffffff;
+        display: flex;
+        // flex-wrap: wrap;
+        // justify-content: center;
+        a {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          background-color: #7f1023;
+          text-decoration: none;
+          color: #ffffff;
+          letter-spacing: $letter-spacing;
+          width: 40%;
+          aspect-ratio: 30/7;
+          @include t {
+            width: 60%;
+          }
+          @include m {
+            width: 90%;
+          }
+        }
+      }
+    }
+  }
 }

@@ -5,23 +5,14 @@
     </div>
     <div class="selectStore">
       <h4>選擇7-11取貨門市</h4>
-
-      <button
-        class="map big-btn-primary"
-        @click="click1"
-        :class="isClicked ? 'clicked' : 'unclicked'"
-      >
+      <button class="map big-btn-primary" @click="click1" :class="isClicked ? 'clicked' : 'unclicked'">
         依地圖選擇門市
       </button>
-      <button
-        class="ussdStore big-btn-primary"
-        @click="click2"
-        :class="isClicked ? 'unclicked' : 'clicked'"
-      >
+      <button class="ussdStore big-btn-primary" @click="click2" :class="isClicked ? 'unclicked' : 'clicked'">
         ★ 選擇常用門市
       </button>
     </div>
-    <div class="area">
+    <div class="area" v-if="isClicked">
       <label for="county">
         <select name="county" v-model="selectedCounty">
           <option value="" disabled selected>請選擇</option>
@@ -39,18 +30,26 @@
         </select>
       </label>
       <label for="street">
-        <select name="street" id="">
+        <select name="street" id="" v-model="selectedStreet">
           <option value="" disabled selected>請選擇</option>
-          <option value="" v-for="streetItem in allStreet" :key="streetItem">
-            {{ streetItem }}
+          <option v-for="street in Object.keys(stores[selectedCounty]?.[selectedDistrict] || {})" :key="street"
+            :value="street">
+            {{ street }}
           </option>
         </select>
       </label>
     </div>
 
-    <div class="storeAddress">
-      <h4>門市名稱 | 新鎮興門市</h4>
-      <h4>地址 | 桃園市平鎮區中興路平鎮段349號351號353號</h4>
+    <div class="storeAddress" v-if="isClicked">
+      <div class="storeDisplay">
+        <div class="rect" v-for="storeItem in storeFilter" :key="storeItem.storeName" :value="storeItem"
+          @click="selectStore(storeItem)">
+          <p>{{ storeItem.storeName }}</p>
+          <p>{{ storeItem.address }}</p>
+        </div>
+      </div>
+      <h4>門市名稱 | {{ selectedStore ? selectedStore.storeName : '請選擇門市' }}</h4>
+      <h4>地址 | {{ selectedStore ? selectedStore.address : '請選擇門市' }}</h4>
       <p>
         &bull;
         門市取件時需配合門市相關規範，部分門市已陸續調整為「自助取件」，可重新依地圖選擇確認。
@@ -63,9 +62,12 @@
 export default {
   data() {
     return {
-      isClicked: Boolean,
+      isClicked: true,
       selectedCounty: '',
       selectedDistrict: '',
+      selectedStreet: '',
+      selectedStore: null,
+      switch: true,
       counties: [
         '臺北市',
         '新北市',
@@ -176,6 +178,32 @@ export default {
             '環河北路'
           ]
         }
+      },
+      stores: {
+        臺北市: {
+          士林區: {
+            中山北路: [
+              {
+                storeName: '銘傳門市',
+                address: '台北市士林區中山北路五段250號'
+              },
+              {
+                storeName: '劍潭門市',
+                address: '台北市士林區中山北路五段65號1樓'
+              }
+            ],
+            士東路: [
+              {
+                storeName: '士東門市',
+                address: '台北市士林區士東路42號1樓'
+              },
+              {
+                storeName: '徳芝門市',
+                address: '台北市士林區士東路266巷5弄18號20號1樓'
+              },
+            ]
+          }
+        }
       }
     }
   },
@@ -185,14 +213,42 @@ export default {
     },
     click2() {
       this.isClicked = false
+    },
+    selectStore(store) {
+      this.selectedStore = store;
+      console.log(this.selectedStore)
     }
   },
   computed: {
     districts() {
       return this.cityData[this.selectedCounty] || []
     },
-    allStreet() {
-      return this.streets[this.selectedCounty]?.[this.selectedDistrict] || []
+    // allStreet() {
+    //   const result = Object.keys(this.stores[this.selectedCounty]?.[this.selectedDistrict]) || {}
+    //   return result
+    // },
+    storeFilter() {
+      const district = this.stores[this.selectedCounty]?.[this.selectedDistrict];
+      if (!district) return [];
+      // 如果選擇了特定街道
+      const streetStores = district[this.selectedStreet];
+      // console.log('Stores on selected street:', streetStores);
+      return streetStores || [];
+    },
+
+  },
+  watch: {
+    selectedCounty() {
+      this.selectedDistrict = '';
+      this.selectedStreet = '';
+      this.selectedStore = null;
+    },
+    selectedDistrict() {
+      this.selectedStreet = '';
+      this.selectedStore = null;
+    },
+    selectedStreet() {
+      this.selectedStore = null;
     }
   }
 }
@@ -202,7 +258,30 @@ export default {
 .clicked {
   background-color: #aea495;
 }
+
 .unclicked {
   background-color: #322d26;
+}
+
+.storeDisplay {
+  width: 80%;
+  padding: 20px 0;
+  display: flex
+}
+
+.rect {
+  color: #fff;
+  background-color: #322d26;
+  margin: 0 5px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.rect:hover {
+  background-color: black;
+}
+
+.rect p {
+  padding: 10px 0
 }
 </style>

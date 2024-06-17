@@ -25,6 +25,10 @@
         <div class="wine-in-glass" :style="{ height: wineHeight }"></div>
       </div>
     </div>
+    <!-- <Router-link to="/GameTotal">
+      <button>ok</button>
+    </Router-link> -->
+    
   </section> 
 </template>
   
@@ -120,7 +124,6 @@
         selectedOption: null,
         isCorrect: false,
         pouring: false,
-        // wineHeight: '0px',
       };
     },
     computed: {
@@ -180,7 +183,7 @@
           if (currentHeight >= 100) {
             clearInterval(interval);
           }
-        }, 200); // 每次增加液体的时间间隔，可以根据需要调整
+        }, 100); // 每次增加液体的时间间隔，可以根据需要调整
       } 
     }
   }
@@ -196,104 +199,104 @@
   transform: rotate(-13deg);
 }
 .wine {
-  width: 20px;
-  height: 100px;
-  background: linear-gradient(to bottom, rgba(255,0,0,0.8), rgba(255,0,0,0.5));
-  // border-radius: 10px 10px 0 0; /* 圓角效果 */
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: pour 2s forwards;
+  // width: 20px;
+  // height: 100px;
+  // background: linear-gradient(to bottom, rgba(255,0,0,0.8), rgba(255,0,0,0.5));
+  // // border-radius: 10px 10px 0 0; /* 圓角效果 */
+  // position: absolute;
+  // top: 0;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // animation: pour 2s forwards;
 }
 
 @keyframes pour {
-  0% {
-    height: 0;
-    bottom: 0;
-    clip-path: polygon(50% 0%, 50% 0%, 50% 0%); /* 初始狀態為點 */
-  }
-  5% {
-    height: 5px;
-    clip-path: polygon(50% 0%, 49% 100%, 51% 100%);
-  }
-  10% {
-    height: 10px;
-    clip-path: polygon(50% 0%, 48% 100%, 52% 100%);
-  }
-  15% {
-    height: 15px;
-    clip-path: polygon(50% 0%, 47% 100%, 53% 100%);
-  }
-  20% {
-    height: 20px;
-    clip-path: polygon(50% 0%, 46% 100%, 54% 100%);
-  }
-  25% {
-    height: 25px;
-    clip-path: polygon(50% 0%, 45% 100%, 55% 100%);
-  }
-  30% {
-    height: 30px;
-    clip-path: polygon(50% 0%, 44% 100%, 56% 100%);
-  }
-  35% {
-    height: 35px;
-    clip-path: polygon(50% 0%, 43% 100%, 57% 100%);
-  }
-  40% {
-    height: 40px;
-    clip-path: polygon(50% 0%, 42% 100%, 58% 100%);
-  }
-  45% {
-    height: 45px;
-    clip-path: polygon(50% 0%, 41% 100%, 59% 100%);
-  }
-  50% {
-    height: 50px;
-    clip-path: polygon(50% 0%, 40% 100%, 60% 100%);
-  }
-  55% {
-    height: 55px;
-    clip-path: polygon(50% 0%, 39% 100%, 61% 100%);
-  }
-  60% {
-    height: 60px;
-    clip-path: polygon(50% 0%, 38% 100%, 62% 100%);
-  }
-  65% {
-    height: 65px;
-    clip-path: polygon(50% 0%, 37% 100%, 63% 100%);
-  }
-  70% {
-    height: 70px;
-    clip-path: polygon(50% 0%, 36% 100%, 64% 100%);
-  }
-  75% {
-    height: 75px;
-    clip-path: polygon(50% 0%, 35% 100%, 65% 100%);
-  }
-  80% {
-    height: 80px;
-    clip-path: polygon(50% 0%, 34% 100%, 66% 100%);
-  }
-  85% {
-    height: 85px;
-    clip-path: polygon(50% 0%, 33% 100%, 67% 100%);
-  }
-  90% {
-    height: 90px;
-    clip-path: polygon(50% 0%, 32% 100%, 68% 100%);
-  }
-  95% {
-    height: 95px;
-    clip-path: polygon(50% 0%, 31% 100%, 69% 100%);
-  }
-  100% {
-    height: 100px;
-    bottom: -100px;
-    clip-path: polygon(50% 0%, 30% 100%, 70% 100%);
-  }
+  // 0% {
+  //   height: 0;
+  //   bottom: 0;
+  //   clip-path: polygon(50% 0%, 50% 0%, 50% 0%); /* 初始狀態為點 */
+  // }
+  // 5% {
+  //   height: 5px;
+  //   clip-path: polygon(50% 0%, 49% 100%, 51% 100%);
+  // }
+  // 10% {
+  //   height: 10px;
+  //   clip-path: polygon(50% 0%, 48% 100%, 52% 100%);
+  // }
+  // 15% {
+  //   height: 15px;
+  //   clip-path: polygon(50% 0%, 47% 100%, 53% 100%);
+  // }
+  // 20% {
+  //   height: 20px;
+  //   clip-path: polygon(50% 0%, 46% 100%, 54% 100%);
+  // }
+  // 25% {
+  //   height: 25px;
+  //   clip-path: polygon(50% 0%, 45% 100%, 55% 100%);
+  // }
+  // 30% {
+  //   height: 30px;
+  //   clip-path: polygon(50% 0%, 44% 100%, 56% 100%);
+  // }
+  // 35% {
+  //   height: 35px;
+  //   clip-path: polygon(50% 0%, 43% 100%, 57% 100%);
+  // }
+  // 40% {
+  //   height: 40px;
+  //   clip-path: polygon(50% 0%, 42% 100%, 58% 100%);
+  // }
+  // 45% {
+  //   height: 45px;
+  //   clip-path: polygon(50% 0%, 41% 100%, 59% 100%);
+  // }
+  // 50% {
+  //   height: 50px;
+  //   clip-path: polygon(50% 0%, 40% 100%, 60% 100%);
+  // }
+  // 55% {
+  //   height: 55px;
+  //   clip-path: polygon(50% 0%, 39% 100%, 61% 100%);
+  // }
+  // 60% {
+  //   height: 60px;
+  //   clip-path: polygon(50% 0%, 38% 100%, 62% 100%);
+  // }
+  // 65% {
+  //   height: 65px;
+  //   clip-path: polygon(50% 0%, 37% 100%, 63% 100%);
+  // }
+  // 70% {
+  //   height: 70px;
+  //   clip-path: polygon(50% 0%, 36% 100%, 64% 100%);
+  // }
+  // 75% {
+  //   height: 75px;
+  //   clip-path: polygon(50% 0%, 35% 100%, 65% 100%);
+  // }
+  // 80% {
+  //   height: 80px;
+  //   clip-path: polygon(50% 0%, 34% 100%, 66% 100%);
+  // }
+  // 85% {
+  //   height: 85px;
+  //   clip-path: polygon(50% 0%, 33% 100%, 67% 100%);
+  // }
+  // 90% {
+  //   height: 90px;
+  //   clip-path: polygon(50% 0%, 32% 100%, 68% 100%);
+  // }
+  // 95% {
+  //   height: 95px;
+  //   clip-path: polygon(50% 0%, 31% 100%, 69% 100%);
+  // }
+  // 100% {
+  //   height: 100px;
+  //   bottom: -100px;
+  //   clip-path: polygon(50% 0%, 30% 100%, 70% 100%);
+  // }
 }
 
 .wineglass {
@@ -301,14 +304,15 @@
   overflow: hidden;
 }
 .wine-in-glass {
-  width: 100%; /* 根據需要調整以適應酒杯 */
+  // outline: 1px solid rgb(18, 14, 14);
+  width: 91%; /* 根據需要調整以適應酒杯 */
   height: 0;
-  background: red;
+  background: rgba(165, 42, 42, 0.8);
   position: absolute;
-  bottom: 0;
-  left: 0;
-  transition: height 2s;
+  bottom: 93px;
+  left: 5px;
+  transition: height .5s;
+  border-radius: 0 0 50% 50%; /* 讓底部邊緣呈現圓弧 */
+  // overflow: hidden;
 } 
-
-
 </style>
