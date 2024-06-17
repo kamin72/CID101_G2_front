@@ -418,7 +418,7 @@ section {
     .creditCard {
       display: flex;
       align-items: center;
-      background-color: #aea495;
+      background-color: $invalid-button-color;
       margin: 20px 0;
       height: 50px;
       cursor: pointer;
@@ -426,7 +426,7 @@ section {
     .store {
       display: flex;
       align-items: center;
-      background-color: #aea495;
+      background-color: $invalid-button-color;
       margin: 20px 0;
       height: 50px;
       cursor: pointer;
@@ -434,10 +434,13 @@ section {
     .yardSelf {
       display: flex;
       align-items: center;
-      background-color: #aea495;
+      background-color: $invalid-button-color;
       margin: 20px 0;
       height: 50px;
       cursor: pointer;
+    }
+    .clicked {
+      background-color: #aea495;
     }
   }
   .hr {
