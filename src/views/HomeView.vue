@@ -11,10 +11,7 @@
       <div class="homeBanner_txt">
         <h3>MEMORABLE</h3>
         <h2>WINE</h2>
-        <h4>
-          JOURNEYS
-          <!-- <img src="/src/assets/img/wine/bannerwine.png" class="image">  -->
-        </h4>
+        <h4>JOURNEYS</h4>
       </div>
     </div>
   </section>
@@ -49,9 +46,11 @@
           </div>
         </div>
 
-        <button>
-          <a href="#">MORE</a>
-        </button>
+        <RouterLink to="/About">
+          <a href="#">
+            <button>MORE</button>
+          </a>
+        </RouterLink>
 
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png" />

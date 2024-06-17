@@ -1,5 +1,5 @@
-section{
-    overflow: hidden;
+section {
+    // overflow: hidden;
 }
 // 開場輪播圖
 .homeBanner {
@@ -88,13 +88,6 @@ section{
                 margin: auto;
                 color: #ffffff;
                 letter-spacing: 2px;
-                // position: relative;
-                // img {
-                //     position: absolute;
-                //     top: -350px;
-                //     left: 0;
-                //     width: clamp(500px, 39.0625vw, 600px);
-                // }
                 @include t {
                     width: 90%;
                     color: #520802;
@@ -179,13 +172,14 @@ section{
             border: none;
             padding: 15px 90px;
             background-color: #7f1023;
+            color: #ffffff;
+
             @include t {
                 display: block;
                 margin: auto;
             }
             a {
                 text-decoration: none;
-                color: #ffffff;
                 letter-spacing: $letter-spacing;
             }
         }
@@ -209,18 +203,18 @@ section{
     }
 }
 //map
-.home-map{
-    .container{
+.home-map {
+    .container {
         width: 80%;
         position: relative;
-        img{
+        img {
             width: 100%;
             display: block;
         }
-        .card{
+        .card {
             width: 50%;
             position: absolute;
-            .dot{
+            .dot {
                 width: 20px;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
@@ -228,18 +222,18 @@ section{
                 border: 2px solid #ffffff;
                 position: relative;
                 top: 0;
-                left: 50%;   
+                left: 50%;
                 cursor: pointer;
-                pointer-events:auto;
+                pointer-events: auto;
                 z-index: 1;
             }
-            .card-wrap{
+            .card-wrap {
                 display: none;
                 overflow: hidden;
-                .line{
+                .line {
                     width: 100%;
                     display: block;
-                    &::before{
+                    &::before {
                         content: "";
                         display: block;
                         position: relative;
@@ -249,20 +243,20 @@ section{
                         height: 10vh;
                     }
                 }
-                .card-info{
+                .card-info {
                     background-color: #ffffff;
                     display: flex;
                     justify-content: space-between;
                     padding: 10px;
                     margin: auto;
-                    .card-info-image{
+                    .card-info-image {
                         width: 45%;
                         margin: auto;
-                        img{
+                        img {
                             width: 100%;
                         }
                     }
-                    .card-info-txt{
+                    .card-info-txt {
                         width: 50%;
                         margin: auto;
                         h4 {
@@ -274,12 +268,9 @@ section{
                             margin-top: 10px;
                             letter-spacing: $letter-spacing;
                             font-family: $font-noto;
-
                         }
                     }
-                    
                 }
-                
             }
             .card-wrap.active {
                 display: block;
@@ -288,16 +279,15 @@ section{
                 pointer-events: none;
             }
         }
-        .card-grape{
-            top:65%;
+        .card-grape {
+            top: 65%;
             left: 55%;
-            
         }
-        .card-service{
-            top:50%;
+        .card-service {
+            top: 50%;
             left: 6%;
         }
-        .card-class{
+        .card-class {
             top: 63%;
             left: -8%;
         }
@@ -305,47 +295,45 @@ section{
             top: 60%;
             left: -5%;
         }
-        .card-vintage{
+        .card-vintage {
             top: 60%;
             left: 25%;
         }
     }
     @include t {
-        .container{
+        .container {
             position: relative;
             width: 100%;
-            .card{
+            .card {
                 width: 50%;
-                position: absolute;;
-                .dot{
+                position: absolute;
+                .dot {
                     width: 15px;
                 }
-                .card-wrap{
+                .card-wrap {
                     position: relative;
                     width: 100%;
-                    .line{
-                            display: none;
+                    .line {
+                        display: none;
                     }
-                    .card-info{
+                    .card-info {
                         flex-direction: column;
                         position: fixed;
-                        top:56%;
+                        top: 56%;
                         left: 50%;
                         transform: translate(-50%, -50%);
                         width: 45%;
                         z-index: 11;
-                        .card-info-image{
+                        .card-info-image {
                             width: 100%;
                         }
-                        .card-info-txt{
+                        .card-info-txt {
                             width: 100%;
-                            h4{
+                            h4 {
                                 margin-top: 10px;
                             }
                         }
-                        
                     }
-                    
                 }
                 .card-wrap.active {
                     display: block;
