@@ -12,7 +12,7 @@
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: 'pay_info', query: { method: selectedPaymentMethod } }" style="text-decoration: none">
+        <RouterLink :to="{ path: 'pay_info', query: { method: selectedMethod } }" style="text-decoration: none">
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
             提交配送資訊
           </button>
@@ -94,7 +94,7 @@ export default {
       selectedMethod: null,
       deliveryInfo_comp: [],
       windowWidth: window.innerWidth,
-      selectedPaymentMethod: null,
+      // selectedPaymentMethod: null,
       phone: '',
       email: ''
     }
@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     changePaymentMethod(index) {
-      this.selectedPaymentMethod = index
+      this.selectedMethod = index
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
@@ -142,14 +142,17 @@ export default {
         this.phone = this.deliveryInfo_comp.phone
         this.email = this.deliveryInfo_comp.email
       }
+      const savedMethod = localStorage.getItem('selectedMethod')
+      if (savedMethod !== null) {
+        this.selectedMethod = parseInt(savedMethod)
+      }
     }
   },
   computed: {
     canSubmit() {
       const phoneValid = /^\d{10}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
-      this.selectedPaymentMethod = localStorage.getItem('selectedMethod')
-      return this.selectedPaymentMethod !== null && phoneValid && emailValid
+      return this.selectedMethod !== null && phoneValid && emailValid
     },
     isMobile() {
       return this.windowWidth < 450
