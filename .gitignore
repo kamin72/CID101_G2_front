@@ -13,6 +13,11 @@ dist
 dist-ssr
 coverage
 *.local
+front
+
+dist-ssr
+coverage
+*.local
 
 /cypress/videos/
 /cypress/screenshots/
