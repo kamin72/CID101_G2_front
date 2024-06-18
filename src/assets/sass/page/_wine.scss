@@ -6,7 +6,6 @@
   font-size: 12px;
  }
 
-
 .product-title-filter {  
    .our-product {
       display: flex;
@@ -35,67 +34,68 @@
         }
       }
    }
-   .filter-block-sm{
+   .filter-blocks-sm{
     display: none;
    }
 
-   .filter-block{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-
-  .filters {
-     display: flex;
-     justify-content: center;
-     gap: 20px;
-
-    .filter {
-     position: relative;
-
-     .filter-button {
-      width: 200px;
-      padding: 7px 0px;
-      background-color: #FFFFFF;
-      color: black;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .button-text{
+  .filter-blocks{
+    .selected-filters {
+       display: flex;
+       justify-content: center;
+       padding: 0 15% 3% 20%;
+      .selected-filter {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 15px;
+       .selected-filter i {
          margin-left: 5px;
-      }
-      .fa-solid {
-        margin-right: 5px;
-        font-size: 12px;
+         cursor: pointer;
+       }
+     }
     }
+  
+     .filter-block{
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 0 5% 0;
+  
+    .filters {
+       display: flex;
+       justify-content: center;
+       gap: 20px;
+  
+      .filter {
+       position: relative;
+  
+       .filter-button {
+        width: 200px;
+        padding: 7px 0px;
+        background-color: #FFFFFF;
+        color: black;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .button-text{
+           margin-left: 5px;
+        }
+        .fa-solid {
+          margin-right: 5px;
+          font-size: 12px;
+      }
      }
-   }
-   }
-  }
-
-  .selected-filters {
-     margin: 25px 20px;
-    .selected-filter {
-      display: inline-block;
-      background-color: #f0f0f0;
-      padding: 5px 10px;
-      margin-right: 8px;
-      border-radius: 15px;
-     .selected-filter i {
-       margin-left: 5px;
-       cursor: pointer;
-     }
+    }
    }
   }
-
-  .selected-filters-sm{
-    display: none;
-  }
+}
 
   @include t() {
-    .filter-block{
+    .filter-blocks .filter-block{
       display: flex;
       justify-content: center;
       gap: 10px;
@@ -112,34 +112,37 @@
 }
 
    @include m() {
-    .selected-filters{
+    .filter-blocks{
       display: none;
     }
 
-
-    .selected-filters-sm {
-      margin: 25px 20px;
-     .selected-filter {
-       display: inline-block;
-       background-color: #f0f0f0;
-       padding: 5px 10px;
-       margin-right: 5px;
-       border-radius: 15px;
-      .selected-filter i {
-        margin-left: 5px;
+    .filter-blocks-sm{
+       display: block;
+     .selected-filters-sm {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0 10% 8% 10%;
+        // margin: 25px 20px;
+      .selected-filter-sm {
+         display: inline-block;
+         background-color: #f0f0f0;
+         padding: 5px 10px;
+        //  margin-right: 5px;
+         margin: 5px;
+         border-radius: 15px;
+       .selected-filter-sm i {
+          margin-left: 5px;
         cursor: pointer;
       }
     }
-   }
+     }
 
-    .filter-block{
-      display: none;
-    }
-    .filter-block-sm{
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 10%;
+     .filter-block-sm{
+       display: flex;
+       justify-content: center;
+       gap: 10px;
+       margin-bottom: 6%;
 
      .filter-sm {
         position: relative;
@@ -158,19 +161,9 @@
             margin-left: 5px;
          }
         }
-     
-
-
-
-
-
-
-
-   }
-  }
-    .selected-filters-sm{
-      display: block;
+     }
     }
+  }
  }
 
 

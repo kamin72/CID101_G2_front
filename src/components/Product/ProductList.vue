@@ -20,8 +20,22 @@
       </div>
     </div>
 
+   <div class="filter-blocks">
+    <!-- 已選中的篩選器選項 -->
+     <div class="selected-filters">
+      <!-- 迭代每個篩選器的選中選項 -->
+      <div>
+        <!-- 迭代每個選中的選項 -->
+        <span v-for="option in selectedOptions.flat()" :key="option" class="selected-filter">
+          {{ option }}
+          <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
+          <i class="fa fa-times" @click="removeOption(index, option)"></i>
+        </span>
+      </div>
+     </div>
+
     <!-- 篩選器區域 -->
-   <div class="filter-block">
+     <div class="filter-block">
     <div class="filters">
       <!-- 迭代每個篩選器資料 -->
       <div class="filter" v-for="(dropdown, index) in dropdowns" :key="index">
@@ -60,14 +74,18 @@
       </div>
     </div>
 
-   </div>  
+     </div>  
+   </div>
 
-    <!-- 已選中的篩選器選項 -->
-    <div class="selected-filters">
+
+   <div class="filter-blocks-sm">
+
+    <!-- 手機版已選中的篩選器選項 -->
+    <div class="selected-filters-sm">
       <!-- 迭代每個篩選器的選中選項 -->
-      <div v-for="(options, index) in selectedOptions" :key="'selected-' + index">
+      <div>
         <!-- 迭代每個選中的選項 -->
-        <span v-for="option in options" :key="option" class="selected-filter">
+        <span v-for="option in selectedOptions.flat()" :key="option" class="selected-filter-sm">
           {{ option }}
           <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
           <i class="fa fa-times" @click="removeOption(index, option)"></i>
@@ -75,9 +93,8 @@
       </div>
     </div>
 
-
-  <!-- 手機版篩選器區域 -->
-   <div class="filter-block-sm">
+    <!-- 手機版篩選器區域 -->
+    <div class="filter-block-sm">
       <div class="filter-sm">
           <button class="filter-button-sm" @click="toggleMenusm_sm">
             <i class="fa-solid fa-bars"></i>
@@ -122,7 +139,6 @@
     </div> 
 
 
-
      <!-- 手機版價格排序按鈕 -->
       <div class="filter-sm">
         <!-- @change="handleSortChange($event.target.value)"：這是一個事件綁定，當下拉選單的值發生變化時（即用戶選擇不同的選項時），會調用handleSortChange方法來處理這個事件 -->
@@ -133,22 +149,11 @@
              <option class="button-text-sm" value disabled selected hidden>價格排序</option>
           </select>
     </div>
-   </div>  
+    </div>  
 
-
-    <!-- 手機版已選中的篩選器選項 -->
-    <div class="selected-filters-sm">
-      <!-- 迭代每個篩選器的選中選項 -->
-      <div v-for="(options, index) in selectedOptions" :key="'selected-' + index">
-        <!-- 迭代每個選中的選項 -->
-        <span v-for="option in options" :key="option" class="selected-filter">
-          {{ option }}
-          <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
-          <i class="fa fa-times" @click="removeOption(index, option)"></i>
-        </span>
-      </div>
-    </div>
   </div>
+
+ </div>
 
   <!-- 商品卡片 -->
   <div class="container">
@@ -247,16 +252,6 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['checkCart','addCart']),
-    // addToInquiry(product) {
-    //   // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
-    //   let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
-
-    //   // 將商品資訊加入詢價單
-    //   inquiry.push(product);
-
-    //   // 將更新後的詢價單存回 localStorage
-    //   localStorage.setItem('inquiry', JSON.stringify(inquiry));
-    // },
     parseImg(file) {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
       },
@@ -312,7 +307,7 @@ export default {
     },
     sortByPriceDescending() {
       // 按照價格由高到低排序產品
-      this.products.sort((a, b) => b.price2 - a.price2);
+      this.products.sort((a, b) => {b.price2 - a.price2});
     },
     sortByPriceAscending() {
       // 按照價格由低到高排序產品

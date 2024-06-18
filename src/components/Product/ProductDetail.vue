@@ -186,7 +186,7 @@ export default {
     return {
       count: 1,
       products:[],
-      detail: []
+      detail: {} //如果要用null, 要加v-if="detail"
     }
   },
   computed: {
@@ -214,16 +214,6 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['checkCart','addCart']),
-    // addToInquiry(product) {
-    //   // 獲取當前的詢價單資訊,如果 localStorage 中沒有就初始化為空陣列
-    //   let inquiry = JSON.parse(localStorage.getItem('inquiry')) || [];
-
-    //   // 將商品資訊加入詢價單
-    //   inquiry.push(product);
-
-    //   // 將更新後的詢價單存回 localStorage
-    //   localStorage.setItem('inquiry', JSON.stringify(inquiry));
-    // },
     increment() {
       if (this.count < 10) {
         this.count++
