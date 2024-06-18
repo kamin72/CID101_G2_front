@@ -1,29 +1,27 @@
 <template>
-  <tr class="list">
-    <td class="image">
-      <input
-        type="checkbox"
-        name="checkbox"
-        id="checkbox"
-        :checked="isChecked"
-        @change="updateCheck"
-      />
-      <img :src="parseImg(item.image)" />
-      <div>
+  <div class="list">
+    <div class="img-title">
+      <div class="image-wrap">
+        <input type="checkbox" name="checkbox" id="checkbox" :checked="isChecked" @change="updateCheck"
+          v-model="deletItemCheck" />
+        <img :src="parseImg(item.image)" />
+      </div>
+      <div class="text-wrap">
         <h4 class="description">{{ item.name }}</h4>
         <p class="description">{{ item.ename }}</p>
         <p class="description">{{ item.variety }}</p>
       </div>
-    </td>
-    <td class="price">{{ item.price }}</td>
-    <td class="amount">
+    </div>
+    <div class="price">{{ item.price }}</div>
+    <div class="amount">
       <button @click="$emit('reduce')" class="cartButton">-</button>
       <span class="num">{{ item.count }}</span>
       <button @click="$emit('add')" class="cartButton">+</button>
-    </td>
-    <td class="total">NT. {{ sum(index) }}</td>
-    <td class="delet_icon"><span class="material-symbols-outlined"> delete </span></td>
-  </tr>
+    </div>
+    <div class="total">NT. {{ sum(index) }}</div>
+    <div class="delet_icon"><span class="material-symbols-outlined" @click="deletItem(index)"
+        :class="{ 'disabled': !isChecked }"> delete </span></div>
+  </div>
 </template>
 
 <script>
@@ -35,7 +33,9 @@ export default {
   },
   inject: ['total'],
   data() {
-    return {}
+    return {
+      deletItemCheck: false,
+    }
   },
   methods: {
     sum(n) {
@@ -46,6 +46,15 @@ export default {
     },
     parseImg(file) {
       return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
+    },
+    deletItem(index) {
+      if (this.deletItemCheck == true) {
+        this.$emit('deleteProductItem', index)
+      } else {
+        // 可以添加一個提示，告訴用戶需要先勾選才能刪除
+        alert('請先勾選商品才能刪除')
+      }
+
     }
   }
 }

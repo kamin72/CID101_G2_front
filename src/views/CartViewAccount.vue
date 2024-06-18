@@ -16,16 +16,9 @@
           <th class="item">總金額</th>
           <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
         </tr>
-        <CartList
-          v-for="(productItem, productIndex) in products"
-          :key="productItem.id"
-          :item="productItem"
-          :index="productIndex"
-          :isChecked="allChecked"
-          @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)"
-          @reduce="reduce(productIndex)"
-        />
+        <CartList v-for="(productItem, productIndex) in products" :key="productItem.id" :item="productItem"
+          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
         <tr class="sum">
           <td>總價</td>
           <td></td>
@@ -53,17 +46,10 @@
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
-          <label
-            ><input
-              type="checkbox"
-              class="agree"
-              v-model="agreeTerms"
-            />我同意所有交易條款[查看條款]</label
-          >
+          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
           <label>
             <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
-            是否願意收到Silken SipsVineyard的最新消息</label
-          >
+            是否願意收到Silken SipsVineyard的最新消息</label>
         </div>
         <RouterLink to="/cart_account/cartdelivery_account" style="text-decoration: none">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
@@ -77,6 +63,8 @@
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartList from '@/components/Cart/CartList.vue'
 import Coupon from '@/components/Cart/Coupon.vue'
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
   components: {
@@ -136,6 +124,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(cartStore, ['cleanCart']),
     total(index) {
       let price = this.products[index].price2 * this.products[index].count
       return price
@@ -156,9 +145,30 @@ export default {
       this.products.forEach((product) => {
         product.isChecked = this.allChecked
       })
+    },
+    getProduct() {
+      let storage = JSON.parse(localStorage.getItem('cart'))
+      if (storage.length != 0) {
+        this.products = storage
+      } else {
+        this.products = []
+      }
+    },
+    clearAllProduct() {
+      if (this.allChecked == true) {
+        this.cleanCart()
+        this.products = []
+        this.allChecked = false
+      }
+    },
+    onDeletProductItem(index) {
+      this.products.splice(index, 1)
+      console.log(this.products)
+      localStorage.setItem('cart', JSON.stringify(this.products))
     }
   },
   computed: {
+    ...mapState(cartStore, ['cart']),
     sum() {
       const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
       return price
@@ -182,9 +192,11 @@ export default {
     }
   },
   mounted() {
-    fetch(`../../public/product.json`)
-      .then((res) => res.json())
-      .then((jsonData) => (this.products = jsonData))
+    //   fetch(`../../public/product.json`)
+    //     .then((res) => res.json())
+    //     .then((jsonData) => (this.products = jsonData))
+    // }
+    this.getProduct()
   }
 }
 </script>

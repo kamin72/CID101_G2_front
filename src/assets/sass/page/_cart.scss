@@ -171,6 +171,8 @@ section {
   }
   .wrap_list {
     width: 70%;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-size: map-get($font-size, p);
     font-weight: $font-weight;
@@ -180,14 +182,29 @@ section {
     }
     //列表欄位
     .textItem {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 1px solid $gray;
       .check {
+        width: 50%;
         padding: 10px 0;
         display: flex;
         align-items: center;
         gap: 5px;
+        p {
+          width: 100%;
+          text-align: left;
+        }
+      }
+      .item {
+        width: 15%;
+        padding: 10px 0;
       }
       .allDelet_icon {
+        width: 5%;
+        padding: 10px 0;
         vertical-align: bottom;
         cursor: pointer;
       }
@@ -195,44 +212,53 @@ section {
 
     //購物車商品列表
     .list {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       border-bottom: 1px solid #d5d5d5;
-      .image {
+      .img-title {
         display: flex;
-        text-align: left;
+        align-items: center;
         padding: 10px 0;
-        // width: 50%;
+        width: 50%;
         @include m() {
           flex-direction: column;
           width: 100px;
         }
-        input {
-          position: absolute;
-          z-index: 1;
-        }
-        img {
-          object-fit: cover;
-          object-position: center;
-          width: 40%;
-          @include m() {
+        .image-wrap {
+          position: relative;
+          width: 50%;
+          input {
+            position: absolute;
+            z-index: 1;
+          }
+          img {
+            object-fit: cover;
+            object-position: center;
             width: 100%;
           }
         }
-        .description {
-          padding: 8px 10px;
-          @include m() {
-            padding: 10px 0;
+        .text-wrap {
+          text-align: left;
+          .description {
+            padding: 8px 10px;
+            text-wrap: nowrap;
+            @include m() {
+              padding: 10px 0;
+            }
           }
         }
       }
       .price {
+        width: 15%;
         vertical-align: middle;
-        width: 10%;
         @include t() {
           width: 20%;
         }
       }
       .amount {
-        width: 20%;
+        width: 15%;
         vertical-align: middle;
         position: relative;
         @include t() {
@@ -259,28 +285,53 @@ section {
         vertical-align: middle;
       }
       .delet_icon {
+        width: 5%;
         vertical-align: middle;
         cursor: pointer;
       }
     }
     //總金額、折扣金額、結帳金額
-    .sum > td:nth-child(1) {
-      text-align: left;
-      padding: 10px 0;
-    }
-    .discount > td:nth-child(1) {
-      text-align: left;
-      padding: 10px 0;
-    }
-    .actualPaid > td:nth-child(1) {
-      text-align: left;
-    }
-    .actualPaid > td:nth-child(4) {
-      font-size: 24px;
-      padding: 10px 0 50px;
+
+    .sum {
+      height: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .text {
+        width: 15%;
+      }
+      .price {
+        width: 20%;
+      }
     }
     .discount {
+      height: 50px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 2px solid lighten($gray, 20);
+      .text {
+        width: 15%;
+      }
+      .price {
+        width: 20%;
+      }
+    }
+    .actualPaid {
+      height: 50px;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .text {
+        width: 15%;
+      }
+      .price {
+        width: 20%;
+        font-size: map-get($font-size, h4);
+      }
     }
   }
 
