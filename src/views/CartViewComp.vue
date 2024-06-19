@@ -73,7 +73,6 @@ export default {
   },
   data() {
     return {
-      products: [],
       flow: [
         {
           id: 1,
@@ -132,7 +131,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(cartStore, ['cleanCart']),
+    ...mapActions(cartStore, ['cleanCart', 'checkCart']),
     total(index) {
       let price = this.products[index].price2 * this.products[index].count
       return price
@@ -159,24 +158,22 @@ export default {
         product.isChecked = this.allChecked
       })
     },
-    getProduct() {
-      let storage = JSON.parse(localStorage.getItem('cart'))
-      if (storage.length != 0) {
-        this.products = storage
-      } else {
-        this.products = []
-      }
-    },
+    // getProduct() {
+    //   let storage = localStorage.getItem('cart');
+    //   //先檢查'cart'是否存在
+    //   storage = storage ? JSON.parse(storage) : [];
+
+    //   this.products = storage;
+    // },
     clearAllProduct() {
       if (this.allChecked == true) {
         this.cleanCart()
-        this.products = []
         this.allChecked = false
       }
     },
     onDeletProductItem(index) {
       this.products.splice(index, 1)
-      console.log(this.products)
+      // console.log(this.products)
       localStorage.setItem('cart', JSON.stringify(this.products))
     }
   },
@@ -184,8 +181,11 @@ export default {
     // fetch(`../../public/product.json`)
     //   .then((res) => res.json())
     //   .then((jsonData) => (this.products = jsonData))
-    this.getProduct()
-
+    window.addEventListener('resize', this.updateWindowWidth)
+    this.checkCart()
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   },
   computed: {
     ...mapState(cartStore, ['cart']),
@@ -205,6 +205,9 @@ export default {
     actualPaid() {
       return this.sum + this.discount
     },
+    products() {
+      return this.cart
+    }
   },
   provide() {
     return {

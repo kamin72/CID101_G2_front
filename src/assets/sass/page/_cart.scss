@@ -224,11 +224,16 @@ section {
         width: 50%;
         @include m() {
           flex-direction: column;
+          align-items: baseline;
+          flex-grow: 1;
           width: 100px;
         }
         .image-wrap {
           position: relative;
           width: 50%;
+          @include m() {
+            width: 70%;
+          }
           input {
             position: absolute;
             z-index: 1;
@@ -255,6 +260,9 @@ section {
         vertical-align: middle;
         @include t() {
           width: 20%;
+        }
+        @include m() {
+          width: 10%;
         }
       }
       .amount {

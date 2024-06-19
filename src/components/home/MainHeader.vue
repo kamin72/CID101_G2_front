@@ -25,7 +25,7 @@
 
           <div class="header-shoppingcart">
             <i class="fa-solid fa-bag-shopping"></i>
-            <RouterLink to="/cart_comp">詢價清單(0)</RouterLink>
+            <RouterLink to="/cart_comp">詢價清單({{ cartCount }})</RouterLink>
           </div>
         </div>
       </div>
@@ -34,28 +34,47 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
-  setup() {
-    const isNavOpen = ref(false)
-    const router = useRouter()
-
-    const toggleNav = () => {
-      isNavOpen.value = !isNavOpen.value
-    }
-
-    onMounted(() => {
-      router.afterEach(() => {
-        isNavOpen.value = false
-      })
-    })
-
+  data() {
     return {
-      isNavOpen,
-      toggleNav
+      isNavOpen: false,
+      // currentProducts: []
     }
-  }
+  },
+  computed: {
+    ...mapState(cartStore, ['cart']),
+    cartCount() {
+      return this.cart.length
+    }
+  },
+  created() {
+    this.$router.afterEach(() => {
+      this.isNavOpen = false
+    })
+  },
+  methods: {
+    ...mapActions(cartStore, ['checkCart']),
+    toggleNav() {
+      this.isNavOpen = !this.isNavOpen
+    },
+    // getData() {
+    //   let storage = localStorage.getItem('cart');
+    //   //先檢查'cart'是否存在
+    //   storage = storage ? JSON.parse(storage) : [];
+
+    //   this.currentProducts = storage;
+
+    //   // console.log(this.currentProducts)
+    // },
+
+  },
+  mounted() {
+    this.checkCart()
+    // console.log(this.cart)
+  },
 }
+
 </script>
