@@ -7,15 +7,15 @@ export default defineStore('courseStore', {
   }),
 
   actions: {
-    async getData() {
-      try {
-        const response = await fetch('/courses.json')
-        const data = await response.json()
-        this.allCourse = data
-      } catch (error) {
-        console.error('Failed to fetch courses:', error)
-      }
+    //fetch所有課程，將資料丟進allCourse
+    getData() {
+      fetch('/courses.json')
+        .then((response) => response.json())
+        .then((data) => {
+          this.allCourse = data
+        })
     },
+    //fetch路由中id的資料，將資料丟進specificCourse
     getSpecificData(courseId) {
       if (courseId) {
         fetch('/courses.json')
@@ -28,5 +28,16 @@ export default defineStore('courseStore', {
           })
       }
     }
+    // async getSpecificData(courseId) {
+    //   if (courseId) {
+    //     try {
+    //       const response = await fetch('/courses.json')
+    //       const data = await response.json()
+    //       this.specificCourse = data.find((course) => course.id === courseId)
+    //     } catch (error) {
+    //       console.error('Failed to fetch specific course:', error)
+    //     }
+    //   }
+    // }
   }
 })

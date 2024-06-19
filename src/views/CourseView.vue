@@ -186,6 +186,12 @@ export default {
             isMobile: false,
         };
     },
+    props: {
+        id: {
+            type: [Number, String],
+            required: true
+        }
+    },
 
     computed: {
         currentMonth() {
