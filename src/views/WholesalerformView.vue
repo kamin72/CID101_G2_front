@@ -33,10 +33,10 @@
                         <label>再輸入一次密碼</label>
                     </div>
                     <div class="form_box" style="position: relative;">
-                        <input :type='pwdFlag ? "password" : "text"' id="password_check" autocomplete="password_check" placeholder="再輸入一次密碼">
-                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                        <input :type='pwdFlags ? "password" : "text"' id="password_check" autocomplete="password_check" placeholder="再輸入一次密碼">
+                        <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
                             style="font-size: 18px;position: absolute;">visibility_off </span>
-                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
+                        <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
                             style="font-size: 18px;position: absolute;">visibility</span>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                         <label>地址</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="address" style="width: 550px;" placeholder="請輸入地址">
+                        <input type="text" id="address" class="address" placeholder="請輸入地址">
 
                         <!-- 
                         考慮到是否有外國地址 以及資料表欄位只有address 由單一input比較好做
@@ -158,20 +158,23 @@ export default {
     data() {
         return {
             pwdFlag: true,
+            pwdFlags: true,
             flow: [
                 {
                     id: 1,
                     icon: 'receipt_long',
                     opacity: '1',
                     text: '填寫基本資料',
-                    bold: '400'
+                    bold: '400',
+                    color: '#AEA495'
                 },
                 {
                     id: 4,
                     icon: 'check',
                     opacity: '0.3',
                     text: '註冊完成',
-                    bold: '0'
+                    bold: '0',
+                    color: '#AEA495'
                 }
             ]
         }
@@ -179,6 +182,9 @@ export default {
     methods: {
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
+        },
+        togglePasswords() {
+            this.pwdFlags = !this.pwdFlags;
         }
     }
 }

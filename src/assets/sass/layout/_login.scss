@@ -1,11 +1,16 @@
+// 會員登入
 .container {
     .wrap_login {
         width: 500px;
         height: 425px;
         background-color: #F8F5F2;
         margin: 30px auto;
-        padding: 20px 0 0 0 ;
+        padding: 20px 0 0 0;
         text-align: center;
+        @include t {
+            width: 400px;
+            height: 410px;
+        }
         .login_item {
             text-align: center;
             padding-top: 30px;
@@ -23,6 +28,7 @@
                 margin: 30px 25px;
                 padding-bottom: 5px;
             }
+
             .sign_up {
                 font-size: 24px;
                 color: #322D26;
@@ -35,11 +41,13 @@
                 margin: 30px 25px;
             }
         }
+
         .process {
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0 40px 0;
+
             p {
                 display: inline-block;
                 width: 16px;
@@ -49,7 +57,13 @@
                 background-color: #AEA495;
                 text-align: center;
                 padding: 5px;
+                @include t {
+                    width: 14px;
+                    height: 14px;
+                    padding: 4px;
+                }
             }
+
             span {
                 width: 200px;
                 height: 2px;
@@ -57,43 +71,72 @@
                 margin: 0 10px;
             }
         }
+
         .account_list {
             font-size: 16px;
             border-bottom: 1px solid #322D26;
             display: flex;
             margin: 30px 50px;
-            padding: 5px 0 ;
+            padding: 5px 0;
+
             input {
                 border: none;
                 outline: none;
                 background-color: #F8F5F2;
             }
+
         }
+        
         .password_list {
             font-size: 16px;
             border-bottom: 1px solid #322D26;
             display: flex;
             margin: 20px 50px 0 50px;
-            padding: 5px 0 ;
+            padding: 5px 0;
+            position: relative;
             input {
                 border: none;
                 outline: none;
                 background-color: #F8F5F2;
             }
+            .eyes_visibility {
+                .material-symbols-outlined {
+                    position: absolute;
+                    font-size: 18px;
+                    margin-left: 215px;
+                }
+                @include t {
+                    .material-symbols-outlined {
+                        font-size: 16px;
+                        margin-left: 120px;
+                    }
+                }
+            }
         }
+
         .function_btn {
             a {
                 text-decoration: none;
             }
         }
+
         .forget {
             color: #322D26;
             font-size: 12px;
             padding-left: 340px;
             text-decoration: none;
+
+            @include t {
+                padding-left: 245px;
+            }
         }
+
         .login_btn {
+            display: inline-block;
+            margin: auto;
+
             button {
+                display: inline-block;
                 margin: 40px 0;
             }
         }

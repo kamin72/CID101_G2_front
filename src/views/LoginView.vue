@@ -11,14 +11,12 @@
                 <div class="account_list">
                     <input type="text" id="account" autocomplete="account" placeholder="帳號">
                 </div>
-                <div class="password_list" style="position: relative;">
+                <div class="password_list">
                     <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password" placeholder="密碼">
-                    <div>
-                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;margin-left: 210px;">visibility_off 
+                    <div class="eyes_visibility">
+                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility_off
                         </span>
-                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;margin-left: 210px;">visibility
+                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility
                         </span>
                     </div>
                 </div>
@@ -48,8 +46,9 @@ export default {
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
         }
-    }  
+    }
 }
 </script>
 
-<style></style>
+<style>
+</style>

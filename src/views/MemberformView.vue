@@ -19,13 +19,15 @@
                     <div class="form_item">
                         <label for="password">會員密碼</label>
                     </div>
-                    <div class="form_box" style="position: relative;">
+                    <div class="form_box">
                         <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password"
                             placeholder="請輸入密碼">
-                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;">visibility_off </span>
-                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;">visibility</span>
+                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
+                            visibility_off 
+                        </span>
+                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">
+                            visibility
+                        </span>
                     </div>
                 </div>
                 <!-- 再輸入一次密碼 -->
@@ -34,11 +36,13 @@
                         <label for="password">再輸入一次密碼</label>
                     </div>
                     <div class="form_box">
-                        <input :type='pwdFlag ? "password" : "text"'  id="password_check" placeholder="再輸入一次密碼">
-                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;">visibility_off </span>
-                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                            style="font-size: 18px;position: absolute;">visibility</span>
+                        <input :type='pwdFlags ? "password" : "text"'  id="password_check" placeholder="再輸入一次密碼">
+                        <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
+                            visibility_off 
+                        </span>
+                        <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
+                            visibility
+                        </span>
                     </div>
                 </div>
                 <!-- 姓名 -->
@@ -91,6 +95,7 @@ export default {
     data() {
         return {
             pwdFlag: true,
+            pwdFlags: true,
             flow: [
                 {
                     id: 1,
@@ -113,7 +118,11 @@ export default {
     methods: {
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
+        },
+        togglePasswords() {
+            this.pwdFlags = !this.pwdFlags;
         }
+
     }
 }
 </script>
