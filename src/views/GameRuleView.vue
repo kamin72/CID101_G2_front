@@ -9,7 +9,7 @@
             <p>(一天只能獲得一次)</p>
         </div>
        
-        <router-link to="/GameAns">
+        <router-link to="/GameTest">
             <button class="button">
                 <a href="#">START</a>
             </button>

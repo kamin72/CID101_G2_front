@@ -102,14 +102,14 @@ const router = createRouter({
       component: () => import('@/views/GameRuleView.vue')
     },
     {
-      path: '/gameAns',
-      name: 'gameAns',
-      component: () => import('@/views/GameAnsView.vue')
-    },
-    {
       path: '/gameTotal',
       name: 'gameTotal',
       component: () => import('@/views/GameTotalView.vue')
+    },
+    {
+      path: '/gameTest',
+      name: 'gameTest',
+      component: () => import('@/views/GameTestView.vue')
     },
     {
       path: '/login',
