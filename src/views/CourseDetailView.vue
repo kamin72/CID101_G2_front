@@ -13,7 +13,7 @@
     <div class="container">
       <div class="courseDetailRow">
         <div class="col-11 col-md-11 col-sm-12 courseTopInfoWrap">
-          <div class="courseInfo" v-if="course">
+          <div class="courseInfo">
             <h3>{{ course.name }}</h3>
             <div class="courseDetailWrap">
               <div class="courseTime">
@@ -43,13 +43,15 @@
               </div>
             </div>
           </div>
-          <div class="courseIntro" v-if="course">
+          <div class="courseIntro">
             <p>
               {{ course.courseIntro }}
             </p>
-            <button class="big-btn-primary reserveCourse">
-              <span class="material-symbols-outlined"> edit_calendar </span>預約課程
-            </button>
+            <RouterLink to="/courseBookingDetail">
+              <button class="big-btn-primary reserveCourse">
+                <span class="material-symbols-outlined"> edit_calendar </span>預約課程
+              </button>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -61,18 +63,22 @@
 
 <script>
 import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
+import { mapActions } from 'pinia'
+import courseStore from '@/stores/course'
 
 export default {
-  data() {
-    return {
-      course: null,
-      detail: []
-    }
-  },
+  props: ['id'],
   components: {
     CourseDetail1
   },
+  data() {
+    return {
+      detail: [],
+      course: null,
+    }
+  },
   methods: {
+    ...mapActions(courseStore, ['getSpecificData']),
     formatDate(dateString) {
       const date = new Date(dateString)
       const year = date.getFullYear()
@@ -99,31 +105,20 @@ export default {
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
-    fetchCourseData(courseId) {
-      fetch('/courses.json')
-        .then((response) => response.json())
-        .then((data) => {
-          this.course = data.find((course) => course.id == courseId)
-        })
-    }
+    async fetchCourseData() {
+      const courseId = this.$route.params.id;
+      await this.getSpecificData(courseId);
+      this.course = courseStore().specificCourse;
+    },
   },
   mounted() {
-    // const courseId = this.$route.params.id
-    // fetch('../../../public/courses.json')
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     this.course = data
-    //     this.detail = this.course.find((course) => course.id === courseId)
-    //   })
-  },
-  created() {
-    const courseId = this.$route.params.id;
-    this.fetchCourseData(courseId);
+    this.fetchCourseData();
   },
   watch: {
-    '$route.params.id'(newId) {
-      this.fetchCourseData(newId);
-    }
+    '$route.params.id': {
+    handler: 'fetchCourseData',
+    immediate: true,
+  },
   }
 }
 </script>
