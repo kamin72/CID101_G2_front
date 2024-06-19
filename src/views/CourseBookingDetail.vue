@@ -1,12 +1,6 @@
 <template>
-    <section>
-        <div class="container">
-            <div class="row">
-                <section class="booking_flow">
-                    <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
-                </section>
-            </div>
-        </div>
+    <section class="booking_flow">
+        <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <section class="course-booking-section">
         <div class="course-booking-container">
@@ -19,7 +13,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>品酒體驗-初級課程1</p>
+                        <p>{{ course.name }}</p>
                     </div>
                 </div>
 
@@ -31,7 +25,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>NT. 3,200</p>
+                        <p>NT. {{ course.price }}</p>
                     </div>
                 </div>
 
@@ -57,10 +51,10 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <div class="ppl-amount-btn-wrap">
-                            <button @click="$emit('reduce')" class="ppl-amount-btn">-</button>
-                            <span class="num">{{ item.count }}</span>
-                            <button @click="$emit('add')" class="ppl-amount-btn">+</button>
+                        <div class="amount">
+                            <button @click.prevent="reduce" class="material-symbols-outlined">remove</button>
+                            <span class="num"><p>{{ count }}</p></span>
+                            <button @click.prevent="add" class="material-symbols-outlined">add</button>
                         </div>
                     </div>
                 </div>
@@ -73,7 +67,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>{{ sum }}</p>
+                        <p>NT. {{ sum }}</p>
                     </div>
                 </div>
 
@@ -121,19 +115,20 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"></textarea>
+                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10" v-model="otherRequirements"></textarea>
                     </div>
                 </div>
             </form>
 
             <div class="form_privacy_policy">
-                <input type="checkbox">
-                <span>我同意隱私條款政策 [隱私條款政策]</span>
+                <input type="checkbox" id="privacyPolicyCheckbox" v-model="isChecked">
+                <label for="privacyPolicyCheckbox"><p>我同意隱私條款政策 [隱私條款政策]</p></label>
             </div>
 
-            <RouterLink to="/memberformok" style="text-decoration: none;">
-                <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
-                margin: 10px auto;" />
+            <RouterLink :to="`/courseBookingDetail_pay/${course.id}`" style="text-decoration: none;">
+                <button :disabled="!isChecked" :class="{'cursor-not-allowed': !isChecked, 'big-btn-primary': true, 'reserveCourse': true}" class="big-btn-primary reserveCourse">
+                    <span class="material-symbols-outlined">edit_calendar</span>預約課程
+                </button>
             </RouterLink>
         </div>
     </section>
@@ -142,13 +137,16 @@
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
 
+import { mapState, mapActions } from 'pinia';
+import courseStore from '@/stores/course';
+
 export default {
     components: {
         CartFlow,
     },
+
     data() {
         return {
-            pwdFlag: true,
             flow: [
                 {
                     id: 1,
@@ -179,10 +177,52 @@ export default {
                     text: '完成預約',
                     bold: '300'
                 },
-            ]
+            ],
+            count: 0,
+            sum: 0,
+            memName: '',
+            memEmail: '',
+            memPhone: '',
+            otherRequirements: '',
+            isChecked: false,
         }
     },
+
+    computed: {
+        ...mapState(courseStore, ['specificCourse']), // 使用 mapState 獲取 specificCourse
+        course() {
+            return this.specificCourse; // 定義 course 計算屬性返回 specificCourse
+        },
+    },
+
     methods: {
+        ...mapActions(courseStore, ['getSpecificData']), // 使用 mapActions 獲取 getSpecificData 方法
+        add() {
+            if (this.count == 10) return
+            this.count++
+            this.updateSum()
+        },
+        reduce() {
+            if (this.count == 0) return
+            this.count--
+            this.updateSum()
+        },
+        updateSum() {
+            this.sum = this.count * this.course.price
+        }
+    },
+
+    mounted() {
+        const courseId = this.$route.params.id; // 從路由參數獲取課程 ID
+        this.getSpecificData(courseId); // 調用 getSpecificData 方法獲取特定課程資料
+
+        // 初始化會員資料
+        this.memName = 'John Doe'
+        this.memEmail = 'john.doe@example.com'
+        this.memPhone = '0912345678'
+
+        // 初始化結帳金額
+        this.updateSum()
     }
 }
 </script>

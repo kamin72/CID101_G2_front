@@ -78,8 +78,9 @@ const router = createRouter({
       component: () => import('@/views/CourseDetailView.vue')
     },
     {
-      path: '/courseBookingDetail',
+      path: '/courseBookingDetail/:id',
       name: 'courseBookingDetail',
+      props: true,
       component: () => import('@/views/CourseBookingDetail.vue')
     },
     {

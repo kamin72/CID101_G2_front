@@ -578,7 +578,9 @@
 }
 
 //預約課程頁面
-// 會員帳號
+.booking_flow {
+  padding-bottom: 0px;
+}
 .course-booking-section {
   .course-booking-container {
     width: 100%;
@@ -647,6 +649,28 @@
             font-size: 14px;
             padding-top: 10px;
           }
+
+          .amount {
+            width: 25%;
+            height: 44px;
+            margin: 25px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            background-color: $white;
+            @include t() {
+              width: 30%;
+            }
+            & > button {
+              font-size: map-get($font-size, a);
+              padding: 7px 15px;
+              background-color: $white;
+              cursor: pointer;
+              color: $gray;
+              border: none;
+            }
+          }
         }
 
         &:last-child {
@@ -663,16 +687,25 @@
         }
       }
     }
+
     .form_privacy_policy {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 20px 0;
-
-      span {
-        display: flex;
-        margin: 2px 0;
+      margin: $mar-1;
+      input {
+        margin-right: 5px;
       }
+    }
+
+    .reserveCourse {
+      span {
+        margin-right: 5px;
+      }
+    }
+    
+    .cursor-not-allowed {
+      cursor: not-allowed;
     }
   }
 }
