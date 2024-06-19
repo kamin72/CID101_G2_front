@@ -73,7 +73,7 @@
     v-if="swiperTitle ==='Course'"
     >
         <swiper-slide v-for="(item) in course" :key="item.id">
-            <router-link :to="{ name: 'course_detail', params: { id: item.id }}">   
+            <router-link :to="{ name: 'courseDetail', params: { id: item.id }}">   
                 <div class="img-wrap">
                     <img :src="parseImgCourse(item.image)" :alt="item.title">
                     <div class="card-tag" v-if="item.tag">
