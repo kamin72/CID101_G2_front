@@ -41,7 +41,21 @@
   }
 }
 
-
+.title-wrap {
+  display: flex;
+  align-items: center;
+  padding-top: $pad-1;
+  padding-bottom: $pad-2;
+  .line {
+    background-color: $gray;
+    width: 161.003px;
+    height: 1px;
+  }
+  h2 {
+    font-family: $font-cormorant;
+    padding: 0 30px;
+  }
+}
 //消息內頁大圖banner
 .banner {
   position: relative;

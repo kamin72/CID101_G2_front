@@ -124,7 +124,7 @@ export default {
     }
   },
   created() {
-    console.log(this.specificCourse)
+    // console.log(this.specificCourse)
   },
 }
 

@@ -147,12 +147,6 @@ import { mapState, mapActions } from 'pinia';
 import courseStore from '@/stores/course';
 
 export default {
-    props: {
-        id: {
-            type: [Number, String],
-            required: true
-        }
-    },
     components: {
         CartFlow,
     },
@@ -191,21 +185,20 @@ export default {
             ],
             count: 0,
             sum: 0,
-            memName: '',
-            memEmail: '',
-            memPhone: '',
+            memName: 'John Doe',
+            memEmail: 'john.doe@example.com',
+            memPhone: '0912345678',
             otherRequirements: '',
             isChecked: false,
         }
     },
-
     computed: {
         ...mapState(courseStore, ['specificCourse', 'allCourse']), // 使用 mapState 獲取 specificCourse
         course() {
             return this.specificCourse; // 定義 course 計算屬性返回 specificCourse
-        },
-    },
+        }
 
+    },
     methods: {
         ...mapActions(courseStore, ['getSpecificData', 'getData']),// 使用 mapActions 獲取 getSpecificData 方法
         add() {
@@ -226,23 +219,19 @@ export default {
     mounted() {
         const courseId = this.$route.params.id; // 從路由參數獲取課程 ID
         this.getSpecificData(courseId); // 調用 getSpecificData 方法獲取特定課程資料
-        this.getData()
-
-        // 初始化會員資料
-        this.memName = 'John Doe'
-        this.memEmail = 'john.doe@example.com'
-        this.memPhone = '0912345678'
-
-        // 初始化結帳金額
-        this.updateSum()
     },
     created() {
-        // console.log(this.specificCourse)
+        // console.log(this.specificCourse) // 初始化會員資料
+
+        // 初始化結帳金額
+        // this.updateSum()
     },
     watch: {
-        '$route.params.id'() {
-            const courseId = this.$route.params.id
-            this.specificCourse = this.allCourse.find((course) => course.id == courseId)
+        '$route.params.id': {
+            handler(newId) {
+                console.log(newId)
+                this.getSpecificData(newId)
+            },
         }
     },
 }
