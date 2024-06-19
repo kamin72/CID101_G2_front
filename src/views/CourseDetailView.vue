@@ -102,6 +102,13 @@ export default {
     parseImg(file) {
       return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
     },
+    //解決部屬網站圖片問題
+    // parseServerImg(file) {
+	  //   // 因為圖檔放在server中，只要組出路徑即可，
+	  //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
+	  //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
+    //   return `${import.meta.env.VITE_FILE_URL}/${file}`
+    // },
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
