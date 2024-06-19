@@ -63,8 +63,9 @@
 
 <script>
 import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import courseStore from '@/stores/course'
+
 
 export default {
   props: ['id'],
@@ -74,7 +75,7 @@ export default {
   data() {
     return {
       detail: [],
-      course: null,
+      // course: null,
     }
   },
   methods: {
@@ -105,20 +106,28 @@ export default {
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
-    async fetchCourseData() {
-      const courseId = this.$route.params.id;
-      await this.getSpecificData(courseId);
-      this.course = courseStore().specificCourse;
-    },
+    // fetchCourseData() {
+    //   const courseId = this.$route.params.id;
+    //   this.getSpecificData(courseId);
+    //   // this.course = courseStore().specificCourse;
+    // },
   },
   mounted() {
-    this.fetchCourseData();
+    this.getSpecificData(this.$route.params.id)
   },
   watch: {
-    '$route.params.id': {
-    handler: 'fetchCourseData',
-    immediate: true,
+    // '$route.params.id'() {
+    //   const courseId = this.$route.params.id
+    //   this.getSpecificData(courseId)
+    // },
   },
+  computed: {
+    ...mapState(courseStore, ['specificCourse']),
+    course() {
+      return this.specificCourse
+    }
+
   }
 }
+
 </script>
