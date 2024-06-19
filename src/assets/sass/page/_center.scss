@@ -1,3 +1,4 @@
+// 會員中心
 .container {
     .center_menu {
         margin: 40px 0;
@@ -11,6 +12,9 @@
             background-color: #F8F5F2;
             margin: 30px auto;
             text-align: center;
+            @include t {
+                width: 400px;
+            }
             button {
                 margin: 30px 0;
             }
@@ -20,15 +24,26 @@
                 justify-content: center;
                 border-bottom: 10px solid #EDE7DE;
                 h3 {
-                    margin: 20px 0 ;
+                    // margin: 20px 0 ;
+                    margin: 20px;
                 }
                 h4 {
-                    margin: 20px 0 0 50px ;
+                    // margin: 20px 0 0 50px ;
+                    margin: 20px;
                 }
             }
             .member_icon {
                 display: flex;
                 padding: 30px;
+                .material-symbols-outlined {
+                    font-size: 26px;
+                    @include t {
+                        font-size: 20px;
+                    }
+                }
+                h4 {
+                    margin: 2px 7px;
+                }
             }
             .member_info {
                 display: flex;

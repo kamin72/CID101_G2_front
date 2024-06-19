@@ -9,27 +9,32 @@
                 <span></span>
                 <p>2</p>
             </div>
-            <div class="password_list" style="position: relative;">
+            <div class="password_list">
                 <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password" placeholder="設定新密碼">
-                <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                    style="font-size: 16px;position: absolute; margin-left: 160px;">visibility_off
-                </span>
-                <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                    style="font-size: 16px;position: absolute;margin-left: 160px;">visibility
-                </span>
+                <div class="eyes_visibility">
+                    <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
+                        visibility_off
+                    </span>
+                    <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">
+                        visibility
+                    </span>
+                </div>
             </div>
-            <div class="password_list" style="position: relative;">
-                <input :type='pwdFlag ? "password" : "text"' id="password_check" autocomplete="password_check"
+            <div class="password_list">
+                <input :type='pwdFlags ? "password" : "text"' id="password_check" autocomplete="password_check"
                     placeholder="再次輸入密碼">
-                <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                    style="font-size: 18px;position: absolute; margin-left: 160px;">visibility_off
-                </span>
-                <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-                    style="font-size: 18px;position: absolute; margin-left: 160px;">visibility
-                </span>
+                <div class="eyes_visibility">
+                    <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">visibility_off
+                    </span>
+                    <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
+                        visibility
+                    </span>
+                </div>
             </div>
             <div class="function_btn" style="margin-top: 40px">
-                <button type="button" class="big-btn-primary" style="margin-top: 30px;">完成</button>
+                <button type="button" class="big-btn-primary" style="display: inline-block;margin-top: 30px;">
+                    完成
+                </button>
             </div>
         </div>
     </div>
@@ -42,19 +47,18 @@ export default {
     data() {
         return {
             pwdFlag: true,
+            pwdFlags: true
         }
     },
     methods: {
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
+        },
+        togglePasswords() {
+            this.pwdFlags = !this.pwdFlags;
         }
     }
 }
 </script>
 
-<style>
-.material-symbols-outlined {
-    font-size: 16px;
-    padding-left: 220px;
-}
-</style>
+<style></style>

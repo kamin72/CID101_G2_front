@@ -34,14 +34,16 @@ export default {
                     icon: 'receipt_long',
                     opacity: '1',
                     text: '填寫基本資料',
-                    bold: '400'
+                    bold: '400',
+                    color: '#AEA495'
                 },
                 {
                     id: 4,
                     icon: 'check',
                     opacity: '0.3',
                     text: '註冊完成',
-                    bold: '0'
+                    bold: '400',
+                    color: '#AEA495'
                 }
             ]
         }
@@ -61,7 +63,7 @@ export default {
                 } else {
                     // 時間到，清除計時器
                     clearInterval(this.timer);
-                    this.timer = null;
+                    this.$router.push('/')
                 }
             }, 1000); // 每秒執行一次進入作用域
         }

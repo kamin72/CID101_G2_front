@@ -7,10 +7,22 @@
             <span class="material-symbols-outlined">arrow_forward_ios</span>查看詳情</small>
         </div>
         <div class="center_menu">
-            <RouterLink to="/membercenter"> <button class="big-btn-primary">會員資料</button></RouterLink>
-            <RouterLink to="/memberorderhistory"> <button class="big-btn-secondary">訂單紀錄</button></RouterLink>
-            <RouterLink to="/bookinghistory"> <button class="big-btn-primary">預約紀錄</button></RouterLink>
-            <RouterLink to="/discounthistory"> <button class="big-btn-primary">優惠券紀錄</button></RouterLink>
+            <RouterLink to="/membercenter" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary"">會員資料</button> -->
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
+            </RouterLink>
+            <RouterLink to="/memberorderhistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-secondary">訂單紀錄</button> -->
+                <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+            </RouterLink>
+            <RouterLink to="/bookinghistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary">預約紀錄</button> -->
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+            </RouterLink>
+            <RouterLink to="/discounthistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+            </RouterLink>
         </div>
         <div class="wrap_details">
             <h4>訂單紀錄詳情</h4>
@@ -70,57 +82,34 @@
     </div>
 </template>
 
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            windowWidth: window.innerWidth
+        };
+    },
+    computed: {
+        buttonClass() {
+            return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
+        },
+        secondaryButtonClass() {
+            return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary';
+        }
+    },
+    methods: {
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth;
+        }
+    },
+    mounted() {
+        window.addEventListener('resize', this.updateWindowWidth);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.updateWindowWidth);
+    }
+};
+</script>
 
 <style>
-.wrap_details {
-    margin: auto;
-}
-.wrap_details h4 {
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #000000;
-    margin: 0 90px;
-}
-.details_list {
-    width: 1000px;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    margin: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid #000000;
-}
-.details_list p {
-    width: 250px;
-    padding: 0 0 0 20px;
-    margin: 15px 0 15px 60px;
-}
-
-.product_details {
-    width: 1000px;
-    border-bottom: 1px solid #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    padding: 25px 0;
-    
-}
-.product_details p {
-    margin: 0 80px;
-    padding: 0 10px
-}
-.product_price {
-    width: 1000px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: auto;
-    padding: 25px 0;
-}
-.product_price p {
-    margin: 0 80px;
-    padding: 0 20px;
-}
 </style>

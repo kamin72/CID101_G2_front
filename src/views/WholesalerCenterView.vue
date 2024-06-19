@@ -5,8 +5,22 @@
                     class="material-symbols-outlined">arrow_forward_ios</span>我們的酒</small>
         </div>
         <div class="center_menu">
-            <button type="button" class="big-btn-primary">會員資料</button>
-            <button type="button" class="big-btn-secondary">訂單紀錄</button>
+            <RouterLink to="/membercenter" style="text-decoration: none;">
+                <!-- <button class="big-btn-secondary">會員資料</button> -->
+                <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">會員資料</button>
+            </RouterLink>
+            <RouterLink to="/memberorderhistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary">訂單紀錄</button> -->
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+            </RouterLink>
+            <RouterLink to="/bookinghistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary">預約紀錄</button> -->
+                <button :class="buttonClass"style="display: inline; margin: 0 2px;">預約紀錄</button>
+            </RouterLink>
+            <RouterLink to="/discounthistory" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
+            </RouterLink>
         </div>
         <div class="wrap_mem_center">
             <div class="member_info_list">
@@ -36,7 +50,34 @@
     </div>
 </template>
 
-<script></script>
+<script>
+export default {
+    data() {
+        return {
+            windowWidth: window.innerWidth
+        };
+    },
+    computed: {
+        buttonClass() {
+            return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
+        },
+        secondaryButtonClass() {
+            return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary';
+        }
+    },
+    methods: {
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth;
+        }
+    },
+    mounted() {
+        window.addEventListener('resize', this.updateWindowWidth);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.updateWindowWidth);
+    }
+};
+</script>
 
 <style>
 .center_menu {
