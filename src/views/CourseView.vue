@@ -186,13 +186,6 @@ export default {
             isMobile: false,
         };
     },
-    props: {
-        id: {
-            type: [Number, String],
-            required: true
-        }
-    },
-
     computed: {
         currentMonth() {
             return this.currentDate.getMonth() + 1;

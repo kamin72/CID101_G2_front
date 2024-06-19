@@ -77,12 +77,7 @@ export default {
       detail: [],
     }
   },
-  props: {
-    id: {
-      type: [Number, String],
-      required: true
-    }
-  },
+
   methods: {
     ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
@@ -123,10 +118,12 @@ export default {
     // this.getData()
   },
   watch: {
-    // '$route.params.id'() {
-    //   const courseId = this.$route.params.id
-    //   this.specificCourse = this.allCourse.find((course) => course.id == courseId)
-    // }
+    '$route.params.id': {
+      handler(newId) {
+        console.log(newId)
+        this.getSpecificData(newId)
+      },
+    }
   },
   computed: {
     ...mapState(courseStore, ['specificCourse', 'allCourse']),
@@ -136,7 +133,7 @@ export default {
     }
   },
   created() {
-    console.log(this.specificCourse)
+    // console.log(this.specificCourse)
   },
 }
 
