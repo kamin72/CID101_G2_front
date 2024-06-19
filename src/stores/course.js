@@ -7,7 +7,7 @@ export default defineStore('courseStore', {
   }),
 
   actions: {
-    //fetch所有課程，將資料丟進allCourse
+    //fetch所有課程，將資料丟進state裡的allCourse陣列
     getData() {
       fetch('/courses.json')
         .then((response) => response.json())
@@ -28,16 +28,5 @@ export default defineStore('courseStore', {
           })
       }
     }
-    // async getSpecificData(courseId) {
-    //   if (courseId) {
-    //     try {
-    //       const response = await fetch('/courses.json')
-    //       const data = await response.json()
-    //       this.specificCourse = data.find((course) => course.id === courseId)
-    //     } catch (error) {
-    //       console.error('Failed to fetch specific course:', error)
-    //     }
-    //   }
-    // }
   }
 })
