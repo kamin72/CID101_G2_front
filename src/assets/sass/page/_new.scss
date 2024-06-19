@@ -1,0 +1,106 @@
+//最新消息卡片
+.news-card-list{
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  .news-card{
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    .news-pic{
+      width: 100%;
+      height:70%;
+      // aspect-ratio: 4/3;
+      // overflow: hidden;
+      img{
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+    .news-title{
+      width: 100%;
+      flex-grow: 1;
+      // line-height: 30px;
+
+    }
+    .news-date{
+      width: 100%;
+      height: 5%;
+      margin: 10px 0;
+    }
+    &:hover{
+      background-color: $wine;
+      color: $white;
+    }
+  }
+}
+
+
+//消息內頁大圖banner
+.banner {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  .bgImgWrap {
+    position: fixed;
+    width: 100%;
+    z-index: -1;
+    img {
+      object-fit: cover;
+      object-position: bottom;
+      width: 100%;
+    }
+  }
+  .maskWrap {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -5px;
+    z-index: 2;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@include t() {
+}
+@include m() {
+  .courseBanner {
+    // height: 200px;
+    .bgImgWrap {
+      img {
+        object-position: top;
+      }
+    }
+  }
+
+}
+//消息內頁
+.news-detail{
+  background-color: $bgc;
+  .container{
+    
+    .news-wrap{
+      letter-spacing: $letter-spacing;
+      width: 80%;
+      margin: auto;
+      .news-title{
+        margin: 10px 0;
+      }
+      .news-content{
+        margin: 10px 0;
+        line-height: 25px;
+        p{
+          margin: 20px 0;
+        }
+      }
+    }
+  }
+}

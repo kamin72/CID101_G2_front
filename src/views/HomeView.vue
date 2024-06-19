@@ -21,7 +21,7 @@
 
   <!-- 關於我們 -->
   <section class="homeAboutus">
-    <div class="homeAboutus_container">
+    <div class="container homeAboutus_container">
       <div class="homeAboutus_pic">
         <img src="/src/assets/img/home/homeAboutus_pic.png" />
       </div>
@@ -63,11 +63,19 @@
   <section class="wine">
   <div class="container">
 		<WineCarousel></WineCarousel>
+    <div class="more-btn">
+        <RouterLink to="/product">MORE</RouterLink>
+    </div>
 	</div>
 </section>
 <!-- 地圖 -->
 <section class="home-map">
   <div class="container">
+    <div class="title">
+        <span></span>
+        <h2>Winery Map</h2>
+        <span></span>
+    </div>
     <img src="../assets/img/home/home-map.png" alt="">
     <div v-for="(card, index) in map" 
           :key="index" 
@@ -92,12 +100,12 @@
 </section>
 
   <!-- event輪播圖 -->
-  <section class="swiper-wrap swiper-event">
+  <section class="swiper-wrap swiper-course">
     <div class="container">
-      <SwiperComponent swiperTitle="Event"></SwiperComponent>
+      <SwiperComponent swiperTitle="Course"></SwiperComponent>
       <div class="more-btn">
         <RouterLink to="/course">MORE</RouterLink>
-    </div>
+      </div>
     </div>
   </section>
 <!-- news輪播圖 -->
@@ -105,7 +113,7 @@
     <div class="container">
       <SwiperComponent swiperTitle="News"></SwiperComponent>
       <div class="more-btn">
-        <RouterLink to="/new">MORE</RouterLink>
+        <RouterLink to="/news">MORE</RouterLink>
     </div>
     </div>
   </section>
