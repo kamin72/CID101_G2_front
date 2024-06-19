@@ -1,5 +1,5 @@
 <template>
-  <div class="deliveryInfo">
+  <form class="deliveryInfo">
     <div class="column">
       <h3 class="title">配送資訊</h3>
       <p class="title">(公司資訊如需更動請聯絡我們)</p>
@@ -38,7 +38,7 @@
         required
       />
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

@@ -14,17 +14,11 @@
           <th class="item">單價</th>
           <th class="item">數量</th>
           <th class="item">總金額</th>
+          <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
         </tr>
-        <CartList
-          v-for="(productItem, productIndex) in products"
-          :key="productItem.id"
-          :item="productItem"
-          :index="productIndex"
-          :isChecked="allChecked"
-          @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)"
-          @reduce="reduce(productIndex)"
-        />
+        <CartList v-for="(productItem, productIndex) in products" :key="productItem.id" :item="productItem"
+          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
         <tr class="sum">
           <td>總價</td>
           <td></td>
@@ -35,13 +29,13 @@
           <td>折扣</td>
           <td></td>
           <td></td>
-          <td>-NT. 120</td>
+          <td>- NT. {{ discount }}</td>
         </tr>
         <tr class="actualPaid">
           <td>結帳金額</td>
           <td></td>
           <td></td>
-          <td>NT. 1080</td>
+          <td>NT. {{ actualPaid }}</td>
         </tr>
       </table>
       <aside class="coupon">
@@ -52,17 +46,10 @@
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
-          <label
-            ><input
-              type="checkbox"
-              class="agree"
-              v-model="agreeTerms"
-            />我同意所有交易條款[查看條款]</label
-          >
+          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
           <label>
             <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
-            是否願意收到Silken SipsVineyard的最新消息</label
-          >
+            是否願意收到Silken SipsVineyard的最新消息</label>
         </div>
         <RouterLink to="/cart_account/cartdelivery_account" style="text-decoration: none">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
@@ -76,6 +63,8 @@
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartList from '@/components/Cart/CartList.vue'
 import Coupon from '@/components/Cart/Coupon.vue'
+import { mapState, mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
   components: {
@@ -85,36 +74,7 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          image: 'https://picsum.photos/150/200/?random=10',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 300,
-          count: 1
-        },
-        {
-          id: 2,
-          image: 'https://picsum.photos/150/200/?random=11',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 400,
-          count: 1
-        },
-        {
-          id: 3,
-          image: 'https://picsum.photos/150/200/?random=12',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 500,
-          count: 1
-        },
-        {
-          id: 4,
-          image: 'https://picsum.photos/150/200/?random=15',
-          desc: 'efhjhfjhfjhdfdf',
-          price: 600,
-          count: 1
-        }
-      ],
+      products: [],
       flow: [
         {
           id: 1,
@@ -164,8 +124,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions(cartStore, ['cleanCart']),
     total(index) {
-      let price = this.products[index].price * this.products[index].count
+      let price = this.products[index].price2 * this.products[index].count
       return price
     },
     add(index) {
@@ -184,11 +145,32 @@ export default {
       this.products.forEach((product) => {
         product.isChecked = this.allChecked
       })
+    },
+    getProduct() {
+      let storage = JSON.parse(localStorage.getItem('cart'))
+      if (storage.length != 0) {
+        this.products = storage
+      } else {
+        this.products = []
+      }
+    },
+    clearAllProduct() {
+      if (this.allChecked == true) {
+        this.cleanCart()
+        this.products = []
+        this.allChecked = false
+      }
+    },
+    onDeletProductItem(index) {
+      this.products.splice(index, 1)
+      console.log(this.products)
+      localStorage.setItem('cart', JSON.stringify(this.products))
     }
   },
   computed: {
+    ...mapState(cartStore, ['cart']),
     sum() {
-      const price = this.products.reduce((total, items) => total + items.price * items.count, 0)
+      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
       return price
     },
     canSubmit() {
@@ -196,12 +178,25 @@ export default {
     },
     isMobile() {
       return this.windowWidth < 450
+    },
+    discount() {
+      return this.sum * 0.8
+    },
+    actualPaid() {
+      return this.sum + this.discount
     }
   },
   provide() {
     return {
       total: this.total
     }
+  },
+  mounted() {
+    //   fetch(`../../public/product.json`)
+    //     .then((res) => res.json())
+    //     .then((jsonData) => (this.products = jsonData))
+    // }
+    this.getProduct()
   }
 }
 </script>

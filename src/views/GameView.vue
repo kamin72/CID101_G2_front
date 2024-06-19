@@ -6,9 +6,7 @@
         <p>品酒達人</p>
       </div>
       <RouterLink to="/GameRule">
-        <button class="button">
-          <a href="#">GO!</a>
-        </button>
+        <button class="button"><a href="#">GO!</a></button>
       </RouterLink>
     </div>
   </section>

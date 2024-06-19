@@ -1,18 +1,17 @@
-//rwd
-
+//麵包屑
 .frontPage-bread a{
   color: black;
   text-decoration: none;
   font-size: 12px;
  }
 
-
+ //標題
 .product-title-filter {  
    .our-product {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .title-wrap {
+      .product-title-wrap {
         display: flex;
         align-items: center;
         padding-top: $pad-1;
@@ -20,157 +19,160 @@
         h2 {
              font-family: $font-cormorant;
              padding: 0 30px;
+          @include t() {
+              padding: 0 20px;
+          }
+
+          @include m() {
+              padding: 0 10px;
+          }
         }
        .line {
             background-color: $gray;
             width: 161.003px;
-            height: 1.5px;
-        }
-        @include m() {
-          .line {
-            background-color: $gray;
-            width: 70.003px;
-            height: 1.3px;
+            height: 1px;
+
+         @include t() {
+            width: 120px;
+            height: 0.7px;
           }
+
+          @include m() {
+            width: 85px;
+          }
+
+
         }
       }
    }
-   .filter-block-sm{
+   .filter-blocks-sm{
     display: none;
    }
 
-   .filter-block{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-
-  .filters {
-     display: flex;
-     justify-content: center;
-     gap: 20px;
-
-    .filter {
-     position: relative;
-
-     .filter-button {
-      width: 200px;
-      padding: 7px 0px;
-      background-color: #FFFFFF;
-      color: black;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .button-text{
+// 篩選按鈕
+  .filter-blocks{
+    .selected-filters {
+       display: flex;
+       justify-content: center;
+       padding: 0 15% 3% 20%;
+      .selected-filter {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 15px;
+       .selected-filter i {
          margin-left: 5px;
-      }
-      .fa-solid {
-        margin-right: 5px;
-        font-size: 12px;
+         cursor: pointer;
+       }
+     }
     }
-     }
-   }
-   }
-  }
-
-  .selected-filters {
-     margin: 25px 20px;
-    .selected-filter {
-      display: inline-block;
-      background-color: #f0f0f0;
-      padding: 5px 10px;
-      margin-right: 8px;
-      border-radius: 15px;
-     .selected-filter i {
-       margin-left: 5px;
-       cursor: pointer;
-     }
-   }
-  }
-
-  .selected-filters-sm{
-    display: none;
-  }
-
-  @include t() {
-    .filter-block{
+  
+     .filter-block{
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 20px;
+      padding: 0 0 5% 0;
 
-     .filters {
-      display: block;
-      gap: 10px;
+      @include t() {
+        gap: 10px;
+      }
+  
+    .filters {
+       display: flex;
+       justify-content: center;
+       gap: 20px;
+
+       @include t() {
+        display: block;
+        gap: 10px;
+      }
+  
       .filter {
-        position: relative;
+       position: relative;
+
+       @include t() {
         margin-bottom: 10px;
       }
+  
+       .filter-button {
+        width: 200px;
+        padding: 7px 0px;
+        background-color: #FFFFFF;
+        color: black;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        .button-text{
+           margin-left: 5px;
+        }
+        .fa-solid {
+          margin-right: 5px;
+          font-size: 12px;
+      }
+     }
     }
+   }
   }
 }
 
+// 手機版篩選按鈕
    @include m() {
-    .selected-filters{
+    .filter-blocks{
       display: none;
     }
 
+    .filter-blocks-sm{
+       display: block;
 
-    .selected-filters-sm {
-      margin: 25px 20px;
-     .selected-filter {
-       display: inline-block;
-       background-color: #f0f0f0;
-       padding: 5px 10px;
-       margin-right: 5px;
-       border-radius: 15px;
-      .selected-filter i {
-        margin-left: 5px;
+     .selected-filters-sm {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 0 10% 8% 10%;
+
+      .selected-filter-sm {
+         display: inline-block;
+         background-color: #f0f0f0;
+         padding: 5px 10px;
+         margin: 5px;
+         border-radius: 15px;
+
+       .selected-filter-sm i {
+          margin-left: 5px;
         cursor: pointer;
       }
     }
-   }
+  }
+  .filter-block-sm{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 6%;
 
-    .filter-block{
-      display: none;
-    }
-    .filter-block-sm{
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 10%;
-
-     .filter-sm {
-        position: relative;
+   .filter-sm {
+      position: relative;
    
-        .filter-button-sm {
-         width: 150px;
-         padding: 7px 0px;
-         background-color: #FFFFFF;
-         color: black;
-         border: none;
-         cursor: pointer;
-         align-items: center;
-         text-align: center;
+    .filter-button-sm {
+       width: 150px;
+        padding: 7px 0px;
+        background-color: #FFFFFF;
+        color: black;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        text-align: center;
    
          .button-text-sm{
             margin-left: 5px;
          }
-        }
-     
-
-
-
-
-
-
-
-   }
-  }
-    .selected-filters-sm{
-      display: block;
+       }
+     }
     }
+  }
  }
 
 
@@ -266,7 +268,7 @@
 
 
 //選單樣式
-  .menu-filter ul {
+ .menu-filter ul {
     position: absolute;
     top: 40px;
     left: 0;
@@ -291,7 +293,7 @@
          padding: 5px 8px;
         }
        }
-    }
+}
 
 
 // 商品卡片
@@ -307,6 +309,11 @@
             bottom: 0;
             width: 100%;
             height: 200px;
+
+            @include t() {
+              bottom: -10%;
+              height: 180px;
+            }
           }
         }
      }
@@ -321,194 +328,4 @@
 }
 
 
-@include t() {
-  .product-cards{
-      .product-card{
-        .product-img {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 5/2;
-          img {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 180px;
-          }
-        }
-     }
-        .product-card .add-card {
-            background-color: #322D26;
-            font-family: "DM Sans", sans-serif;
-     }
-        .info-wrap a{
-             color: black;
-             text-decoration: none;
-            }
- }
-}
-
-
-
-@include m() {
-  .product-cards{
-      .product-card{
-        .product-img {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 5/2;
-          img {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 150px;
-          }
-        }
-     }
-        .product-card .add-card {
-            background-color: #322D26;
-            font-family: "DM Sans", sans-serif;
-     }
-        .info-wrap a{
-             color: black;
-             text-decoration: none;
-            }
-}
-
-
-}
-
-
-
-
-
-
-
-// //未rwd
-// .product-title-filter {  
-//    .our-product {
-//       display: flex;
-//       flex-direction: column;
-//       align-items: center;
-//     .title-wrap {
-//         display: flex;
-//         align-items: center;
-//         padding-top: $pad-1;
-//         padding-bottom: $pad-2;
-//         h2 {
-//             font-family: $font-cormorant;
-//             padding: 0 30px;
-//         }
-//         .line {
-//             background-color: $gray;
-//             width: 161.003px;
-//             height: 1.5px;
-//         }
-//       }
-//     }
-
-//     .filter-block{
-//       display: flex;
-//       justify-content: center;
-//       gap: 20px;
-
-//     .filters {
-//        display: flex;
-//        justify-content: center;
-//        gap: 20px;
-//     .filter {
-//       position: relative;
-
-//       .filter-button {
-//         width: 200px;
-//         padding: 7px 0px;
-//         background-color: #FFFFFF;
-//         color: black;
-//         border: none;
-//         cursor: pointer;
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         &:hover {
-//             background-color: #DFD4C3;
-//         }
-//         .button-text{
-//             margin-left: 5px;
-//         }
-
-//         .fa-solid {
-//             margin-right: 5px;
-//             font-size: 12px;
-//         }
-//       }
-
-//       .menu-filter ul {
-//         position: absolute;
-//         top: 40px;
-//         left: 0;
-//         background-color: #DFD4C3;
-//         border: 1px solid #ddd;
-//         list-style: none;
-//         padding: 5px;
-//         width: 100%;
-//         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-//         z-index:1;
-
-//         li {
-//           padding: 10px;
-//           cursor: pointer;
-//           input {
-//             margin-bottom: 8px;
-//             margin-right: 5px;
-//            }
-
-//            .menu-filter-button{
-//             background-color: #322D26;
-//             color: white;
-//             padding: 5px 8px;
-//           }
-
-
-//         }
-//       }
-//      }
-//     }
-//   }
-// }
-
-
-// .selected-filters {
-//   margin: 20px 0;
-//   .selected-filter {
-//    display: inline-block;
-//    background-color: #f0f0f0;
-//    padding: 5px 10px;
-//    margin-right: 5px;
-//    border-radius: 15px;
-//    .selected-filter i {
-//     margin-left: 5px;
-//     cursor: pointer;
-//   }
-//  }
-// }
-
-
-
-// .product-cards{
-//     margin-bottom: 80px;
-//       .product-card{
-//         position: relative;
-//         .img-wrap img{
-//             position:absolute;
-//              left: 0px;
-//         }
-//      }
-//         .product-card .add-card {
-//             background-color: #322D26;
-//             font-family: "DM Sans", sans-serif;
-//      }
-//         .info-wrap a{
-//              color: black;
-//              text-decoration: none;
-//             }
-// }
     

@@ -12,6 +12,7 @@
   background-color: $btn-color; // 按鈕背景顏色為傳入的顏色變數
   transition: 0.3s;
   font-size: map-get($font-size, h4);
+  text-wrap: nowrap;
   cursor: pointer;
   h4 {
     padding: 0;
@@ -19,6 +20,12 @@
   }
   &:hover {
     background-color: darken($btn-color, 20);
+  }
+  @include t(){
+    padding: 18px 40px;
+  }
+  @include m(){
+    padding: 15px 32px;
   }
 }
 
@@ -29,6 +36,12 @@
   p {
     padding: 0;
     margin: 0;
+  }
+  @include t(){
+    padding: 10px 23px;
+  }
+  @include m(){
+    padding: 9px 21px;
   }
 }
 
