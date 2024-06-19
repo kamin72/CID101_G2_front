@@ -268,8 +268,6 @@
   }
 }
 
-
-
 //課程詳情資訊
 .courseBanner {
   position: relative;
@@ -400,7 +398,8 @@
               line-height: 25px;
             }
           }
-          .teacherInfo > h3, h4 {
+          .teacherInfo > h3,
+          h4 {
             padding: 10px 0;
           }
           .teacherInfo > p {
@@ -454,7 +453,7 @@
   }
 }
 
-@include t(){
+@include t() {
   .courseBanner {
     height: 400px;
     .bgImgWrap {
@@ -478,8 +477,9 @@
             .courseDetailWrap {
               flex-direction: column;
               width: fit-content;
-              .courseTime, .courseAdress {
-                margin-bottom: 15px ;
+              .courseTime,
+              .courseAdress {
+                margin-bottom: 15px;
               }
             }
           }
@@ -515,6 +515,9 @@
               .iconWrap {
                 height: 80px;
                 width: 80px;
+              }
+              ul {
+                width: 90%;
               }
             }
           }
@@ -569,6 +572,106 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+//預約課程頁面
+// 會員帳號
+.course-booking-section {
+  .course-booking-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .course-booking-form {
+      .form_ltem_list {
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid #ffffff;
+        background-color: $secondary-botton-color;
+  
+        .form_item {
+          width: 30%;
+          display: flex;
+          align-items: center;
+          label {
+            font-size: 24px;
+            color: white;
+            background-color: $secondary-botton-color;
+            padding: 30px 20px;
+            text-align: center;
+            display: block;
+            margin: auto;
+          }
+        }
+  
+        .form_box {
+          display: flex;
+          align-items: center;
+          width: 70%;
+          background-color: #f8f5f2;
+          p {
+            margin: 25px;
+          }
+
+          input {
+            width: 80%;
+            font-size: 14px;
+            display: inline-block;
+            outline: none;
+            border: none;
+            padding: 7px;
+            margin: 25px;
+          }
+
+          select {
+            width: 40%;
+            height: 30px;
+            font-size: 14px;
+            display: inline-block;
+            border: none;
+            outline: 7px solid $white;
+            padding: 7px;
+            margin: 25px;
+            option {
+              color: $gray;
+              font-size: map-get($font-size, p);
+              font-weight: $font-weight;
+              font-family: $font-dm, $font-noto;
+            }
+          }
+  
+          .material-symbols-outlined {
+            font-size: 14px;
+            padding-top: 10px;
+          }
+        }
+
+        &:last-child {
+          .form_box {
+            textarea {
+              font-size: 14px;
+              outline: none;
+              border: none;
+              width: 80%;
+              margin: 25px;
+              padding: 7px;
+            }
+          }
+        }
+      }
+    }
+    .form_privacy_policy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+
+      span {
+        display: flex;
+        margin: 2px 0;
       }
     }
   }

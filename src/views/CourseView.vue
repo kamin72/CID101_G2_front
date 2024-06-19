@@ -18,7 +18,7 @@
                 <!-- 推薦卡片清單 -->
                 <router-link r-link v-for="(course, index) in recommendedCourses" :key="index"
                     class="col-3 col-md-6 col-sm-6 event-card1"
-                    :to="{ name: 'course_detail', params: { id: course.id } }">
+                    :to="{ name: 'courseDetail', params: { id: course.id } }">
                     <div class="event-card1-img-wrap">
                         <img :src="parseImg(course.img)" />
                         <div v-if="course.tag" class="event-card1-tag">
@@ -77,7 +77,7 @@
                         </div>
 
                         <!-- 預約日曆 -->
-                        <div v-show="showCalen" class="col-10 col-md-12 col-sm-12 search-course-calendar">
+                        <div v-show="showCalen && !isMobile" class="col-10 col-md-12 col-sm-12 search-course-calendar">
                             <div class="search-course-calendar-header">
                                 <span class="prev material-symbols-outlined" @click="prevMonth">arrow_back_ios</span>
                                 <h4 class="month-year">{{ currentYear }}.{{ currentMonth }}</h4>
@@ -97,7 +97,8 @@
                                     }">
                                         <div class="day-number">{{ day.date.getDate() }}</div>
                                         <router-link v-if="hasCourse(day.date)"
-                                            :to="'/course/' + getCourseIdByDate(day.date)" class="course-item">
+                                            :to="{ name: 'courseDetail', params: { id: getCourseIdByDate(day.date) } }"
+                                            class="course-item">
                                             <small v-if="getCourseTagByDate(day.date)" class="course-tag">
                                                 {{ getCourseTagByDate(day.date) }}
                                             </small>
@@ -114,7 +115,7 @@
                         </div>
 
                         <!-- 預約卡片清單 -->
-                        <div v-show="showList" class="col-7 col-md-11 col-sm-12 event-card-wrap">
+                        <div v-show="showList || isMobile" class="col-7 col-md-11 col-sm-12 event-card-wrap">
                             <div class="search-course-calendar-header">
                                 <span class="prev material-symbols-outlined"
                                     @click="prevListMonth">arrow_back_ios</span>
@@ -152,7 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <router-link :to="{ name: 'course_detail', params: { id: course.id } }"
+                                <router-link :to="{ name: 'courseDetail', params: { id: course.id } }"
                                     class="small-btn-primary">
                                     詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
                                 </router-link>
@@ -165,218 +166,10 @@
     </section>
 </template>
 
-<!-- <script>
-export default {
-    data() {
-        return {
-            weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            currentDate: new Date(),
-            currentListDate: new Date(),
-            courses: new Map(),
-            showCalen: true,
-            showList: false,
-            activeButton: "calen",
-            recommendedCourses: [],
-            courseData: [],
-        };
-    },
-    computed: {
-        currentMonth() {
-            return this.currentDate.getMonth() + 1;
-        },
-        currentYear() {
-            return this.currentDate.getFullYear();
-        },
-        startDayOfWeek() {
-            const startDate = new Date(
-                this.currentYear,
-                this.currentDate.getMonth(),
-                1
-            );
-            return startDate.getDay();
-        },
-        endDayOfWeek() {
-            const endDate = new Date(
-                this.currentYear,
-                this.currentDate.getMonth() + 1,
-                0
-            );
-            const endDay = endDate.getDay();
-            return 6 - endDay;
-        },
-        days() {
-            const days = [];
-            const startDate = new Date(
-                this.currentYear,
-                this.currentDate.getMonth(),
-                1
-                );
-                const endDate = new Date(
-                    this.currentYear,
-                    this.currentDate.getMonth() + 1,
-                    0
-                );
-                    
-                for (
-                    let date = startDate;
-                    date <= endDate;
-                    date.setDate(date.getDate() + 1)
-                ) {
-                const day = new Date(date);
-                days.push({
-                    date: day,
-                    isToday: day.toDateString() === new Date().toDateString(),
-                });
-            }
-            return days;
-        },
-        getMonthCourses() {
-            return (date) => {
-                const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
-                const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-                return Array.from(this.courses).filter(([courseDate]) => {
-                    const formattedDate = new Date(courseDate);
-                    return formattedDate >= monthStart && formattedDate <= monthEnd;
-                });
-            };
-        },
-    },
-
-    methods: {
-        prevMonth() {
-            this.currentDate = new Date(
-                this.currentDate.getFullYear(),
-                this.currentDate.getMonth() - 1
-            );
-        },
-        nextMonth() {
-            this.currentDate = new Date(
-                this.currentDate.getFullYear(),
-                this.currentDate.getMonth() + 1
-            );
-        },
-        prevListMonth() {
-            this.currentListDate = new Date(
-                this.currentListDate.getFullYear(),
-                this.currentListDate.getMonth() - 1
-            );
-        },
-        nextListMonth() {
-            this.currentListDate = new Date(
-                this.currentListDate.getFullYear(),
-                this.currentListDate.getMonth() + 1
-            );
-        },
-        formatDisplayDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}/${month}/${day}`;
-        },
-        formatDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        },
-        hasCourse(date) {
-            // 使用 has 方法檢查 Map 中是否存在該日期
-            const formattedDate = this.formatDate(date);
-            return this.courses.has(formattedDate);
-        },
-        getCourseTagByDate(date) {
-            const formattedDate = this.formatDate(date);
-            const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null;
-            return course ? course.tag : null;
-        },
-        getCourseNameByDate(date) {
-            const formattedDate = this.formatDate(date);
-            const course = this.courses.has(formattedDate)
-                ? this.courses.get(formattedDate)
-                : null;
-            return course ? course.name : "";
-        },
-        toggleButton(button) {
-            // 如果點擊的是 a 按鈕且已經被選中,則不做任何操作
-            if (button === "calen" && this.activeButton === "calen") {
-                return;
-            }
-            // 否則切換按鈕狀態
-            this.activeButton = button;
-        },
-        parseImg(file) {
-            return new URL(`../assets/img/course/courselist/${file}`, import.meta.url)
-                .href;
-        },
-        getRecommendedCourses() {
-            const currentDate = new Date();
-            const futureCoursesArray = Array.from(this.courses).filter(
-                ([date]) => new Date(date) >= currentDate
-            );
-
-            if (futureCoursesArray.length <= 4) {
-                this.recommendedCourses = futureCoursesArray.map(([date, course]) => ({
-                    ...course,
-                    date,
-                }));
-            } else {
-                const shuffledCourses = futureCoursesArray.sort(
-                    () => 0.5 - Math.random()
-                );
-                this.recommendedCourses = shuffledCourses
-                    .slice(0, 4)
-                    .map(([date, course]) => ({ ...course, date }));
-            }
-        },
-        getCourseIdByDate(date) {
-            const formattedDate = this.formatDate(date);
-            const course = this.courses.get(formattedDate);
-            return course ? course.id : '';
-        },
-    },
-
-    created() {
-        this.courses.set("2024-06-14", {
-            id: "course_detail",
-            img: "1.jpg",
-            link: "/CourseDetail.vue",
-            tag: null,
-            name: "品酒初級課程1",
-            price: 3200,
-            desc: "課程內容包括葡萄酒的基本知識、品酒技巧、如何選酒等。透過理論與實作快速掌握品酒的要領，開啟探索葡萄酒世界的大門。",
-        });
-        this.courses.set("2024-06-30", {
-            id: "course_detail",
-            img: "2.jpg",
-            tag: null,
-            name: "品酒中級課程1",
-            price: 3600,
-            desc: "深入探討葡萄酒風土、品種、釀造工藝及熟成，並透過系統化品評訓練，提升品酒技巧。",
-        });
-        this.courses.set("2024-07-01", {
-            id: "course_detail",
-            img: "3.jpg",
-            tag: null,
-            name: "品酒進階課程1",
-            price: 4200,
-            desc: "深入剖析頂級葡萄酒的特色，探討稀有品種與產區，透過大師級講師的指導，磨練品酒技藝成為真正的品酒專家。",
-        });
-        this.courses.set("2024-07-10", {
-            id: "course_detail",
-            img: "4.jpg",
-            tag: "早鳥優惠",
-            name: "品酒初級課程2",
-            price: 3800,
-            desc: "進一步探索葡萄酒的風味特性。透過品嚐不同產區與風格的葡萄酒，訓練您的味蕾，學習如何描述與分享品酒心得。",
-        });
-        this.getRecommendedCourses();
-        setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000);
-    },
-};
-</script> -->
-
 <script>
 import courseData from '../../public/courses.json';
+import { mapActions } from 'pinia';
+import courseStore from '@/stores/course';
 
 export default {
     data() {
@@ -389,9 +182,11 @@ export default {
             showList: false,
             activeButton: "calen",
             recommendedCourses: [],
-            courseData: courseData, // 將課程資訊存儲在data中
+            courseData: courseData,
+            isMobile: false,
         };
     },
+
     computed: {
         currentMonth() {
             return this.currentDate.getMonth() + 1;
@@ -442,9 +237,13 @@ export default {
             }
             return days;
         },
+        allCourse() {
+            return courseStore().allCourse;
+        },
     },
 
     methods: {
+        ...mapActions(courseStore, ['getData']),
         prevMonth() {
             this.currentDate = new Date(
                 this.currentDate.getFullYear(),
@@ -482,7 +281,6 @@ export default {
             return `${year}-${month}-${day}`;
         },
         hasCourse(date) {
-            // 使用 has 方法檢查 Map 中是否存在該日期
             const formattedDate = this.formatDate(date);
             return this.courses.has(formattedDate);
         },
@@ -499,11 +297,9 @@ export default {
             return course ? course.name : "";
         },
         toggleButton(button) {
-            // 如果點擊的是 a 按鈕且已經被選中,則不做任何操作
             if (button === "calen" && this.activeButton === "calen") {
                 return;
             }
-            // 否則切換按鈕狀態
             this.activeButton = button;
         },
         parseImg(file) {
@@ -543,15 +339,25 @@ export default {
                 return formattedDate >= monthStart && formattedDate <= monthEnd;
             });
         },
-
-        //不知道為什麼渲染不出來折扣後的價格
         discountedPrice(price, discount) {
             return discount ? price * (1 - discount) : price;
         },
+        checkIsMobile() {
+            this.isMobile = window.innerWidth < 450;
+        },
+    },
+
+    async mounted() {
+        window.addEventListener('resize', this.checkIsMobile);
+        await this.getData();
+        this.getRecommendedCourses();
+    },
+
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkIsMobile);
     },
 
     created() {
-        // 將課程資訊轉換為Map物件
         this.courseData.forEach(course => {
             this.courses.set(course.date, {
                 id: course.id,
@@ -563,8 +369,13 @@ export default {
             });
         });
 
-        this.getRecommendedCourses();
-        setInterval(this.getRecommendedCourses, 7 * 24 * 60 * 60 * 1000);
+        this.checkIsMobile();
+
+        if (this.isMobile) {
+            this.activeButton = 'list';
+            this.showList = true;
+            this.showCalen = false;
+        }
     },
 };
 </script>
