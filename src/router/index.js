@@ -87,6 +87,11 @@ const router = createRouter({
       component: () => import('@/views/CourseBookingDetail.vue')
     },
     {
+      path: '/courseBookingDetail_confirm',
+      name: 'courseBookingDetail_confirm',
+      component: () => import('@/views/CourseBookingDetail_confirm.vue')
+    },
+    {
       path: '/game',
       name: 'game',
       component: () => import('@/views/GameView.vue')
@@ -112,9 +117,14 @@ const router = createRouter({
       component: () => import('@/views/LoginView.vue')
     },
     {
-      path: '/new',
-      name: 'new',
+      path: '/news',
+      name: 'news',
       component: () => import('@/views/NewView.vue')
+    },
+    {
+      path: '/news_detail/:id',
+      name: 'news_detail',
+      component: () => import('@/views/NewsDetailView.vue')
     },
     {
       path: '/product',

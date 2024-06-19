@@ -65,8 +65,8 @@
       onSlideChange(swiper) {
         this.activeSlide = swiper.realIndex;
       },
-    },
-  };
+    }
+  }
 </script>
 
 <template>
@@ -76,31 +76,53 @@
       :loop="true"
       :centeredSlides="true"
       :initialSlide="2"
-      :loopAdditionalSlides="1"
+      :loopAdditionalSlides="2"
       :effect="'coverflow'"
       :coverflowEffect="{
         rotate: 0,
-        stretch: 10,
+        stretch: 0,
         depth: 200,
-        modifier: 1,
+        modifier: 3,
         slideShadows: false,
       }"
-      :navigation="true"
+      :breakpoints="{
+        430: {
+          coverflowEffect:{
+            rotate: 0,
+            stretch: 0,
+            depth: 500,
+            modifier: 1,
+            slideShadows: false,
+          }
+	      },
+        995: {
+          coverflowEffect:{
+            rotate: 0,
+            stretch: 0,
+            depth: 500,
+            modifier: 1,
+            slideShadows: false,
+          }
+	      }
+      }"
+      :navigation="{
+	    nextEl: '.swiper-button-next',
+	    prevEl: '.swiper-button-prev'
+	    }"
       :modules="modules"
       class="wineSwiper"
       @slideChange="onSlideChange"
     >
       <swiper-slide v-for="bottle in wine" :key="bottle.id">
-        <img :src="bottle.img" :alt="bottle.nameCh" />
+        <img :src="bottle.img" :alt="bottle.nameCh" class="bottle"/>
       </swiper-slide>
+      <button class="swiper-button swiper-button-next"></button>
+      <button class="swiper-button swiper-button-prev"></button>	
     </swiper>
     <div class="wine-content">
       <h2>{{ wine[activeSlide].nameEn }}</h2>
       <h3>{{ wine[activeSlide].nameCh }}</h3>
       <h4>NT. {{ wine[activeSlide].price }}</h4>
       <p>{{ wine[activeSlide].txt }}</p>
-      <div class="more-btn">
-        <RouterLink to="/product">MORE</RouterLink>
     </div>
-    </div>  
 </template>

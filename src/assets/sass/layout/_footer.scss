@@ -1,20 +1,26 @@
 .footer {
   background-color: #7f1023;
+  padding: 5%;
   .container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
   }
-  .footer_logo {
-    padding: 50px 0;
-    flex-grow: 1;
+  .footer-logo {
+    // padding: 50px 0;
+    width:25%;
+    // flex-grow: 1;
     img {
       display: block;
-      width: 250px;
+      width: 100%;
+    }
+    .footer-logo-s{
+      display: none;
     }
   }
   .wrap_contactus_aboutus {
     display: flex;
-    width: 350px;
+    width: 35%;
     justify-content: space-between;
     .footer_contactus {
       display: flex;
@@ -22,9 +28,10 @@
       a {
         color: #fff;
         letter-spacing: $letter-spacing;
-        font-size: map-get($font-size, a);
+        font-size: map-get($font-size, p);
         line-height: 2;
         font-family: $font-dm;
+        cursor: unset;
       }
     }
     .footer_aboutus {
@@ -33,15 +40,19 @@
       a {
         color: #fff;
         letter-spacing: $letter-spacing;
-        font-size: map-get($font-size, a);
+        font-size: map-get($font-size, p);
         line-height: 2;
         font-family: $font-dm;
+        text-decoration: none;
       }
+    }
+    @include t{
+      width: 50%;
     }
   }
 }
 .tibame {
-  padding: 50px 0;
+  padding: 3%;
   background-color: black;
   small {
     letter-spacing: $letter-spacing;
@@ -50,4 +61,58 @@
     display: block;
     font-family: $font-cormorant;
   }
+}
+
+@include t{
+  .footer {
+    .container {
+      align-items:center;
+      .footer-logo {
+        width: 20%;
+        .footer-logo-l{
+          display: none;
+        }
+        .footer-logo-s{
+          display: block;
+        }
+      }
+      .wrap_contactus_aboutus {
+        width: 70%;
+        justify-content: space-around;
+      }
+    }
+  } 
+}
+
+@include m{
+  .footer {
+    .container {
+      .footer-logo {
+        width: 18%;
+        .footer-logo-l{
+          display: none;
+        }
+        .footer-logo-s{
+          display: block;
+        }
+      }
+      .wrap_contactus_aboutus {
+        width: 75%;
+        .footer_contactus {
+          a {
+            font-size: map-get($font-size, small);
+            line-height: 1.5;
+          }
+        }
+        .footer_aboutus {
+          display: flex;
+          flex-direction: column;
+          a {
+            font-size: map-get($font-size, small);
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+  } 
 }
