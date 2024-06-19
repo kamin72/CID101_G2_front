@@ -47,8 +47,8 @@
             <p>
               {{ course.courseIntro }}
             </p>
-            <RouterLink to="/courseBookingDetail">
-              <button class="big-btn-primary reserveCourse">
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }"><button
+                class="big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
             </RouterLink>
@@ -68,18 +68,23 @@ import courseStore from '@/stores/course'
 
 
 export default {
-  props: ['id'],
+
   components: {
     CourseDetail1
   },
   data() {
     return {
       detail: [],
-      // course: null,
+    }
+  },
+  props: {
+    id: {
+      type: [Number, String],
+      required: true
     }
   },
   methods: {
-    ...mapActions(courseStore, ['getSpecificData']),
+    ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
       const date = new Date(dateString)
       const year = date.getFullYear()
@@ -113,21 +118,26 @@ export default {
     // },
   },
   mounted() {
+    //再呼叫一次pinia的getSpecificData()
     this.getSpecificData(this.$route.params.id)
+    // this.getData()
   },
   watch: {
     // '$route.params.id'() {
     //   const courseId = this.$route.params.id
-    //   this.getSpecificData(courseId)
-    // },
+    //   this.specificCourse = this.allCourse.find((course) => course.id == courseId)
+    // }
   },
   computed: {
-    ...mapState(courseStore, ['specificCourse']),
+    ...mapState(courseStore, ['specificCourse', 'allCourse']),
     course() {
+      //定義course = specificCourse
       return this.specificCourse
     }
-
-  }
+  },
+  created() {
+    console.log(this.specificCourse)
+  },
 }
 
 </script>
