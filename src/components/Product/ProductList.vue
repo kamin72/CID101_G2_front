@@ -13,7 +13,7 @@
 
   <div class="product-title-filter">
     <div class="col-12 our-product">
-      <div class="title-wrap">
+      <div class="product-title-wrap">
         <div class="line"></div>
         <h2>Our Product</h2>
         <div class="line"></div>

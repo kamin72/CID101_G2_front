@@ -93,7 +93,7 @@
       </div>
     </section>
 
-    <!-- 手機板 -->
+    <!-- 手機版 -->
     <section class="section-product-detail-sm">
       <div class="container">
         <div class="detail-img-sm">
