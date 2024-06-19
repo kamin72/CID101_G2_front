@@ -13,7 +13,7 @@
             <RouterLink to="/product">我們的酒</RouterLink>
             <RouterLink to="/course">品酒課程</RouterLink>
             <RouterLink to="/game">品酒達人</RouterLink>
-            <RouterLink to="/new">最新消息</RouterLink>
+            <RouterLink to="/news">最新消息</RouterLink>
             <RouterLink to="/about">關於我們</RouterLink>
           </li>
         </ul>
