@@ -2,7 +2,7 @@
     <section class="booking_flow">
         <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
-    <section class="course-booking-section">
+    <section class="course-booking-section" v-if="course">
         <div class=" course-booking-container">
             <form class="col-9 col-md-10 col-sm-12 course-booking-form">
                 <!-- 活動名稱 -->
@@ -130,7 +130,7 @@
                 </label>
             </div>
 
-            <RouterLink :to="`/courseBookingDetail_pay/${course.id}`" style="text-decoration: none;">
+            <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
                 <button :disabled="!isChecked"
                     :class="{ 'cursor-not-allowed': !isChecked, 'big-btn-primary': true, 'reserveCourse': true }"
                     class="big-btn-primary reserveCourse">
@@ -216,9 +216,19 @@ export default {
         }
     },
 
-    mounted() {
-        const courseId = this.$route.params.id; // 從路由參數獲取課程 ID
-        this.getSpecificData(courseId); // 調用 getSpecificData 方法獲取特定課程資料
+    // mounted() {
+    //     const courseId = this.$route.params.id // 從路由參數獲取課程 ID
+    //     this.getSpecificData(courseId)
+    //     this.updateSum()
+    // },
+    async mounted() {
+        try {
+            const courseId = this.$route.params.id
+            await this.getSpecificData(courseId)
+            this.updateSum() // 确保数据加载完成后更新结算金额
+        } catch (error) {
+            console.error("Failed to fetch specific course data:", error)
+        }
     },
     created() {
         // console.log(this.specificCourse) // 初始化會員資料
@@ -229,9 +239,10 @@ export default {
     watch: {
         '$route.params.id': {
             handler(newId) {
-                console.log(newId)
+                // console.log(newId)
                 this.getSpecificData(newId)
             },
+            immediate: true
         }
     },
 }

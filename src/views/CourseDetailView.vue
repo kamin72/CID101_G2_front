@@ -47,8 +47,8 @@
             <p>
               {{ course.courseIntro }}
             </p>
-            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }"><button
-                class="big-btn-primary reserveCourse">
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }" style="text-decoration: none;">
+              <button class=" big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
             </RouterLink>
@@ -74,7 +74,7 @@ export default {
   },
   data() {
     return {
-      detail: [],
+      detail: []
     }
   },
 
@@ -105,9 +105,9 @@ export default {
     },
     //解決部屬網站圖片問題
     // parseServerImg(file) {
-	  //   // 因為圖檔放在server中，只要組出路徑即可，
-	  //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
-	  //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
+    //   // 因為圖檔放在server中，只要組出路徑即可，
+    //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
+    //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
     //   return `${import.meta.env.VITE_FILE_URL}/${file}`
     // },
     discountedPrice(price, discount) {
@@ -119,10 +119,15 @@ export default {
     //   // this.course = courseStore().specificCourse;
     // },
   },
-  mounted() {
-    //再呼叫一次pinia的getSpecificData()
-    this.getSpecificData(this.$route.params.id)
-    // this.getData()
+  async mounted() {
+    try {
+      //再呼叫一次pinia的getSpecificData()
+      await this.getSpecificData(this.$route.params.id)
+    } catch (error) {
+      console.error("Failed to fetch specific course data:", error)
+    }
+
+
   },
   watch: {
     '$route.params.id': {
