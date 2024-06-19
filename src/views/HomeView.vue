@@ -47,9 +47,8 @@
         </div>
 
         <RouterLink to="/About">
-          <a href="#">
+
             <button>MORE</button>
-          </a>
         </RouterLink>
 
         <div class="homeAboutus_BarrelImg">
