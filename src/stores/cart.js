@@ -15,14 +15,16 @@ export default defineStore('cartStore', {
   // 對應 methods (物件形式)
   actions: {
     prodAllData() {
-      fetch('../../public/product.json')
+      // 部屬用-解析伺服器json位置
+      fetch(`${import.meta.env.VITE_FILE_URL}/product.json`)
         .then((response) => response.json())
         .then((data) => {
           this.cart = data
         })
     },
     prodData() {
-      fetch('../../public/product.json')
+      // 部屬用-解析伺服器json位置
+      fetch(`${import.meta.env.VITE_FILE_URL}/product.json`)
         .then((response) => response.json())
         .then((data) => {
           this.products = data

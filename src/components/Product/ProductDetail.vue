@@ -181,9 +181,6 @@
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
 
-// 部屬用-伺服器讀取json檔要用的
-// import {GET} from '@/plugin/axios'
-
 export default {
   data() {
     return {
@@ -191,12 +188,6 @@ export default {
       products:[],
       detail: {} //如果要用null, 要加v-if="detail"
     }
-  },
-  mounted() {
-    // 部屬用-伺服器讀取json檔要用的
-    this.fetchData();
-    // 如果有裝axios
-    //this.axiosFetchData();
   },
   computed: {
     likes() {
@@ -237,30 +228,6 @@ export default {
     parseImg(file) {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
     },
-    // 部屬用-解析伺服器json位置
-    // fetchData() {
-    //   fetch(`${import.meta.env.VITE_API_URL}/product.json`)
-    //   .then(res => res.json())
-    //   .then(data => {
-	  //     // 在這裡處理收到的數據
-    //     this.responseData = data.data;
-    //   })
-    //   .catch(error => {
-	  //     // 在這裡處理錯誤
-    //     console.error('Error fetching data:', error);
-    //   });
-    // },
-    // axiosFetchData() {
-    //   GET(`${import.meta.env.VITE_API_URL}/product.json`)
-    //   .then((response) => {
-	  //     // 在這裡處理收到的數據
-    //     this.responseData = response.data;
-    //   })
-    //   .catch((error) => {
-	  //     // 在這裡處理錯誤
-    //     console.error("Error fetching data:", error);
-    //   });
-    // }
   }
 }
 </script>
