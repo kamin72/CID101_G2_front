@@ -41,11 +41,11 @@
                 </div>
                 <div class="member_info">
                     <label>Email</label>
-                    <input type="text" value="123@email.com">
+                    <input type="text" value="abc123@email.com">
                 </div>
                 <div class="member_info">
                     <label>手機電話</label>
-                    <input type="text" value="091234567">
+                    <input type="text" value="0912345678">
                 </div>
                 <button class="big-btn-primary cart" style="display: inline-block;">儲存</button>
             </div>

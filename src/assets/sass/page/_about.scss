@@ -1,32 +1,66 @@
 // 關於我們
-.container {
 
-    // 關於酒窖
-    .section-about-us {
-        .about-us {
 
-            // margin: auto;
+// 關於酒窖
+.section-about-us {
+    .about-us-container {
+        // max-width: $max-width;
+        width: 100%;
+        margin: auto;
+        @include t {
+            margin: auto;
+        }
+        .about-us-row {
+            width: 100%;
+            .about-title-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+                @include t {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .line {
+                    background-color: $gray;
+                    width: 161.003px;
+                    height: 1px;
+                }
+
+                h2 {
+                    font-family: $font-cormorant;
+                    padding: 0 30px;
+                }
+            }
+
             .about-info {
                 display: flex;
-
+                align-items: center;
+                justify-content: center;
                 @include t {
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
                 }
-
                 .about-info-pic {
+                    // width: 90%;
                     width: 500px;
-                    height: 323px;
-
+                    // height: 323px;
+                    @include t {
+                        // width: 300px;
+                        width: 100%;
+                    }
                     img {
                         width: 100%;
                     }
                 }
 
                 .about-text {
-                    margin: 0 10px;
                     width: 400px;
-                    height: 400px;
+                    height: 350px;
+                    margin: 10px;
 
                     @include t {
                         width: 500px;
@@ -35,148 +69,246 @@
 
                     h5 {
                         line-height: 24px;
+                        margin: 10px;
+                        padding: 30px 0;
 
                         @include t {
                             margin: 20px;
                             line-height: 24px;
                         }
                     }
-
                 }
             }
         }
     }
+}
 
-    // 認識我們的關鍵人物
-    .key-people {
-        .people-info-list {
-            display: flex;
-            gap: 10px;
+// 認識我們的關鍵人物
+.section-key-people {
+    .key-people-container {
+        max-width: $max-width;
+        width: 100%;
+        margin: auto;
 
-            @include t {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .people-info {
-                .people-info-pic {
-                    width: 150px;
-                    height: 150px;
-
-                    img {
-                        width: 100%;
-                    }
-                }
-
-                h4 {
-                    margin: 10px 0;
-                }
-            }
-        }
-    }
-
-    // 超過五個十年的歷史
-    .about-our-history {
-        .history-process {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
+        @include t {
             margin: auto;
+        }
 
-            @include t {
-                margin: auto;
+        .key-people-row {
+            .about-title-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 0;
+
+                .line {
+                    background-color: $gray;
+                    width: 161.003px;
+                    height: 1px;
+                }
+
+                h2 {
+                    font-family: $font-cormorant;
+                    padding: 0 30px;
+                }
             }
 
-            .history-info {
+            .people-info-list {
                 display: flex;
-                margin: auto;
+                gap: 10px;
 
                 @include t {
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
                     justify-content: center;
-
                 }
 
-                .history-info-pic {
-                    width: 250px;
-                    height: 200px;
-                    margin: 10px 40px;
+                .people-info {
+                    .people-info-pic {
+                        width: 180px;
+                        height: 180px;
 
-                    @include t {
-                        width: 250px;
-                        height: 150px;
-                        margin: 0 10px 60px 0px;
-                    }
-
-                    img {
-                        width: 100%;
-                    }
-                }
-
-                .history-text {
-                    h3 {
-                        margin: 10px 0;
-
-                        @include t {
-                            font-size: 24px;
+                        img {
+                            width: 100%;
                         }
                     }
 
                     h4 {
                         margin: 10px 0;
-                        line-height: 26px;
-
-                        @include t {
-                            font-size: 16px;
-                        }
                     }
                 }
             }
         }
     }
+}
 
-    .traffic-information {
+// 超過五個十年的歷史
+.section-our-history {
+    .our-history-container {
+        max-width: $max-width;
+        width: 100%;
+        margin: auto;
+        @include t {
+            width: 80%;
+            margin: auto;
+        }
+        .our-history-row {
+            .about-title-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 40px auto;
+                .line {
+                    background-color: $gray;
+                    // width: 161.003px;
+                    width: 160px;
+                    height: 1px;
+                }
+                h2 {
+                    font-family: $font-cormorant;
+                    padding: 0 30px;
+                }
+            }
+            // 歷史過程
+            .history-process {
+                .history-info {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: auto;
+                    @include t {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .history-info-pic {
+                        width: 250px;
+                        height: 200px;
+                        // margin: 5px 40px;
+                        @include t {
+                            // width: 250px;
+                            // height: 150px;
+                            // margin: 0 10px 60px 0px;
+                        }
+                        img {
+                            width: 100%;
+                            vertical-align: middle;
+                        }
+                    }
+                    .history-text {
+                        h3 {
+                            margin: 10px 0;
+                            @include t {
+                                font-size: 24px;
+                                width: 50%;
+                                // height: 80px;
+                            }
+                        }
+                        h4 {
+                            margin: 10px 0;
+                            line-height: 30px;
+                            @include t {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+                .history-info-pic-dot {
+                    width: 20%;
+                    // width: 200px;
+                    // height: 100px;
+                    margin: 10px auto;
+                    padding: 20px 0;
+                    @include t {
+
+                        width: 200px;
+                        height: 100px;
+                        margin: 20px;
+                    }
+                    img {
+                        width: 100%;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// 交通資訊 
+.section-traffic-information {
+    .traffic-container {
+        max-width: $max-width;
+        width: 100%;
+        margin: auto;
+
+        .traffic-row {
+            .about-title-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+
+                .line {
+                    background-color: $gray;
+                    width: 161.003px;
+                    height: 1px;
+                }
+
+                h2 {
+                    font-family: $font-cormorant;
+                    padding: 0 30px;
+                }
+            }
+        }
+
         .traffic-item {
             display: flex;
             margin: auto;
+
             @include t {
                 display: flex;
                 flex-direction: column;
             }
+
             .traffic-map {
                 width: 600px;
                 height: 100%;
                 margin-bottom: 40px;
+                margin: auto;
+
                 @include t {
-                    width: 450px;
+                    width: 400px;
                     height: 100%;
                 }
+
                 iframe {
                     width: 100%;
                     vertical-align: middle;
                 }
             }
-        }
-        .traffic-list {
-            margin: 10px;
-            @include t {
-                margin: 5px auto 40px auto;
-            }
-            .traffic-text {
-                display: flex;
-                margin: 15px 5px;
+
+            .traffic-list {
+                margin: auto;
                 @include t {
-                    margin: 10px 0; 
+                    margin: 5px auto 40px auto;
                 }
-                .material-symbols-outlined {
-                    font-size: 24px;
-                }
-                h4 {
-                    margin: 2px;
+                .traffic-text {
+                    display: flex;
+                    margin: 15px 5px;
+
                     @include t {
-                        margin: 5px;
+                        margin: 10px 0;
+                    }
+                    .material-symbols-outlined {
+                        font-size: 24px;
+                    }
+                    h4 {
+                        @include t {
+                            margin: 5px;
+                        }
                     }
                 }
             }

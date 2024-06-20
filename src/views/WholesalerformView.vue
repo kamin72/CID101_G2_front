@@ -28,6 +28,7 @@
                             style="font-size: 18px;position: absolute;">visibility</span>
                     </div>
                 </div>
+                <!-- 再輸入一次密碼 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
                         <label>再輸入一次密碼</label>
@@ -79,7 +80,8 @@
                         <label>公司統編</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" id="tax_id" placeholder="請輸入公司統編">
+                        <input type="text" id="taxId" v-model="taxId"
+                        @blur="validateTaxId" placeholder="請輸入公司統編"> 
                     </div>
                 </div>
                 <div class="form_ltem_list">
@@ -88,42 +90,6 @@
                     </div>
                     <div class="form_box">
                         <input type="text" id="address" class="address" placeholder="請輸入地址">
-
-                        <!-- 
-                        考慮到是否有外國地址 以及資料表欄位只有address 由單一input比較好做
-                        <select class="address-select" id="address">
-                            <option value="disabled selected">縣市</option>
-                            <option value="台北市">台北市</option>
-                            <option value="新北市">新北市</option>
-                            <option value="桃園市">桃園市</option>
-                            <option value="台中市">台中市</option>
-                            <option value="台南市">台南市</option>
-                            <option value="高雄市">高雄市</option>
-                            <option value="基隆市">基隆市</option>
-                            <option value="新竹市">新竹市</option>
-                            <option value="嘉義市">嘉義市</option>
-                            <option value="新竹縣">新竹縣</option>
-                            <option value="苗栗縣">苗栗縣</option>
-                            <option value="彰化縣">彰化縣</option>
-                            <option value="南投縣">南投縣</option>
-                            <option value="雲林縣">雲林縣</option>
-                            <option value="嘉義縣">嘉義縣</option>
-                            <option value="屏東縣">屏東縣</option>
-                            <option value="宜蘭縣">宜蘭縣</option>
-                            <option value="花蓮縣">花蓮縣</option>
-                            <option value="台東縣">台東縣</option>
-                        </select>
-                        <select id="address" name="address" class="address-select">
-                            <option value="鄉鎮" disabled selected>鄉鎮</option>
-                        </select>
-                        <select id="address" name="address" class="address-select">
-                            <option value="路段" disabled selected>路段</option>
-                        </select>
-                        <input type="text" class="s-input">巷
-                        <input type="text" class="s-input">弄
-                        <input type="text" class="s-input">號之
-                        <input type="text" class="s-input">樓之
-                        <input type="text" class="s-input">室 -->
                     </div>
                 </div>
                 <div class="form_ltem_list" style="border: none;">
@@ -136,11 +102,11 @@
                     </div>
                 </div>
                 <div class="form_privacy_policy">
-                    <input type="checkbox" id="privacy_policy">
-                    <span>我同意隱私條款政策 [隱私條款政策]</span>
+                    <input type="checkbox" v-model="isChecked" id="privacy_policy">
+                    <span style="margin: 0 5px;">我同意隱私條款政策 [隱私條款政策]</span>
                 </div>
                 <RouterLink to="/wholesalerformok" style="text-decoration: none;">
-                    <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
+                    <input type="submit" :disabled="!isChecked" value="下一步" class="big-btn-primary" style="display: block;
                     margin: 10px auto;" />
                 </RouterLink>
             </form>
@@ -154,11 +120,13 @@ import CartFlow from '@/components/Cart/CartFlow.vue'
 export default {
     components: {
         CartFlow,
+        taxId: '',
+        isValidTaxId: true,
+
     },
     data() {
         return {
-            pwdFlag: true,
-            pwdFlags: true,
+            
             flow: [
                 {
                     id: 1,
@@ -176,7 +144,10 @@ export default {
                     bold: '0',
                     color: '#AEA495'
                 }
-            ]
+            ],
+            pwdFlag: true,
+            pwdFlags: true,
+            isChecked: false,
         }
     },
     methods: {
@@ -185,10 +156,17 @@ export default {
         },
         togglePasswords() {
             this.pwdFlags = !this.pwdFlags;
+        },
+        // 公司統編
+        validateTaxId() {
+            const taxIdPattern = /^\d{8}$/;
+            this.isValidTaxId = taxIdPattern.test(this.taxId);
+            if (!this.isValidTaxId) {
+                alert('請輸入有效的統編，必須是8位數字');
+            }
         }
-    }
+    },
 }
 </script>
-
 
 <style></style>

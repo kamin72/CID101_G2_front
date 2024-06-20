@@ -164,6 +164,11 @@ const router = createRouter({
       component: () => import('@/views/MemberCenterView.vue')
     },
     {
+      path: '/wholesalercenter',
+      name: 'wholesalercenter',
+      component: () => import('@/views/WholesalerCenterView.vue')
+    },
+    {
       path: '/ProductDetail/:id',
       name: 'ProductDetail',
       props: true,
