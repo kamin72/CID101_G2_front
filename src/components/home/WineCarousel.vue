@@ -22,7 +22,7 @@
             nameCh: '精釀紅酒 2016',
             price: '1200',
             txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: '/src/assets/img/wine/Elegant-Red-Wine.png',
+            img: 'Elegant-Red-Wine.png',
           },
           {
             id: 2,
@@ -30,7 +30,7 @@
             nameCh: '精選白葡萄酒',
             price: '1200',
             txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: '/src/assets/img/wine/Ice-White-Wine.png',
+            img: 'Ice-White-Wine.png',
           },
           {
             id: 3,
@@ -38,7 +38,7 @@
             nameCh: '葡萄酒3',
             price: '1200',
             txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: '/src/assets/img/wine/Pearl-White-Wine.png',
+            img: 'Pearl-White-Wine.png',
           },
           {
             id: 4,
@@ -46,7 +46,7 @@
             nameCh: '葡萄酒4',
             price: '1200',
             txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: '/src/assets/img/wine/Star-Fortified-Wine.png',
+            img: 'Star-Fortified-Wine.png',
           },
           {
             id: 5,
@@ -54,7 +54,7 @@
             nameCh: '葡萄酒5',
             price: '1200',
             txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: '/src/assets/img/wine/Sky-Sparkling-Wine.png',
+            img: 'Sky-Sparkling-Wine.png',
           },
         ],
         modules: [EffectCoverflow, Navigation],
@@ -65,6 +65,9 @@
       onSlideChange(swiper) {
         this.activeSlide = swiper.realIndex;
       },
+      parseImgWine(file) {
+                return new URL(`../../assets/img/wine/${file}`, import.meta.url).href;
+            },
     }
   }
 </script>
@@ -114,7 +117,7 @@
       @slideChange="onSlideChange"
     >
       <swiper-slide v-for="bottle in wine" :key="bottle.id">
-        <img :src="bottle.img" :alt="bottle.nameCh" class="bottle"/>
+        <img :src="parseImgWine(bottle.img)" :alt="bottle.nameCh" class="bottle"/>
       </swiper-slide>
       <button class="swiper-button swiper-button-next"></button>
       <button class="swiper-button swiper-button-prev"></button>	

@@ -27,8 +27,8 @@
         },
         mounted() {
             Promise.all([
-                fetch("/courses.json").then(response => response.json()),
-                fetch("/news.json").then(response => response.json()),
+                fetch(`${import.meta.env.BASE_URL}courses.json`).then(response => response.json()),
+                fetch(`${import.meta.env.BASE_URL}news.json`).then(response => response.json()),
             ])
             .then(([courseData, newsData]) => {
                 this.course = courseData.slice(0, 10); // 取前十個資料
