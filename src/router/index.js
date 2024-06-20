@@ -79,7 +79,7 @@ const router = createRouter({
     {
       path: '/courseBookingDetail_pay/:id',
       name: 'courseBookingDetail_pay',
-      component: () => import('@/views/CourseBookingDetail.vue')
+      component: () => import('@/views/CourseBookingDetail_payment.vue')
     },
     {
       path: '/courseBookingDetail/:id',
