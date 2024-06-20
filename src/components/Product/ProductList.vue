@@ -312,7 +312,7 @@ export default {
     },
     sortByPriceDescending() {
       // 按照價格由高到低排序產品
-      this.products.sort((a, b) => { b.price2 - a.price2 });
+      this.products.sort((a, b) => b.price2 - a.price2);
     },
     sortByPriceAscending() {
       // 按照價格由低到高排序產品
