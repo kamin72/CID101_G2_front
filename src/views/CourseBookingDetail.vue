@@ -184,7 +184,7 @@ export default {
                 },
             ],
             count: 0,
-            sum: 0,
+            // sum: 0,
             memName: 'John Doe',
             memEmail: 'john.doe@example.com',
             memPhone: '0912345678',
@@ -195,7 +195,10 @@ export default {
     computed: {
         ...mapState(courseStore, ['specificCourse', 'allCourse']), // 使用 mapState 獲取 specificCourse
         course() {
-            return this.specificCourse; // 定義 course 計算屬性返回 specificCourse
+            return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
+        },
+        sum() {
+            return this.count * this.course.price
         }
 
     },
@@ -204,38 +207,34 @@ export default {
         add() {
             if (this.count == 10) return
             this.count++
-            this.updateSum()
         },
         reduce() {
             if (this.count == 0) return
             this.count--
-            this.updateSum()
         },
-        updateSum() {
-            this.sum = this.count * this.course.price
-        }
+        // updateSum() {
+        //     this.sum = this.count * this.course.price
+        // }
     },
-
-    // mounted() {
-    //     const courseId = this.$route.params.id // 從路由參數獲取課程 ID
-    //     this.getSpecificData(courseId)
-    //     this.updateSum()
-    // },
     async mounted() {
         try {
             const courseId = this.$route.params.id
             await this.getSpecificData(courseId)
-            this.updateSum() // 确保数据加载完成后更新结算金额
+            // this.updateSum() // 确保数据加载完成后更新结算金额
         } catch (error) {
             console.error("Failed to fetch specific course data:", error)
         }
     },
-    created() {
-        // console.log(this.specificCourse) // 初始化會員資料
-
-        // 初始化結帳金額
-        // this.updateSum()
-    },
+    // async created() {
+    //     try {
+    //         const courseId = this.$route.params.id
+    //         await this.getSpecificData(courseId)
+    //         this.updateSum()
+    //         // 确保数据加载完成后更新结算金额
+    //     } catch (error) {
+    //         console.error("Failed to fetch specific course data:", error)
+    //     }
+    // },
     watch: {
         '$route.params.id': {
             handler(newId) {
