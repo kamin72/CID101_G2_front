@@ -175,9 +175,9 @@
 </template>
 
 <script>
-import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
-import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
-import image3 from '@/assets/img/wine/Ice-White-Wine.png'
+// import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
+// import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
+// import image3 from '@/assets/img/wine/Ice-White-Wine.png'
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
 
@@ -195,16 +195,17 @@ export default {
       // 篩裡面的id跟頁面的id不一樣的card,然後從裡面抽4個
     },
      // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的state,getters
-     ...mapState(cartStore, ['cart','cartCount']),
+    ...mapState(cartStore, ['cart','cartCount']),
   },
   watch: {
     '$route.params.id'() {
       const productId = this.$route.params.id // 從路由參數中獲取產品 ID
       this.detail = this.products.find((product) => product.id === Number(productId)) // 根據 ID 找到對應的產品詳情
-   }
+    }
   },
   created() {
-    fetch("/product.json")
+    // 部屬用-解析伺服器json位置
+    fetch(`${import.meta.env.VITE_API_URL}/product.json`)
     .then(response => response.json())
     .then(data => {
     this.products = data
@@ -228,5 +229,5 @@ export default {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
     },
   }
- }
+}
 </script>

@@ -186,7 +186,6 @@ export default {
             isMobile: false,
         };
     },
-
     computed: {
         currentMonth() {
             return this.currentDate.getMonth() + 1;

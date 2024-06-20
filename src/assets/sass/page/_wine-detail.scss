@@ -3,7 +3,7 @@
   color: black;
   text-decoration: none;
   font-size: 12px;
- }
+}
 
 //手機版的商品資訊隱藏
 .section-product-detail-sm, 
@@ -22,7 +22,8 @@
     .detail-img{
         width: 50%;   
       .detail-img-wrap{
-        background-image: url('../src/assets/img/wine/Background-image.png');
+        // 部屬用-解析圖片位置
+        background-image: url('https://tibamef2e.com/cid101/g2/img/Background-image.png');
         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
         background-position: center;
         background-repeat: no-repeat;
@@ -108,14 +109,15 @@
         width: 90%;
         margin: auto;
       .detail-img-wrap-sm{
-        background-image: url('../src/assets/img/wine/Background-image.png');
+        // 部屬用-解析圖片位置
+        background-image: url('https://tibamef2e.com/cid101/g2/img/Background-image.png');
         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
         background-repeat: no-repeat;
         margin-bottom: 20px;
         img{
             width: 100%;
             object-fit: cover; /* 讓圖片按照比例放大來適應容器 */
-         }
+        }
       }
     }
     .product-info-wrap-sm{

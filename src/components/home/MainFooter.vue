@@ -1,8 +1,9 @@
 <template>
   <footer class="footer">
     <nav class="container">
-      <div class="footer_logo">
-        <a href="#"><img src="/src/assets/img/logo/logo2-w.png" alt="" /></a>
+      <div class="footer-logo">
+        <RouterLink to="/"><img src="/src/assets/img/logo/logo2-w.png" alt="" class="footer-logo-l"/>
+        <img src="/src/assets/img/logo/logo1-w.png" alt="" class="footer-logo-s"></RouterLink>
       </div>
 
       <div class="wrap_contactus_aboutus">
@@ -11,7 +12,9 @@
         </div>
 
         <div class="footer_aboutus">
-          <a v-for="(aboutItem) in aboutUs" :key="aboutItem.id">{{ aboutItem.title }}</a>
+            <router-link v-for="(aboutItem) in aboutUs" :key="aboutItem.id" :to="{ name: aboutItem.page }">
+            {{ aboutItem.title }}
+            </router-link>
         </div>
       </div>
     </nav>
@@ -49,15 +52,18 @@ export default {
       aboutUs: [
         {
           id: 1,
-          title: "關於我"
+          title: "關於我們",
+          page:"about"
         },
         {
           id: 2,
-          title: "最新消息"
+          title: "最新消息",
+          page:"news"
         },
         {
           id: 3,
-          title: "品酒課程"
+          title: "品酒課程",
+          page:"course"
         }
       ]
     }

@@ -47,8 +47,8 @@
             <p>
               {{ course.courseIntro }}
             </p>
-            <RouterLink to="/courseBookingDetail">
-              <button class="big-btn-primary reserveCourse">
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }" style="text-decoration: none;">
+              <button class=" big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
             </RouterLink>
@@ -63,22 +63,28 @@
 
 <script>
 import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import courseStore from '@/stores/course'
 
+
 export default {
-  props: ['id'],
+
   components: {
     CourseDetail1
   },
   data() {
     return {
-      detail: [],
-      course: null,
+      detail: []
     }
   },
-  methods: {
-    ...mapActions(courseStore, ['getSpecificData']),
+  props: {
+    id: {
+      type: [Number, String],
+      required: true
+    }
+  },
+  methods: { // 要return東西
+    ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
       const date = new Date(dateString)
       const year = date.getFullYear()
@@ -102,23 +108,37 @@ export default {
     parseImg(file) {
       return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
     },
+    //解決部屬網站圖片問題
+    // parseServerImg(file) {
+    //   // 因為圖檔放在server中，只要組出路徑即可，
+    //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
+    //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
+    //   return `${import.meta.env.VITE_FILE_URL}/${file}`
+    // },
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
-    async fetchCourseData() {
-      const courseId = this.$route.params.id;
-      await this.getSpecificData(courseId);
-      this.course = courseStore().specificCourse;
-    },
   },
-  mounted() {
-    this.fetchCourseData();
+  async mounted() {
+    try {
+      //再呼叫一次pinia的getSpecificData()
+      await this.getSpecificData(this.$route.params.id)
+    } catch (error) {
+      console.error("Failed to fetch specific course data:", error)
+    }
+
+
   },
-  watch: {
-    '$route.params.id': {
-    handler: 'fetchCourseData',
-    immediate: true,
+  computed: { // computed是渲染畫面後要做的事
+    ...mapState(courseStore, ['specificCourse', 'allCourse']),
+    course() {
+      // 定義course = specificCourse
+      return this.specificCourse
+    }
   },
-  }
+  created() {
+    // console.log(this.specificCourse)
+  },
 }
+
 </script>

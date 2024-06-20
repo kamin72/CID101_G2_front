@@ -1,15 +1,9 @@
 <template>
-    <section>
-        <div class="container">
-            <div class="row">
-                <section class="booking_flow">
-                    <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
-                </section>
-            </div>
-        </div>
+    <section class="booking_flow">
+        <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
-    <section class="course-booking-section">
-        <div class="course-booking-container">
+    <section class="course-booking-section" v-if="course">
+        <div class=" course-booking-container">
             <form class="col-9 col-md-10 col-sm-12 course-booking-form">
                 <!-- 活動名稱 -->
                 <div class="form_ltem_list">
@@ -19,7 +13,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>品酒體驗-初級課程1</p>
+                        <p>{{ course.name }}</p>
                     </div>
                 </div>
 
@@ -31,7 +25,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>NT. 3,200</p>
+                        <p>NT. {{ course.price }}</p>
                     </div>
                 </div>
 
@@ -57,10 +51,12 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <div class="ppl-amount-btn-wrap">
-                            <button @click="$emit('reduce')" class="ppl-amount-btn">-</button>
-                            <span class="num">{{ item.count }}</span>
-                            <button @click="$emit('add')" class="ppl-amount-btn">+</button>
+                        <div class="amount">
+                            <button @click.prevent="reduce" class="material-symbols-outlined">remove</button>
+                            <span class="num">
+                                <p>{{ count }}</p>
+                            </span>
+                            <button @click.prevent="add" class="material-symbols-outlined">add</button>
                         </div>
                     </div>
                 </div>
@@ -73,7 +69,7 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <p>{{ sum }}</p>
+                        <p>NT. {{ sum }}</p>
                     </div>
                 </div>
 
@@ -121,19 +117,25 @@
                         </label>
                     </div>
                     <div class="form_box">
-                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"></textarea>
+                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"
+                            v-model="otherRequirements"></textarea>
                     </div>
                 </div>
             </form>
 
             <div class="form_privacy_policy">
-                <input type="checkbox">
-                <span>我同意隱私條款政策 [隱私條款政策]</span>
+                <input type="checkbox" id="privacyPolicyCheckbox" v-model="isChecked">
+                <label for="privacyPolicyCheckbox">
+                    <p>我同意隱私條款政策 [隱私條款政策]</p>
+                </label>
             </div>
 
-            <RouterLink to="/memberformok" style="text-decoration: none;">
-                <input type="submit" value="下一步" class="big-btn-primary" style="display: block;
-                margin: 10px auto;" />
+            <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
+                <button :disabled="!isChecked"
+                    :class="{ 'cursor-not-allowed': !isChecked, 'big-btn-primary': true, 'reserveCourse': true }"
+                    class="big-btn-primary reserveCourse">
+                    <span class="material-symbols-outlined">edit_calendar</span>預約課程
+                </button>
             </RouterLink>
         </div>
     </section>
@@ -141,6 +143,8 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import { mapState, mapActions } from 'pinia';
+import courseStore from '@/stores/course';
 
 export default {
     components: {
@@ -148,7 +152,6 @@ export default {
     },
     data() {
         return {
-            pwdFlag: true,
             flow: [
                 {
                     id: 1,
@@ -179,12 +182,67 @@ export default {
                     text: '完成預約',
                     bold: '300'
                 },
-            ]
+            ],
+            count: 0,
+            // sum: 0,
+            memName: 'John Doe',
+            memEmail: 'john.doe@example.com',
+            memPhone: '0912345678',
+            otherRequirements: '',
+            isChecked: false,
         }
     },
+    computed: {
+        ...mapState(courseStore, ['specificCourse', 'allCourse']), // 使用 mapState 獲取 specificCourse
+        course() {
+            return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
+        },
+        sum() {
+            return this.count * this.course.price
+        }
+
+    },
     methods: {
-    }
+        ...mapActions(courseStore, ['getSpecificData', 'getData']),// 使用 mapActions 獲取 getSpecificData 方法
+        add() {
+            if (this.count == 10) return
+            this.count++
+        },
+        reduce() {
+            if (this.count == 0) return
+            this.count--
+        },
+        // updateSum() {
+        //     this.sum = this.count * this.course.price
+        // }
+    },
+    async mounted() {
+        try {
+            const courseId = this.$route.params.id
+            await this.getSpecificData(courseId)
+            // this.updateSum() // 确保数据加载完成后更新结算金额
+        } catch (error) {
+            console.error("Failed to fetch specific course data:", error)
+        }
+    },
+    // async created() {
+    //     try {
+    //         const courseId = this.$route.params.id
+    //         await this.getSpecificData(courseId)
+    //         this.updateSum()
+    //         // 确保数据加载完成后更新结算金额
+    //     } catch (error) {
+    //         console.error("Failed to fetch specific course data:", error)
+    //     }
+    // },
+    watch: {
+        '$route.params.id': {
+            handler(newId) {
+                // console.log(newId)
+                this.getSpecificData(newId)
+            },
+            immediate: true
+        }
+    },
 }
 </script>
-
-<style></style>
