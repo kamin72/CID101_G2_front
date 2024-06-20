@@ -175,11 +175,14 @@
 </template>
 
 <script>
-import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
-import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
-import image3 from '@/assets/img/wine/Ice-White-Wine.png'
+// import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
+// import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
+// import image3 from '@/assets/img/wine/Ice-White-Wine.png'
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
+
+// 部屬用-伺服器讀取json檔要用的
+// import {GET} from '@/plugin/axios'
 
 export default {
   data() {
@@ -189,22 +192,29 @@ export default {
       detail: {} //如果要用null, 要加v-if="detail"
     }
   },
+  mounted() {
+    // 部屬用-伺服器讀取json檔要用的
+    this.fetchData();
+    // 如果有裝axios
+    //this.axiosFetchData();
+  },
   computed: {
     likes() {
       return this.products.filter((v) => v.id !== Number(this.$route.params.id)).slice(0, 4)
       // 篩裡面的id跟頁面的id不一樣的card,然後從裡面抽4個
     },
      // 這裡帶入兩個參數 : 一個是Store，另一個是要帶入的state,getters
-     ...mapState(cartStore, ['cart','cartCount']),
+    ...mapState(cartStore, ['cart','cartCount']),
   },
   watch: {
     '$route.params.id'() {
       const productId = this.$route.params.id // 從路由參數中獲取產品 ID
       this.detail = this.products.find((product) => product.id === Number(productId)) // 根據 ID 找到對應的產品詳情
-   }
+    }
   },
   created() {
-    fetch("/product.json")
+    // 部屬用-解析伺服器json位置
+    fetch(`${import.meta.env.VITE_API_URL}/product.json`)
     .then(response => response.json())
     .then(data => {
     this.products = data
@@ -227,6 +237,30 @@ export default {
     parseImg(file) {
         return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
     },
+    // 部屬用-解析伺服器json位置
+    // fetchData() {
+    //   fetch(`${import.meta.env.VITE_API_URL}/product.json`)
+    //   .then(res => res.json())
+    //   .then(data => {
+	  //     // 在這裡處理收到的數據
+    //     this.responseData = data.data;
+    //   })
+    //   .catch(error => {
+	  //     // 在這裡處理錯誤
+    //     console.error('Error fetching data:', error);
+    //   });
+    // },
+    // axiosFetchData() {
+    //   GET(`${import.meta.env.VITE_API_URL}/product.json`)
+    //   .then((response) => {
+	  //     // 在這裡處理收到的數據
+    //     this.responseData = response.data;
+    //   })
+    //   .catch((error) => {
+	  //     // 在這裡處理錯誤
+    //     console.error("Error fetching data:", error);
+    //   });
+    // }
   }
- }
+}
 </script>

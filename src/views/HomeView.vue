@@ -81,7 +81,7 @@
           :class="card.type"
     >
       <div class="dot" @click="toggleInfo(index)"></div>
-      <div class="card-wrap":class="{ active: card.isActive }">
+      <div class="card-wrap" :class="{ active: card.isActive }">
         <span class="line"></span>
         <div class="card-info">
           <div class="card-info-image">

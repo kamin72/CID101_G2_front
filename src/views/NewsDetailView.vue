@@ -116,7 +116,8 @@ export default {
             return new URL(`../assets/img/news/${file}`, import.meta.url).href;
         },
         fetchNewsData(newsId) {
-            fetch('/news.json')
+            // 部屬用-解析伺服器json位置
+            fetch(`${import.meta.env.VITE_API_URL}/news.json`)
             .then((response) => response.json())
             .then((data) => {
             this.news = data.find((news) => news.id == newsId)

@@ -65,10 +65,11 @@
       onSlideChange(swiper) {
         this.activeSlide = swiper.realIndex;
       },
-      parseImgWine(file) {
-                return new URL(`../../assets/img/wine/${file}`, import.meta.url).href;
-            },
-    }
+      // 部屬用-解析伺服器圖片路徑
+      parseServerImg(imgURL) {
+        return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+      },
+    },
   }
 </script>
 
@@ -117,7 +118,8 @@
       @slideChange="onSlideChange"
     >
       <swiper-slide v-for="bottle in wine" :key="bottle.id">
-        <img :src="parseImgWine(bottle.img)" :alt="bottle.nameCh" class="bottle"/>
+        <!-- 部屬用-解析伺服器圖片路徑 -->
+        <img :src="parseServerImg(bottle.img)" :alt="bottle.nameCh" class="bottle"/>
       </swiper-slide>
       <button class="swiper-button swiper-button-next"></button>
       <button class="swiper-button swiper-button-prev"></button>	
