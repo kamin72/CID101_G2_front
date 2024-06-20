@@ -16,7 +16,7 @@ export default defineStore('cartStore', {
   actions: {
     prodAllData() {
       // 部屬用-解析伺服器json位置
-      fetch(`${import.meta.env.VITE_FILE_URL}/product.json`)
+      fetch(`${import.meta.env.VITE_API_URL}/product.json`)
         .then((response) => response.json())
         .then((data) => {
           this.cart = data
@@ -24,7 +24,7 @@ export default defineStore('cartStore', {
     },
     prodData() {
       // 部屬用-解析伺服器json位置
-      fetch(`${import.meta.env.VITE_FILE_URL}/product.json`)
+      fetch(`${import.meta.env.VITE_API_URL}/product.json`)
         .then((response) => response.json())
         .then((data) => {
           this.products = data
