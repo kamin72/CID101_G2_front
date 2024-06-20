@@ -85,7 +85,8 @@
         <span class="line"></span>
         <div class="card-info">
           <div class="card-info-image">
-            <img :src="parseImgMap(card.img)" :alt="card.title">
+            <!-- 部屬用-解析圖片位置 -->
+            <img :src="parseServerImg(card.img)" :alt="card.title">
           </div>
           <div class="card-info-txt">
             <h4>{{ card.title }}</h4>
@@ -188,8 +189,15 @@ export default {
       }
     },
     parseImgMap(file) {
-                return new URL(`../assets/img/home/${file}`, import.meta.url).href;
-            },
+      return new URL(`../assets/img/home/${file}`, import.meta.url).href;
+    },
+    // 部屬用-解析圖片位置
+    parseServerImg(imgURL) {
+	    // 因為圖檔放在server中，只要組出路徑即可，
+	    // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
+	    // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
+      return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+    },
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
