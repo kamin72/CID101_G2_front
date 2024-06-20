@@ -47,8 +47,8 @@
             <p>
               {{ course.courseIntro }}
             </p>
-            <RouterLink to="/courseBookingDetail">
-              <button class="big-btn-primary reserveCourse">
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }"><button
+                class="big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
             </RouterLink>
@@ -63,22 +63,28 @@
 
 <script>
 import CourseDetail1 from '@/components/Course/CourseDetail1.vue'
-import { mapActions } from 'pinia'
+import { mapActions, mapState } from 'pinia'
 import courseStore from '@/stores/course'
 
+
 export default {
-  props: ['id'],
+
   components: {
     CourseDetail1
   },
   data() {
     return {
       detail: [],
-      course: null,
     }
   },
-  methods: {
-    ...mapActions(courseStore, ['getSpecificData']),
+  props: {
+    id: {
+      type: [Number, String],
+      required: true
+    }
+  },
+  methods: { // 要return東西
+    ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
       const date = new Date(dateString)
       const year = date.getFullYear()
@@ -105,20 +111,21 @@ export default {
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
-    async fetchCourseData() {
-      const courseId = this.$route.params.id;
-      await this.getSpecificData(courseId);
-      this.course = courseStore().specificCourse;
-    },
   },
   mounted() {
-    this.fetchCourseData();
+    // 再呼叫一次pinia的getSpecificData()
+    this.getSpecificData(this.$route.params.id)
   },
-  watch: {
-    '$route.params.id': {
-    handler: 'fetchCourseData',
-    immediate: true,
+  computed: { // computed是渲染畫面後要做的事
+    ...mapState(courseStore, ['specificCourse', 'allCourse']),
+    course() {
+      // 定義course = specificCourse
+      return this.specificCourse
+    }
   },
-  }
+  created() {
+    // console.log(this.specificCourse)
+  },
 }
+
 </script>

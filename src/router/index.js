@@ -74,13 +74,22 @@ const router = createRouter({
     {
       path: '/courseDetail/:id',
       name: 'courseDetail',
-      props: true,
       component: () => import('@/views/CourseDetailView.vue')
     },
     {
-      path: '/courseBookingDetail',
+      path: '/courseBookingDetail_pay/:id',
+      name: 'courseBookingDetail_pay',
+      component: () => import('@/views/CourseBookingDetail.vue')
+    },
+    {
+      path: '/courseBookingDetail/:id',
       name: 'courseBookingDetail',
       component: () => import('@/views/CourseBookingDetail.vue')
+    },
+    {
+      path: '/courseBookingDetail_confirm',
+      name: 'courseBookingDetail_confirm',
+      component: () => import('@/views/CourseBookingDetail_confirm.vue')
     },
     {
       path: '/game',
@@ -93,14 +102,14 @@ const router = createRouter({
       component: () => import('@/views/GameRuleView.vue')
     },
     {
-      path: '/gameAns',
-      name: 'gameAns',
-      component: () => import('@/views/GameAnsView.vue')
-    },
-    {
       path: '/gameTotal',
       name: 'gameTotal',
       component: () => import('@/views/GameTotalView.vue')
+    },
+    {
+      path: '/gameTest',
+      name: 'gameTest',
+      component: () => import('@/views/GameTestView.vue')
     },
     {
       path: '/login',
@@ -108,9 +117,14 @@ const router = createRouter({
       component: () => import('@/views/LoginView.vue')
     },
     {
-      path: '/new',
-      name: 'new',
+      path: '/news',
+      name: 'news',
       component: () => import('@/views/NewView.vue')
+    },
+    {
+      path: '/news_detail/:id',
+      name: 'news_detail',
+      component: () => import('@/views/NewsDetailView.vue')
     },
     {
       path: '/product',

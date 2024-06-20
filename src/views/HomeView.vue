@@ -18,7 +18,7 @@
 
   <!-- 關於我們 -->
   <section class="homeAboutus">
-    <div class="homeAboutus_container">
+    <div class="container homeAboutus_container">
       <div class="homeAboutus_pic">
         <img src="/src/assets/img/home/homeAboutus_pic.png" />
       </div>
@@ -47,9 +47,8 @@
         </div>
 
         <RouterLink to="/About">
-          <a href="#">
+
             <button>MORE</button>
-          </a>
         </RouterLink>
 
         <div class="homeAboutus_BarrelImg">
@@ -62,11 +61,19 @@
   <section class="wine">
   <div class="container">
 		<WineCarousel></WineCarousel>
+    <div class="more-btn">
+        <RouterLink to="/product">MORE</RouterLink>
+    </div>
 	</div>
 </section>
 <!-- 地圖 -->
 <section class="home-map">
   <div class="container">
+    <div class="title">
+        <span></span>
+        <h2>Winery Map</h2>
+        <span></span>
+    </div>
     <img src="../assets/img/home/home-map.png" alt="">
     <div v-for="(card, index) in map" 
           :key="index" 
@@ -74,11 +81,11 @@
           :class="card.type"
     >
       <div class="dot" @click="toggleInfo(index)"></div>
-      <div class="card-wrap":class="{ active: card.isActive }">
+      <div class="card-wrap" :class="{ active: card.isActive }">
         <span class="line"></span>
         <div class="card-info">
           <div class="card-info-image">
-            <img :src="card.img" :alt="card.title">
+            <img :src="parseImgMap(card.img)" :alt="card.title">
           </div>
           <div class="card-info-txt">
             <h4>{{ card.title }}</h4>
@@ -91,12 +98,12 @@
 </section>
 
   <!-- event輪播圖 -->
-  <section class="swiper-wrap swiper-event">
+  <section class="swiper-wrap swiper-course">
     <div class="container">
-      <SwiperComponent swiperTitle="Event"></SwiperComponent>
+      <SwiperComponent swiperTitle="Course"></SwiperComponent>
       <div class="more-btn">
         <RouterLink to="/course">MORE</RouterLink>
-    </div>
+      </div>
     </div>
   </section>
 <!-- news輪播圖 -->
@@ -104,7 +111,7 @@
     <div class="container">
       <SwiperComponent swiperTitle="News"></SwiperComponent>
       <div class="more-btn">
-        <RouterLink to="/new">MORE</RouterLink>
+        <RouterLink to="/news">MORE</RouterLink>
     </div>
     </div>
   </section>
@@ -130,35 +137,35 @@ export default {
           type: 'card-grape',
           title: '黑皮諾葡萄園',
           description: '這是一座翠綠山麓的小酒莊,擁有得天獨厚的火山岩土壤及涼爽宜人的氣候,非常適合栽種黑皮諾葡萄。陽光充足而夜涼的環境,孕育出獨特的酒香與層次豐富的口感。',
-          img: 'src/assets/img/home/home-map-grapegarden.png',
+          img: 'home-map-grapegarden.png',
           isActive: false
         },
         {
           type: 'card-service',
           title: '客服中心',
           description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
-          img: 'src/assets/img/home/home-map-service.png',
+          img: 'home-map-service.png',
           isActive: false
         },
         {
           type: 'card-class',
           title: '品酒學堂',
           description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
-          img: 'src/assets/img/home/home-map-class.png',
+          img: 'home-map-class.png',
           isActive: false
         },
         {
           type: 'card-oak',
           title: '橡木桶室',
           description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
-          img: 'src/assets/img/home/home-map-oak.png',
+          img: 'home-map-oak.png',
           isActive: false
         },
         {
           type: 'card-vintage',
           title: '釀造室',
           description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
-          img: 'src/assets/img/home/home-map-vintage.png',
+          img: 'home-map-vintage.png',
           isActive: false
         }
       ]
@@ -179,7 +186,10 @@ export default {
       if (!event.target.closest('.card')) {
         this.map.forEach(card => card.isActive = false);
       }
-    }
+    },
+    parseImgMap(file) {
+                return new URL(`../assets/img/home/${file}`, import.meta.url).href;
+            },
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
