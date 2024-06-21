@@ -20,7 +20,7 @@
                     class="col-3 col-md-6 col-sm-6 event-card1"
                     :to="{ name: 'courseDetail', params: { id: course.id } }">
                     <div class="event-card1-img-wrap">
-                        <img :src="parseImg(course.img)" />
+                        <img :src="parseServerImg(course.img)" />
                         <div v-if="course.tag" class="event-card1-tag">
                             <p>{{ course.tag }}</p>
                         </div>
@@ -134,7 +134,7 @@
                                     <p>{{ course.tag }}</p>
                                 </div>
                                 <div class="event-card2-img-wrap">
-                                    <img :src="parseImg(course.img)" />
+                                    <img :src="parseServerImg(course.img)" />
                                 </div>
                                 <div class="event-card2-info-wrap">
                                     <div class="event-card2-left-wrap">
@@ -301,9 +301,8 @@ export default {
             }
             this.activeButton = button;
         },
-        parseImg(file) {
-            return new URL(`../assets/img/course/courselist/${file}`, import.meta.url)
-                .href;
+        parseServerImg(file) {
+            return `${import.meta.env.VITE_FILE_URL}/${file}`
         },
         getRecommendedCourses() {
             const currentDate = new Date();

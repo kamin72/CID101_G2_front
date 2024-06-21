@@ -2,10 +2,10 @@
   <!-- 大圖banner -->
   <div class="courseBanner" v-if="course">
     <div class="bgImgWrap">
-      <img :src="parseImg(course.image)" alt="" />
+      <img :src="parseServerImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
-      <img src="../assets/img/home/homebanner2.png" alt="" />
+      <img :src="parseServerImg(homebanner2.png)" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
@@ -105,16 +105,9 @@ export default {
 
       return hours
     },
-    parseImg(file) {
-      return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
+    parseServerImg(file) {
+      return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
-    //解決部屬網站圖片問題
-    // parseServerImg(file) {
-    //   // 因為圖檔放在server中，只要組出路徑即可，
-    //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
-    //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
-    //   return `${import.meta.env.VITE_FILE_URL}/${file}`
-    // },
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
