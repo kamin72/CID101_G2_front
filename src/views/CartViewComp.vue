@@ -36,8 +36,8 @@
         </div>
       </div>
       <aside class="coupon">
-        <Coupon />
-        <div class="terms">
+        <!-- <Coupon /> -->
+        <div class="termsComp">
           <p>
             本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
@@ -48,7 +48,8 @@
             SipsVineyard的最新消息</label>
         </div>
         <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none">
-          <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
+          <button class="big-btn-primary cartSubmit"
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">送出詢價單</button>
         </RouterLink>
       </aside>
     </div>
@@ -60,7 +61,7 @@
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import CartList from '@/components/Cart/CartList.vue'
-import Coupon from '@/components/Cart/Coupon.vue'
+// import Coupon from '@/components/Cart/Coupon.vue'
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
 
@@ -68,7 +69,7 @@ export default {
   components: {
     CartFlow,
     CartList,
-    Coupon,
+    // Coupon,
     CartFlowRWD
   },
   data() {
@@ -158,13 +159,6 @@ export default {
         product.isChecked = this.allChecked
       })
     },
-    // getProduct() {
-    //   let storage = localStorage.getItem('cart');
-    //   //先檢查'cart'是否存在
-    //   storage = storage ? JSON.parse(storage) : [];
-
-    //   this.products = storage;
-    // },
     clearAllProduct() {
       if (this.allChecked == true) {
         this.cleanCart()

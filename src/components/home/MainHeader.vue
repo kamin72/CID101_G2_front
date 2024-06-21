@@ -60,16 +60,6 @@ export default {
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
     },
-    // getData() {
-    //   let storage = localStorage.getItem('cart');
-    //   //先檢查'cart'是否存在
-    //   storage = storage ? JSON.parse(storage) : [];
-
-    //   this.currentProducts = storage;
-
-    //   // console.log(this.currentProducts)
-    // },
-
   },
   mounted() {
     this.checkCart()

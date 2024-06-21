@@ -13,7 +13,8 @@
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
         <RouterLink :to="{ path: 'pay_info', query: { method: selectedMethod } }" style="text-decoration: none">
-          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit">
+          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit"
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">
             提交配送資訊
           </button>
         </RouterLink>
