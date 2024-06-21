@@ -48,7 +48,7 @@
 
         <RouterLink to="/About">
 
-            <button>MORE</button>
+          <button>MORE</button>
         </RouterLink>
 
         <div class="homeAboutus_BarrelImg">
@@ -57,46 +57,42 @@
       </div>
     </div>
   </section>
-<!-- 酒瓶輪播 -->
+  <!-- 酒瓶輪播 -->
   <section class="wine">
-  <div class="container">
-		<WineCarousel></WineCarousel>
-    <div class="more-btn">
+    <div class="container">
+      <WineCarousel></WineCarousel>
+      <div class="more-btn">
         <RouterLink to="/product">MORE</RouterLink>
+      </div>
     </div>
-	</div>
-</section>
-<!-- 地圖 -->
-<section class="home-map">
-  <div class="container">
-    <div class="title">
+  </section>
+  <!-- 地圖 -->
+  <section class="home-map">
+    <div class="container">
+      <div class="title">
         <span></span>
         <h2>Winery Map</h2>
         <span></span>
-    </div>
-    <img src="../assets/img/home/home-map.png" alt="">
-    <div v-for="(card, index) in map" 
-          :key="index" 
-          class="card" 
-          :class="card.type"
-    >
-      <div class="dot" @click="toggleInfo(index)"></div>
-      <div class="card-wrap" :class="{ active: card.isActive }">
-        <span class="line"></span>
-        <div class="card-info">
-          <div class="card-info-image">
-            <!-- 部屬用-解析圖片位置 -->
-            <img :src="parseServerImg(card.img)" :alt="card.title">
-          </div>
-          <div class="card-info-txt">
-            <h4>{{ card.title }}</h4>
-            <p>{{ card.description }}</p>
+      </div>
+      <img src="../assets/img/home/home-map.png" alt="">
+      <div v-for="(card, index) in map" :key="index" class="card" :class="card.type">
+        <div class="dot" @click="toggleInfo(index)"></div>
+        <div class="card-wrap" :class="{ active: card.isActive }">
+          <span class="line"></span>
+          <div class="card-info">
+            <div class="card-info-image">
+              <!-- 部屬用-解析圖片位置 -->
+              <img :src="parseServerImg(card.img)" :alt="card.title">
+            </div>
+            <div class="card-info-txt">
+              <h4>{{ card.title }}</h4>
+              <p>{{ card.description }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- event輪播圖 -->
   <section class="swiper-wrap swiper-course">
@@ -107,13 +103,13 @@
       </div>
     </div>
   </section>
-<!-- news輪播圖 -->
+  <!-- news輪播圖 -->
   <section class="swiper-wrap swiper-news">
     <div class="container">
       <SwiperComponent swiperTitle="News"></SwiperComponent>
       <div class="more-btn">
         <RouterLink to="/news">MORE</RouterLink>
-    </div>
+      </div>
     </div>
   </section>
 </template>
@@ -127,9 +123,6 @@ export default {
   components: {
     SwiperComponent,
     WineCarousel
-  },
-  mounted() {
-    window.scrollTo(0, 0), document.addEventListener('click', this.handleClickOutside)
   },
   data() {
     return {
@@ -193,14 +186,15 @@ export default {
     },
     // 部屬用-解析圖片位置
     parseServerImg(imgURL) {
-	    // 因為圖檔放在server中，只要組出路徑即可，
-	    // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
-	    // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
+      // 因為圖檔放在server中，只要組出路徑即可，
+      // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
+      // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
       return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
     },
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
+    window.scrollTo(0, 0), document.addEventListener('click', this.handleClickOutside)
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
