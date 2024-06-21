@@ -225,16 +225,6 @@ export default {
             console.error("Failed to fetch specific course data:", error)
         }
     },
-    // async created() {
-    //     try {
-    //         const courseId = this.$route.params.id
-    //         await this.getSpecificData(courseId)
-    //         this.updateSum()
-    //         // 确保数据加载完成后更新结算金额
-    //     } catch (error) {
-    //         console.error("Failed to fetch specific course data:", error)
-    //     }
-    // },
     watch: {
         '$route.params.id': {
             handler(newId) {
