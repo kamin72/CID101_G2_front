@@ -57,7 +57,6 @@
                   <input type="checkbox" :id="option" :value="option" v-model="selectedOptions[index]" />
                   <label :for="option"> {{ option }}</label>
                 </li>
-                <!-- <li><button class="menu-filter-button" @click="applyFilter(index)" >確定</button></li> -->
               </ul>
             </div>
           </div>
@@ -66,13 +65,19 @@
         <!-- 價格排序按鈕 -->
         <div class="filters">
           <div class="filter">
-            <!-- @change="handleSortChange($event.target.value)"：這是一個事件綁定，當下拉選單的值發生變化時（即用戶選擇不同的選項時），會調用handleSortChange方法來處理這個事件 -->
-            <!-- $event.target.value表示當前選中的選項的value屬性的值，即排序方式（desc或asc） -->
-            <select class="filter-button" @change="handleSortChange($event.target.value)">
+          <!-- <div class="filter" v-for="(dropdown, index) in dropdowns.slice(3,4)" :key="index"> -->
+            <!-- <button class="filter-button" @click="toggleDropdown(index)">
+              <span class="button-text"> {{ dropdown.label }}</span>
+              <span v-if="dropdown.isMenuVisible"><i class="fa-solid fa-angle-up"></i></span>
+              <span v-else><i class="fa-solid fa-angle-down"></i></span>
+            </button> -->
+
+
+             <select class="filter-button" @change="handleSortChange($event.target.value)">
               <option value="desc">價格由高到低</option>
               <option value="asc">價格由低到高</option>
               <option class="button-text" value disabled selected hidden>價格排序</option>
-            </select>
+            </select> 
           </div>
         </div>
 
@@ -227,6 +232,12 @@ export default {
           isMenuVisible: false,
           options: ['2020年', '2019年', '2018年', '2017年', '2014年', '2013年', '2012年', '2009年'],
         },
+        // {
+        //   label: '價格排序',
+        //   isOpen: false,
+        //   isMenuVisible: false,
+        //   options: ['價格由高到低', '價格由低到高'],
+        // }
 
       ],
       // 新增狀態以追蹤選中的選項
