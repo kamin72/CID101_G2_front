@@ -4,23 +4,17 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormAccount
-        v-model:name="name"
-        v-model:address="address"
-        v-model:phone="phone"
-        v-model:email="email"
-        @update:name="saveToLocalstorage"
-        @update:address="saveToLocalstorage"
-        @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage"
-      />
+      <FormAccount v-model:name="name" v-model:address="address" v-model:phone="phone" v-model:email="email"
+        @update:name="saveToLocalstorage" @update:address="saveToLocalstorage" @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage" />
       <aside class="yardInfo">
         <YardInfo />
       </aside>
     </div>
     <div class="button">
       <RouterLink to="/cart_account/cart_finish_account" from="" style="text-decoration: none">
-        <button class="big-btn-primary accountSubmit" :disabled="!canSubmit">提交資料</button>
+        <button class="big-btn-primary accountSubmit" :disabled="!canSubmit"
+          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">提交資料</button>
       </RouterLink>
     </div>
   </div>
