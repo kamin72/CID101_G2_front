@@ -7,28 +7,20 @@
                 </span>
                 <span class="material-symbols-outlined">arrow_forward_ios</span>
                 <span class="frontPage-bread">
-                    <RouterLink to="/membercenter">會員中心</RouterLink>
+                    <RouterLink to="/wholesalercenter">會員中心</RouterLink>
                 </span>
                 <span class="material-symbols-outlined">arrow_forward_ios</span>
                 訂單紀錄
             </small>
         </div>
         <div class="center_menu">
-            <RouterLink to="/membercenter" style="text-decoration: none;">
+            <RouterLink to="/wholesalercenter" style="text-decoration: none;">
                 <!-- <button class="big-btn-primary"">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
             <RouterLink to="/memberorderhistory" style="text-decoration: none;">
                 <!-- <button class="big-btn-secondary">訂單紀錄</button> -->
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
-            </RouterLink>
-            <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">預約紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
-            </RouterLink>
-            <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
         <!-- 訂單紀錄 -->

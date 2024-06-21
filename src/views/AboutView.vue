@@ -3,11 +3,11 @@
     <div class="row">
       <!-- 頁面scrumble -->
       <small class="col-12 scrumble">
-        <!-- <RouterLink to="/">首頁</RouterLink> -->
-        首頁
-        <span class="material-symbols-outlined">
-          arrow_forward_ios
-        </span>關於我們
+        <span class="frontPage-bread">
+          <RouterLink to="/">首頁</RouterLink>
+        </span>
+        <span class="material-symbols-outlined">arrow_forward_ios</span>
+        關於我們
       </small>
     </div>
   </div>
@@ -104,10 +104,10 @@
         <div class="history-process">
           <div class="history-info">
             <div class="history-info-pic"
-            style="margin-right: 20px;">
+            style="margin: 0 30px;">
               <img src="@/assets/img/about/beginning.png">
             </div>
-            <div class="history-text">
+            <div class="history-text" style="margin-right: 20px;">
               <h3>1967<br>
                 The Beginning</h3>
               <h4>我們的莊園在1967年成立，<br>

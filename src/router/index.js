@@ -194,6 +194,11 @@ const router = createRouter({
       component: () => import('@/views/MemberOrderHistoryView.vue')
     },
     {
+      path: '/wholesalerorderhistory',
+      name: 'wholesalerorderhistory',
+      component: () => import('@/views/WholesalerOrderHistoryView.vue')
+    },
+    {
       path: '/bookinghistory',
       name: 'bookinghistory',
       component: () => import('@/views/BookingHistoryView.vue')

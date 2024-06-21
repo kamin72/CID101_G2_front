@@ -9,6 +9,7 @@
         margin: auto;
         @include t {
             margin: auto;
+            width: 80%;
         }
         .about-us-row {
             width: 100%;
@@ -63,8 +64,9 @@
                     margin: 10px;
 
                     @include t {
-                        width: 500px;
-                        height: 323px;
+                        width: 100%;
+                        // width: 500px;
+                        // height: 323px;
                     }
 
                     h5 {
@@ -126,14 +128,12 @@
 
                 .people-info {
                     .people-info-pic {
-                        width: 180px;
-                        height: 180px;
-
+                        width: 250px;
+                        height: 250px;
                         img {
                             width: 100%;
                         }
                     }
-
                     h4 {
                         margin: 10px 0;
                     }
@@ -158,11 +158,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin: 40px auto;
+                padding: 40px 0;
+
                 .line {
                     background-color: $gray;
-                    // width: 161.003px;
-                    width: 160px;
+                    width: 161.003px;
                     height: 1px;
                 }
                 h2 {
@@ -197,6 +197,9 @@
                         }
                     }
                     .history-text {
+                        @include t {
+                            margin: 0 30px;
+                        }
                         h3 {
                             margin: 10px 0;
                             @include t {
@@ -224,7 +227,7 @@
 
                         width: 200px;
                         height: 100px;
-                        margin: 20px;
+                        margin: 20px auto;
                     }
                     img {
                         width: 100%;

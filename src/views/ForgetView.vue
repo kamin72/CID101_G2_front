@@ -10,14 +10,16 @@
                 <p>2</p>
             </div>
             <div class="account_list">
-                <input type="text" id="account" placeholder="請輸入電子信箱">
+                <input type="text" id="email" v-model="email" @blur="validateEmail" placeholder="請輸入電子信箱">
             </div>
-            <RouterLink to="/forgetok" class="function_btn"> 
-                <button type="button" class="big-btn-primary" style="margin: 20px; display: inline-block;">發送信件</button>
-            </RouterLink>
-            <!-- 
-            由信件內容提供連結forgetok
-            <div class="account_list">
+            <!-- <span v-if="!isValidEmail" class="prompt">請輸入有效的電子郵件地址</span> -->
+            <span v-if="errorMessage" class="prompt">{{ errorMessage }}</span>
+            <button type="button" class="big-btn-primary" :disabled="!isEmailValid" style="margin-top: 80px; display: inline-block;">
+                發送信件
+            </button>
+            <!-- 由信件內容提供連結forgetok -->
+
+            <!-- <div class="account_list">
                 <input type="text" id="account" placeholder="請輸入驗證碼">
             </div>
             <div class="function_btn"  style="margin-top: 40px">
@@ -30,13 +32,27 @@
 </template>
 
 <script>
+export default {
+    data() {
+        return {
+            email: '',
+            errorMessage: '',
+        }
+    },
+    methods: {
+        validateEmail() {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(this.email)) {
+                this.errorMessage = '請輸入有效的電子郵件';
+                return false;
+            }
+            this.errorMessage = '';
+            return this.$router.push('/forgetok');
+        },
+    }
+}
 </script>
 
 <style>
-
-.material-symbols-outlined {
-    font-size: 16px;
-    padding-left: 180px;
-}
 
 </style>

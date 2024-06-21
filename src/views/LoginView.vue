@@ -10,6 +10,7 @@
                 </div>
                 <div class="account_list">
                     <input type="text" id="account" v-model="account" autocomplete="account" placeholder="帳號">
+                    <!-- <span v-if="!isValidaccount">請輸入有效的帳號</span> -->
                 </div>
                 <div class="password_list">
                     <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password" autocomplete="password" placeholder="密碼">
@@ -20,7 +21,7 @@
                         </span>
                     </div>
                 </div>
-                <RouterLink to="/forget">
+                <RouterLink to="/forget" style="text-decoration: none;">
                     <a href="#" class="forget">忘記密碼?</a>
                 </RouterLink>
                 <!-- <RouterLink to="/membercenter">
