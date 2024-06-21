@@ -36,7 +36,7 @@
                     class="col-4 col-md-6 col-sm-12 news-card"
                     :to="{ name: 'news_detail', params: { id: newsItem.id } }">
                     <div class="news-pic">
-                      <img :src="parseImg(newsItem.image)" alt="最新消息圖片"/>
+                      <img :src="parseServerImg(newsItem.image)" alt="最新消息圖片"/>
                     </div>
                     <p class="news-date">{{ newsItem.date }} </p>
                     <h4 class="news-title"> {{ newsItem.name }} </h4>
@@ -57,6 +57,10 @@ export default {
     parseImg(file) {
       return new URL(`../assets/img/news/${file}`, import.meta.url).href
     },
+    // 部屬用-解析伺服器圖片路徑
+    parseServerImg(imgURL) {
+            return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+        },
   },
   mounted() {
     // 部屬用-解析伺服器json位置
