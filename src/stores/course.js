@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 export default defineStore('courseStore', {
   state: () => ({
     allCourse: [],
-    specificCourse: null
+    specificCourse: null,
+    tempCourse: []
   }),
 
   actions: {
@@ -27,6 +28,10 @@ export default defineStore('courseStore', {
             console.error('Failed to fetch specific course:', error)
           })
       }
+    },
+    storeCourse() {
+      let storage = localStorage.setItem('course', JSON.stringify(this.specificCourse))
+      this.tempCourse = storage
     }
   }
 })
