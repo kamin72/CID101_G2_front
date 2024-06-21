@@ -57,19 +57,27 @@ export default {
         <span></span>
     </div>
     <!-- Course -->
-    <Swiper :navigation="{
+    <Swiper 
+        :navigation="{
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
-    }" :slidesPerView="2" :breakpoints="{
-        430: {
+        }" 
+        :slidesPerView="2" 
+        :breakpoints="{
+            430: {
             slidesPerView: 3,
             spaceBetween: 20,
-        },
-        995: {
+            },
+            995: {
             slidesPerView: 4,
             spaceBetween: 30,
-        },
-    }" :spaceBetween="30" :loop="true" :modules="modules" v-if="swiperTitle === 'Course'">
+            },
+        }" 
+        :spaceBetween="30" 
+        :loop="true" 
+        :modules="modules" 
+        v-if="swiperTitle === 'Course'"
+    >
         <swiper-slide v-for="(item) in course" :key="item.id">
             <router-link :to="{ name: 'courseDetail', params: { id: item.id } }">
                 <div class="img-wrap">
