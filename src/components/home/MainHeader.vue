@@ -40,7 +40,7 @@ import cartStore from '@/stores/cart'
 export default {
   data() {
     return {
-      isNavOpen: false,
+      isNavOpen: false
       // currentProducts: []
     }
   },
@@ -59,12 +59,11 @@ export default {
     ...mapActions(cartStore, ['checkCart']),
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
-    },
+    }
   },
   mounted() {
     this.checkCart()
     // console.log(this.cart)
-  },
+  }
 }
-
 </script>

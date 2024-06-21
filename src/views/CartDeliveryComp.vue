@@ -7,14 +7,24 @@
       <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <div class="wrap_all">
-      <FormComp v-model:phone="phone" v-model:email="email" @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage" />
+      <FormComp
+        v-model:phone="phone"
+        v-model:email="email"
+        @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage"
+      />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
-        <RouterLink :to="{ path: 'pay_info', query: { method: selectedMethod } }" style="text-decoration: none">
-          <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit"
-            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">
+        <RouterLink
+          :to="{ path: 'pay_info', query: { method: selectedMethod } }"
+          style="text-decoration: none"
+        >
+          <button
+            class="big-btn-primary deliverySubmit"
+            :disabled="!canSubmit"
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          >
             提交配送資訊
           </button>
         </RouterLink>
@@ -100,11 +110,9 @@ export default {
       email: ''
     }
   },
-  created() { },
+  created() {},
   mounted() {
-    window.scrollTo(0, 0),
-      window.addEventListener('resize', this.updateWindowWidth),
-      this.showLocalstorage()
+    window.addEventListener('resize', this.updateWindowWidth), this.showLocalstorage()
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
