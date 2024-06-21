@@ -5,7 +5,10 @@
       <div class="homeBanner_wine">
         <div class="homeBanner_wine_wapper">
           <img src="/src/assets/img/wine/bannerwine.png" class="image" />
-          <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
+          <div class="shadow">
+            <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
+          </div>
+          
         </div>
       </div>
       <div class="homeBanner_txt">
@@ -13,7 +16,10 @@
         <h2>WINE</h2>
         <h4>JOURNEYS</h4>
       </div>
-    </div>
+      <div class="homeBanner_mountain">
+        <img src="/src/assets/img/home/homebanner2.png" alt="">
+      </div>
+    </div>   
   </section>
 
   <!-- 關於我們 -->

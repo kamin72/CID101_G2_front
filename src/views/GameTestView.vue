@@ -32,6 +32,9 @@
         <div class="wine-glass-base"></div> <!-- 新增红酒杯的底部 -->
       </div>
     </div>
+    <Router-link to="/GameTotal">
+      <button>領取</button>
+    </Router-link>
     </div>
   </section>
 </template>
