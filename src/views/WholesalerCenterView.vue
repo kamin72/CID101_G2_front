@@ -1,32 +1,32 @@
 <template>
     <div class="container">
         <div class="row">
-            <small class="col-12 scrumble">首頁<span
-                    class="material-symbols-outlined">arrow_forward_ios</span>我們的酒</small>
+            <small class="col-12 scrumble">
+                <span class="frontPage-bread">
+                    <RouterLink to="/">首頁</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="frontPage-bread">
+                    <RouterLink to="/wholesalercenter">會員中心</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                批發商會員資料
+            </small>
         </div>
+        <!-- 會員中心導覽列 -->
         <div class="center_menu">
-            <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">會員資料</button> -->
+            <RouterLink to="/wholesalercenter" style="text-decoration: none;">
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
-            <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">訂單紀錄</button> -->
+            <RouterLink to="/wholesalerorderhistory" style="text-decoration: none;">
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
-            </RouterLink>
-            <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">預約紀錄</button> -->
-                <button :class="buttonClass"style="display: inline; margin: 0 2px;">預約紀錄</button>
-            </RouterLink>
-            <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
         <div class="wrap_mem_center">
             <div class="member_info_list">
                 <div class="member_type">
-                    <h3>王小明</h3>
-                    <h4>一般會員</h4>
+                    <h3>王大明</h3>
+                    <h4>批發商會員</h4>
                 </div>
                 <div class="member_icon">
                     <span class="material-symbols-outlined">perm_contact_calendar</span>
@@ -34,17 +34,33 @@
                 </div>
                 <div class="member_info">
                     <label>會員帳號</label>
-                    <input type="text" value="abc123" disabled="disabled" style="background-color: #F8F5F2;">
+                    <input type="text" value="who456" disabled="disabled" style="background-color: #F8F5F2;">
                 </div>
                 <div class="member_info">
                     <label>Email</label>
-                    <input type="text" value="123@email.com">
+                    <input type="text" value="who456@email.com">
                 </div>
                 <div class="member_info">
                     <label>手機電話</label>
-                    <input type="text" value="091234567">
+                    <input type="text" value="0900000000">
                 </div>
-                <button class="big-btn-primary cart">儲存</button>
+                <div class="member_info">
+                    <label>公司名稱</label>
+                    <input type="text" value="緯育股份有限公司" disabled="disabled" style="background-color: #F8F5F2;">
+                </div>
+                <div class="member_info">
+                    <label>公司統編</label>
+                    <input type="text" value="34567890" disabled="disabled" style="background-color: #F8F5F2;">
+                </div>
+                <div class="member_info">
+                    <label>公司地址</label>
+                    <input type="text" value="桃園市中壢區復興路46號9樓" disabled="disabled" style="background-color: #F8F5F2;">
+                </div>
+                <div class="member_info">
+                    <label></label>
+                    <input type="text" value="(公司資訊如需更動請聯絡我們)" disabled="disabled" style="background-color: #F8F5F2;">
+                </div>
+                <button class="big-btn-primary cart" style="display: inline-block;">儲存</button>
             </div>
         </div>
     </div>
@@ -103,11 +119,13 @@ export default {
     justify-content: center;
     border-bottom: 10px solid #EDE7DE;
 }
+
 .member_type h3 {
-    margin: 10px 0 ;
+    margin: 10px 0;
 }
+
 .member_type h4 {
-    margin: 10px 0 0 50px ;
+    margin: 10px 0 0 50px;
 }
 
 .member_icon {

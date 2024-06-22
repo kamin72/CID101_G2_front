@@ -101,6 +101,7 @@
         background-color: #FFFFFF;
         color: black;
         border: none;
+        outline: none;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -275,9 +276,9 @@
     background-color: #DFD4C3;
     border: 1px solid #ddd;
     list-style: none;
-    padding: 5px;
     width: 100%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding-top: 5px;
+    box-shadow: 3px 3px 5px #322d2641;
     z-index:1;
 
       li {

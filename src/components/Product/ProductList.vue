@@ -27,10 +27,11 @@
         <!-- 迭代每個篩選器的選中選項 -->
         <div>
           <!-- 迭代每個選中的選項 -->
-          <span v-for="option in selectedOptions.flat()" :key="option" class="selected-filter">
+          <span v-for="(option, index) in selectedOptions.flat()" :key="`${option}-${index}`" class="selected-filter">
             {{ option }}
             <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
-            <i class="fa fa-times" @click="removeOption(index, option)"></i>
+            <!-- <i class="fa fa-times" @click="removeOption(index, option)"></i> -->
+            <i class="fa fa-times" @click="removeOption(option)"></i>
           </span>
         </div>
       </div>
@@ -56,7 +57,6 @@
                   <input type="checkbox" :id="option" :value="option" v-model="selectedOptions[index]" />
                   <label :for="option"> {{ option }}</label>
                 </li>
-                <!-- <li><button class="menu-filter-button" @click="applyFilter(index)" >確定</button></li> -->
               </ul>
             </div>
           </div>
@@ -65,13 +65,19 @@
         <!-- 價格排序按鈕 -->
         <div class="filters">
           <div class="filter">
-            <!-- @change="handleSortChange($event.target.value)"：這是一個事件綁定，當下拉選單的值發生變化時（即用戶選擇不同的選項時），會調用handleSortChange方法來處理這個事件 -->
-            <!-- $event.target.value表示當前選中的選項的value屬性的值，即排序方式（desc或asc） -->
-            <select class="filter-button" @change="handleSortChange($event.target.value)">
+          <!-- <div class="filter" v-for="(dropdown, index) in dropdowns.slice(3,4)" :key="index"> -->
+            <!-- <button class="filter-button" @click="toggleDropdown(index)">
+              <span class="button-text"> {{ dropdown.label }}</span>
+              <span v-if="dropdown.isMenuVisible"><i class="fa-solid fa-angle-up"></i></span>
+              <span v-else><i class="fa-solid fa-angle-down"></i></span>
+            </button> -->
+
+
+             <select class="filter-button" @change="handleSortChange($event.target.value)">
               <option value="desc">價格由高到低</option>
               <option value="asc">價格由低到高</option>
               <option class="button-text" value disabled selected hidden>價格排序</option>
-            </select>
+            </select> 
           </div>
         </div>
 
@@ -86,10 +92,10 @@
         <!-- 迭代每個篩選器的選中選項 -->
         <div>
           <!-- 迭代每個選中的選項 -->
-          <span v-for="option in selectedOptions.flat()" :key="option" class="selected-filter-sm">
+          <span v-for="option in selectedOptions.flat()" :key="`${option}-${index}`" class="selected-filter-sm">
             {{ option }}
             <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
-            <i class="fa fa-times" @click="removeOption(index, option)"></i>
+            <i class="fa fa-times" @click="removeOption(option)"></i>
           </span>
         </div>
       </div>
@@ -226,6 +232,12 @@ export default {
           isMenuVisible: false,
           options: ['2020年', '2019年', '2018年', '2017年', '2014年', '2013年', '2012年', '2009年'],
         },
+        // {
+        //   label: '價格排序',
+        //   isOpen: false,
+        //   isMenuVisible: false,
+        //   options: ['價格由高到低', '價格由低到高'],
+        // }
 
       ],
       // 新增狀態以追蹤選中的選項
@@ -291,17 +303,14 @@ export default {
 
     // 方法接收兩個參數：dropdownIndex 表示篩選器的索引，option 表示要移除的選項。
     // 獲取指定篩選器的選中選項。
-    removeOption(dropdownIndex, option) {
-      const options = this.selectedOptions[dropdownIndex];
-
-      // 找到要移除選項的索引。
-      const optionIndex = options.indexOf(option);
-
-      // 如果 optionIndex 不是 -1，表示 option 存在於 options 中。
-      if (optionIndex !== -1) {
-        // 使用 splice 方法從 options 中移除 option。
-        options.splice(optionIndex, 1);
-      }
+    removeOption(option) {
+      this.selectedOptions.forEach((options, dropdownIndex) => {
+        const optionIndex = options.indexOf(option);
+        if (optionIndex !== -1) {
+          // 從該子陣列中移除該選項
+          options.splice(optionIndex, 1);
+        }
+      });
     },
     handleSortChange(value) {
       if (value === 'desc') {
@@ -312,7 +321,7 @@ export default {
     },
     sortByPriceDescending() {
       // 按照價格由高到低排序產品
-      this.products.sort((a, b) => { b.price2 - a.price2 });
+      this.products.sort((a, b) => b.price2 - a.price2);
     },
     sortByPriceAscending() {
       // 按照價格由低到高排序產品

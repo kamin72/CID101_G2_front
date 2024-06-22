@@ -76,7 +76,7 @@
             font-size: 16px;
             border-bottom: 1px solid #322D26;
             display: flex;
-            margin: 30px 50px;
+            margin: 5px 50px;
             padding: 5px 0;
 
             input {
@@ -84,8 +84,17 @@
                 outline: none;
                 background-color: #F8F5F2;
             }
-
+            
+            
         }
+        .prompt {
+                font-size: 12px;
+                color: red;
+                display: block;
+                text-align: start;
+                margin: 5px 50px;
+            }
+        
         
         .password_list {
             font-size: 16px;

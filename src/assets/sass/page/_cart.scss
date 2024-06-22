@@ -383,9 +383,37 @@ section {
         }
       }
     }
-    .terms {
+    .termsComp {
       p {
         padding: 50px 10px 20px;
+        line-height: 25px;
+        @include t() {
+          padding: 20px 10px;
+        }
+      }
+      label {
+        width: 100%;
+        float: left;
+        padding: 10px 0 0;
+        font-size: map-get($font-size, p);
+        font-weight: $font-weight;
+        font-family: $font-dm, $font-noto;
+        input {
+          margin-right: 5px;
+        }
+      }
+      label:nth-child(4) {
+        padding: 10px 0px 20px;
+        margin-bottom: 50px;
+        border-bottom: 1px solid;
+        @include t() {
+          padding: 10px 0 20px;
+        }
+      }
+    }
+    .terms {
+      p {
+        padding: 20px 10px 20px;
         border-top: 1px solid;
         line-height: 25px;
         @include t() {
@@ -404,7 +432,8 @@ section {
         }
       }
       label:nth-child(4) {
-        padding: 10px 0px 50px;
+        padding: 10px 0px 20px;
+        margin-bottom: 50px;
         border-bottom: 1px solid;
         @include t() {
           padding: 10px 0 20px;
@@ -415,9 +444,6 @@ section {
       .cartSubmit {
         width: 100%;
         margin-top: 20px;
-      }
-      .cartSubmit:disabled {
-        cursor: not-allowed;
       }
     }
   }
@@ -510,9 +536,6 @@ section {
   .deliverySubmit {
     margin-top: 50px;
     width: 100%;
-  }
-  .deliverySubmit:disabled {
-    cursor: not-allowed;
   }
 }
 
@@ -622,9 +645,30 @@ section {
     }
   }
 }
-// .area{
+.area {
+  label {
+    font-size: map-get($font-size, p);
+    font-weight: $font-weight;
+    font-family: $font-dm;
+  }
+  .filter-button {
+    margin: 10px 0;
+    width: 200px;
+    padding: 7px 0px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-// }
+    .button-text {
+      margin-left: 5px;
+    }
+  }
+}
 .storeAddress {
   h4 {
     padding: 10px 0;

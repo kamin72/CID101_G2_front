@@ -1,9 +1,17 @@
 <template>
     <div class="container">
         <div class="row">
-            <small class="col-12 scrumble">首頁
-                <span class="material-symbols-outlined">arrow_forward_ios</span>會員中心
-                <span class="material-symbols-outlined">arrow_forward_ios</span>會員資料</small>
+            <small class="col-12 scrumble">
+                <span class="frontPage-bread">
+                    <RouterLink to="/">首頁</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="frontPage-bread">
+                    <RouterLink to="/membercenter">會員中心</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                一般會員資料
+            </small>
         </div>
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
@@ -41,11 +49,11 @@
                 </div>
                 <div class="member_info">
                     <label>Email</label>
-                    <input type="text" value="123@email.com">
+                    <input type="text" value="abc123@email.com">
                 </div>
                 <div class="member_info">
                     <label>手機電話</label>
-                    <input type="text" value="091234567">
+                    <input type="text" value="0912345678">
                 </div>
                 <button class="big-btn-primary cart" style="display: inline-block;">儲存</button>
             </div>

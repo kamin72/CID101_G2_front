@@ -16,12 +16,21 @@
           <div class="item">單價</div>
           <div class="item">數量</div>
           <div class="item">總金額</div>
-          <div class="allDelet_icon"><span class="material-symbols-outlined" @click="clearAllProduct"> delete </span>
+          <div class="allDelet_icon">
+            <span class="material-symbols-outlined" @click="clearAllProduct"> delete </span>
           </div>
         </div>
-        <CartList v-for="(productItem, productIndex) in products" :key="productItem.id" :item="productItem"
-          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
+        <CartList
+          v-for="(productItem, productIndex) in products"
+          :key="productItem.id"
+          :item="productItem"
+          :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)"
+          @reduce="reduce(productIndex)"
+          @deleteProductItem="onDeletProductItem"
+        />
         <div class="sum">
           <div class="text">總價</div>
           <div class="price">NT. {{ sum }}</div>
@@ -36,19 +45,32 @@
         </div>
       </div>
       <aside class="coupon">
-        <Coupon />
-        <div class="terms">
+        <!-- <Coupon /> -->
+        <div class="termsComp">
           <p>
             本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
-          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
-          <label><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
-            SipsVineyard的最新消息</label>
+          <label
+            ><input
+              type="checkbox"
+              class="agree"
+              v-model="agreeTerms"
+            />我同意所有交易條款[查看條款]</label
+          >
+          <label
+            ><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
+            SipsVineyard的最新消息</label
+          >
         </div>
         <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none">
-          <button class="big-btn-primary cartSubmit" :disabled="!canSubmit">送出詢價單</button>
+          <button
+            class="big-btn-primary cartSubmit"
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          >
+            送出詢價單
+          </button>
         </RouterLink>
       </aside>
     </div>
@@ -60,7 +82,7 @@
 import CartFlow from '@/components//Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import CartList from '@/components/Cart/CartList.vue'
-import Coupon from '@/components/Cart/Coupon.vue'
+// import Coupon from '@/components/Cart/Coupon.vue'
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
 
@@ -68,7 +90,7 @@ export default {
   components: {
     CartFlow,
     CartList,
-    Coupon,
+    // Coupon,
     CartFlowRWD
   },
   data() {
@@ -158,13 +180,6 @@ export default {
         product.isChecked = this.allChecked
       })
     },
-    // getProduct() {
-    //   let storage = localStorage.getItem('cart');
-    //   //先檢查'cart'是否存在
-    //   storage = storage ? JSON.parse(storage) : [];
-
-    //   this.products = storage;
-    // },
     clearAllProduct() {
       if (this.allChecked == true) {
         this.cleanCart()
@@ -178,9 +193,6 @@ export default {
     }
   },
   mounted() {
-    // fetch(`../../public/product.json`)
-    //   .then((res) => res.json())
-    //   .then((jsonData) => (this.products = jsonData))
     window.addEventListener('resize', this.updateWindowWidth)
     this.checkCart()
   },
@@ -211,7 +223,7 @@ export default {
   },
   provide() {
     return {
-      total: this.total,
+      total: this.total
     }
   }
 }

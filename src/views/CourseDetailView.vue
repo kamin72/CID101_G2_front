@@ -2,10 +2,10 @@
   <!-- 大圖banner -->
   <div class="courseBanner" v-if="course">
     <div class="bgImgWrap">
-      <img :src="parseImg(course.image)" alt="" />
+      <img :src="parseServerImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
-      <img src="../assets/img/home/homebanner2.png" alt="" />
+      <img :src="parseServerImg(homebanner2.png)" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
@@ -47,8 +47,8 @@
             <p>
               {{ course.courseIntro }}
             </p>
-            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }"><button
-                class="big-btn-primary reserveCourse">
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.id } }" style="text-decoration: none;">
+              <button class=" big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
             </RouterLink>
@@ -74,7 +74,7 @@ export default {
   },
   data() {
     return {
-      detail: [],
+      detail: []
     }
   },
   props: {
@@ -105,16 +105,22 @@ export default {
 
       return hours
     },
-    parseImg(file) {
-      return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
+    parseServerImg(file) {
+      return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
   },
-  mounted() {
-    // 再呼叫一次pinia的getSpecificData()
-    this.getSpecificData(this.$route.params.id)
+  async mounted() {
+    try {
+      //再呼叫一次pinia的getSpecificData()
+      await this.getSpecificData(this.$route.params.id)
+    } catch (error) {
+      console.error("Failed to fetch specific course data:", error)
+    }
+
+
   },
   computed: { // computed是渲染畫面後要做的事
     ...mapState(courseStore, ['specificCourse', 'allCourse']),

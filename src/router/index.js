@@ -7,12 +7,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { title: 'Silken Sip Vineyard' }
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: () => import('../views/AboutView.vue'),
+      meta: { title: '關於我們' }
     },
     {
       path: '/cart_comp',
@@ -37,7 +39,8 @@ const router = createRouter({
             }
           }
         }
-      ]
+      ],
+      meta: { title: '購物車 | 公司行號', requiresAuth: true }
     },
     {
       path: '/cart_account',
@@ -64,103 +67,123 @@ const router = createRouter({
             }
           }
         }
-      ]
+      ],
+      meta: { title: '購物車 | 一般會員', requiresAuth: true }
     },
     {
       path: '/course',
       name: 'course',
-      component: () => import('@/views/CourseView.vue')
+      component: () => import('@/views/CourseView.vue'),
+      meta: { title: '品酒課程' }
     },
     {
       path: '/courseDetail/:id',
       name: 'courseDetail',
-      component: () => import('@/views/CourseDetailView.vue')
+      component: () => import('@/views/CourseDetailView.vue'),
+      meta: { title: '品酒課程 | 課程詳情' }
     },
     {
       path: '/courseBookingDetail_pay/:id',
       name: 'courseBookingDetail_pay',
-      component: () => import('@/views/CourseBookingDetail.vue')
+      component: () => import('@/views/CourseBookingDetail_payment.vue'),
+      meta: { title: '品酒課程 | 付款流程' }
     },
     {
       path: '/courseBookingDetail/:id',
       name: 'courseBookingDetail',
-      component: () => import('@/views/CourseBookingDetail.vue')
+      component: () => import('@/views/CourseBookingDetail.vue'),
+      meta: { title: '品酒課程 | 預約課程' }
     },
     {
       path: '/courseBookingDetail_confirm',
       name: 'courseBookingDetail_confirm',
-      component: () => import('@/views/CourseBookingDetail_confirm.vue')
+      component: () => import('@/views/CourseBookingDetail_confirm.vue'),
+      meta: { title: '品酒課程 | 確認預約資料' }
     },
     {
       path: '/game',
       name: 'game',
-      component: () => import('@/views/GameView.vue')
+      component: () => import('@/views/GameView.vue'),
+      meta: { title: '品酒達人' }
     },
     {
       path: '/gameRule',
       name: 'gameRule',
-      component: () => import('@/views/GameRuleView.vue')
+      component: () => import('@/views/GameRuleView.vue'),
+      meta: { title: '品酒達人 | 遊戲規則' }
     },
     {
       path: '/gameTotal',
       name: 'gameTotal',
-      component: () => import('@/views/GameTotalView.vue')
+      component: () => import('@/views/GameTotalView.vue'),
+      meta: { title: '品酒達人 | 遊戲分數' }
     },
     {
       path: '/gameTest',
       name: 'gameTest',
-      component: () => import('@/views/GameTestView.vue')
+      component: () => import('@/views/GameTestView.vue'),
+      meta: { title: '品酒達人 | 遊戲測驗' }
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/LoginView.vue'),
+      meta: { title: '會員登入' }
     },
     {
       path: '/news',
       name: 'news',
-      component: () => import('@/views/NewView.vue')
+      component: () => import('@/views/NewView.vue'),
+      meta: { title: '最新消息' }
     },
     {
       path: '/news_detail/:id',
       name: 'news_detail',
-      component: () => import('@/views/NewsDetailView.vue')
+      component: () => import('@/views/NewsDetailView.vue'),
+      meta: { title: '最新消息 | 消息詳情' }
     },
     {
       path: '/product',
       name: 'product',
-      component: () => import('@/views/ProductView.vue')
+      component: () => import('@/views/ProductView.vue'),
+      meta: { title: '我們的酒' }
     },
 
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('@/views/SignupView.vue')
+      component: () => import('@/views/SignupView.vue'),
+      meta: { title: '會員註冊' }
     },
     {
       path: '/forget',
       name: 'forget',
-      component: () => import('@/views/ForgetView.vue')
+      component: () => import('@/views/ForgetView.vue'),
+      meta: { title: '忘記密碼' }
     },
     {
       path: '/forgetok',
       name: 'forgetok',
-      component: () => import('@/views/ForgetokView.vue')
+      component: () => import('@/views/ForgetokView.vue'),
+      meta: { title: '忘記密碼 | 重設成功' }
     },
     {
       path: '/memberform',
       name: 'memberform',
-      component: () => import('@/views/MemberformView.vue')
+      component: () => import('@/views/MemberformView.vue'),
+      meta: { title: '會員註冊 | 一般會員' }
     },
     {
       path: '/memberformok',
       name: 'memberformok',
-      component: () => import('@/views/MemberformokView.vue')
+      component: () => import('@/views/MemberformokView.vue'),
+      meta: { title: '會員註冊 | 填寫完成' }
     },
     {
       path: '/wholesalerform',
       name: 'wholesalerform',
-      component: () => import('@/views/WholesalerformView.vue')
+      component: () => import('@/views/WholesalerformView.vue'),
+      meta: { title: '會員註冊 | 公司行號' }
     },
     // {
     //   path: '/product-detail',
@@ -170,43 +193,62 @@ const router = createRouter({
     {
       path: '/wholesalerformok',
       name: 'wholesalerformok',
-      component: () => import('@/views/WholesalerformokView.vue')
+      component: () => import('@/views/WholesalerformokView.vue'),
+      meta: { title: '會員註冊 | 填寫完成' }
     },
     {
       path: '/membercenter',
       name: 'membercenter',
-      component: () => import('@/views/MemberCenterView.vue')
+      component: () => import('@/views/MemberCenterView.vue'),
+      meta: { title: '會員中心' }
+    },
+    {
+      path: '/wholesalercenter',
+      name: 'wholesalercenter',
+      component: () => import('@/views/WholesalerCenterView.vue'),
+      meta: { title: '會員中心' }
     },
     {
       path: '/ProductDetail/:id',
       name: 'ProductDetail',
       props: true,
-      component: () => import('@/views/ProductdetailView.vue')
+      component: () => import('@/views/ProductdetailView.vue'),
+      meta: { title: '我們的酒 | 產品詳情' }
     },
     {
       path: '/memberorderhistory',
       name: 'memberorderhistory',
-      component: () => import('@/views/MemberOrderHistoryView.vue')
+      component: () => import('@/views/MemberOrderHistoryView.vue'),
+      meta: { title: '會員中心 | 訂單紀錄' }
+    },
+    {
+      path: '/wholesalerorderhistory',
+      name: 'wholesalerorderhistory',
+      component: () => import('@/views/WholesalerOrderHistoryView.vue')
     },
     {
       path: '/bookinghistory',
       name: 'bookinghistory',
-      component: () => import('@/views/BookingHistoryView.vue')
+      component: () => import('@/views/BookingHistoryView.vue'),
+      meta: { title: '會員中心 | 預約紀錄' }
     },
     {
       path: '/discounthistory',
       name: 'discounthistory',
-      component: () => import('@/views/DiscountHistoryView.vue')
+      component: () => import('@/views/DiscountHistoryView.vue'),
+      meta: { title: '會員中心 | 折價券紀錄' }
     },
     {
       path: '/memberorderhistorydetails',
       name: 'memberorderhistorydetail',
-      component: () => import('@/views/MemberOrderHistoryDetailsView.vue')
+      component: () => import('@/views/MemberOrderHistoryDetailsView.vue'),
+      meta: { title: '會員中心 | 訂單紀錄詳情' }
     },
     {
       path: '/bookinghistorydetails',
       name: 'bookinghistorydetails',
-      component: () => import('@/views/BookingHistoryDetailsView.vue')
+      component: () => import('@/views/BookingHistoryDetailsView.vue'),
+      meta: { title: '會員中心 | 預約紀錄詳情' }
     }
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -222,4 +264,22 @@ router.beforeEach(async (to, from) => {
   if (to.meta && to.meta.title) {
     document.title = to.meta.title
   }
+})
+
+router.beforeEach((to, from, next) => {
+  // 如果路由中有 meta.title，则设置页面标题
+  if (to.meta.title) {
+    document.title = to.meta.title
+  } else {
+    document.title = '默認標題' // 设置默认标题
+  }
+  next()
+  //登入導航守衛，將需要登入的頁面設定 meta: {requiresAuth: true}
+  // if (to.matched.some((record) => record.meta.requiresAuth)) {
+  //   next({
+  //     path: '/login'
+  //   })
+  // } else {
+  //   next()
+  // }
 })

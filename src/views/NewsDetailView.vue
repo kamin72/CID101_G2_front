@@ -34,7 +34,7 @@
                      :to="{ name: 'news_detail', params: { id: latestNews.id } }"
                      class="col-4 col-md-6 col-sm-12 news-card">
           <div class="news-pic">
-            <img :src="parseImgNews(latestNews.image)" alt="最新消息圖片"/>
+            <img :src="parseServerImg(latestNews.image)" alt="最新消息圖片"/>
           </div>
           <p class="news-date">{{ latestNews.date }}</p>
           <h4 class="news-title">{{ latestNews.name }}</h4>
@@ -115,8 +115,13 @@ export default {
         parseImgNews(file) {
             return new URL(`../assets/img/news/${file}`, import.meta.url).href;
         },
+        // 部屬用-解析伺服器圖片路徑
+        parseServerImg(imgURL) {
+            return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+        },
         fetchNewsData(newsId) {
-            fetch('/news.json')
+            // 部屬用-解析伺服器json位置
+            fetch(`${import.meta.env.VITE_API_URL}/news.json`)
             .then((response) => response.json())
             .then((data) => {
             this.news = data.find((news) => news.id == newsId)
