@@ -5,7 +5,7 @@
       <img :src="parseServerImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
-      <img :src="parseServerImg(homebanner2.png)" alt="" />
+      <img :src="parseServerImg('homebanner2.png')" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
@@ -58,7 +58,7 @@
     </div>
   </section>
   <!-- 課程介紹 -->
-  <CourseDetail1 />
+  <CourseDetail1 :courseId="$route.params.id" />
 </template>
 
 <script>
@@ -72,17 +72,20 @@ export default {
   components: {
     CourseDetail1
   },
+
   data() {
     return {
       detail: []
     }
   },
+
   props: {
     id: {
       type: [Number, String],
       required: true
     }
   },
+
   methods: { // 要return東西
     ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
@@ -112,25 +115,21 @@ export default {
       return discount ? price * (1 - discount) : price
     },
   },
+
   async mounted() {
     try {
       //再呼叫一次pinia的getSpecificData()
-      await this.getSpecificData(this.$route.params.id)
+      this.getSpecificData(this.$route.params.id)
     } catch (error) {
       console.error("Failed to fetch specific course data:", error)
     }
-
-
   },
+
   computed: { // computed是渲染畫面後要做的事
-    ...mapState(courseStore, ['specificCourse', 'allCourse']),
+    ...mapState(courseStore, ['specificCourse']),  //抓課程id
     course() {
-      // 定義course = specificCourse
       return this.specificCourse
     }
-  },
-  created() {
-    // console.log(this.specificCourse)
   },
 }
 
