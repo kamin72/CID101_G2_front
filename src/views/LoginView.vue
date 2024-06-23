@@ -9,12 +9,12 @@
                     </RouterLink>
                 </div>
                 <div class="account_list">
-                    <input type="text" id="account" v-model="account" autocomplete="account" placeholder="帳號">
+                    <input type="text" id="account" v-model="account" placeholder="帳號" name="account">
                     <!-- <span v-if="!isValidaccount">請輸入有效的帳號</span> -->
                 </div>
                 <div class="password_list">
-                    <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password"
-                        autocomplete="password" placeholder="密碼">
+                    <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password" placeholder="密碼"
+                        name="password">
                     <div class="eyes_visibility">
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility_off
                         </span>
@@ -61,31 +61,61 @@ export default {
         //         // 在這裡可以導向到下一個頁面或執行其他登入成功後的操作
         //     }
         // }
+        // login() {
+        //     // 模擬帳號和密碼驗證
+        //     if (this.account === 'abc123' && this.password === '123456') {
+        //         this.isAuthenticated = true;
+        //         this.$router.push('/membercenter');
+        //     } else if (this.account === 'who456' && this.password === '112233') {
+        //         this.$router.push('/wholesalercenter');
+        //     } else {
+        //         alert('帳號或密碼輸入錯誤');
+        //     }
+        // }
         login() {
-            // 模擬帳號和密碼驗證
-            if (this.account === 'abc123' && this.password === '123456') {
-                this.isAuthenticated = true;
-                this.$router.push('/membercenter');
-            } else if (this.account === 'who456' && this.password === '112233') {
-                this.$router.push('/wholesalercenter');
-            } else {
-                alert('帳號或密碼輸入錯誤');
-            }
+            const formData = new URLSearchParams();
+            formData.append('account', this.account);
+            formData.append('password', this.password);
+
+            fetch('http://localhost/php/memberLogin.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData.toString(),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.error) {
+                        alert(data.msg);
+                    } else if (data.member) {
+                        alert('welcome');
+                        // 如果登入成功，可以進行頁面跳轉
+                        this.$router.push('/');
+                    } else {
+                        alert('無此帳號')
+                    }
+                })
+            // .catch((error) => {
+            //     console.error('Error:', error);
+            //     alert('An error occurred while logging in.');
+            // });
         }
     },
     created() {
-        fetch('memberLogin.php')
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.error) {
-                    alert(data.msg)
-                } else {
-                    this.$route.push('/')
-                }
-            })
+        // fetch('http://localhost/php/connectDataBase.php')
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         if (data.error) {
+        //             alert(data.msg)
+        //         } else {
+        //             alert('welcome')
+        //         }
+        //     })
 
     },
 }
+
 
 </script>
 
