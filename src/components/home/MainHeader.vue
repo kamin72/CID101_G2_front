@@ -20,7 +20,8 @@
         <div class="wrap-login-shoppingcart">
           <div class="header-login">
             <i class="fa-regular fa-user"></i>
-            <RouterLink to="/login">登入</RouterLink>
+            <RouterLink to="/login" v-if="!accountName">登入</RouterLink>
+            <RouterLink to="/login" v-if="accountName">{{ accountName }}</RouterLink>
           </div>
 
           <div class="header-shoppingcart">
@@ -40,7 +41,8 @@ import cartStore from '@/stores/cart'
 export default {
   data() {
     return {
-      isNavOpen: false
+      isNavOpen: false,
+      accountName: ''
       // currentProducts: []
     }
   },
@@ -59,10 +61,18 @@ export default {
     ...mapActions(cartStore, ['checkCart']),
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
+    },
+    getAccountName() {
+      let memberInfo = JSON.parse(localStorage.getItem('memberInfo'))
+      // console.log(memberInfo)
+      this.accountName = memberInfo[0]['name']
+      // console.log(this.accountName)
     }
+
   },
   mounted() {
     this.checkCart()
+    this.getAccountName()
     // console.log(this.cart)
   }
 }

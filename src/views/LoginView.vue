@@ -45,7 +45,8 @@ export default {
             pwdFlag: true,
             account: '',
             password: '',
-            isAuthenticated: false
+            isAuthenticated: false,
+            memberInfo: []
         }
     },
     methods: {
@@ -90,28 +91,20 @@ export default {
                         alert(data.msg);
                     } else if (data.member) {
                         alert('welcome');
+                        this.memberInfo = data.member
+                        console.log(this.memberInfo)
+                        localStorage.setItem('memberInfo', JSON.stringify(this.memberInfo))
                         // 如果登入成功，可以進行頁面跳轉
-                        this.$router.push('/');
+                        // this.$router.push('/');
                     } else {
                         alert('無此帳號')
                     }
                 })
-            // .catch((error) => {
-            //     console.error('Error:', error);
-            //     alert('An error occurred while logging in.');
-            // });
         }
     },
     created() {
-        // fetch('http://localhost/php/connectDataBase.php')
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         if (data.error) {
-        //             alert(data.msg)
-        //         } else {
-        //             alert('welcome')
-        //         }
-        //     })
+    },
+    mounted() {
 
     },
 }
