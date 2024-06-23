@@ -12,7 +12,8 @@
                     <input type="text" id="account" v-model="account" autocomplete="account" placeholder="帳號">
                 </div>
                 <div class="password_list">
-                    <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password" autocomplete="password" placeholder="密碼">
+                    <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password"
+                        autocomplete="password" placeholder="密碼">
                     <div class="eyes_visibility">
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility_off
                         </span>
@@ -71,7 +72,16 @@ export default {
             }
         }
     },
-    components: {
+    created() {
+        fetch('memberLogin.php')
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.error) {
+                    alert(data.msg)
+                } else {
+                    this.$route.push('/')
+                }
+            })
 
     },
 }
