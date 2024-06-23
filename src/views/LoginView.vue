@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="wrap_login">
-            <form @submit.prevent="login">
+            <form @submit.prevent="handleLogin">
                 <div class="login_item">
                     <a href="#" class="log_in">會員登入</a>
                     <RouterLink to="/signup">
@@ -39,6 +39,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
     data() {
         return {
@@ -46,21 +49,23 @@ export default {
             account: '',
             password: '',
             isAuthenticated: false,
-            memberInfo: []
+            // memberInfo: []
         }
     },
     methods: {
+        ...mapActions(memberStore, ['login']),
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
         },
         // login() {
-        //     // 假設正確的帳號和密碼是 "admin" 和 "password"
-        //     if (this.account !== 'abc123' || this.password !== '123123') {
-        //         alert('帳號或密碼輸入錯誤');
-        //     } else {
-        //         alert('登入成功');
-        //         // 在這裡可以導向到下一個頁面或執行其他登入成功後的操作
-        //     }
+        //     //     // 假設正確的帳號和密碼是 "admin" 和 "password"
+        //     //     if (this.account !== 'abc123' || this.password !== '123123') {
+        //     //         alert('帳號或密碼輸入錯誤');
+        //     //     } else {
+        //     //         alert('登入成功');
+        //     //         // 在這裡可以導向到下一個頁面或執行其他登入成功後的操作
+        //     //     }
+        //     // }
         // }
         // login() {
         //     // 模擬帳號和密碼驗證
@@ -73,41 +78,39 @@ export default {
         //         alert('帳號或密碼輸入錯誤');
         //     }
         // }
-        login() {
-            const formData = new URLSearchParams();
-            formData.append('account', this.account);
-            formData.append('password', this.password);
+        // login() {
+        //     const formData = new URLSearchParams();
+        //     formData.append('account', this.account);
+        //     formData.append('password', this.password);
 
-            fetch('http://localhost/php/memberLogin.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: formData.toString(),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (data.error) {
-                        alert(data.msg);
-                    } else if (data.member) {
-                        alert('welcome');
-                        this.memberInfo = data.member
-                        console.log(this.memberInfo)
-                        localStorage.setItem('memberInfo', JSON.stringify(this.memberInfo))
-                        // 如果登入成功，可以進行頁面跳轉
-                        // this.$router.push('/');
-                    } else {
-                        alert('無此帳號')
-                    }
-                })
+        //     fetch('http://localhost/CID101_G2_php/front/memberLogin.php', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/x-www-form-urlencoded',
+        //         },
+        //         body: formData.toString(),
+        //     })
+        //         .then((res) => res.json())
+        //         .then((data) => {
+        //             if (data.error) {
+        //                 alert(data.msg);
+        //             } else if (data.member) {
+        //                 alert('welcome');
+        //                 this.memberInfo = data.member
+        //                 console.log(this.memberInfo)
+        //                 localStorage.setItem('memberInfo', JSON.stringify(this.memberInfo))
+
+        //                 // 如果登入成功，可以進行頁面跳轉
+        //                 // this.$router.push('/');
+        //             }
+        //         })
+        // },
+        handleLogin() {
+            this.login(this.account, this.password);
         }
-    },
-    created() {
-    },
-    mounted() {
-
-    },
+    }
 }
+
 
 
 </script>

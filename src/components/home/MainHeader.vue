@@ -37,17 +37,17 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
+import memberStore from '@/stores/loginMember'
 
 export default {
   data() {
     return {
       isNavOpen: false,
-      accountName: ''
-      // currentProducts: []
     }
   },
   computed: {
     ...mapState(cartStore, ['cart']),
+    ...mapState(memberStore, ['memberInfo', 'accountName']),
     cartCount() {
       return this.cart.length
     }
@@ -56,24 +56,18 @@ export default {
     this.$router.afterEach(() => {
       this.isNavOpen = false
     })
+    this.getMemberData()
   },
   methods: {
     ...mapActions(cartStore, ['checkCart']),
+    ...mapActions(memberStore, ['getMemberData']),
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
-    },
-    getAccountName() {
-      let memberInfo = JSON.parse(localStorage.getItem('memberInfo'))
-      // console.log(memberInfo)
-      this.accountName = memberInfo[0]['name']
-      // console.log(this.accountName)
     }
-
   },
   mounted() {
     this.checkCart()
-    this.getAccountName()
-    // console.log(this.cart)
+
   }
 }
 </script>
