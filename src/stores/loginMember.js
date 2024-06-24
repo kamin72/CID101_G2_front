@@ -6,7 +6,11 @@ export default defineStore('memberStore', {
   }),
   getters: {
     accountName() {
-      return this.memberInfo[0]['name']
+      if (localStorage.getItem('memberInfo')) {
+        return this.memberInfo[0]['name']
+      } else {
+        return false
+      }
     }
   },
   actions: {

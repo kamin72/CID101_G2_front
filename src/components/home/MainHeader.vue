@@ -42,7 +42,7 @@ import memberStore from '@/stores/loginMember'
 export default {
   data() {
     return {
-      isNavOpen: false,
+      isNavOpen: false
     }
   },
   computed: {
@@ -67,7 +67,6 @@ export default {
   },
   mounted() {
     this.checkCart()
-
   }
 }
 </script>
