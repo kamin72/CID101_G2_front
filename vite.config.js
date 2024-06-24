@@ -27,6 +27,15 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
         alias: {
           '@': fileURLToPath(new URL('./src', import.meta.url))
         }
+      },
+      server: {
+        proxy: {
+          '/api': {
+            target: 'http://localhost',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, '')
+          }
+        }
       }
     }
   }

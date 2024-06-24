@@ -20,7 +20,8 @@
         <div class="wrap-login-shoppingcart">
           <div class="header-login">
             <i class="fa-regular fa-user"></i>
-            <RouterLink to="/login">登入</RouterLink>
+            <RouterLink to="/login" v-if="!accountName">登入</RouterLink>
+            <RouterLink to="/login" v-if="accountName">{{ accountName }}</RouterLink>
           </div>
 
           <div class="header-shoppingcart">
@@ -36,16 +37,17 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
+import memberStore from '@/stores/loginMember'
 
 export default {
   data() {
     return {
-      isNavOpen: false
-      // currentProducts: []
+      isNavOpen: false,
     }
   },
   computed: {
     ...mapState(cartStore, ['cart']),
+    ...mapState(memberStore, ['memberInfo', 'accountName']),
     cartCount() {
       return this.cart.length
     }
@@ -54,16 +56,18 @@ export default {
     this.$router.afterEach(() => {
       this.isNavOpen = false
     })
+    this.getMemberData()
   },
   methods: {
     ...mapActions(cartStore, ['checkCart']),
+    ...mapActions(memberStore, ['getMemberData']),
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
     }
   },
   mounted() {
     this.checkCart()
-    // console.log(this.cart)
+
   }
 }
 </script>

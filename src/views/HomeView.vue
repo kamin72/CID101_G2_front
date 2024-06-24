@@ -5,13 +5,19 @@
       <div class="homeBanner_wine">
         <div class="homeBanner_wine_wapper">
           <img src="/src/assets/img/wine/bannerwine.png" class="image" />
-          <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
+          <div class="shadow">
+            <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
+          </div>
+
         </div>
       </div>
       <div class="homeBanner_txt">
         <h3>MEMORABLE</h3>
         <h2>WINE</h2>
         <h4>JOURNEYS</h4>
+      </div>
+      <div class="homeBanner_mountain">
+        <img src="/src/assets/img/home/homebanner2.png" alt="">
       </div>
     </div>
   </section>
@@ -190,7 +196,7 @@ export default {
       // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
       // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
       return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
-    },
+    }
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
