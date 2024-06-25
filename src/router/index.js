@@ -95,10 +95,16 @@ const router = createRouter({
       meta: { title: '品酒課程 | 預約課程' }
     },
     {
-      path: '/courseBookingDetail_confirm',
+      path: '/courseBookingDetail_confirm/:id',
       name: 'courseBookingDetail_confirm',
       component: () => import('@/views/CourseBookingDetail_confirm.vue'),
       meta: { title: '品酒課程 | 確認預約資料' }
+    },
+    {
+      path: '/courseBookingDetail_finish/:id',
+      name: 'courseBookingDetail_finish',
+      component: () => import('@/views/CourseBookingDetail_finish.vue'),
+      meta: { title: '品酒課程 | 預約完成' }
     },
     {
       path: '/game',

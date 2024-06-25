@@ -1,8 +1,13 @@
 <template>
     <div class="course-page-container">
         <div class="row">
-            <small class="col-12 scrumble">首頁<span class="material-symbols-outlined">arrow_forward_ios</span>品酒課程
-            </small>
+            <div class="col-12 scrumble">
+                <RouterLink to="/" style="text-decoration: none; color: #322d26;"><small>首頁</small></RouterLink>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <small>
+                    品酒課程
+                </small>
+            </div>
         </div>
     </div>
     <section class="section-recom-course">
@@ -184,6 +189,7 @@ export default {
             recommendedCourses: [],
             courseData: courseData,
             isMobile: false,
+            windowWidth: 450,
         };
     },
     computed: {
@@ -238,6 +244,22 @@ export default {
         },
         allCourse() {
             return courseStore().allCourse;
+        },
+    },
+    watch: {
+        windowWidth: {
+            handler(nVal) {
+                if (nVal < 450) {
+                    this.showCalen = false
+                    this.showList = true
+                    this.activeButton = 'list'
+                } else {
+                    this.showCalen = true
+                    this.showList = false
+                    this.activeButton = 'calen'
+                }
+            },
+            immediate: true,
         },
     },
 
@@ -341,7 +363,7 @@ export default {
             return discount ? price * (1 - discount) : price;
         },
         checkIsMobile() {
-            this.isMobile = window.innerWidth < 450;
+            this.windowWidth = window.innerWidth // 不寫死，比較有彈性
         },
     },
 

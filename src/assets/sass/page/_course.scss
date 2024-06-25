@@ -69,6 +69,12 @@
       .month-year {
         padding: 0 $pad-1;
       }
+      @include m(){
+        padding: 30px 0px;
+        .month-year {
+          padding: 0 30px;
+        }
+      }
     }
     .course-title-wrap {
       padding-bottom: 150px;
@@ -102,6 +108,11 @@
             .triangle {
               border-color: darken($gray, 20) transparent transparent transparent;
             }
+          }
+        }
+        @include m(){
+          .search-course-calen-tab {
+            display: none;
           }
         }
       }
@@ -202,6 +213,9 @@
         align-items: center;
         .event-card2 {
           margin-bottom: $mar-1;
+          @include t(){
+            margin-bottom: 45px;
+          }
         }
       }
     }
@@ -227,7 +241,7 @@
         padding-bottom: 7rem;
       }
       .search-course-list-wrap {
-        padding-top: 25px;
+        padding: 25px 0;
         .search-course-calendar {
           .search-course-calendar-body {
             .days {
@@ -517,7 +531,7 @@
                 width: 80px;
               }
               ul {
-                width: 90%;
+                width: fit-content;
               }
             }
           }
@@ -571,6 +585,13 @@
               }
             }
           }
+          .feature {
+            .featWrap {
+              ul {
+                width: 90%;
+              }
+            }
+          }
         }
       }
     }
@@ -588,6 +609,9 @@
     flex-direction: column;
     align-items: center;
     .course-booking-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .form_ltem_list {
         width: 100%;
         display: flex;
@@ -596,11 +620,16 @@
   
         .form_item {
           width: 30%;
+          min-height: 75px;
           display: flex;
           align-items: center;
           justify-content: center;
           color: white;
           background-color: $secondary-botton-color;
+          @include m() {
+            width: 25%;
+            min-height: 60px;
+          }
         }
   
         .form_box {
@@ -610,6 +639,9 @@
           background-color: #f8f5f2;
           p {
             margin: 25px;
+            @include m(){
+              margin: 15px;
+            }
           }
           input {
             width: 80%;
@@ -624,16 +656,22 @@
             width: 40%;
             height: 30px;
             font-size: 14px;
-            display: inline-block;
             border: none;
+            margin: 25px 25px 25px 32px;
             outline: 7px solid $white;
-            padding: 7px;
-            margin: 25px;
             option {
               color: $gray;
               font-size: map-get($font-size, p);
               font-weight: $font-weight;
               font-family: $font-dm, $font-noto;
+            }
+            @include t() {
+              width: 60%;
+            }
+            @include m() {
+              width: 70%;
+              height: 25px;
+              margin: 15px 15px 15px 22px;
             }
           }
           .material-symbols-outlined {
@@ -652,28 +690,73 @@
             @include t() {
               width: 30%;
             }
+            @include m() {
+              width: 55%;
+              height: 39px;
+              margin: 15px;
+            }
             & > button {
               font-size: map-get($font-size, a);
+              background-color: transparent;
               padding: 7px 15px;
-              background-color: $white;
               cursor: pointer;
               color: $gray;
               border: none;
             }
           }
           .creditCardWrap1 {
+            width: 70%;
+            margin-left: 25px;
+            margin-top: 25px;
             .creditCardInput {
+              width: 100%;
               display: flex;
-              width: 80%;
+              align-items: center;
+              height: 28px;
               input {
-                width: 80px;
-                margin: 10px;
+                margin: unset;
+              }
+              p {
+                margin: 0 15px;
+              }
+            }
+            @include t() {
+              width: 90%;
+              margin-left: 15px;
+              .creditCardInput {
+                p {
+                  margin: 0 5px;
+                }
               }
             }
           }
           .creditCardWrap2 {
+            width: 70%;
+            margin-left: 25px;
             display: flex;
-            
+            justify-content: space-between;
+            margin-bottom: 25px;
+            div {
+              width: 30%;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              input {
+                margin: unset;
+                width: 85%;
+              }
+              p {
+                margin: unset;
+                margin-bottom: 15px;
+              }
+            }
+            @include t(){
+              width: 90%;
+              margin-left: 15px;
+            }
+          }
+          @include t() {
+            width: 75%;
           }
         }
 
@@ -686,6 +769,9 @@
               width: 80%;
               margin: 25px;
               padding: 7px;
+              @include t(){
+                margin: 15px;
+              }
             }
           }
         }
@@ -700,6 +786,12 @@
       input {
         margin-right: 5px;
       }
+      @include t(){
+        margin: 40px;
+      }
+      @include m(){
+        margin: 30px;
+      }
     }
 
     .reserveCourse {
@@ -710,9 +802,19 @@
 
     .btn-wrap {
       display: flex;
-      &:first-child {
-        margin-right: 10px;
+      margin-top: 50px;
+      .big-btn-secondary {
+        margin-right: 25px;
+      }
+      @include t(){
+        margin-top: 40px;
+      }
+      @include m(){
+        margin-top: 30px;
       }
     }
+  }
+  @include m(){
+    padding-top: 0px;
   }
 }

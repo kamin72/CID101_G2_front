@@ -1,6 +1,9 @@
 <template>
-    <section class="booking_flow">
+    <section v-if="!isMobile" class="booking_flow">
         <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-else class="cartFlowRWD">
+        <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <section class="course-booking-section" v-if="course">
         <div class=" course-booking-container">
@@ -54,7 +57,7 @@
                         <div class="amount">
                             <button @click.prevent="reduce" class="material-symbols-outlined">remove</button>
                             <span class="num">
-                                <p>{{ count }}</p>
+                                <p>{{ participantCount }}</p>
                             </span>
                             <button @click.prevent="add" class="material-symbols-outlined">add</button>
                         </div>
@@ -108,7 +111,8 @@
                     </div>
                     <div class="form_box">
                         <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"
-                            v-model="otherRequirements"></textarea>
+                            v-model="otherRequirements">
+                        </textarea>
                     </div>
                 </div>
             </form>
@@ -120,7 +124,7 @@
                 </div>
             </div>
 
-            <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
+            <RouterLink :to="'/courseBookingDetail_confirm/' + course.id" style="text-decoration: none;">
                 <button :disabled="disabledButton"
                     :class="{ 'big-btn-invalid': disabledButton, 'big-btn-primary': false, 'reserveCourse': true }"
                     class="big-btn-primary  reserveCourse">
@@ -133,12 +137,14 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import { mapState, mapActions } from 'pinia';
 import courseStore from '@/stores/course';
 
 export default {
     components: {
         CartFlow,
+        CartFlowRWD
     },
     data() {
         return {
@@ -173,21 +179,39 @@ export default {
                     bold: '300'
                 },
             ],
+            flowRwd: [
+                {
+                    id: 1,
+                    icon: 'edit_document',
+                    opacity: '1',
+                    text: '填寫預約資料',
+                    bold: '300',
+                    color: '#AEA495'
+                },
+                {
+                    id: 2,
+                    icon: 'checklist',
+                    opacity: '0.3',
+                    text: '確認預約資料',
+                    bold: '300'
+                }
+            ],
             count: 1,
             memName: 'John Doe',
             memEmail: 'john.doe@example.com',
             memPhone: '0912345678',
             otherRequirements: '',
             isChecked: false,
+            windowWidth: window.innerWidth,
         }
     },
     computed: {
-        ...mapState(courseStore, ['specificCourse', 'allCourse']), // 使用 mapState 獲取 specificCourse
+        ...mapState(courseStore, ['specificCourse', 'otherRequirements', 'participantCount']), // 使用 mapState 獲取 specificCourse
         course() {
             return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
         },
         sum() {
-            return this.count * this.course.price
+            return this.participantCount * this.course.price
         },
         isSumZero() {
             return this.sum <= 0
@@ -195,26 +219,38 @@ export default {
         disabledButton() {
             return !this.isChecked || this.isSumZero
         },
+        isMobile() {
+            return this.windowWidth < 450
+        }
     },
     methods: {
-        ...mapActions(courseStore, ['getSpecificData', 'getData', 'setCheckoutSum']), // 使用 mapActions 獲取 getSpecificData 方法
+        ...mapActions(courseStore, ['setOtherRequirements', 'setParticipantCount', 'getSpecificData', 'setCheckoutSum']), // 使用 mapActions 獲取 getSpecificData 方法
         add() {
-            if (this.count == 10) return
-            this.count++
+            if (this.participantCount < 10) {
+                this.setParticipantCount(this.participantCount + 1);
+            }
         },
         reduce() {
-            if (this.count == 0) return
-            this.count--
+            if (this.participantCount > 1) {
+                this.setParticipantCount(this.participantCount - 1);
+            }
+        },
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth
         },
     },
     async mounted() {
         try {
             const courseId = this.$route.params.id
-            await this.getSpecificData(courseId)
-            // this.updateSum() // 确保数据加载完成后更新结算金额
+            this.getSpecificData(courseId)
+            // 确保数据加载完成后更新结算金额
         } catch (error) {
             console.error("Failed to fetch specific course data:", error)
-        }
+        };
+        window.addEventListener('resize', this.updateWindowWidth);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.updateWindowWidth)
     },
     watch: {
         '$route.params.id': {
@@ -236,6 +272,16 @@ export default {
                 this.setCheckoutSum(newSum);
             },
             immediate: true
+        },
+        otherRequirements: {
+            handler(newValue) {
+                this.setOtherRequirements(newValue);
+            },
+        },
+        participantCount: {
+            handler(newValue) {
+                this.setParticipantCount(newValue);
+            },
         },
     },
 }
