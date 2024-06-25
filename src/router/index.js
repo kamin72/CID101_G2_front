@@ -125,6 +125,12 @@ const router = createRouter({
       meta: { title: '品酒達人 | 遊戲測驗' }
     },
     {
+      path: '/gameCoupon',
+      name: 'gameCoupon',
+      component: () => import('@/views/GameCouponView.vue'),
+      meta: { title: '品酒達人 | 遊戲優惠券' }
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
