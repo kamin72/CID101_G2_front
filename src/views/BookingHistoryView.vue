@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="history-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">
@@ -36,8 +36,8 @@
                 <p>課程日期</p>
                 <p>預約時段</p>
                 <p>活動名稱</p>
-                <p>人數</p>
-                <p>總金額</p>
+                <!-- <p>人數</p> -->
+                <!-- <p>總金額</p> -->
                 <p>預約狀態</p>
                 <p>操作</p>
             </div>
@@ -45,8 +45,8 @@
                 <p>2024-05-18</p>
                 <p>14:00-16:00</p>
                 <p>品酒體驗-初級課程1</p>
-                <p>1</p>
-                <p>NT.3,200</p>
+                <!-- <p>1</p> -->
+                <!-- <p>NT.3,200</p> -->
                 <p>預約完成</p>
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-secondary">取消訂單</button>
