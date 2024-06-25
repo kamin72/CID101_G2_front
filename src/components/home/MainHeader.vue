@@ -62,17 +62,17 @@ export default {
     toggleNav() {
       this.isNavOpen = !this.isNavOpen
     },
-    getAccountName() {
-      let memberInfo = JSON.parse(localStorage.getItem('memberInfo'))
-      // console.log(memberInfo)
-      this.accountName = memberInfo[0]['name']
-      // console.log(this.accountName)
-    }
+    // getAccountName() {
+    //   let memberInfo = JSON.parse(localStorage.getItem('memberInfo'))
+    //   // console.log(memberInfo)
+    //   this.accountName = memberInfo[0]['name']
+    //   // console.log(this.accountName)
+    // }
 
   },
   mounted() {
     this.checkCart()
-    this.getAccountName()
+    // this.getAccountName()
     // console.log(this.cart)
   }
 }
