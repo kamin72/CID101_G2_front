@@ -1,6 +1,9 @@
 <template>
-    <section class="booking_flow">
+    <section v-if="!isMobile" class="booking_flow">
         <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-else class="cartFlowRWD">
+        <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <section class="course-booking-section">
         <div class="course-booking-container">
@@ -41,7 +44,7 @@
                         <h4>人數</h4>
                     </div>
                     <div class="form_box">
-                        <p>{{ count }}</p>
+                        <p>{{ participantCount }}</p>
                     </div>
                 </div>
 
@@ -96,12 +99,16 @@
                 </div>
             </form>
             <div class="btn-wrap">
-                <button class="big-btn-secondary">
-                    上一步
-                </button>
-                <button class="big-btn-primary">
-                    確認無誤
-                </button>
+                <RouterLink :to="'/courseBookingDetail/' + course.id" style="text-decoration: none;">
+                    <button class="big-btn-secondary">
+                        上一步
+                    </button>
+                </RouterLink>
+                <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
+                    <button class="big-btn-primary">
+                        確認無誤
+                    </button>
+                </RouterLink>
             </div>
         </div>
     </section>
@@ -109,10 +116,14 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
+import { mapState, mapActions } from 'pinia';
+import courseStore from '@/stores/course';
 
 export default {
     components: {
         CartFlow,
+        CartFlowRWD,
     },
 
     data() {
@@ -124,7 +135,8 @@ export default {
                     opacity: '1',
                     text: '填寫預約資料',
                     bold: '300',
-                    color: '#AEA495'
+                    color: '#AEA495',
+                    borderColor: '#AEA495',
                 },
                 {
                     id: 2,
@@ -149,27 +161,50 @@ export default {
                     bold: '300'
                 },
             ],
-            memName: '',
-            memEmail: '',
-            memPhone: '',
-            otherRequirements: '',
+            flowRwd: [
+                {
+                    id: 1,
+                    icon: 'edit_document',
+                    opacity: '1',
+                    text: '填寫預約資料',
+                    bold: '300',
+                    color: '#AEA495',
+                    borderColor: '#AEA495',
+                },
+                {
+                    id: 2,
+                    icon: 'checklist',
+                    opacity: '1',
+                    text: '確認預約資料',
+                    bold: '300',
+                    color: '#AEA495'
+                }
+            ],
+            memName: 'John Doe',
+            memEmail: 'john.doe@example.com',
+            memPhone: '0912345678',
+            windowWidth: window.innerWidth,
         }
     },
 
+    computed: {
+        ...mapState(courseStore, ['specificCourse', 'checkoutSum', 'otherRequirements', 'participantCount']),
+        sum() {
+            return this.checkoutSum;
+        },
+        course() {
+            return this.specificCourse || [];
+        },
+        isMobile() {
+            return this.windowWidth < 450
+        },
+    },
+
     methods: {
-        add() {
-            if (this.count == 10) return
-            this.count++
-            this.updateSum()
+        ...mapActions(courseStore, ['loadCheckoutSum', 'getData']),
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth
         },
-        reduce() {
-            if (this.count == 0) return
-            this.count--
-            this.updateSum()
-        },
-        updateSum() {
-            this.sum = this.count * this.course.price
-        }
     },
 
     mounted() {
@@ -177,10 +212,12 @@ export default {
         this.memName = 'John Doe'
         this.memEmail = 'john.doe@example.com'
         this.memPhone = '0912345678'
+        window.addEventListener('resize', this.updateWindowWidth)
+    },
 
-        // 初始化結帳金額
-        this.updateSum()
-    }
+    beforeUnmount() {
+        window.removeEventListener('resize', this.updateWindowWidth)
+    },
 }
 </script>
 

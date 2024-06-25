@@ -6,6 +6,8 @@ export default defineStore('courseStore', {
     specificCourse: null,
     tempCourse: [],
     checkoutSum: 0, // 新添加的狀態來存儲結帳金額
+    otherRequirements: '',
+    participantCount: 1,
   }),
 
   actions: {
@@ -45,7 +47,16 @@ export default defineStore('courseStore', {
       const savedSum = localStorage.getItem('checkoutSum')
       if (savedSum) {
         this.checkoutSum = parseFloat(savedSum)
+      }else {
+        console.warn('在 localStorage 中找不到結帳金額');
+        this.checkoutSum = 0; // 或者某個默認值
       }
-    }
+    },
+    setOtherRequirements(requirements) {
+      this.otherRequirements = requirements;
+    },
+    setParticipantCount(count) {
+      this.participantCount = count;
+    },
   }
 })
