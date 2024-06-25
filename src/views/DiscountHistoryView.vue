@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="history-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">
@@ -31,7 +31,7 @@
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
-        <div class="wrap_order_history">
+        <div class="wrap_discount_history">
             <div class="items_list">
                 <p>獲得日期</p>
                 <p>優惠券名稱</p>
@@ -43,7 +43,8 @@
                 <p>2024-05-01</p>
                 <p>小遊戲9折優惠卷</p>
                 <p>不限金額9折</p>
-                <p>2024-05-31 23:59:59</p>
+                <p>2024-05-31<br>
+                    23:59:59</p>
                 <p>未使用</p>
             </div>
         </div>
@@ -80,15 +81,4 @@ export default {
 </script>
 
 <style>
-
-.items_list p {
-    margin: 0 45px;
-    padding: 10px;
-}
-
-.items p {
-    margin: 0 35px;
-    padding: 10px;
-}
-
 </style>

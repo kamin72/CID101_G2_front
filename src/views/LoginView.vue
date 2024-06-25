@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="login_container">
         <div class="wrap_login">
             <form @submit.prevent="login">
                 <div class="login_item">
@@ -24,59 +24,48 @@
                 <RouterLink to="/forget" style="text-decoration: none;">
                     <a href="#" class="forget">忘記密碼?</a>
                 </RouterLink>
-                <!-- <RouterLink to="/membercenter">
-                    <div class="login_btn">
-                        <button type="button" class="big-btn-primary">會員登入</button>
-                    </div>
-                </RouterLink> -->
                 <div class="login_btn">
                     <button type="submit" class="big-btn-primary">會員登入</button>
                 </div>
             </form>
         </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
-    data() {
-        return {
-            pwdFlag: true,
-            account: '',
-            password: '',
-            isAuthenticated: false
+  data() {
+    return {
+      pwdFlag: true,
+      account: '',
+      password: '',
+      isAuthenticated: false
+      // memberInfo: []
+    }
+  },
+  methods: {
+    ...mapActions(memberStore, ['login']),
+    togglePassword() {
+      this.pwdFlag = !this.pwdFlag
+    },
+    handleLogin() {
+      try {
+        const success = this.login(this.account, this.password)
+        if (success) {
+          // 如果登入成功，進行頁面跳轉
+          this.$router.push('/')
         }
-    },
-    methods: {
-        togglePassword() {
-            this.pwdFlag = !this.pwdFlag;
-        },
-        // login() {
-        //     // 假設正確的帳號和密碼是 "admin" 和 "password"
-        //     if (this.account !== 'abc123' || this.password !== '123123') {
-        //         alert('帳號或密碼輸入錯誤');
-        //     } else {
-        //         alert('登入成功');
-        //         // 在這裡可以導向到下一個頁面或執行其他登入成功後的操作
-        //     }
-        // }
-        login() {
-            // 模擬帳號和密碼驗證
-            if (this.account === 'abc123' && this.password === '123456') {
-                this.isAuthenticated = true;
-                this.$router.push('/membercenter');
-            } else if (this.account === 'who456' && this.password === '112233') {
-                this.$router.push('/wholesalercenter');
-            } else {
-                alert('帳號或密碼輸入錯誤');
-            }
-        }
-    },
-    components: {
-
-    },
+      } catch (error) {
+        console.error('Login error:', error)
+      }
+    }
+  }
 }
-
 </script>
 
 <style></style>

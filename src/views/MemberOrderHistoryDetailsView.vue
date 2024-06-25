@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="details-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">
@@ -17,6 +17,7 @@
                 查看詳情
             </small>
         </div>
+        <!-- 會員中心導覽列 -->
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
                 <!-- <button class="big-btn-primary"">會員資料</button> -->
@@ -47,7 +48,7 @@
             </div>
             <div class="details_list">
                 <p>姓名</p>
-                <p>王大明</p>
+                <p>王小明</p>
             </div>
             <div class="details_list">
                 <p>電話</p>

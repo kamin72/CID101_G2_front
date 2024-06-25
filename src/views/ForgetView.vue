@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="login_container">
         <div class="wrap_login">
             <div class="login_item">
                 <h4>忘記密碼</h4>

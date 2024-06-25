@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="history-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">
@@ -18,8 +18,7 @@
                 <!-- <button class="big-btn-primary"">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
-            <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">訂單紀錄</button> -->
+            <RouterLink to="/wholesalerorderhistory" style="text-decoration: none;">
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
         </div>
