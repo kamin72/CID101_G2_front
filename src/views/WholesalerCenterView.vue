@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="history-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">

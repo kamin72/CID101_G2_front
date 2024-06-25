@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="login_container">
         <div class="wrap_login">
             <form @submit.prevent="login">
                 <div class="login_item">
@@ -24,11 +24,6 @@
                 <RouterLink to="/forget" style="text-decoration: none;">
                     <a href="#" class="forget">忘記密碼?</a>
                 </RouterLink>
-                <!-- <RouterLink to="/membercenter">
-                    <div class="login_btn">
-                        <button type="button" class="big-btn-primary">會員登入</button>
-                    </div>
-                </RouterLink> -->
                 <div class="login_btn">
                     <button type="submit" class="big-btn-primary">會員登入</button>
                 </div>

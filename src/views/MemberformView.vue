@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="signup_container">
         <div class="wrap_signup">
             <section class="form_flow">
                 <CartFlow :flow="item" v-for="item in flow" :key="item.id" />

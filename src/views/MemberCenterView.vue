@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="history-container">
         <div class="row">
             <small class="col-12 scrumble">
                 <span class="frontPage-bread">
@@ -13,21 +13,19 @@
                 一般會員資料
             </small>
         </div>
+        <!-- 會員中心導覽列 -->
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">會員資料</button> -->
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
             <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">訂單紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
             <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">預約紀錄</button> -->
-                <button :class="buttonClass"style="display: inline; margin: 0 2px;">預約紀錄</button>
+
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
             </RouterLink>
             <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
@@ -57,7 +55,6 @@
                 </div>
                 <button class="big-btn-primary cart" style="display: inline-block;">儲存</button>
             </div>
-
         </div>
     </div>
 </template>

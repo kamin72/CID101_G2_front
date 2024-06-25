@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="signup_container">
         <div class="wrap_signup">
             <section class="form_flow">
                 <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
@@ -19,7 +19,7 @@
                     <div class="form_item">
                         <label>會員密碼</label>
                     </div>
-                    <div class="form_box" style="position: relative;">
+                    <div class="form_box">
                         <input :type='pwdFlag ? "password" : "text"' id="password" autocomplete="password"
                             placeholder="請輸入密碼" minlength="8" required />
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
@@ -34,7 +34,7 @@
                         <label>再輸入一次密碼</label>
                     </div>
                     <div class="form_box" style="position: relative;">
-                        <input :type='pwdFlags ? "password" : "text"' id="password_check" autocomplete="password_check" placeholder="再輸入一次密碼">
+                        <input :type='pwdFlags ? "password" : "text"' id="new-password" autocomplete="new-password" placeholder="再輸入一次密碼">
                         <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
                             style="font-size: 18px;position: absolute;">visibility_off </span>
                         <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
