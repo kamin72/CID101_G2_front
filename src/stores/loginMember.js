@@ -7,6 +7,13 @@ export default defineStore('memberStore', {
   getters: {
     accountName() {
       return this.memberInfo?.[0]['name'] || ''
+    },
+    isNormalAccount() {
+      if (this.memberInfo?.[0]['identity'] == 2) {
+        return false
+      } else {
+        return true
+      }
     }
   },
   actions: {

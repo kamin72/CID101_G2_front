@@ -42,6 +42,9 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   props: {
     phone: {
@@ -57,6 +60,9 @@ export default {
   data() {
     return {}
   },
-  computed: {}
+  computed: {
+    ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount'])
+  },
+  methods: {}
 }
 </script>
