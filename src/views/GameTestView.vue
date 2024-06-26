@@ -256,26 +256,26 @@ export default {
 
 
 <style scoped>
-.game-container {
+/* .game-container {
   position: relative;
-}
-.bottle-container {
+} */
+/* .bottle-container {
   position: relative;
   margin: 20px 0;
   right: -45%;
   width: 46%;
   transition: transform 1s;
-}
-.wine-bottle {
+} */
+/* .wine-bottle {
   width: 100%;
   height: 100%;
   transform-origin: bottom center;
   transition: transform 1s;
-}
-.wine-bottle.pouring {
+} */
+/* .wine-bottle.pouring {
   transform: rotate(-15deg);
-}
-.glass-container {
+} */
+/* .glass-container {
   width: 100px;
   height: 250px;
   margin: 0 auto;
@@ -285,8 +285,8 @@ export default {
   position: absolute;
   right: -10%;
   bottom: -165%;
-}
-.wine-glass {
+} */
+/* .wine-glass {
   position: relative;
   border: 2px solid #CEE1ED;
   background-color: #CEE1ED;
@@ -294,36 +294,36 @@ export default {
   overflow: hidden;
   width: 120px;
   height: 155px;
-}
-.wine-glass-stem {
+} */
+/* .wine-glass-stem {
   width: 6px;
   height: 80px;
   background-color: #CEE1ED;
   margin-top: -2px;
-}
-.wine-glass-base {
+} */
+/* .wine-glass-base {
   width: 95px;
   height: 10px;
   background-color: #CEE1ED;
   border-radius: 50%;
   margin-top: -2px;
-}
-.water {
+} */
+/* .water {
   position: absolute;
   bottom: 43%;
   width: 100%;
   background-color: rgba(165, 42, 42, 0.8);
   transition: height 1s;
   border-radius: 0 0 50% 50%;
-}
-button {
+} */
+/* button {
   margin-top: 20px;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-button.correct {
+} */
+/* button.correct {
   background-color: lightgreen;
 }
 button.wrong {
@@ -331,7 +331,7 @@ button.wrong {
 }
 button.shake {
   animation: shake 0.5s;
-}
+} */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
