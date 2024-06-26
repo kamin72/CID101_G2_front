@@ -2,12 +2,10 @@
 .login_container {
     width: 100%;
     margin: auto;
-
     @include t {
         width: 80%;
         margin: auto;
     }
-
     .wrap_login {
         width: 500px;
         height: 425px;
@@ -15,13 +13,11 @@
         margin: 30px auto;
         padding: 20px 0 0 0;
         text-align: center;
-
         @include t {
             width: 90%;
             // width: 400px;
             // height: 410px;
         }
-
         .login_item {
             text-align: center;
             padding-top: 30px;
@@ -48,7 +44,6 @@
                     font-size: 16px;
                 }
             }
-
             .sign_up {
                 font-size: 24px;
                 color: #322D26;
@@ -69,7 +64,6 @@
                 }
             }
         }
-
         .process {
             display: flex;
             align-items: center;

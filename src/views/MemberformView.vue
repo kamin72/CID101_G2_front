@@ -1,93 +1,18 @@
 <template>
-    <div class="signup_container">
-        <div class="wrap_signup">
-            <section class="form_flow">
-                <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
-            </section>
-            <form @submit.prevent="register">
-                <!-- 會員帳號 -->
-                <div class="form_ltem_list">
-                    <div class="form_item">
-                        <label for="account">會員帳號</label>
-                    </div>
-                    <div class="form_box">
-                        <input type="text" id="account" autocomplete="account" 
-                        @blur="validateAccount"
-                        placeholder="請輸入帳號">
-                    </div>
-                </div>
-                <!-- 密碼 -->
-                <div class="form_ltem_list">
-                    <div class="form_item">
-                        <label for="password">會員密碼</label>
-                    </div>
-                    <div class="form_box">
-                        <input :type='pwdFlag ? "password" : "text"' id="password" 
-                        @blur="validatePassword"
-                        autocomplete="password" placeholder="請輸入密碼">
-                        <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
-                            visibility_off
-                        </span>
-                        <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">
-                            visibility
-                        </span>
-                    </div>
-                </div>
-                <!-- 再輸入一次密碼 -->
-                <div class="form_ltem_list" style="position: relative;">
-                    <div class="form_item">
-                        <label for="password">再輸入一次密碼</label>
-                    </div>
-                    <div class="form_box">
-                        <input :type='pwdFlags ? "password" : "text"' 
-                        id="password_check"  placeholder="再輸入一次密碼">
-                        <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
-                            visibility_off
-                        </span>
-                        <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
-                            visibility
-                        </span>
-                    </div>
-                </div>
-                <!-- 姓名 -->
-                <div class="form_ltem_list">
-                    <div class="form_item">
-                        <label>姓名</label>
-                    </div>
-                    <div class="form_box">
-                        <input type="text" id="name" v-model="name" 
-                        @blur="validateName" placeholder="請輸入姓名">
-                    </div>
-                </div>
-                <!-- 電話 -->
-                <div class="form_ltem_list">
-                    <div class="form_item">
-                        <label>電話</label>
-                    </div>
-                    <div class="form_box">
-                        <input type="text" id="phone" v-model="phone"
-                        @blur="validatePhone" placeholder="請輸入電話">
-                    </div>
-                </div>
-                <!-- Email -->
-                <div class="form_ltem_list" style="border: none;">
-                    <div class="form_item">
-                        <label>Email</label>
-                    </div>
-                    <div class="form_box">
-                        <input type="email" id="email" v-model="email" 
-                        @blur="validateEmail" placeholder="請輸入Email">
-                    </div>
-                </div>
-                <div class="form_privacy_policy">
-                    <input type="checkbox" v-model="isChecked">
-                    <span style="margin: 0 5px;">我同意隱私條款政策 [隱私條款政策]</span>
-                </div>
-                <RouterLink to="/memberformok" style="text-decoration: none;">
-                    <input type="submit" class="big-btn-primary deliverySubmit" 
-                    style="display: block; margin: 10px auto;" value="下一步" :disabled="!isChecked"/>
-                </RouterLink>
-            </form>
+  <div class="signup_container">
+    <div class="wrap_signup">
+      <section class="form_flow">
+        <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+      </section>
+      <form @submit.prevent="register">
+        <!-- 會員帳號 -->
+        <div class="form_ltem_list">
+          <div class="form_item">
+            <label for="account">會員帳號</label>
+          </div>
+          <div class="form_box">
+            <input type="text" id="account" autocomplete="account" @blur="validateAccount" placeholder="請輸入帳號">
+          </div>
         </div>
         <!-- 密碼 -->
         <div class="form_ltem_list">
@@ -95,56 +20,27 @@
             <label for="password">會員密碼</label>
           </div>
           <div class="form_box">
-            <input
-              :type="pwdFlag ? 'password' : 'text'"
-              id="password"
-              @blur="validatePassword"
-              autocomplete="password"
-              placeholder="請輸入密碼"
-            />
-            <span
-              v-show="pwdFlag"
-              @click="togglePassword"
-              class="material-symbols-outlined"
-              style="cursor: default"
-            >
+            <input :type='pwdFlag ? "password" : "text"' id="password" @blur="validatePassword" autocomplete="password"
+              placeholder="請輸入密碼">
+            <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
               visibility_off
             </span>
-            <span
-              v-show="!pwdFlag"
-              @click="togglePassword"
-              class="material-symbols-outlined"
-              style="cursor: default"
-            >
+            <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">
               visibility
             </span>
           </div>
         </div>
         <!-- 再輸入一次密碼 -->
-        <div class="form_ltem_list" style="position: relative">
+        <div class="form_ltem_list" style="position: relative;">
           <div class="form_item">
             <label for="password">再輸入一次密碼</label>
           </div>
           <div class="form_box">
-            <input
-              :type="pwdFlags ? 'password' : 'text'"
-              id="password_check"
-              placeholder="再輸入一次密碼"
-            />
-            <span
-              v-show="pwdFlags"
-              @click="togglePasswords"
-              class="material-symbols-outlined"
-              style="cursor: default"
-            >
+            <input :type='pwdFlags ? "password" : "text"' id="password_check" placeholder="再輸入一次密碼">
+            <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
               visibility_off
             </span>
-            <span
-              v-show="!pwdFlags"
-              @click="togglePasswords"
-              class="material-symbols-outlined"
-              style="cursor: default"
-            >
+            <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
               visibility
             </span>
           </div>
@@ -155,13 +51,7 @@
             <label>姓名</label>
           </div>
           <div class="form_box">
-            <input
-              type="text"
-              id="name"
-              v-model="name"
-              @blur="validateName"
-              placeholder="請輸入姓名"
-            />
+            <input type="text" id="name" v-model="name" @blur="validateName" placeholder="請輸入姓名">
           </div>
         </div>
         <!-- 電話 -->
@@ -170,42 +60,25 @@
             <label>電話</label>
           </div>
           <div class="form_box">
-            <input
-              type="text"
-              id="phone"
-              v-model="phone"
-              @blur="validatePhone"
-              placeholder="請輸入電話"
-            />
+            <input type="text" id="phone" v-model="phone" @blur="validatePhone" placeholder="請輸入電話">
           </div>
         </div>
         <!-- Email -->
-        <div class="form_ltem_list" style="border: none">
+        <div class="form_ltem_list" style="border: none;">
           <div class="form_item">
             <label>Email</label>
           </div>
           <div class="form_box">
-            <input
-              type="email"
-              id="email"
-              v-model="email"
-              @blur="validateEmail"
-              placeholder="請輸入Email"
-            />
+            <input type="email" id="email" v-model="email" @blur="validateEmail" placeholder="請輸入Email">
           </div>
         </div>
         <div class="form_privacy_policy">
-          <input type="checkbox" v-model="isChecked" />
-          <span style="margin: 0 5px">我同意隱私條款政策[隱私條款政策]</span>
+          <input type="checkbox" v-model="isChecked">
+          <span style="margin: 0 5px;">我同意隱私條款政策 [隱私條款政策]</span>
         </div>
-        <RouterLink to="/memberformok" style="text-decoration: none">
-          <input
-            type="submit"
-            class="big-btn-primary deliverySubmit"
-            style="display: block; margin: 10px auto"
-            value="下一步"
-            :disabled="!isChecked"
-          />
+        <RouterLink to="/memberformok" style="text-decoration: none;">
+          <input type="submit" class="big-btn-primary deliverySubmit" style="display: block; margin: 10px auto;"
+            value="下一步" :disabled="!isChecked" />
         </RouterLink>
       </form>
     </div>
