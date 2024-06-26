@@ -6,11 +6,7 @@ export default defineStore('memberStore', {
   }),
   getters: {
     accountName() {
-      if (localStorage.getItem('memberInfo')) {
-        return this.memberInfo[0]['name']
-      } else {
-        return false
-      }
+      return this.memberInfo?.[0]['name'] || ''
     }
   },
   actions: {
@@ -54,6 +50,8 @@ export default defineStore('memberStore', {
       let storage = localStorage.getItem('memberInfo')
       if (storage) {
         this.memberInfo = JSON.parse(storage)
+      } else {
+        this.memberInfo = null
       }
     }
   }

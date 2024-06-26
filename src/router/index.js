@@ -270,6 +270,11 @@ const router = createRouter({
   }
 })
 
+const isLoggedIn = () => {
+  const memberInfo = localStorage.getItem('memberInfo')
+  return memberInfo !== null && memberInfo !== 'undefined'
+}
+
 export default router
 
 router.beforeEach(async (to, from) => {
@@ -286,12 +291,17 @@ router.beforeEach((to, from, next) => {
     document.title = '默認標題' // 设置默认标题
   }
   next()
-  //登入導航守衛，將需要登入的頁面設定 meta: {requiresAuth: true}
-  // if (to.matched.some((record) => record.meta.requiresAuth)) {
-  //   next({
-  //     path: '/login'
-  //   })
-  // } else {
-  //   next()
-  // }
+})
+
+router.beforeEach((to, from, next) => {
+  //  登入導航守衛，將需要登入的頁面設定 meta: {requiresAuth: true}
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isLoggedIn()) {
+      next({ path: '/login' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })

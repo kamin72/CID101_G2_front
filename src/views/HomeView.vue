@@ -200,10 +200,12 @@ export default {
   },
   mounted() {
     document.addEventListener('click', this.handleClickOutside);
-    window.scrollTo(0, 0), document.addEventListener('click', this.handleClickOutside)
+    window.scrollTo(0, 0)
+    document.addEventListener('click', this.handleClickOutside)
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
   }
+
 }
 </script>
