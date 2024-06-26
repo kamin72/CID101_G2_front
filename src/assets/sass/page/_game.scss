@@ -93,6 +93,81 @@
                 text-align: center;
             }
         }
+        .options {
+            button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .correct {
+                background-color: lightgreen;
+            }
+            .wrong {
+                background-color: rgb(255, 48, 48);
+            }
+            .shake {
+                animation: shake 0.5s;
+            }
+        }
+        .bottle-container {
+            position: relative;
+            margin: 20px 0;
+            right: -45%;
+            width: 46%;
+            transition: transform 1s;
+            .wine-bottle {
+                width: 100%;
+                height: 100%;
+                transform-origin: bottom center;
+                transition: transform 1s;
+            }
+            .pouring {
+                transform: rotate(-15deg);
+            }
+        }
+        .glass-container {
+            width: 100px;
+            height: 250px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            right: -10%;
+            bottom: -165%;
+            .wine-glass {
+                position: relative;
+                border: 2px solid #cee1ed;
+                background-color: #cee1ed;
+                border-radius: 0 0 50% 50%;
+                overflow: hidden;
+                width: 120px;
+                height: 155px;
+                // .water {
+                //     position: absolute;
+                //     bottom: 43%;
+                //     width: 100%;
+                //     background-color: rgba(165, 42, 42, 0.8);
+                //     transition: height 1s;
+                //     border-radius: 0 0 50% 50%;
+                // }
+            }
+            .wine-glass-stem {
+                width: 6px;
+                height: 80px;
+                background-color: #cee1ed;
+                margin-top: -2px;
+            }
+            .wine-glass-base {
+                width: 95px;
+                height: 10px;
+                background-color: #cee1ed;
+                border-radius: 50%;
+                margin-top: -2px;
+            }
+        }
         button {
             margin: 10px;
             padding: 10px 20px;
