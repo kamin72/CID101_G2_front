@@ -21,13 +21,13 @@
           <div class="header-login">
             <i class="fa-solid fa-user"></i>
             <RouterLink to="/login" v-if="!accountName">登入</RouterLink>
-            <RouterLink to="/login" v-if="accountName">{{ accountName }}</RouterLink>
+            <RouterLink to="/membercenter" v-if="accountName">{{ accountName }}</RouterLink>
           </div>
 
           <div class="header-shoppingcart">
             <i class="fa-solid fa-bag-shopping"></i>
-            <RouterLink to="/cart_comp" v-if="!normalAccount">詢價清單({{ cartCount }})</RouterLink>
-            <RouterLink to="/cart_account" v-if="normalAccount">詢價清單({{ cartCount }})</RouterLink>
+            <RouterLink to="/cart_comp" v-if="!isNormalAccount">詢價清單({{ cartCount }})</RouterLink>
+            <RouterLink to="/cart_account" v-if="isNormalAccount">詢價清單({{ cartCount }})</RouterLink>
           </div>
 
           <div class="wrap-logout-shoppingcart" v-if="accountName">
@@ -49,12 +49,11 @@ export default {
   data() {
     return {
       isNavOpen: false,
-      normalAccount: true
     }
   },
   computed: {
     ...mapState(cartStore, ['cart']),
-    ...mapState(memberStore, ['memberInfo', 'accountName']),
+    ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
     cartCount() {
       return this.cart.length
     }
@@ -78,16 +77,6 @@ export default {
         this.isNavOpen = false
       }
     },
-    isNormalAccount() {
-      let storage = localStorage.getItem('memberInfo')
-      if (storage) {
-        storage = JSON.parse(storage)
-        let account = storage[0]['identity']
-        if (account == 1) {
-          this.normalAccount = true
-        }
-      }
-    },
     logout() {
       localStorage.removeItem('memberInfo')
       this.$router.push('/')
@@ -96,7 +85,6 @@ export default {
   },
   mounted() {
     this.checkCart()
-    this.isNormalAccount()
     window.addEventListener('click', this.handleOutsideClick)
   },
   beforeUnmount() {
