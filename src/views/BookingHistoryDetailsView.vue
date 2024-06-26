@@ -1,10 +1,23 @@
 <template>
-    <div class="container">
+    <div class="details-container">
         <div class="row">
-            <small class="col-12 scrumble">首頁
-            <span class="material-symbols-outlined">arrow_forward_ios</span>會員中心
-            <span class="material-symbols-outlined">arrow_forward_ios</span>預約紀錄
-            <span class="material-symbols-outlined">arrow_forward_ios</span>查看詳情</small>
+            <small class="col-12 scrumble">
+                <span class="frontPage-bread">
+                    <RouterLink to="/">首頁</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="frontPage-bread">
+                    <RouterLink to="/membercenter">會員中心</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="frontPage-bread">
+                <RouterLink to="/bookinghistory">預約紀錄</RouterLink>
+                </span>
+                <span class="material-symbols-outlined">arrow_forward_ios</span>
+                <span class="frontPage-bread">
+                    <RouterLink to="/membercenter">查看詳情</RouterLink>
+                </span>
+            </small>
         </div>
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">

@@ -53,7 +53,9 @@
         </div>
         <RouterLink to="/cart_account/cartdelivery_account" style="text-decoration: none">
           <button class="big-btn-primary cartSubmit" :disabled="!canSubmit"
-            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">送出詢價單</button>
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">
+            送出詢價單
+          </button>
         </RouterLink>
       </aside>
     </div>
@@ -149,7 +151,7 @@ export default {
     },
     getProduct() {
       let storage = JSON.parse(localStorage.getItem('cart'))
-      if (storage.length != 0) {
+      if (storage?.length > 0 && storage?.length != null) {
         this.products = storage
       } else {
         this.products = []
@@ -193,10 +195,6 @@ export default {
     }
   },
   mounted() {
-    //   fetch(`../../public/product.json`)
-    //     .then((res) => res.json())
-    //     .then((jsonData) => (this.products = jsonData))
-    // }
     this.getProduct()
   }
 }

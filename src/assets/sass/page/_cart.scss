@@ -96,7 +96,7 @@ section {
     width: 100px;
     height: 100px;
     .dot {
-      border: 4px dashed $invalid-button-color;
+      border: 3px dashed $invalid-button-color;
       width: 100px;
       height: 0;
       top: 50%;
@@ -148,7 +148,7 @@ section {
     width: 100px;
     height: 100px;
     .dot {
-      border: 4px dashed $invalid-button-color;
+      border: 3px dashed $invalid-button-color;
       width: 100px;
       height: 0;
       top: 50%;
@@ -645,9 +645,30 @@ section {
     }
   }
 }
-// .area{
+.area {
+  label {
+    font-size: map-get($font-size, p);
+    font-weight: $font-weight;
+    font-family: $font-dm;
+  }
+  .filter-button {
+    margin: 10px 0;
+    width: 200px;
+    padding: 7px 0px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-// }
+    .button-text {
+      margin-left: 5px;
+    }
+  }
+}
 .storeAddress {
   h4 {
     padding: 10px 0;
@@ -697,11 +718,12 @@ section {
       }
       h2 {
         padding: 20px 0;
+        color: $gray;
       }
     }
-
     h3 {
       padding: 20px 0;
+      color: $gray;
     }
   }
   button {
@@ -748,7 +770,7 @@ section {
     width: 100px;
     height: 100px;
     .dot {
-      border: 4px dashed $invalid-button-color;
+      border: 3px dashed $invalid-button-color;
       width: 100px;
       height: 0;
       top: 50%;

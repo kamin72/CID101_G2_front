@@ -1,5 +1,11 @@
 // 會員登入
-.container {
+.login_container {
+    width: 100%;
+    margin: auto;
+    @include t {
+        width: 80%;
+        margin: auto;
+    }
     .wrap_login {
         width: 500px;
         height: 425px;
@@ -8,27 +14,36 @@
         padding: 20px 0 0 0;
         text-align: center;
         @include t {
-            width: 400px;
-            height: 410px;
+            width: 90%;
+            // width: 400px;
+            // height: 410px;
         }
         .login_item {
             text-align: center;
             padding-top: 30px;
+
             h4 {
                 text-align: center;
             }
+
             .log_in {
                 background-color: #F8F5F2;
                 // border-bottom: 2px solid #322D26;
                 color: #322D26;
                 display: inline-block;
                 font-size: 24px;
-                // padding: 7px 27px;
                 text-decoration: none;
                 margin: 30px 25px;
                 padding-bottom: 5px;
-            }
 
+                @include t {
+                    font-size: 24px;
+                }
+
+                @include m {
+                    font-size: 16px;
+                }
+            }
             .sign_up {
                 font-size: 24px;
                 color: #322D26;
@@ -39,9 +54,16 @@
                 display: inline-block;
                 // margin: 20px 0;
                 margin: 30px 25px;
+
+                @include t {
+                    font-size: 24px;
+                }
+
+                @include m {
+                    font-size: 16px;
+                }
             }
         }
-
         .process {
             display: flex;
             align-items: center;
@@ -57,6 +79,7 @@
                 background-color: #AEA495;
                 text-align: center;
                 padding: 5px;
+
                 @include t {
                     width: 14px;
                     height: 14px;
@@ -69,6 +92,10 @@
                 height: 2px;
                 background-color: #AEA495;
                 margin: 0 10px;
+
+                @include t {
+                    width: 150px;
+                }
             }
         }
 
@@ -76,7 +103,7 @@
             font-size: 16px;
             border-bottom: 1px solid #322D26;
             display: flex;
-            margin: 30px 50px;
+            margin: 5px 50px;
             padding: 5px 0;
 
             input {
@@ -86,7 +113,15 @@
             }
 
         }
-        
+
+        .prompt {
+            font-size: 12px;
+            color: red;
+            display: block;
+            text-align: start;
+            margin: 5px 50px;
+        }
+
         .password_list {
             font-size: 16px;
             border-bottom: 1px solid #322D26;
@@ -94,24 +129,43 @@
             margin: 20px 50px 0 50px;
             padding: 5px 0;
             position: relative;
+
             input {
                 border: none;
                 outline: none;
                 background-color: #F8F5F2;
             }
+
             .eyes_visibility {
                 .material-symbols-outlined {
-                    position: absolute;
                     font-size: 18px;
-                    margin-left: 215px;
-                }
-                @include t {
-                    .material-symbols-outlined {
+                    position: absolute;
+                    // margin-left: 215px;
+                    top: 0;
+                    right: 0px;
+
+                    @include t {
+                        position: absolute;
+                        width: calc(100% - 190px);
                         font-size: 16px;
-                        margin-left: 120px;
+                        // margin-left: 200px;
+                    }
+
+                    @include m {
+                        font-size: 16px;
+                        width: calc(100% - 180px);
+                        // margin-left: 25px;
                     }
                 }
             }
+        }
+
+        .prompt_psw {
+            font-size: 12px;
+            color: red;
+            display: block;
+            text-align: start;
+            margin: 5px 50px;
         }
 
         .function_btn {
@@ -127,7 +181,11 @@
             text-decoration: none;
 
             @include t {
-                padding-left: 245px;
+                padding-left: 200px;
+            }
+
+            @include m {
+                padding-left: 160px;
             }
         }
 

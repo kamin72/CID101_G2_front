@@ -1,6 +1,9 @@
 <template>
-    <section class="booking_flow">
+    <section v-if="!isMobile" class="booking_flow">
         <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
+    </section>
+    <section v-else class="cartFlowRWD">
+        <CartFlowRWD :flowRwd="itemRwd" v-for="itemRwd in flowRwd" :key="itemRwd.id" />
     </section>
     <section class="course-booking-section" v-if="course">
         <div class=" course-booking-container">
@@ -8,9 +11,9 @@
                 <!-- 活動名稱 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label for="account">
+                        <div>
                             <h4>活動名稱</h4>
-                        </label>
+                        </div>
                     </div>
                     <div class="form_box">
                         <p>{{ course.name }}</p>
@@ -20,9 +23,9 @@
                 <!-- 課程價格 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label for="password">
+                        <div>
                             <h4>課程價格</h4>
-                        </label>
+                        </div>
                     </div>
                     <div class="form_box">
                         <p>NT. {{ course.price }}</p>
@@ -32,9 +35,9 @@
                 <!-- 折價券 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label for="password">
+                        <div>
                             <h4>折價券</h4>
-                        </label>
+                        </div>
                     </div>
                     <div class="form_box">
                         <select>
@@ -46,15 +49,15 @@
                 <!-- 人數 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label>
+                        <div>
                             <h4>人數</h4>
-                        </label>
+                        </div>
                     </div>
                     <div class="form_box">
                         <div class="amount">
                             <button @click.prevent="reduce" class="material-symbols-outlined">remove</button>
                             <span class="num">
-                                <p>{{ count }}</p>
+                                <p>{{ participantCount }}</p>
                             </span>
                             <button @click.prevent="add" class="material-symbols-outlined">add</button>
                         </div>
@@ -64,21 +67,17 @@
                 <!-- 結帳金額 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label>
-                            <h4>結帳金額</h4>
-                        </label>
+                        <h4>結帳金額</h4>
                     </div>
                     <div class="form_box">
-                        <p>NT. {{ sum }}</p>
+                        <p :style="{ color: isSumZero ? 'red' : 'inherit' }">NT. {{ sum }}</p>
                     </div>
                 </div>
 
                 <!-- 姓名 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label>
-                            <h4>姓名</h4>
-                        </label>
+                        <h4>姓名</h4>
                     </div>
                     <div class="form_box">
                         <p>{{ memName }}</p>
@@ -88,9 +87,7 @@
                 <!-- email -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label>
-                            <h4>email</h4>
-                        </label>
+                        <h4>email</h4>
                     </div>
                     <div class="form_box">
                         <p>{{ memEmail }}</p>
@@ -100,9 +97,7 @@
                 <!-- 電話號碼 -->
                 <div class="form_ltem_list">
                     <div class="form_item">
-                        <label>
-                            <h4>電話號碼</h4>
-                        </label>
+                        <h4>電話號碼</h4>
                     </div>
                     <div class="form_box">
                         <p>{{ memPhone }}</p>
@@ -112,28 +107,27 @@
                 <!-- 其他需求 -->
                 <div class="form_ltem_list" style="border: none;">
                     <div class="form_item">
-                        <label>
-                            <h4>其他需求</h4>
-                        </label>
+                        <h4>其他需求</h4>
                     </div>
                     <div class="form_box">
                         <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"
-                            v-model="otherRequirements"></textarea>
+                            v-model="otherRequirements">
+                        </textarea>
                     </div>
                 </div>
             </form>
 
             <div class="form_privacy_policy">
                 <input type="checkbox" id="privacyPolicyCheckbox" v-model="isChecked">
-                <label for="privacyPolicyCheckbox">
+                <div for="privacyPolicyCheckbox">
                     <p>我同意隱私條款政策 [隱私條款政策]</p>
-                </label>
+                </div>
             </div>
 
-            <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
-                <button :disabled="!isChecked"
-                    :class="{ 'cursor-not-allowed': !isChecked, 'big-btn-primary': true, 'reserveCourse': true }"
-                    class="big-btn-primary reserveCourse">
+            <RouterLink :to="'/courseBookingDetail_confirm/' + course.id" style="text-decoration: none;">
+                <button :disabled="disabledButton"
+                    :class="{ 'big-btn-invalid': disabledButton, 'big-btn-primary': false, 'reserveCourse': true }"
+                    class="big-btn-primary  reserveCourse">
                     <span class="material-symbols-outlined">edit_calendar</span>預約課程
                 </button>
             </RouterLink>
@@ -143,12 +137,14 @@
 
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
+import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import { mapState, mapActions } from 'pinia';
 import courseStore from '@/stores/course';
 
 export default {
     components: {
         CartFlow,
+        CartFlowRWD
     },
     data() {
         return {
@@ -183,58 +179,79 @@ export default {
                     bold: '300'
                 },
             ],
-            count: 0,
-            // sum: 0,
+            flowRwd: [
+                {
+                    id: 1,
+                    icon: 'edit_document',
+                    opacity: '1',
+                    text: '填寫預約資料',
+                    bold: '300',
+                    color: '#AEA495'
+                },
+                {
+                    id: 2,
+                    icon: 'checklist',
+                    opacity: '0.3',
+                    text: '確認預約資料',
+                    bold: '300'
+                }
+            ],
+            count: 1,
             memName: 'John Doe',
             memEmail: 'john.doe@example.com',
             memPhone: '0912345678',
             otherRequirements: '',
             isChecked: false,
+            windowWidth: window.innerWidth,
         }
     },
     computed: {
-        ...mapState(courseStore, ['specificCourse', 'allCourse']), // 使用 mapState 獲取 specificCourse
+        ...mapState(courseStore, ['specificCourse', 'otherRequirements', 'participantCount']), // 使用 mapState 獲取 specificCourse
         course() {
             return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
         },
         sum() {
-            return this.count * this.course.price
+            return this.participantCount * this.course.price
+        },
+        isSumZero() {
+            return this.sum <= 0
+        },
+        disabledButton() {
+            return !this.isChecked || this.isSumZero
+        },
+        isMobile() {
+            return this.windowWidth < 450
         }
-
     },
     methods: {
-        ...mapActions(courseStore, ['getSpecificData', 'getData']),// 使用 mapActions 獲取 getSpecificData 方法
+        ...mapActions(courseStore, ['setOtherRequirements', 'setParticipantCount', 'getSpecificData', 'setCheckoutSum']), // 使用 mapActions 獲取 getSpecificData 方法
         add() {
-            if (this.count == 10) return
-            this.count++
+            if (this.participantCount < 10) {
+                this.setParticipantCount(this.participantCount + 1);
+            }
         },
         reduce() {
-            if (this.count == 0) return
-            this.count--
+            if (this.participantCount > 1) {
+                this.setParticipantCount(this.participantCount - 1);
+            }
         },
-        // updateSum() {
-        //     this.sum = this.count * this.course.price
-        // }
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth
+        },
     },
     async mounted() {
         try {
             const courseId = this.$route.params.id
-            await this.getSpecificData(courseId)
-            // this.updateSum() // 确保数据加载完成后更新结算金额
+            this.getSpecificData(courseId)
+            // 确保数据加载完成后更新结算金额
         } catch (error) {
             console.error("Failed to fetch specific course data:", error)
-        }
+        };
+        window.addEventListener('resize', this.updateWindowWidth);
     },
-    // async created() {
-    //     try {
-    //         const courseId = this.$route.params.id
-    //         await this.getSpecificData(courseId)
-    //         this.updateSum()
-    //         // 确保数据加载完成后更新结算金额
-    //     } catch (error) {
-    //         console.error("Failed to fetch specific course data:", error)
-    //     }
-    // },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.updateWindowWidth)
+    },
     watch: {
         '$route.params.id': {
             handler(newId) {
@@ -242,7 +259,30 @@ export default {
                 this.getSpecificData(newId)
             },
             immediate: true
-        }
+        },
+        isSumZero: {
+            handler(newValue) {
+                if (newValue) {
+                    alert("結帳金額不能夠為0");
+                }
+            }
+        },
+        sum: {
+            handler(newSum) {
+                this.setCheckoutSum(newSum);
+            },
+            immediate: true
+        },
+        otherRequirements: {
+            handler(newValue) {
+                this.setOtherRequirements(newValue);
+            },
+        },
+        participantCount: {
+            handler(newValue) {
+                this.setParticipantCount(newValue);
+            },
+        },
     },
 }
 </script>

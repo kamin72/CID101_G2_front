@@ -7,51 +7,60 @@
                 </span>
                 <span class="material-symbols-outlined">arrow_forward_ios</span>
                 <span class="frontPage-bread">
-                    <RouterLink to="/membercenter">會員中心</RouterLink>
+                    <RouterLink to="/wholesalercenter">會員中心</RouterLink>
                 </span>
                 <span class="material-symbols-outlined">arrow_forward_ios</span>
-                預約紀錄
+                訂單紀錄
             </small>
         </div>
         <div class="center_menu">
-            <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">會員資料</button> -->
+            <RouterLink to="/wholesalercenter" style="text-decoration: none;">
+                <!-- <button class="big-btn-primary"">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
-            <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">訂單紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
-            </RouterLink>
-            <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">預約紀錄</button> -->
-                <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
-            </RouterLink>
-            <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
+            <RouterLink to="/wholesalerorderhistory" style="text-decoration: none;">
+                <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
         </div>
-        <div class="wrap_booking_history">
+        <!-- 訂單紀錄 -->
+        <div class="wrap_order_history">
             <div class="items_list">
-                <p>課程日期</p>
-                <p>預約時段</p>
-                <p>活動名稱</p>
-                <!-- <p>人數</p> -->
-                <!-- <p>總金額</p> -->
-                <p>預約狀態</p>
+                <p>訂單編號</p>
+                <p>訂單日期</p>
+                <p>總金額</p>
+                <p>訂單狀態</p>
                 <p>操作</p>
             </div>
             <div class="items">
-                <p>2024-05-18</p>
-                <p>14:00-16:00</p>
-                <p>品酒體驗-初級課程1</p>
-                <!-- <p>1</p> -->
-                <!-- <p>NT.3,200</p> -->
-                <p>預約完成</p>
+                <p>2024xxxxxxxx</p>
+                <p>2024-02-29</p>
+                <p>NT.2,500</p>
+                <p>已完成</p>
+                <button class="small-btn-invalid">取消訂單</button>
+                <RouterLink to="memberorderhistorydetails" style="text-decoration: none;"> <button
+                        class="small-btn-primary">查閱</button></RouterLink>
+            </div>
+            <div class="items">
+                <p>2024xxxxxxxx</p>
+                <p>2024-02-29</p>
+                <p>NT.2,500</p>
+                <p>已備貨</p>
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-secondary">取消訂單</button>
                 </RouterLink>
-                <RouterLink to="/bookinghistorydetails" style="text-decoration: none;">
+                <RouterLink to="/" style="text-decoration: none;">
+                    <button class="small-btn-primary">查閱</button>
+                </RouterLink>
+            </div>
+            <div class="items">
+                <p>2024xxxxxxxx</p>
+                <p>2024-02-29</p>
+                <p>NT.2,500</p>
+                <p>未處理</p>
+                <RouterLink to="/" style="text-decoration: none;">
+                    <button class="small-btn-secondary">取消訂單</button>
+                </RouterLink>
+                <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
             </div>

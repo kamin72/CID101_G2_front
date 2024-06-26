@@ -2,10 +2,10 @@
   <!-- 大圖banner -->
   <div class="courseBanner" v-if="course">
     <div class="bgImgWrap">
-      <img :src="parseImg(course.image)" alt="" />
+      <img :src="parseServerImg(course.image)" alt="" />
     </div>
     <div class="maskWrap">
-      <img src="../assets/img/home/homebanner2.png" alt="" />
+      <img :src="parseServerImg('homebanner2.png')" alt="" />
     </div>
   </div>
   <!-- 課程資訊 -->
@@ -58,7 +58,7 @@
     </div>
   </section>
   <!-- 課程介紹 -->
-  <CourseDetail1 />
+  <CourseDetail1 :courseId="$route.params.id" />
 </template>
 
 <script>
@@ -72,17 +72,20 @@ export default {
   components: {
     CourseDetail1
   },
+
   data() {
     return {
       detail: []
     }
   },
+
   props: {
     id: {
       type: [Number, String],
       required: true
     }
   },
+
   methods: { // 要return東西
     ...mapActions(courseStore, ['getSpecificData', 'getData']),
     formatDate(dateString) {
@@ -105,39 +108,28 @@ export default {
 
       return hours
     },
-    parseImg(file) {
-      return new URL(`../assets/img/course/courselist/${file}`, import.meta.url).href
+    parseServerImg(file) {
+      return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
-    //解決部屬網站圖片問題
-    // parseServerImg(file) {
-    //   // 因為圖檔放在server中，只要組出路徑即可，
-    //   // 先確認這個路徑透過瀏覽器開啟有沒有圖檔，再確認斜線那些有沒有寫錯
-    //   // return `https://tibamef2e.com/chd104/ingrid/file/${imgURL}`
-    //   return `${import.meta.env.VITE_FILE_URL}/${file}`
-    // },
     discountedPrice(price, discount) {
       return discount ? price * (1 - discount) : price
     },
   },
+
   async mounted() {
     try {
       //再呼叫一次pinia的getSpecificData()
-      await this.getSpecificData(this.$route.params.id)
+      this.getSpecificData(this.$route.params.id)
     } catch (error) {
       console.error("Failed to fetch specific course data:", error)
     }
-
-
   },
+
   computed: { // computed是渲染畫面後要做的事
-    ...mapState(courseStore, ['specificCourse', 'allCourse']),
+    ...mapState(courseStore, ['specificCourse']),  //抓課程id
     course() {
-      // 定義course = specificCourse
       return this.specificCourse
     }
-  },
-  created() {
-    // console.log(this.specificCourse)
   },
 }
 

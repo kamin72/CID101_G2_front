@@ -3,11 +3,11 @@
     <div class="row">
       <!-- 頁面scrumble -->
       <small class="col-12 scrumble">
-        <!-- <RouterLink to="/">首頁</RouterLink> -->
-        首頁
-        <span class="material-symbols-outlined">
-          arrow_forward_ios
-        </span>關於我們
+        <span class="frontPage-bread">
+          <RouterLink to="/">首頁</RouterLink>
+        </span>
+        <span class="material-symbols-outlined">arrow_forward_ios</span>
+        關於我們
       </small>
     </div>
   </div>
@@ -22,7 +22,8 @@
         </div>
         <div class="col-12 about-info">
           <div class="about-info-pic">
-            <img src="@/assets/img/about/began.jpg">
+            <!-- <img src="@/assets/img/about/began.jpg"> -->
+            <img :src="parseServerImg('began.jpg')">
           </div>
           <div class="about-text">
             <h5>
@@ -47,42 +48,42 @@
         <div class="people-info-list">
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/kaimin.jpg">
+              <img :src="parseServerImg('kaimin.jpg')">
             </div>
             <h4>許凱閔</h4>
             <p>Founder & Koala</p>
           </div>
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/ruru.jpg">
+              <img :src="parseServerImg('ruru.jpg')">
             </div>
             <h4>黃韻如</h4>
             <p>Executive Director</p>
           </div>
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/mita.jpg">
+              <img :src="parseServerImg('mita.jpg')">
             </div>
             <h4>吳宜庭</h4>
             <p>Senior Winemaker</p>
           </div>
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/dong.jpg">
+              <img :src="parseServerImg('dong.jpg')">
             </div>
             <h4>蔡東廷</h4>
             <p>Viticulture Manager</p>
           </div>
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/purple.jpg">
+              <img :src="parseServerImg('purple.jpg')">
             </div>
             <h4>郭盈君</h4>
             <p>Viticulture Manager</p>
           </div>
           <div class="people-info">
             <div class="people-info-pic">
-              <img src="@/assets/img/about/pei.jpg">
+              <img :src="parseServerImg('pei.jpg')">
             </div>
             <h4>劉姵伶</h4>
             <p>Viticulture Manager</p>
@@ -103,96 +104,84 @@
         </div>
         <div class="history-process">
           <div class="history-info">
-            <div class="history-info-pic"
-            style="margin-right: 20px;">
-              <img src="@/assets/img/about/beginning.png">
+            <div class="history-info-pic" style="width: 250px;height: 200px;">
+              <img :src="parseServerImg('beginning.png')">
             </div>
             <div class="history-text">
               <h3>1967<br>
                 The Beginning</h3>
-              <h4>我們的莊園在1967年成立，<br>
-                當時只是個小規模的家庭酒莊。<br>
-                創始人對葡萄酒充滿熱情，<br>
-                他決心在這片肥沃的土地上種植優質葡萄，<br>
-                釀造出最純正的葡萄酒。
+              <h4>我們的莊園在1967年成立，
+                當時只是個小規模的家庭酒莊。
+                創始人對葡萄酒充滿熱情，
+                他決心在這片肥沃的土地上種植優質葡萄，釀造出最純正的葡萄酒。
               </h4>
             </div>
           </div>
           <div class="history-info-pic-dot">
-            <img src="@/assets/img/about/beginning-dot.png">
+            <img :src="parseServerImg('beginning-dot.png')">
           </div>
           <div class="history-info">
             <div class="history-text">
-              <h3>1970 <br>
-                First Harvest</h3>
-              <h4>經過三年的精心培育，<br>
-                莊園迎來了首批葡萄收成。<br>
-                這一年的葡萄品質極佳，<br>
-                我們釀造的第一批紅葡萄酒<br>
-                已經問世便受到當地市場的歡迎，<br>
-                成為我們莊園歷史上的重要里程碑。<br>
+              <h3>1970 First Harvest</h3>
+              <h4>經過三年的精心培育，
+                莊園迎來了首批葡萄收成。
+                這一年的葡萄品質極佳，
+                我們釀造的第一批紅葡萄酒
+                已經問世便受到當地市場的歡迎，
+                成為我們莊園歷史上的重要里程碑。
               </h4>
             </div>
-            <div class="history-info-pic">
-              <img src="@/assets/img/about/harvest.png" style="width: 150px; height: 200px;">
+            <div class="history-info-pic" style="width: 200px;height: 250px;">
+              <img :src="parseServerImg('harvest.png')">
             </div>
           </div>
           <div class="history-info-pic-dot">
-            <img src="@/assets/img/about/harvest-dot.png">
+            <img :src="parseServerImg('harvest-dot.png')">
           </div>
           <div class="history-info">
-            <div class="history-info-pic">
-              <img src="@/assets/img/about/innovation.png"
-              style="width: 200px;height: 200px;margin-bottom: 20px;">
+            <div class="history-info-pic" style="width: 200px;height: 250px;">
+              <img :src="parseServerImg('innovation.png')">
             </div>
             <div class="history-text">
-              <h3>1972 <br>
-                Technological Innovation</h3>
+              <h3>1972 Technological Innovation</h3>
               <h4>
-                隨著需求的增加，<br>
-                我們引進了先進的釀酒設備和技術，<br>
-                提升了葡萄酒的品質和生產效率。<br>
-                同時，我們開始種植更多的葡萄品種，<br>
-                包括經典的赤霞珠、黑皮諾和長相思等，<br>
-                豐富了我們的產品線。<br>
-                這些葡萄品種各具特色，<br>
+                隨著需求的增加，
+                我們引進了先進的釀酒設備和技術，
+                提升了葡萄酒的品質和生產效率。
+                同時，我們開始種植更多的葡萄品種，包括經典的赤霞珠、黑皮諾和長相思等，豐富了我們的產品線。
+                這些葡萄品種各具特色，
                 為莊園帶來了更多風味的可能。
               </h4>
             </div>
           </div>
           <div class="history-info-pic-dot">
-            <img src="@/assets/img/about/innovation-dot.png">
+            <img :src="parseServerImg('innovation-dot.png')">
           </div>
           <div class="history-info">
             <div class="history-text">
-              <h3>1975 <br>
-                Expand scale</h3>
-              <h4>為了滿足不斷增長的市場需求，<br>
-                我們擴大了莊園的規模，<br>
-                新增加了數百畝的葡萄園。<br>
-                我們有更多的空間進行釀酒實驗和創新。<br>
-                這些新的葡萄園成為我們未來發展的基石，<br>
+              <h3>1975 Expand scale</h3>
+              <h4>為了滿足不斷增長的市場需求，
+                我們擴大了莊園的規模，
+                新增加了數百畝的葡萄園。
+                我們有更多的空間進行釀酒實驗和創新。
+                這些新的葡萄園成為我們未來發展的基石，
                 每一顆新種下的葡萄苗都承載著我們的希望與願景。
               </h4>
             </div>
-            <div class="history-info-pic">
-              <img src="@/assets/img/about/scale.png" style="width: 250px; height: 150px;">
+            <div class="history-info-pic" style="width: 280px;height: 200px;">
+              <img :src="parseServerImg('scale.png')">
             </div>
           </div>
-          <div class="history-info-pic-dot">
-            <img src="@/assets/img/about/scale-dot.png">
+          <div class="history-info-pic-dot" style="width: 180px;height: 120px;">
+            <img :src="parseServerImg('scale-dot.png')">
           </div>
           <div class="history-info">
-            <div class="history-info-pic">
-              <img src="@/assets/img/about/development.png" style="width: 150px;height: 200px;">
+            <div class="history-info-pic" style="width: 150px;height: 190px;margin-bottom:80px">
+              <img :src="parseServerImg('development.png')">
             </div>
             <div class="history-text">
-              <h3>1979 <br>
-                Inheritance And Development</h3>
-              <h4>我們只是個小規模的家庭酒莊。<br>
-                創始人對葡萄酒充滿熱情，<br>
-                在這片肥沃的土地上種植優質葡萄，<br>
-                釀造出最純正的葡萄酒。
+              <h3>1979 Inheritance And Development</h3>
+              <h4>我們只是個小規模的家庭酒莊。創始人對葡萄酒充滿熱情，在這片肥沃的土地上種植優質葡萄，釀造出最純正的葡萄酒。
               </h4>
             </div>
           </div>
@@ -253,7 +242,21 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      pwdFlag: true,
+      account: '',
+      password: '',
+      isAuthenticated: false
+    }
+  },
+  methods: {
+    parseServerImg(file) {
+      return `${import.meta.env.VITE_FILE_URL}/${file}`
+    },
+  },
+}
 </script>
 
 <style></style>

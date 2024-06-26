@@ -11,6 +11,11 @@ import MainHeader from '@/components/home/MainHeader.vue'
 import MainFooter from '@/components/home/MainFooter.vue'
 // import CardsExample from '@/components/CardsExample.vue';
 export default {
+  data() {
+    return {
+      checkAccountName: ''
+    }
+  },
   components: {
     RouterView,
     MainHeader,

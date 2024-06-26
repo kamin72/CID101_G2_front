@@ -73,11 +73,49 @@
               </ul>
             </div>
           </div>
-          <button class="big-btn-primary reserveCourse">
-            <span class="material-symbols-outlined"> edit_calendar </span>預約課程
-          </button>
+          <RouterLink :to="{ name: 'courseBookingDetail', params: { id: courseId } }" style="text-decoration: none;">
+            <button class="big-btn-primary reserveCourse">
+              <span class="material-symbols-outlined"> edit_calendar </span>預約課程
+            </button>
+          </RouterLink>
         </div>
       </div>
     </div>
   </section>
 </template>
+<script>
+import { mapState } from 'pinia'
+import courseStore from '@/stores/course'
+
+export default {
+  data() {
+    return {
+      detail: []
+    }
+  },
+
+  props: {
+    id: {
+      type: [Number, String],
+      required: true
+    }
+  },
+
+  async mounted() {
+    try {
+      //再呼叫一次pinia的getSpecificData()
+      this.getSpecificData(this.$route.params.id)
+    } catch (error) {
+      console.error("Failed to fetch specific course data:", error)
+    }
+  },
+
+  computed: { // computed是渲染畫面後要做的事
+    ...mapState(courseStore, ['specificCourse']),
+    course() {
+      // 定義course = specificCourse
+      return this.specificCourse
+    }
+  },
+}
+</script>

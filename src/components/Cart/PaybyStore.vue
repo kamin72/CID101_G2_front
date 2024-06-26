@@ -5,35 +5,49 @@
     </div>
     <div class="selectStore">
       <h4>選擇7-11取貨門市</h4>
-      <button class="map big-btn-primary" @click="click1" :class="isClicked ? 'clicked' : 'unclicked'">
+      <button
+        class="map big-btn-primary"
+        @click="click1"
+        :class="isClicked ? 'clicked' : 'unclicked'"
+      >
         依地圖選擇門市
       </button>
-      <button class="ussdStore big-btn-primary" @click="click2" :class="isClicked ? 'unclicked' : 'clicked'">
+      <button
+        class="ussdStore big-btn-primary"
+        @click="click2"
+        :class="isClicked ? 'unclicked' : 'clicked'"
+      >
         ★ 選擇常用門市
       </button>
     </div>
     <div class="area" v-if="isClicked">
-      <label for="county">
-        <select name="county" v-model="selectedCounty">
+      <label for="county"
+        >請選擇縣市
+        <select name="county" v-model="selectedCounty" class="filter-button">
           <option value="" disabled selected>請選擇</option>
           <option :value="countyItem" v-for="(countyItem, index) in counties" :key="index">
             {{ countyItem }}
           </option>
         </select>
       </label>
-      <label for="district">
-        <select name="district" id="" v-model="selectedDistrict">
+      <label for="district"
+        >請選擇鄉、鎮、市、區
+        <select name="district" id="" v-model="selectedDistrict" class="filter-button">
           <option value="" disabled selected>請選擇</option>
           <option :value="districtItem" v-for="districtItem in districts" :key="districtItem">
             {{ districtItem }}
           </option>
         </select>
       </label>
-      <label for="street">
-        <select name="street" id="" v-model="selectedStreet">
+      <label for="street"
+        >請選擇街道
+        <select name="street" id="" v-model="selectedStreet" class="filter-button">
           <option value="" disabled selected>請選擇</option>
-          <option v-for="street in Object.keys(stores[selectedCounty]?.[selectedDistrict] || {})" :key="street"
-            :value="street">
+          <option
+            v-for="street in Object.keys(stores[selectedCounty]?.[selectedDistrict] || {})"
+            :key="street"
+            :value="street"
+          >
             {{ street }}
           </option>
         </select>
@@ -42,8 +56,13 @@
 
     <div class="storeAddress" v-if="isClicked">
       <div class="storeDisplay">
-        <div class="rect" v-for="storeItem in storeFilter" :key="storeItem.storeName" :value="storeItem"
-          @click="selectStore(storeItem)">
+        <div
+          class="rect"
+          v-for="storeItem in storeFilter"
+          :key="storeItem.storeName"
+          :value="storeItem"
+          @click="selectStore(storeItem)"
+        >
           <p>{{ storeItem.storeName }}</p>
           <p>{{ storeItem.address }}</p>
         </div>
@@ -200,7 +219,7 @@ export default {
               {
                 storeName: '徳芝門市',
                 address: '台北市士林區士東路266巷5弄18號20號1樓'
-              },
+              }
             ]
           }
         }
@@ -215,7 +234,7 @@ export default {
       this.isClicked = false
     },
     selectStore(store) {
-      this.selectedStore = store;
+      this.selectedStore = store
       console.log(this.selectedStore)
     }
   },
@@ -228,27 +247,26 @@ export default {
     //   return result
     // },
     storeFilter() {
-      const district = this.stores[this.selectedCounty]?.[this.selectedDistrict];
-      if (!district) return [];
+      const district = this.stores[this.selectedCounty]?.[this.selectedDistrict]
+      if (!district) return []
       // 如果選擇了特定街道
-      const streetStores = district[this.selectedStreet];
+      const streetStores = district[this.selectedStreet]
       // console.log('Stores on selected street:', streetStores);
-      return streetStores || [];
-    },
-
+      return streetStores || []
+    }
   },
   watch: {
     selectedCounty() {
-      this.selectedDistrict = '';
-      this.selectedStreet = '';
-      this.selectedStore = null;
+      this.selectedDistrict = ''
+      this.selectedStreet = ''
+      this.selectedStore = null
     },
     selectedDistrict() {
-      this.selectedStreet = '';
-      this.selectedStore = null;
+      this.selectedStreet = ''
+      this.selectedStore = null
     },
     selectedStreet() {
-      this.selectedStore = null;
+      this.selectedStore = null
     }
   }
 }
@@ -265,8 +283,7 @@ export default {
 
 .storeDisplay {
   width: 80%;
-  padding: 20px 0;
-  display: flex
+  display: flex;
 }
 
 .rect {
@@ -282,6 +299,6 @@ export default {
 }
 
 .rect p {
-  padding: 10px 0
+  padding: 10px 0;
 }
 </style>

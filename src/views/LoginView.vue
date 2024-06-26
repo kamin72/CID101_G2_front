@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="wrap_login">
-            <form @submit.prevent="login">
+            <form @submit.prevent="handleLogin">
                 <div class="login_item">
                     <a href="#" class="log_in">會員登入</a>
                     <RouterLink to="/signup">
@@ -9,10 +9,12 @@
                     </RouterLink>
                 </div>
                 <div class="account_list">
-                    <input type="text" id="account" v-model="account" autocomplete="account" placeholder="帳號">
+                    <input type="text" id="account" v-model="account" placeholder="帳號" name="account" />
+                    <!-- <span v-if="!isValidaccount">請輸入有效的帳號</span> -->
                 </div>
                 <div class="password_list">
-                    <input :type='pwdFlag ? "password" : "text"' id="password" v-model="password" autocomplete="password" placeholder="密碼">
+                    <input :type="pwdFlag ? 'password' : 'text'" id="password" v-model="password" placeholder="密碼"
+                        name="password" />
                     <div class="eyes_visibility">
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility_off
                         </span>
@@ -20,7 +22,7 @@
                         </span>
                     </div>
                 </div>
-                <RouterLink to="/forget">
+                <RouterLink to="/forget" style="text-decoration: none">
                     <a href="#" class="forget">忘記密碼?</a>
                 </RouterLink>
                 <!-- <RouterLink to="/membercenter">
@@ -37,6 +39,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
     data() {
         return {
@@ -44,38 +49,28 @@ export default {
             account: '',
             password: '',
             isAuthenticated: false
+            // memberInfo: []
         }
     },
     methods: {
+        ...mapActions(memberStore, ['login']),
         togglePassword() {
-            this.pwdFlag = !this.pwdFlag;
+            this.pwdFlag = !this.pwdFlag
         },
-        // login() {
-        //     // 假設正確的帳號和密碼是 "admin" 和 "password"
-        //     if (this.account !== 'abc123' || this.password !== '123123') {
-        //         alert('帳號或密碼輸入錯誤');
-        //     } else {
-        //         alert('登入成功');
-        //         // 在這裡可以導向到下一個頁面或執行其他登入成功後的操作
-        //     }
-        // }
-        login() {
-            // 模擬帳號和密碼驗證
-            if (this.account === 'abc123' && this.password === '123456') {
-                this.isAuthenticated = true;
-                this.$router.push('/membercenter');
-            } else if (this.account === 'who456' && this.password === '112233') {
-                this.$router.push('/wholesalercenter');
-            } else {
-                alert('帳號或密碼輸入錯誤');
+        async handleLogin() {
+            try {
+                const success = await this.login(this.account, this.password);
+                if (success === true) {
+                    // 如果登入成功，進行頁面跳轉
+                    this.$router.push('/');
+                }
+            } catch (error) {
+                console.error('登入錯誤:', error);
+                // 處理登入錯誤
             }
         }
-    },
-    components: {
-
-    },
+    }
 }
-
 </script>
 
 <style></style>
