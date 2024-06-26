@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <nav class="container">
-      <div class="header-hamburger" @click="toggleNav" ref='nav'>
+      <div class="header-hamburger" @click="toggleNav" ref="nav">
         <i class="fa-solid fa-bars"></i>
       </div>
       <div class="header-logo">
@@ -26,8 +26,12 @@
 
           <div class="header-shoppingcart">
             <i class="fa-solid fa-bag-shopping"></i>
-            <RouterLink to="/cart_comp" v-if="!isNormalAccount">詢價清單({{ cartCount }})</RouterLink>
-            <RouterLink to="/cart_account" v-if="isNormalAccount">詢價清單({{ cartCount }})</RouterLink>
+            <RouterLink to="/cart_comp" v-if="!isNormalAccount"
+              >詢價清單({{ cartCount }})</RouterLink
+            >
+            <RouterLink to="/cart_account" v-if="isNormalAccount"
+              >詢價清單({{ cartCount }})</RouterLink
+            >
           </div>
 
           <div class="wrap-logout-shoppingcart" v-if="accountName">
@@ -48,7 +52,7 @@ import memberStore from '@/stores/loginMember'
 export default {
   data() {
     return {
-      isNavOpen: false,
+      isNavOpen: false
     }
   },
   computed: {
@@ -63,6 +67,7 @@ export default {
       this.isNavOpen = false
     })
     this.getMemberData()
+    // this.isNormalAccount()
   },
   methods: {
     ...mapActions(cartStore, ['checkCart']),
@@ -72,7 +77,7 @@ export default {
     },
     handleOutsideClick(event) {
       // 檢查點擊是否發生在導覽列之外
-      const nav = this.$refs.nav // 假設你的導覽列有 ref="nav"
+      const nav = this.$refs.nav //訪問DOM元素
       if (this.isNavOpen && nav && !nav.contains(event.target)) {
         this.isNavOpen = false
       }
@@ -89,6 +94,6 @@ export default {
   },
   beforeUnmount() {
     window.removeEventListener('click', this.handleOutsideClick)
-  },
+  }
 }
 </script>

@@ -18,13 +18,25 @@
     </div>
     <div class="phone">
       <p class="title">連絡電話</p>
-      <input type="text" placeholder="請輸入連絡電話" id="cartPhone_comp" :value="phone"
-        @input="$emit('update:phone', $event.target.value)" required />
+      <input
+        type="text"
+        placeholder="請輸入連絡電話"
+        id="cartPhone_comp"
+        :value="phone"
+        @input="$emit('update:phone', $event.target.value)"
+        required
+      />
     </div>
     <div class="email">
       <p class="title">Email</p>
-      <input type="text" placeholder="請輸入email" id="cartEmail_comp" :value="email"
-        @input="$emit('update:email', $event.target.value)" required />
+      <input
+        type="text"
+        placeholder="請輸入email"
+        id="cartEmail_comp"
+        :value="email"
+        @input="$emit('update:email', $event.target.value)"
+        required
+      />
     </div>
   </form>
 </template>
@@ -49,15 +61,15 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(memberStore, ['memberInfo', 'memberComp']),
+    ...mapState(memberStore, ['memberInfo', 'memberComp'])
   },
   methods: {
-    ...mapActions(memberStore, ['getMemberData', 'fetchMemberCompData', 'getMemberCompData']),
+    ...mapActions(memberStore, ['getMemberData', 'fetchMemberCompData', 'getMemberCompData'])
   },
   created() {
     this.fetchMemberData()
     this.getMemberCompData()
     // console.log(this.memberComp)
-  },
+  }
 }
 </script>

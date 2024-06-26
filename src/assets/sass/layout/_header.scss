@@ -78,8 +78,14 @@
         }
       }
       .wrap-logout-shoppingcart {
+        display: flex;
         span {
-          color: $white;
+          margin: 0 10px;
+          text-decoration: none;
+          color: #fff;
+          font-size: map-get($font-size, a);
+          letter-spacing: $letter-spacing;
+          font-family: $font-cormorant;
           cursor: pointer;
           margin: 0 10px;
           text-decoration: none;
@@ -87,6 +93,12 @@
           font-size: map-get($font-size, a);
           letter-spacing: $letter-spacing;
           font-family: $font-cormorant;
+        }
+        .fa-regular {
+          color: $white;
+        }
+        .fa-solid {
+          color: $white;
         }
       }
     }

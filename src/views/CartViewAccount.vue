@@ -16,9 +16,17 @@
           <th class="item">總金額</th>
           <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
         </tr>
-        <CartList v-for="(productItem, productIndex) in products" :key="productItem.id" :item="productItem"
-          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
+        <CartList
+          v-for="(productItem, productIndex) in products"
+          :key="productItem.id"
+          :item="productItem"
+          :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)"
+          @reduce="reduce(productIndex)"
+          @deleteProductItem="onDeletProductItem"
+        />
         <tr class="sum">
           <td>總價</td>
           <td></td>
@@ -29,7 +37,7 @@
           <td>折扣</td>
           <td></td>
           <td></td>
-          <td>- NT. {{ discount }}</td>
+          <td>- NT. ???</td>
         </tr>
         <tr class="actualPaid">
           <td>結帳金額</td>
@@ -46,14 +54,24 @@
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
-          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
+          <label
+            ><input
+              type="checkbox"
+              class="agree"
+              v-model="agreeTerms"
+            />我同意所有交易條款[查看條款]</label
+          >
           <label>
             <input type="checkbox" class="reciveMeg" v-model="receiveMessages" />
-            是否願意收到Silken SipsVineyard的最新消息</label>
+            是否願意收到Silken SipsVineyard的最新消息</label
+          >
         </div>
         <RouterLink to="/cart_account/cartdelivery_account" style="text-decoration: none">
-          <button class="big-btn-primary cartSubmit" :disabled="!canSubmit"
-            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">
+          <button
+            class="big-btn-primary cartSubmit"
+            :disabled="!canSubmit"
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          >
             送出詢價單
           </button>
         </RouterLink>
@@ -182,9 +200,9 @@ export default {
     isMobile() {
       return this.windowWidth < 450
     },
-    discount() {
-      return this.sum * 0.8
-    },
+    // discount() {
+    //   return this.sum * 0.8
+    // },
     actualPaid() {
       return this.sum + this.discount
     }
