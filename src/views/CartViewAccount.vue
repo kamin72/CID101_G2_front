@@ -184,7 +184,7 @@ export default {
     },
     onDeletProductItem(index) {
       this.products.splice(index, 1)
-      console.log(this.products)
+      // console.log(this.products)
       localStorage.setItem('cart', JSON.stringify(this.products))
     }
   },
