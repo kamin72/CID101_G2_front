@@ -41,7 +41,7 @@
         <h3>恭喜~你的得分是：{{ totalScore }} 分</h3>
         <!-- --------------------------------------------------------- -->
         <div class="letter-icon">
-          <div class="confetti" v-for="index in 5" :key="index"></div>
+          <div class="confetti" v-for="index in 100" :key="index" :style="generateConfettiStyle()"></div>
           <svg :class="{ hide: isOpen }" width="200" height="200" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="64" height="48" y="8" rx="4" fill="#D1D5DB"/>
             <path class="flap" :class="{ open: isOpen }" d="M4 8L32 32L60 8" stroke="#1F2937" stroke-width="4" fill="#1F2937"/>
@@ -183,6 +183,19 @@ export default {
         this.centerCoupon();
       },
     },
+    generateConfettiStyle() {
+      const colors = ['#ff0', '#f0f', '#0ff', '#0f0', '#00f', '#f00'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const left = Math.random() * 100 + 'vw';
+      const top = Math.random() * -50 + 'vh'; 
+      const rotate = Math.random() * 360 + 'deg';
+      return {
+        backgroundColor: color,
+        left,
+        top,
+        transform: `rotate(${rotate})`
+      };
+  },
     shuffleQuestions() {
       for (let i = this.questions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -392,12 +405,10 @@ button.shake {
 }
 /*  */
 .letter-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
+  height: 100%;
+  width: 100%;
   position: relative;
-  cursor: pointer;
+  /* overflow: hidden; */
 }
 
 svg {
@@ -463,23 +474,21 @@ svg.hide {
 /* 彩带动画 */
 .confetti {
   position: absolute;
-  top: 0;
-  right: 0;
   width: 10px;
   height: 10px;
   background-color: #f00; /* 彩带颜色 */
-  animation: confetti-fall 3s infinite; /* 使用动画 */
+  animation: confetti-fall 4s infinite; /* 使用动画 */
 }
 
 /* 彩带动画关键帧 */
 @keyframes confetti-fall {
   0% {
-    transform: translate(0, -100%);
-    opacity: 0;
+    transform: translateY(0);
+    opacity: 1;
   }
   100% {
-    transform: translate(100%, 1000%);
-    opacity: 1;
+    transform: translateY(100vh); 
+    opacity: 0;
   }
 }
 </style>
