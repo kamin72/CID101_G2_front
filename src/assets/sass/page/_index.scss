@@ -1,16 +1,28 @@
-// 開場輪播圖
+// 首頁banner
 .homeBanner {
   // outline: 1px solid red;
-  background-image: url(/src/assets/img/home/home-banner.png);
-  background-repeat: no-repeat;
-  background-position: bottom 0 left 0;
-  background-size: cover;
-  height: 64vh;
+  // background-image: url(/src/assets/img/home/home-banner.png);
+  // background-repeat: no-repeat;
+  // background-position: bottom 0 left 0;
+  // background-size: cover;
+  // height: 64vh;
   align-content: center;
   position: relative;
-
+  display: flex;
+  flex-wrap: wrap;
+  .banner-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(/src/assets/img/home/home-banner.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
   @include t {
-    height: 65vh;
+    width: 100%;;
     // outline: 1px solid red;
     // background-image: url(/src/assets/img/home/homebanner2.png);
     // background-position: bottom 17% left 50%;
@@ -26,6 +38,7 @@
       bottom: -5px;
       left: 0;
       width: 100%;
+      z-index: 1;
       img {
         width: 100%;
       }
@@ -35,96 +48,351 @@
         // overflow: hidden;
         // outline: 1px solid red;
         .image {
-          z-index: 2;
+          z-index: 99;
           // outline: 1px solid red;
           // width: clamp(500px, 39.0625vw, 600px);
           // width: 40%;
-          height: 78vh;
+          // height: 78vh;
+          width: clamp(300px, 45%, 530px);
           position: absolute;
           // // bottom: 5%;
           // // left: 31%;
-          top: 52%;
+          top: 55%;
           left: 50%;
           transform: translate(-50%, -50%);
           filter: drop-shadow(2px 5px 1px rgba(0, 0, 0, 0.8));
-          @include m {
-            top: 75%;
-          }
+          
+        }
+
+        .reflection {
+          z-index: 98;
+          // width: 30%;
+          // max-height: 80vh;
+          display: block;
+          // outline: 1px solid red;
+          margin: 0 auto;
+          position: absolute;
+          bottom: 0;
+          left: 49.25%;
+          transform: translate(-50%, 95%);
+          width: clamp(170px, 25%, 300px);
           @include t {
-            top: 55%;
+            // left: 48%;
+            transform: translate(-50%, 93%);
           }
-        }
-        .shadow {
-          // position: relative;
-          .reflection {
-            z-index: 5;
-            // width: 30%;
-            height: 80vh;
-            display: block;
-            // outline: 1px solid red;
-            margin: 0 auto;
-            position: absolute;
-            bottom: 0;
-            left: 49.25%;
-            transform: translate(-50%, 91%);
-            @include m {
-              left: 45%;
-              transform: translate(-50%, 97%);
-            }
-            @include t {
-              left: 48%;
-              transform: translate(-50%, 95%);
-            }
+          @include m {
+            left: 49%;
+            // height: 53vh;
+            transform: translate(-50%, 99%);
           }
-        }
+          
+        } 
+        
       }
     }
     .homeBanner_txt {
+      color: #7f1023;
+      position: relative;
+      z-index: 98;
       h3 {
         // outline: 1px solid red;
         font-size: clamp(1.5rem, 3vw, 5rem);
         width: 70%;
         margin: auto;
-        color: #ffffff;
         letter-spacing: 2px;
+        font-family: $font-cormorant;
         @include t {
           width: 90%;
           // color: #520802;
+        }
+        @include m{
+          width: 80%;
         }
       }
       h2 {
         width: 70%;
         margin: auto;
-        font-size: clamp(7rem, 32vw, 19rem);
+        font-size: clamp(5rem, 25vw, 19rem);
         text-align: center;
         // outline: 1px solid red;
-        color: #ffffff;
         letter-spacing: 24px;
+        font-family: $font-cormorant;
         @include t {
           width: 90%;
-          // color: #520802;
+          
+        }
+        @include m{
+          width: 80%;
+          letter-spacing: 20px;
         }
       }
       h4 {
         // outline: 1px solid red;
         font-size: clamp(1.5rem, 3vw, 5rem);
+        font-family: $font-cormorant;
         text-align: right;
         width: 70%;
         margin: auto;
-        color: #ffffff;
         letter-spacing: 2px;
         @include t {
           width: 90%;
           // color: #520802;
         }
+        @include m{
+          width: 80%;
+        }
       }
     }
   }
+  .octagon-wrap{
+    width: 100%;
+    .octagon{
+      background-color: $bgc;
+      position: absolute;
+    }
+    //上
+    .octagon-1{
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10%;
+      z-index: 1;
+      .line-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        // transform: translate(-50%, -50%);
+        background-color: $bgc;
+        // border-bottom: 5px #7f1023 solid;
+        z-index: 3;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 5px);
+        // transform: translate(-50%, -50%);
+        background-color: #7f1023;
+        // border-bottom: $bgc;
+        z-index: 2;
+      }
+    }
+    //下
+    .octagon-2{
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 10%;
+      z-index: 2;
+        .line-top{
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: calc(100% - 10px);
+          height: calc(100% - 10px);
+          // transform: translate(-50%, -50%);
+          background-color: $bgc;
+          // border-bottom: 5px #7f1023 solid;
+          z-index: 3;
+        }
+        .line-bottom{
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: calc(100% - 10px);
+          height: calc(100% - 5px);
+          background-color: #7f1023;
+        }
+    }
+    //左上
+    .octagon-3{
+      clip-path: polygon(0 0,100% 0, 0 100%);
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 4;
+      .line-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(calc(79% - 3px) calc(8% - 3px), calc(92% - 3px) calc(8% - 3px), calc(79% - 3px) calc(21% - 3px));
+        background-color: $bgc;
+        z-index: 6;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(79% 8%,92% 8%, 79% 21%);
+        background-color: #7f1023;
+        z-index: 5;
+      }
+    }
+    // 左
+    .octagon-4{
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      z-index: 3;
+      .line-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 15px);
+        height: 100%;
+        // transform: translate(-50%, -50%);
+        background-color: $bgc;
+        // border-bottom: 5px #7f1023 solid;
+        z-index: 3;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: 100%;
+        // transform: translate(-50%, -50%);
+        background-color: #7f1023;
+        // border-bottom: $bgc;
+        z-index: 2;
+      }
+    }
+    // //左下
+    .octagon-5{
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 5;
+      .line-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(calc(79% - 3px) calc(81% + 3px),calc(92% - 3px) calc(94% + 3px), 79% 94%);
+        background-color: $bgc;
+        z-index: 6;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        // clip-path: polygon(79% 8%,92% 8%, 79% 21%);
+        clip-path: polygon(79% 81%,92% 94%, 79% 94%);
+        background-color: #7f1023;
+        z-index: 5;
+      }
+    }
+    // //右下
+    .octagon-6{
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 5;
+      .line-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(calc(10% + 3px) calc(94% + 3px),calc(23% + 3px) 94%, calc(23% + 3px) calc(81% + 3px));
+        background-color: $bgc;
+        z-index: 6;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(10% 94%,23% 94%, 23% 81%);
+        background-color: #7f1023;
+        z-index: 5;
+      }
+    }
+    // //右
+    .octagon-7{
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      z-index: 3;
+      .line-top{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100% - 15px);
+        height: 100%;
+        // transform: translate(-50%, -50%);
+        background-color: $bgc;
+        // border-bottom: 5px #7f1023 solid;
+        z-index: 3;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100% - 10px);
+        height: 100%;
+        // transform: translate(-50%, -50%);
+        background-color: #7f1023;
+        // border-bottom: $bgc;
+        z-index: 2;
+      }
+    }
+    // //右上
+    .octagon-8{
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      z-index: 5;
+      .line-top{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(calc(8% + 3px) calc(8% - 3px), calc(21% + 3px) calc(8% - 3px), calc(21% + 3px) calc(21% - 3px));
+        background-color: $bgc;
+        z-index: 5;
+      }
+      .line-bottom{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        clip-path: polygon(8% 8%, 21% 8%, 21% 21%);
+        background-color: #7f1023;
+        z-index: 5;
+      }
+    }
+  }
+  
 }
 
 // 關於我們
 .homeAboutus {
   overflow: hidden;
+  position: relative;
+  z-index: 4;
   .homeAboutus_container {
     @include t {
       // outline: 1px solid red;
@@ -195,20 +463,30 @@
         }
       }
     }
-    button {
-      // outline: 1px solid red;
-      border: none;
-      padding: 15px 90px;
-      background-color: #7f1023;
+    .more-btn {
       color: #ffffff;
-
-      @include t {
-        display: block;
-        margin: auto;
-      }
+      display: flex;
+      flex-wrap: wrap;
+      // margin: auto;
+      // justify-content: center;
       a {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #7f1023;
         text-decoration: none;
+        color: #ffffff;
         letter-spacing: $letter-spacing;
+        width: 60%;
+        aspect-ratio: 30/7;
+        @include t {
+          width: 35%;
+          margin: auto;
+        }
+        @include m{
+          width: 62%;
+        }
       }
     }
     .homeAboutus_BarrelImg {
@@ -228,9 +506,6 @@
         width: 100%;
       }
     }
-  }
-  @include m {
-    padding: 25px 0;
   }
 }
 //map
@@ -349,7 +624,9 @@
     }
   }
   @include t {
+    overflow: hidden;
     .container {
+      overflow: hidden;
       position: relative;
       width: 100%;
       .card {
@@ -360,15 +637,15 @@
         }
         .card-wrap {
           position: relative;
-          width: 100%;
+          width: 50%;
           .line {
             display: none;
           }
           .card-info {
             flex-direction: column;
             position: fixed;
-            top: 45%;
-            left: 43%;
+            top: 55%;
+            left: 50%;
             transform: translate(-50%, -50%);
             width: 45%;
             z-index: 11;
@@ -549,6 +826,7 @@
 
 //wineSwiper
 .wine {
+  overflow: hidden;
   .container {
     width: 100%;
     display: flex;
