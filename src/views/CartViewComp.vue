@@ -51,7 +51,7 @@
             本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
-          <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label>
+          <!-- <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label> -->
           <label
             ><input
               type="checkbox"
@@ -147,7 +147,7 @@ export default {
       ],
       allChecked: false,
       windowWidth: window.innerWidth,
-      isEighteen: false,
+      // isEighteen: false,
       agreeTerms: false,
       receiveMessages: false
     }
@@ -206,7 +206,7 @@ export default {
       return price
     },
     canSubmit() {
-      return this.isEighteen && this.agreeTerms && this.receiveMessages
+      return this.agreeTerms
     },
     isMobile() {
       return this.windowWidth < 450

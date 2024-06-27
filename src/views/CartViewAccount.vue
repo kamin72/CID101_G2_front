@@ -195,7 +195,7 @@ export default {
       return price
     },
     canSubmit() {
-      return this.isEighteen && this.agreeTerms && this.receiveMessages
+      return this.isEighteen && this.agreeTerms
     },
     isMobile() {
       return this.windowWidth < 450
