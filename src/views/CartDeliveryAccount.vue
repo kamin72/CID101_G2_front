@@ -4,17 +4,31 @@
       <CartFlow :flow="item" v-for="item in flow" :key="item.id" />
     </section>
     <div class="wrap_all">
-      <FormAccount v-model:name="name" v-model:address="address" v-model:phone="phone" v-model:email="email"
-        @update:name="saveToLocalstorage" @update:address="saveToLocalstorage" @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage" />
+      <FormAccount
+        v-model:isChecked="isChecked"
+        v-model:name="name"
+        v-model:address="address"
+        v-model:phone="phone"
+        v-model:email="email"
+        @isChecked="handelIsChecked"
+        @update:name="saveToLocalstorage"
+        @update:address="saveToLocalstorage"
+        @update:phone="saveToLocalstorage"
+        @update:email="saveToLocalstorage"
+      />
       <aside class="yardInfo">
         <YardInfo />
       </aside>
     </div>
     <div class="button">
       <RouterLink to="/cart_account/cart_finish_account" from="" style="text-decoration: none">
-        <button class="big-btn-primary accountSubmit" :disabled="!canSubmit"
-          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">提交資料</button>
+        <button
+          class="big-btn-primary accountSubmit"
+          :disabled="!canSubmit"
+          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+        >
+          提交資料
+        </button>
       </RouterLink>
     </div>
   </div>
@@ -25,6 +39,8 @@
 import CartFlow from '@/components/Cart/CartFlow.vue'
 import FormAccount from '@/components/Cart/FormAccount.vue'
 import YardInfo from '@/components/Cart/YardInfo.vue'
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
 
 export default {
   components: {
@@ -60,6 +76,7 @@ export default {
         }
       ],
       deliveryInfo: [],
+      isChecked: false,
       name: '',
       address: '',
       phone: '',
@@ -67,9 +84,13 @@ export default {
     }
   },
   mounted() {
-    window.scrollTo(0, 0), this.showLocalstorage()
+    window.scrollTo(0, 0)
+    this.showLocalstorage()
+    // this.showMemberInfo()
   },
   computed: {
+    ...mapState(memberStore, ['memberInfo', 'memberAccount']),
+
     canSubmit() {
       const phoneid = /^\d{10}$/.test(this.phone)
       const emailid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
@@ -77,6 +98,8 @@ export default {
     }
   },
   methods: {
+    ...mapActions(memberStore, ['getMemberData', 'fetchMemberData']),
+
     saveToLocalstorage() {
       this.deliveryInfo = {
         name: this.name,
@@ -94,7 +117,22 @@ export default {
         this.phone = this.deliveryInfo.phone
         this.email = this.deliveryInfo.email
       }
+    },
+    handelIsChecked(value) {
+      if (value) {
+        this.name = this.memberInfo?.[0]['name']
+        this.phone = this.memberInfo?.[0]['phone']
+        this.email = this.memberInfo?.[0]['email']
+      } else {
+        this.name = ''
+        this.phone = ''
+        this.email = ''
+      }
     }
+  },
+  created() {
+    this.getMemberData()
+    this.fetchMemberData()
   }
 }
 </script>

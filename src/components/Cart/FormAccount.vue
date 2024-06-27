@@ -3,7 +3,7 @@
     <div class="column">
       <h3 class="title">填寫個人資料</h3>
       <div class="syn">
-        <input type="checkbox" />
+        <input type="checkbox" @change="syncMember" v-model="localChecked" />
         <p>同步會員資料到訂購人資訊</p>
       </div>
     </div>
@@ -55,8 +55,12 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   props: {
+    isChecked: Boolean,
     name: {
       type: String,
       required: true
@@ -76,9 +80,18 @@ export default {
   },
   emit: ['update:phone', 'update:email', 'update:address', 'update:name'],
   data() {
-    return {}
+    return {
+      localChecked: this.isChecked
+    }
   },
-  mounted() {},
-  methods: {}
+  computed: {
+    ...mapState(memberStore, ['memberInfo', 'memberAccount'])
+  },
+  methods: {
+    ...mapActions(memberStore, ['getMemberData', 'fetchMemberData']),
+    syncMember() {
+      this.$emit('isChecked', this.localChecked)
+    }
+  }
 }
 </script>

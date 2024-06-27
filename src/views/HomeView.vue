@@ -1,17 +1,50 @@
 <template>
-  <!-- 開場輪播圖 -->
+  <!-- 首頁banner -->
   <section class="homeBanner">
+    <div class="banner-img"></div>
+    <div class="octagon-wrap">
+      <div class="octagon-1 octagon">
+        <div class="line-top"></div>
+        <div class="line-bottom"></div>
+      </div>
+        <div class="octagon-2 octagon">
+          <div class="line-top"></div>
+        <div class="line-bottom"></div>
+        </div>
+        <div class="octagon-3 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+        <div class="octagon-4 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+        <div class="octagon-5 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+        <div class="octagon-6 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+        <div class="octagon-7 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+        <div class="octagon-8 octagon">
+          <div class="line-bottom"></div>
+          <div class="line-top"></div>
+        </div>
+    </div>
+        
     <div class="homeBanner_container">
-      <div class="homeBanner_wine">
-        <div class="homeBanner_wine_wapper">
+      <div class="homeBanner_wine" >
+        <div class="homeBanner_wine_wapper" >
           <img src="/src/assets/img/wine/bannerwine.png" class="image" />
-          <div class="shadow">
             <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
-          </div>
-
         </div>
       </div>
-      <div class="homeBanner_txt">
+      <div class="homeBanner_txt"  ref="banner">
         <h3>MEMORABLE</h3>
         <h2>WINE</h2>
         <h4>JOURNEYS</h4>
@@ -52,10 +85,9 @@
           </div>
         </div>
 
-        <RouterLink to="/About">
-
-          <button>MORE</button>
-        </RouterLink>
+        <div class="more-btn">
+        <RouterLink to="/about">MORE</RouterLink>
+      </div>
 
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png" />
@@ -124,6 +156,7 @@
 // swiper
 import SwiperComponent from '@/components/home/SwiperComponent.vue'
 import WineCarousel from '@/components/home/WineCarousel.vue'
+import { gsap } from 'gsap';
 
 export default {
   components: {
@@ -168,7 +201,9 @@ export default {
           img: 'home-map-vintage.png',
           isActive: false
         }
-      ]
+      ],
+      canvas: null,
+      ctx: null
     };
   },
   methods: {
@@ -199,6 +234,19 @@ export default {
     }
   },
   mounted() {
+  //  GSAP animation for octagon
+    gsap.to(this.$refs.banner,{ duration: 3,color:"white", ease: "power4.in"});
+    gsap.fromTo(".banner-img", {scaleX:0.8,scaleY:0.8},{duration: 3, scaleX:1,scaleY:1, ease: "power4.in"});
+    gsap.fromTo(".octagon-1", {width: "100%", height: "10%"},{duration: 3,width: "100%", height: "0", ease: "expo.in"});
+    gsap.fromTo(".octagon-2", {width: "100%", height: "10%"},{duration: 3,width: "100%", height: "0", ease: "expo.in"});
+    gsap.fromTo(".octagon-3", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
+    gsap.fromTo(".octagon-4", {width: "40%", height: "100%"},{duration: 3,width: "0", height:"100%", ease: "expo.in"});
+    gsap.fromTo(".octagon-5", {width: "50%", height: "100%"},{duration: 3,width: "0", height: "0",ease: "expo.in"});
+    gsap.fromTo(".octagon-6", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
+    gsap.fromTo(".octagon-7", {width: "40%", height: "100%"},{duration: 3, width: "0", height:"100%", ease: "expo.in"});
+    gsap.fromTo(".octagon-8", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
+  
+    //map點擊卡片外圍
     document.addEventListener('click', this.handleClickOutside);
     window.scrollTo(0, 0)
     document.addEventListener('click', this.handleClickOutside)
@@ -206,6 +254,5 @@ export default {
   beforeUnmount() {
     document.removeEventListener('click', this.handleClickOutside);
   }
-
 }
 </script>

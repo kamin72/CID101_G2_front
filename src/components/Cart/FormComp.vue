@@ -6,15 +6,15 @@
     </div>
     <div class="name">
       <p class="title">姓名</p>
-      <p class="title">許凱閔</p>
+      <p class="title">{{ memberComp?.[0]['name'] }}</p>
     </div>
     <div class="compName">
       <p class="title">公司名稱</p>
-      <p class="title">緯育股份有限公司</p>
+      <p class="title">{{ memberComp?.[0]['company_name'] }}</p>
     </div>
     <div class="receiveAddress">
       <p class="title">收件地址</p>
-      <p class="title">桃園市中壢區復興路46號</p>
+      <p class="title">{{ memberComp?.[0]['address'] }}</p>
     </div>
     <div class="phone">
       <p class="title">連絡電話</p>
@@ -42,6 +42,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   props: {
     phone: {
@@ -57,6 +60,16 @@ export default {
   data() {
     return {}
   },
-  computed: {}
+  computed: {
+    ...mapState(memberStore, ['memberInfo', 'memberComp'])
+  },
+  methods: {
+    ...mapActions(memberStore, ['getMemberData', 'fetchMemberCompData', 'getMemberCompData'])
+  },
+  created() {
+    this.fetchMemberCompData()
+    this.getMemberCompData()
+    // console.log(this.memberComp)
+  }
 }
 </script>

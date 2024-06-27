@@ -2,11 +2,17 @@ import { defineStore } from 'pinia'
 
 export default defineStore('memberStore', {
   state: () => ({
-    memberInfo: null
+    memberInfo: null,
+    memberComp: null
   }),
   getters: {
     accountName() {
       return this.memberInfo?.[0]['name'] || ''
+    },
+    isNormalAccount() {
+      if (this.memberInfo?.[0]['identity'] == 1) {
+        return true
+      }
     }
   },
   actions: {
@@ -46,12 +52,44 @@ export default defineStore('memberStore', {
         return false
       }
     },
+    fetchMemberData() {
+      fetch('http://localhost/CID101_G2_php/front/memberLogin.php')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.member) {
+            this.memberAccount = data.member
+            localStorage.setItem('memberComp', JSON.stringify(this.memberAccount))
+          }
+        })
+    },
     getMemberData() {
       let storage = localStorage.getItem('memberInfo')
       if (storage) {
         this.memberInfo = JSON.parse(storage)
       } else {
         this.memberInfo = null
+      }
+    },
+    fetchMemberCompData() {
+      fetch('http://localhost/CID101_G2_php/front/getMember_comp.php')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.member) {
+            this.memberComp = data.member
+            localStorage.setItem('memberComp', JSON.stringify(this.memberComp))
+          }
+        })
+    },
+    getMemberCompData() {
+      let storage = localStorage.getItem('memberComp')
+      if (storage) {
+        this.memberComp = JSON.parse(storage)
+      } else {
+        this.memberComp = null
       }
     }
   }
