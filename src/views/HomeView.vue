@@ -7,50 +7,50 @@
         <div class="line-top"></div>
         <div class="line-bottom"></div>
       </div>
-        <div class="octagon-2 octagon">
-          <div class="line-top"></div>
+      <div class="octagon-2 octagon">
+        <div class="line-top"></div>
         <div class="line-bottom"></div>
-        </div>
-        <div class="octagon-3 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
-        <div class="octagon-4 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
-        <div class="octagon-5 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
-        <div class="octagon-6 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
-        <div class="octagon-7 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
-        <div class="octagon-8 octagon">
-          <div class="line-bottom"></div>
-          <div class="line-top"></div>
-        </div>
+      </div>
+      <div class="octagon-3 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
+      <div class="octagon-4 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
+      <div class="octagon-5 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
+      <div class="octagon-6 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
+      <div class="octagon-7 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
+      <div class="octagon-8 octagon">
+        <div class="line-bottom"></div>
+        <div class="line-top"></div>
+      </div>
     </div>
-        
+
     <div class="homeBanner_container">
-      <div class="homeBanner_wine" >
-        <div class="homeBanner_wine_wapper" >
+      <div class="homeBanner_wine">
+        <div class="homeBanner_wine_wapper">
           <img src="/src/assets/img/wine/bannerwine.png" class="image" />
-            <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
+          <img src="/src/assets/img/home/wineshadow.png" class="reflection" />
         </div>
       </div>
-      <div class="homeBanner_txt"  ref="banner">
+      <div class="homeBanner_txt" ref="banner">
         <h3>MEMORABLE</h3>
         <h2>WINE</h2>
         <h4>JOURNEYS</h4>
       </div>
       <div class="homeBanner_mountain">
-        <img src="/src/assets/img/home/homebanner2.png" alt="">
+        <img src="/src/assets/img/home/homebanner2.png" alt="" />
       </div>
     </div>
   </section>
@@ -86,8 +86,8 @@
         </div>
 
         <div class="more-btn">
-        <RouterLink to="/about">MORE</RouterLink>
-      </div>
+          <RouterLink to="/about">MORE</RouterLink>
+        </div>
 
         <div class="homeAboutus_BarrelImg">
           <img src="/src/assets/img/home/BarrelImg.png" />
@@ -112,7 +112,7 @@
         <h2>Winery Map</h2>
         <span></span>
       </div>
-      <img src="../assets/img/home/home-map.png" alt="">
+      <img src="../assets/img/home/home-map.png" alt="" />
       <div v-for="(card, index) in map" :key="index" class="card" :class="card.type">
         <div class="dot" @click="toggleInfo(index)"></div>
         <div class="card-wrap" :class="{ active: card.isActive }">
@@ -120,7 +120,7 @@
           <div class="card-info">
             <div class="card-info-image">
               <!-- 部屬用-解析圖片位置 -->
-              <img :src="parseServerImg(card.img)" :alt="card.title">
+              <img :src="parseServerImg(card.img)" :alt="card.title" />
             </div>
             <div class="card-info-txt">
               <h4>{{ card.title }}</h4>
@@ -156,7 +156,7 @@
 // swiper
 import SwiperComponent from '@/components/home/SwiperComponent.vue'
 import WineCarousel from '@/components/home/WineCarousel.vue'
-import { gsap } from 'gsap';
+import { gsap } from 'gsap'
 
 export default {
   components: {
@@ -169,61 +169,66 @@ export default {
         {
           type: 'card-grape',
           title: '黑皮諾葡萄園',
-          description: '這是一座翠綠山麓的小酒莊,擁有得天獨厚的火山岩土壤及涼爽宜人的氣候,非常適合栽種黑皮諾葡萄。陽光充足而夜涼的環境,孕育出獨特的酒香與層次豐富的口感。',
+          description:
+            '這是一座翠綠山麓的小酒莊,擁有得天獨厚的火山岩土壤及涼爽宜人的氣候,非常適合栽種黑皮諾葡萄。陽光充足而夜涼的環境,孕育出獨特的酒香與層次豐富的口感。',
           img: 'home-map-grapegarden.png',
           isActive: false
         },
         {
           type: 'card-service',
           title: '客服中心',
-          description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
+          description:
+            '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
           img: 'home-map-service.png',
           isActive: false
         },
         {
           type: 'card-class',
           title: '品酒學堂',
-          description: '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
+          description:
+            '這裡提供關於葡萄酒的歷史、釀造過程、品種及產地等知識的教育。教導學員品酒的基本技巧，包括觀色、聞香、品味等，並提供品酒實踐機會，讓學員能夠在專業指導下提升品酒水平。',
           img: 'home-map-class.png',
           isActive: false
         },
         {
           type: 'card-oak',
           title: '橡木桶室',
-          description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
+          description:
+            '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
           img: 'home-map-oak.png',
           isActive: false
         },
         {
           type: 'card-vintage',
           title: '釀造室',
-          description: '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
+          description:
+            '這裡是釀造和儲存優質葡萄酒的核心地帶，參觀我們的橡木桶室，讓您親身體驗葡萄酒從釀造到熟成的過程。讓學員更了解存放與熟成、風味與香氣、顏色與質地、品質提升和儲存空間。',
           img: 'home-map-vintage.png',
           isActive: false
         }
       ],
       canvas: null,
       ctx: null
-    };
+    }
   },
   methods: {
     toggleInfo(index) {
       // Toggle the active state of the clicked card
       this.map.forEach((card, idx) => {
         if (idx === index) {
-          card.isActive = !card.isActive;
+          card.isActive = !card.isActive
         } else {
-          card.isActive = false;
+          card.isActive = false
         }
-      });
+      })
     },
     handleClickOutside(event) {
       if (!event.target.closest('.card')) {
-        this.map.forEach(card => card.isActive = false);
+        this.map.forEach((card) => (card.isActive = false))
       }
     },
     parseImgMap(file) {
-      return new URL(`../assets/img/home/${file}`, import.meta.url).href;
+      return new URL(`../assets/img/home/${file}`, import.meta.url).href
     },
     // 部屬用-解析圖片位置
     parseServerImg(imgURL) {
@@ -234,25 +239,61 @@ export default {
     }
   },
   mounted() {
-  //  GSAP animation for octagon
-    gsap.to(this.$refs.banner,{ duration: 3,color:"white", ease: "power4.in"});
-    gsap.fromTo(".banner-img", {scaleX:0.8,scaleY:0.8},{duration: 3, scaleX:1,scaleY:1, ease: "power4.in"});
-    gsap.fromTo(".octagon-1", {width: "100%", height: "10%"},{duration: 3,width: "100%", height: "0", ease: "expo.in"});
-    gsap.fromTo(".octagon-2", {width: "100%", height: "10%"},{duration: 3,width: "100%", height: "0", ease: "expo.in"});
-    gsap.fromTo(".octagon-3", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
-    gsap.fromTo(".octagon-4", {width: "40%", height: "100%"},{duration: 3,width: "0", height:"100%", ease: "expo.in"});
-    gsap.fromTo(".octagon-5", {width: "50%", height: "100%"},{duration: 3,width: "0", height: "0",ease: "expo.in"});
-    gsap.fromTo(".octagon-6", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
-    gsap.fromTo(".octagon-7", {width: "40%", height: "100%"},{duration: 3, width: "0", height:"100%", ease: "expo.in"});
-    gsap.fromTo(".octagon-8", {width: "50%", height: "100%"},{duration: 3, width: "0", height: "0", ease: "expo.in"});
-  
+    //  GSAP animation for octagon
+    gsap.to(this.$refs.banner, { duration: 3, color: 'white', ease: 'power4.in' })
+    gsap.fromTo(
+      '.banner-img',
+      { scaleX: 0.8, scaleY: 0.8 },
+      { duration: 3, scaleX: 1, scaleY: 1, ease: 'power4.in' }
+    )
+    gsap.fromTo(
+      '.octagon-1',
+      { width: '100%', height: '10%' },
+      { duration: 3, width: '100%', height: '0', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-2',
+      { width: '100%', height: '10%' },
+      { duration: 3, width: '100%', height: '0', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-3',
+      { width: '50%', height: '100%' },
+      { duration: 3, width: '0', height: '0', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-4',
+      { width: '40%', height: '100%' },
+      { duration: 3, width: '0', height: '100%', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-5',
+      { width: '50%', height: '100%' },
+      { duration: 3, width: '0', height: '0', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-6',
+      { width: '50%', height: '100%' },
+      { duration: 3, width: '0', height: '0', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-7',
+      { width: '40%', height: '100%' },
+      { duration: 3, width: '0', height: '100%', ease: 'expo.in' }
+    )
+    gsap.fromTo(
+      '.octagon-8',
+      { width: '50%', height: '100%' },
+      { duration: 3, width: '0', height: '0', ease: 'expo.in' }
+    )
+
     //map點擊卡片外圍
-    document.addEventListener('click', this.handleClickOutside);
+    document.addEventListener('click', this.handleClickOutside)
     window.scrollTo(0, 0)
     document.addEventListener('click', this.handleClickOutside)
   },
   beforeUnmount() {
-    document.removeEventListener('click', this.handleClickOutside);
+    document.removeEventListener('click', this.handleClickOutside)
   }
 }
 </script>

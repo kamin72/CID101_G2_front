@@ -12,28 +12,78 @@
     <div class="cardNumber">
       <p>卡片號碼</p>
       <div class="cardNumber-input-wrap">
-        <input type="number" placeholder="0000" />
+        <input type="number" placeholder="0000" v-model="cardNum1" />
         <span>-</span>
-        <input type="number" placeholder="0000" />
+        <input type="number" placeholder="0000" v-model="cardNum2" />
         <span>-</span>
-        <input type="number" placeholder="0000" />
+        <input type="number" placeholder="0000" v-model="cardNum3" />
         <span>-</span>
-        <input type="number" placeholder="0000" />
+        <input type="number" placeholder="0000" v-model="cardNum4" />
       </div>
     </div>
     <div class="box">
       <div class="cardUser">
         <p>卡片持有人</p>
-        <input type="number" placeholder="請輸入姓名" />
+        <input type="number" placeholder="請輸入姓名" v-model="name" />
       </div>
       <div class="cardDate">
         <p>有效期限</p>
-        <input type="text" placeholder="M/Y" />
+        <input type="text" placeholder="M/Y" v-model="expiryDate" />
       </div>
       <div class="cvv2">
         <p>CVV2</p>
-        <input type="number" placeholder="請輸入安全碼" />
+        <input type="number" placeholder="請輸入安全碼" v-model="cvv2" />
       </div>
     </div>
+    <button class="small-btn-primary" @click="sendCardInfo">送出</button>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      cardNum1: null,
+      cardNum2: null,
+      cardNum3: null,
+      cardNum4: null,
+      name: '',
+      expiryDate: null,
+      cvv2: null
+    }
+  },
+  methods: {
+    sendCardInfo() {
+      try {
+        let cardInfo = {
+          cardNum1: this.cardNum1,
+          cardNum2: this.cardNum2,
+          cardNum3: this.cardNum3,
+          cardNum4: this.cardNum4,
+          name: this.name,
+          expiryDate: this.expiryDate,
+          cvv2: this.cvv2
+        }
+        const formData = new URLSearchParams(cardInfo)
+        fetch(
+          'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php',
+          {
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            alert('付款成功')
+            console.log(result)
+          })
+      } catch (error) {
+        console.error('pay error', error)
+      }
+    }
+  }
+}
+</script>
