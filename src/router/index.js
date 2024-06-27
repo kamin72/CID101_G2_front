@@ -160,7 +160,6 @@ const router = createRouter({
       component: () => import('@/views/ProductView.vue'),
       meta: { title: '我們的酒' }
     },
-
     {
       path: '/signup',
       name: 'signup',
