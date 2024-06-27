@@ -14,22 +14,6 @@ export default defineStore('cartStore', {
 
   // 對應 methods (物件形式)
   actions: {
-    prodAllData() {
-      // 部屬用-解析伺服器json位置
-      fetch(`${import.meta.env.VITE_API_URL}/product.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          this.cart = data
-        })
-    },
-    prodData() {
-      // 部屬用-解析伺服器json位置
-      fetch(`${import.meta.env.VITE_API_URL}/product.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          this.products = data
-        })
-    },
     checkCart() {
       const storageCart = localStorage.getItem('cart')
       if (this.cart.length > 0) {
@@ -47,7 +31,7 @@ export default defineStore('cartStore', {
       // 從 localStorage 中獲取已存在的 cart 數據
       const storageCart = JSON.parse(localStorage.getItem('cart') || '[]')
       // 檢查傳入的 product 是否已存在於 storageCart 中
-      const isExistIndex = storageCart.findIndex((item) => item.id === product.id)
+      const isExistIndex = storageCart.findIndex((item) => item.prod_id === product.prod_id)
       if (isExistIndex >= 0) {
         // 如果已存在,則增加其 count 計數值
         storageCart[isExistIndex].count += 1
@@ -65,7 +49,7 @@ export default defineStore('cartStore', {
     removeCart(product) {
       if (!product) return
 
-      const isExistIndex = this.cart.findIndex((item) => item.id === product.id)
+      const isExistIndex = this.cart.findIndex((item) => item.prod_id === product.prod_id)
       if (isExistIndex >= 0 && this.cart[isExistIndex]['count'] > 1) {
         this.cart[isExistIndex]['count'] -= 1
       } else {
@@ -77,6 +61,27 @@ export default defineStore('cartStore', {
     cleanCart() {
       this.cart = []
       localStorage.removeItem('cart')
+    },
+    fetchProductList() {
+      fetch('http://localhost/CID101_G2_php/front/product.php')
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.products) {
+            this.products = data.products
+            localStorage.setItem('products', JSON.stringify(this.products))
+
+          }
+        })
+    },
+    getProductList() {
+      let storage = localStorage.getItem('products')
+      if (storage) {
+        this.products = JSON.parse(storage)
+      } else {
+        this.products = null
+      }
     }
   }
 })
