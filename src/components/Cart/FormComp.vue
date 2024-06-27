@@ -55,7 +55,7 @@ export default {
     ...mapActions(memberStore, ['getMemberData', 'fetchMemberCompData', 'getMemberCompData']),
   },
   created() {
-    this.fetchMemberData()
+    this.fetchMemberCompData()
     this.getMemberCompData()
     // console.log(this.memberComp)
   },
