@@ -182,7 +182,6 @@ export default {
             weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             currentDate: new Date(),
             currentListDate: new Date(),
-            courses: new Map(),
             showCalen: true,
             showList: false,
             activeButton: "calen",
@@ -190,6 +189,9 @@ export default {
             courseData: courseData,
             isMobile: false,
             windowWidth: 450,
+            courses: [],
+            loading: false,
+            error: null
         };
     },
     computed: {
@@ -365,6 +367,23 @@ export default {
         checkIsMobile() {
             this.windowWidth = window.innerWidth // 不寫死，比較有彈性
         },
+        async fetchCourses() {
+            this.loading = true;
+            this.error = null;
+            try {
+                const response = await fetch('../../../../c');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                this.courses = data;
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+                this.error = '無法獲取課程數據。請稍後再試。';
+            } finally {
+                this.loading = false;
+            }
+        }
     },
 
     async mounted() {
