@@ -4,7 +4,8 @@ export default defineStore('cartStore', {
   // 對應 data
   state: () => ({
     cart: [],
-    products: []
+    products: [],
+    detail: {} //如果要用null, 要加v-if="detail"
   }),
 
   // 對應 computed (物件形式)
@@ -80,8 +81,30 @@ export default defineStore('cartStore', {
       if (storage) {
         this.products = JSON.parse(storage)
       } else {
-        this.products = null
+        this.products = []
       }
-    }
+    },  
+    fetchProductDetail(productId) {
+      fetch('http://localhost/CID101_G2_php/front/product.php')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          alert(data.msg)
+        } else if (data.products) {
+          this.products = data.products
+          this.detail = this.products.find((product) => product.prod_id === Number(productId))
+          localStorage.setItem('detail', JSON.stringify(this.detail))
+
+          }
+        })
+    },
+    getProductDetail() {
+      let storage = localStorage.getItem('detail')
+      if (storage) {
+        this.detail = JSON.parse(storage)
+      } else {
+        this.detail = {}
+      }
+    },
   }
 })
