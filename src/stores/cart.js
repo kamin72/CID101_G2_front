@@ -98,13 +98,13 @@ export default defineStore('cartStore', {
           }
         })
     },
-    getProductDetail() {
-      let storage = localStorage.getItem('detail')
-      if (storage) {
-        this.detail = JSON.parse(storage)
-      } else {
-        this.detail = {}
-      }
-    },
+    // getProductDetail() {
+    //   let storage = localStorage.getItem('detail')
+    //   if (storage) {
+    //     this.detail = JSON.parse(storage)
+    //   } else {
+    //     this.detail = {}
+    //   }
+    // },
   }
 })

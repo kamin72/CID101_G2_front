@@ -200,12 +200,13 @@ export default {
     '$route.params.id'() {
       const productId = this.$route.params.id // 從路由參數中獲取產品 ID
       this.detail = this.products.find((product) => product.prod_id === Number(productId)) // 根據 ID 找到對應的產品詳情
+      this.fetchProductDetail(productId);
     }
   },
   created() {
     const productId = this.$route.params.id
     this.fetchProductDetail(productId);
-    this.getProductDetail()
+    // this.getProductDetail()
     // 部屬用-解析伺服器json位置
     // fetch(`${import.meta.env.VITE_API_URL}/product.json`)
     // .then(response => response.json())
