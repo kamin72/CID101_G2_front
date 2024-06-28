@@ -22,8 +22,6 @@
     .detail-img{
         width: 50%;   
       .detail-img-wrap{
-        // 部屬用-解析圖片位置
-        background-image: url('https://tibamef2e.com/cid101/g2/img/Background-image.png');
         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
         background-position: center;
         background-repeat: no-repeat;
@@ -109,8 +107,6 @@
         width: 90%;
         margin: auto;
       .detail-img-wrap-sm{
-        // 部屬用-解析圖片位置
-        background-image: url('https://tibamef2e.com/cid101/g2/img/Background-image.png');
         background-size: contain;  /* 使用 contain 讓背景圖依照比例縮小 */
         background-repeat: no-repeat;
         margin-bottom: 20px;
