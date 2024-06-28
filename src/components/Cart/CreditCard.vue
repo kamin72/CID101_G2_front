@@ -3,8 +3,7 @@
     <div class="column">
       <h3 class="title">付款資訊</h3>
     </div>
-    <form action="http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php"
-      method="post">
+    <form @submit.prevent="sendCardInfo">
       <label for="">
         訂單編號
         <input type="text" name="MerchantTradeNo">
@@ -54,7 +53,7 @@
         <input type="number" placeholder="請輸入安全碼" v-model="cvv2" />
       </div>
     </div> -->
-      <button class="small-btn-primary" type="submit">送出</button>
+      <button class="small-btn-primary" type="submit">前往付款</button>
     </form>
   </div>
 </template>
@@ -71,55 +70,65 @@ export default {
   },
   methods: {
     sendCardInfo() {
-      try {
-        let orderInfo = {
-          MerchantTradeNo: this.MerchantTradeNo,
-          TotalAmount: this.TotalAmount,
-          TradeDesc: this.TradeDesc,
-          ItemName: this.ItemName,
+      // 創建一個包含表單數據的對象
+      const formData = {
+        MerchantTradeNo: this.MerchantTradeNo,
+        TotalAmount: this.TotalAmount,
+        TradeDesc: this.TradeDesc,
+        ItemName: this.ItemName
+      };
+
+      // 創建一個隱藏的表單並提交
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php';
+
+      for (const key in formData) {
+        if (formData[key] !== null && formData[key] !== '') {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = key;
+          input.value = formData[key];
+          form.appendChild(input);
         }
-        // const formData = new URLSearchParams(orderInfo)
-
-        const form = document.createElement("form");
-        for (const key in orderInfo) {
-          const element = document.createElement("input");
-          element.value = orderInfo[key];
-          element.name = key;
-          form.appendChild(element);
-        }
-
-        form.method = "POST";
-        form.action = "http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php";
-        document.body.appendChild(form)
-        form.submit()
-
-
-        // var xhr = new XMLHttpRequest()
-        // console.log(xhr)
-        // xhr.open('POST', 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php', true);
-        // xhr.send(formData);
-        // fetch(
-        //   'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php',
-        //   {
-        //     method: 'post',
-        //     headers: {
-        //       'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     body: formData
-        //   }
-        // )
-        //   .then((res) => res.json())
-        //   .then((result) => {
-        //     alert('付款成功')
-        //     console.log(result)
-        //   })
-      } catch (error) {
-        console.error('pay error', error)
       }
-    }
-  },
-  created() {
 
-  },
+      document.body.appendChild(form);
+      form.submit();
+    }
+    // try {
+    //   let orderInfo = {
+    //     MerchantTradeNo: this.MerchantTradeNo,
+    //     TotalAmount: this.TotalAmount,
+    //     TradeDesc: this.TradeDesc,
+    //     ItemName: this.ItemName,
+    //   }
+    //   // const formData = new URLSearchParams(orderInfo)
+
+    //   const form = document.createElement("form");
+    //   for (const key in orderInfo) {
+    //     const element = document.createElement("input");
+    //     element.value = orderInfo[key];
+    //     element.name = key;
+    //     form.appendChild(element);
+    //   }
+
+    //   form.method = "POST";
+    //   form.action = "http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php";
+    //   document.body.appendChild(form)
+    //   form.submit()
+
+
+    // var xhr = new XMLHttpRequest()
+    // console.log(xhr)
+    // xhr.open('POST', 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php', true);
+    // xhr.send(formData);
+
+    // } catch(error) {
+    //   console.error('pay error', error)
+    // }
+  }
+
+
 }
 </script>
