@@ -16,7 +16,7 @@
       <div class="container" >
         <div class="product-detail">
           <div class="detail-img">
-            <div class="detail-img-wrap">
+            <div class="detail-img-wrap" :style="{backgroundImage: `url(${parseServerImg(detail?.bg_img)})`}">
               <!-- <img :src="detail.image" alt="" /> -->
               <img :src="parseServerImg(detail?.prod_img)" alt="Product Image" />
             </div>
@@ -97,7 +97,7 @@
     <section class="section-product-detail-sm">
       <div class="container">
         <div class="detail-img-sm">
-          <div class="detail-img-wrap-sm">
+          <div class="detail-img-wrap-sm" :style="{backgroundImage: `url(${parseServerImg(detail?.bg_img)})`}">
             <img :src="parseServerImg(detail?.prod_img)" alt="Product Image"  />
           </div>
         </div>
