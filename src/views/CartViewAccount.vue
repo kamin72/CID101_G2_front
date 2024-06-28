@@ -18,7 +18,7 @@
         </tr>
         <CartList
           v-for="(productItem, productIndex) in products"
-          :key="productItem.id"
+          :key="productItem?.prod_id"
           :item="productItem"
           :index="productIndex"
           :isChecked="allChecked"
@@ -147,7 +147,7 @@ export default {
   methods: {
     ...mapActions(cartStore, ['cleanCart']),
     total(index) {
-      let price = this.products[index].price2 * this.products[index].count
+      let price = this.products[index]?.prod_price * this.products[index]?.count
       return price
     },
     add(index) {
@@ -191,7 +191,10 @@ export default {
   computed: {
     ...mapState(cartStore, ['cart']),
     sum() {
-      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
+      const price = this.products.reduce(
+        (total, items) => total + items?.prod_price * items?.count,
+        0
+      )
       return price
     },
     canSubmit() {

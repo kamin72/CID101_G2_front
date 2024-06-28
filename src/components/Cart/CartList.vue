@@ -2,25 +2,38 @@
   <div class="list">
     <div class="img-title">
       <div class="image-wrap">
-        <input type="checkbox" name="checkbox" id="checkbox" :checked="isChecked" @change="updateCheck"
-          v-model="deletItemCheck" />
-        <img :src="parseImg(item.image)" />
+        <input
+          type="checkbox"
+          name="checkbox"
+          id="checkbox"
+          :checked="isChecked"
+          @change="updateCheck"
+          v-model="deletItemCheck"
+        />
+        <img :src="parseServerImg(item?.prod_img)" />
       </div>
       <div class="text-wrap">
-        <h4 class="description">{{ item.name }}</h4>
-        <p class="description">{{ item.ename }}</p>
-        <p class="description">{{ item.variety }}</p>
+        <h4 class="description">{{ item?.prod_name }}</h4>
+        <p class="description">{{ item?.prod_ename }}</p>
+        <p class="description">{{ item?.prod_describe }}</p>
       </div>
     </div>
-    <div class="price">{{ item.price }}</div>
+    <div class="price">{{ item?.prod_price }}</div>
     <div class="amount">
       <button @click="$emit('reduce')" class="cartButton">-</button>
-      <span class="num">{{ item.count }}</span>
+      <span class="num">{{ item?.count }}</span>
       <button @click="$emit('add')" class="cartButton">+</button>
     </div>
     <div class="total">NT. {{ sum(index) }}</div>
-    <div class="delet_icon"><span class="material-symbols-outlined" @click="deletItem(index)"
-        :class="{ 'disabled': !isChecked }"> delete </span></div>
+    <div class="delet_icon">
+      <span
+        class="material-symbols-outlined"
+        @click="deletItem(index)"
+        :class="{ disabled: !isChecked }"
+      >
+        delete
+      </span>
+    </div>
   </div>
 </template>
 
@@ -34,7 +47,7 @@ export default {
   inject: ['total'],
   data() {
     return {
-      deletItemCheck: false,
+      deletItemCheck: false
     }
   },
   methods: {
@@ -44,8 +57,8 @@ export default {
     updateCheck(event) {
       this.$emit('update:isChecked', event.target.checked)
     },
-    parseImg(file) {
-      return new URL(`../../assets/img/wine/${file}`, import.meta.url).href
+    parseServerImg(file) {
+      return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
     deletItem(index) {
       if (this.deletItemCheck == true) {
@@ -54,7 +67,6 @@ export default {
         // 可以添加一個提示，告訴用戶需要先勾選才能刪除
         alert('請先勾選商品才能刪除')
       }
-
     }
   }
 }

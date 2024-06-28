@@ -6,19 +6,15 @@
     <form @submit.prevent="sendCardInfo">
       <label for="">
         訂單編號
-        <input type="text" name="MerchantTradeNo">
+        <input type="text" name="MerchantTradeNo" v-model="MerchantTradeNo" />
       </label>
       <label for="">
         總金額
-        <input type="text" name="TotalAmount">
-      </label>
-      <label for="">
-        交易描述
-        <input type="text" name="TradeDesc">
+        <input type="text" name="TotalAmount" v-model="TotalAmount" />
       </label>
       <label for="">
         商品名稱
-        <input type="text" name="ItemName">
+        <input type="text" name="ItemName" v-model="ItemName" />
       </label>
 
       <!-- <div class="creditTerm">
@@ -64,8 +60,7 @@ export default {
     return {
       MerchantTradeNo: null,
       TotalAmount: null,
-      TradeDesc: null,
-      ItemName: null
+      ItemName: ''
     }
   },
   methods: {
@@ -74,27 +69,28 @@ export default {
       const formData = {
         MerchantTradeNo: this.MerchantTradeNo,
         TotalAmount: this.TotalAmount,
-        TradeDesc: this.TradeDesc,
+        // TradeDesc: this.TradeDesc,
         ItemName: this.ItemName
-      };
+      }
 
       // 創建一個隱藏的表單並提交
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php';
+      const form = document.createElement('form')
+      form.method = 'POST'
+      form.action =
+        'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php'
 
       for (const key in formData) {
         if (formData[key] !== null && formData[key] !== '') {
-          const input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = key;
-          input.value = formData[key];
-          form.appendChild(input);
+          const input = document.createElement('input')
+          input.type = 'hidden'
+          input.name = key
+          input.value = formData[key]
+          form.appendChild(input)
         }
       }
 
-      document.body.appendChild(form);
-      form.submit();
+      document.body.appendChild(form)
+      form.submit()
     }
     // try {
     //   let orderInfo = {
@@ -118,7 +114,6 @@ export default {
     //   document.body.appendChild(form)
     //   form.submit()
 
-
     // var xhr = new XMLHttpRequest()
     // console.log(xhr)
     // xhr.open('POST', 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php', true);
@@ -127,8 +122,16 @@ export default {
     // } catch(error) {
     //   console.error('pay error', error)
     // }
+    // getCheckResponse() {
+    //   fetch(
+    //     'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/GetCheckoutResponse.php'
+    //   )
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       alert('pay success')
+    //       console.log(data)
+    //     })
+    // }
   }
-
-
 }
 </script>

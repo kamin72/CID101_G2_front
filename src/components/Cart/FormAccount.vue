@@ -8,24 +8,52 @@
       </div>
     </div>
     <div class="name">
-      <p class="title" style="font-weight: 700;">姓名</p>
-      <input type="text" placeholder="請輸入姓名" id="cartName" :value="name"
-        @input="$emit('update:name', $event.target.value)" required />
+      <p class="title" style="font-weight: 700">姓名</p>
+      <input
+        type="text"
+        placeholder="請輸入姓名"
+        id="name"
+        :value="name"
+        @input="$emit('update:name', $event.target.value)"
+        required
+        name="name"
+      />
     </div>
     <div class="receiveAddress">
-      <p class="title" style="font-weight: 700;">收件地址</p>
-      <input type="text" placeholder="請輸入姓名" id="cartAddress" :value="address"
-        @input="$emit('update:address', $event.target.value)" required />
+      <p class="title" style="font-weight: 700">收件地址</p>
+      <input
+        type="text"
+        placeholder="請輸入姓名"
+        id="cartAddress"
+        :value="address"
+        @input="$emit('update:address', $event.target.value)"
+        required
+        name="address"
+      />
     </div>
     <div class="phone">
-      <p class="title" style="font-weight: 700;">連絡電話</p>
-      <input type="number" placeholder="請輸入連絡電話" id="cartPhone" :value="phone"
-        @input="$emit('update:phone', $event.target.value)" required />
+      <p class="title" style="font-weight: 700">連絡電話</p>
+      <input
+        type="number"
+        placeholder="請輸入連絡電話"
+        id="cartPhone"
+        :value="phone"
+        @input="$emit('update:phone', $event.target.value)"
+        required
+        name="phone"
+      />
     </div>
     <div class="email">
-      <p class="title" style="font-weight: 700;">Email</p>
-      <input type="text" placeholder="請輸入email" id="cartEmail" :value="email"
-        @input="$emit('update:email', $event.target.value)" required />
+      <p class="title" style="font-weight: 700">Email</p>
+      <input
+        type="text"
+        placeholder="請輸入email"
+        id="cartEmail"
+        :value="email"
+        @input="$emit('update:email', $event.target.value)"
+        required
+        name="email"
+      />
     </div>
   </form>
 </template>
