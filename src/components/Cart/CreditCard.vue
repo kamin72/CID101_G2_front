@@ -3,13 +3,33 @@
     <div class="column">
       <h3 class="title">付款資訊</h3>
     </div>
-    <div class="creditTerm">
+    <input type="hidden" name="MerchantID" value="3002607">
+    <input type="hidden" name="hashKey" value="pwFHCqoQZGmho4w6" />
+    <input type="hidden" name="hashIv" value="EkRm7iFT261dpevs" />
+
+    <label for="">
+      訂單編號
+      <input type="text" name="MerchantTradeNo" v-model="MerchantTradeNo">
+    </label>
+    <label for="">
+      總金額
+      <input type="text" name="TotalAmount" v-model="TotalAmount">
+    </label>
+    <label for="">
+      交易描述
+      <input type="text" name="TradeDesc" v-model="TradeDesc">
+    </label>
+    <label for="">
+      商品名稱
+      <input type="text" name="ItemName" v-model="ItemName">
+    </label>
+    <!-- <div class="creditTerm">
       <small>
         本網站使用 SSL
         加密技術保護您的信用卡資訊，確保交易安全。請參閱我們的隱私權政策，了解我們如何收集、使用和保護您的個人資料。如果您有任何關於信用卡付款安全方面的疑問，請隨時聯繫我們的客服人員。
       </small>
-    </div>
-    <div class="cardNumber">
+    </div> -->
+    <!-- <div class="cardNumber">
       <p>卡片號碼</p>
       <div class="cardNumber-input-wrap">
         <input type="number" placeholder="0000" v-model="cardNum1" />
@@ -34,7 +54,7 @@
         <p>CVV2</p>
         <input type="number" placeholder="請輸入安全碼" v-model="cvv2" />
       </div>
-    </div>
+    </div> -->
     <button class="small-btn-primary" @click="sendCardInfo">送出</button>
   </div>
 </template>
@@ -43,28 +63,22 @@
 export default {
   data() {
     return {
-      cardNum1: null,
-      cardNum2: null,
-      cardNum3: null,
-      cardNum4: null,
-      name: '',
-      expiryDate: null,
-      cvv2: null
+      MerchantTradeNo: null,
+      TotalAmount: null,
+      TradeDesc: null,
+      ItemName: null
     }
   },
   methods: {
     sendCardInfo() {
       try {
-        let cardInfo = {
-          cardNum1: this.cardNum1,
-          cardNum2: this.cardNum2,
-          cardNum3: this.cardNum3,
-          cardNum4: this.cardNum4,
-          name: this.name,
-          expiryDate: this.expiryDate,
-          cvv2: this.cvv2
+        let orderInfo = {
+          MerchantTradeNo: this.MerchantTradeNo,
+          TotalAmount: this.TotalAmount,
+          TradeDesc: this.TradeDesc,
+          ItemName: this.ItemName,
         }
-        const formData = new URLSearchParams(cardInfo)
+        const formData = new URLSearchParams(orderInfo)
         fetch(
           'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php',
           {
