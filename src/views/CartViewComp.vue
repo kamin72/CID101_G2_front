@@ -21,7 +21,7 @@
           </div>
         </div>
         <CartList
-          v-for="(productItem, productIndex) in products"
+          v-for="(productItem, productIndex) in cart"
           :key="productItem?.prod_id"
           :item="productItem"
           :index="productIndex"
@@ -64,14 +64,15 @@
             SipsVineyard的最新消息</label
           >
         </div>
-        <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none">
-          <button
-            class="big-btn-primary cartSubmit"
-            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
-          >
-            送出詢價單
-          </button>
-        </RouterLink>
+        <!-- <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none"> -->
+        <button
+          class="big-btn-primary cartSubmit"
+          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          @click="handleCanSubmit"
+        >
+          送出詢價單
+        </button>
+        <!-- </RouterLink> -->
       </aside>
     </div>
   </div>
@@ -155,28 +156,28 @@ export default {
   methods: {
     ...mapActions(cartStore, ['cleanCart', 'checkCart']),
     total(index) {
-      let price = this.products[index]?.prod_price * this.products[index]?.count
+      let price = this.cart[index]?.prod_price * this.cart[index]?.count
       return price
     },
     add(index) {
-      if (this.products[index].count == 10) return
-      this.products[index].count++
+      if (this.cart[index].count == 100) return
+      this.cart[index].count++
     },
     reduce(index) {
-      if (this.products[index].count == 0) return
-      this.products[index].count--
+      if (this.cart[index].count == 0) return
+      this.cart[index].count--
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
     },
     updateItemCheck() {
       // 檢查是否所有產品都被選中
-      if (this.products.length > 0) {
-        this.allChecked = this.products.every((product) => product.isChecked)
+      if (this.cart.length > 0) {
+        this.allChecked = this.cart.every((product) => product.isChecked)
       }
     },
     toggleAllChecks() {
-      this.products.forEach((product) => {
+      this.cart.forEach((product) => {
         product.isChecked = this.allChecked
       })
     },
@@ -187,9 +188,19 @@ export default {
       }
     },
     onDeletProductItem(index) {
-      this.products.splice(index, 1)
-      // console.log(this.products)
-      localStorage.setItem('cart', JSON.stringify(this.products))
+      this.cart.splice(index, 1)
+      // console.log(this.cart)
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+    },
+    handleCanSubmit() {
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i]['count'] >= 10) {
+          this.$router.push('/cart_comp/cartdelivery_comp')
+        } else {
+          alert('批發商每樣商品數量需達10瓶以上才可購買')
+          return
+        }
+      }
     }
   },
   mounted() {
@@ -202,10 +213,7 @@ export default {
   computed: {
     ...mapState(cartStore, ['cart']),
     sum() {
-      const price = this.products.reduce(
-        (total, items) => total + items.prod_price * items.count,
-        0
-      )
+      const price = this.cart.reduce((total, items) => total + items.prod_price * items.count, 0)
       return price
     },
     canSubmit() {
@@ -218,10 +226,7 @@ export default {
       return this.sum * 0.8
     },
     actualPaid() {
-      return this.sum + this.discount
-    },
-    products() {
-      return this.cart
+      return this.sum - this.discount
     }
   },
   provide() {
