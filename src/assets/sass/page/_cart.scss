@@ -230,9 +230,9 @@ section {
         }
         .image-wrap {
           position: relative;
-          width: 50%;
+          width: 200%;
           @include m() {
-            width: 70%;
+            width: 100%;
           }
           input {
             position: absolute;
@@ -248,7 +248,8 @@ section {
           text-align: left;
           .description {
             padding: 8px 10px;
-            text-wrap: nowrap;
+            line-height: 1.5rem;
+            // text-wrap: nowrap;
             @include m() {
               padding: 10px 0;
             }
@@ -799,7 +800,7 @@ section {
     }
   }
   .name {
-    #cartName {
+    #name {
       width: calc(100% - 20px);
       padding: 8px 10px;
       border: 0;

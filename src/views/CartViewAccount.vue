@@ -14,11 +14,13 @@
           <th class="item">單價</th>
           <th class="item">數量</th>
           <th class="item">總金額</th>
-          <th class="allDelet_icon"><span class="material-symbols-outlined"> delete </span></th>
+          <th class="allDelet_icon">
+            <span class="material-symbols-outlined" @click="clearAllProduct"> delete </span>
+          </th>
         </tr>
         <CartList
-          v-for="(productItem, productIndex) in products"
-          :key="productItem.id"
+          v-for="(productItem, productIndex) in cart"
+          :key="productItem?.prod_id"
           :item="productItem"
           :index="productIndex"
           :isChecked="allChecked"
@@ -37,7 +39,7 @@
           <td>折扣</td>
           <td></td>
           <td></td>
-          <td>- NT. ???</td>
+          <td>- NT. {{ discount }}</td>
         </tr>
         <tr class="actualPaid">
           <td>結帳金額</td>
@@ -147,51 +149,62 @@ export default {
   methods: {
     ...mapActions(cartStore, ['cleanCart']),
     total(index) {
-      let price = this.products[index].price2 * this.products[index].count
+      let price = this.cart[index]?.prod_price * this.cart[index]?.count
       return price
     },
     add(index) {
-      if (this.products[index].count == 10) return
-      this.products[index].count++
+      if (this.cart[index].count == 10) return
+      this.cart[index].count++
+      localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     reduce(index) {
-      if (this.products[index].count == 0) return
-      this.products[index].count--
+      if (this.cart[index].count == 0) return
+      this.cart[index].count--
+      localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     updateItemCheck() {
       // 檢查是否所有產品都被選中
-      this.allChecked = this.products.every((product) => product.isChecked)
+      this.allChecked = this.cart.every((product) => product.isChecked)
     },
     toggleAllChecks() {
-      this.products.forEach((product) => {
+      this.cart.forEach((product) => {
         product.isChecked = this.allChecked
       })
     },
-    getProduct() {
-      let storage = JSON.parse(localStorage.getItem('cart'))
-      if (storage?.length > 0 && storage?.length != null) {
-        this.products = storage
-      } else {
-        this.products = []
-      }
-    },
+    // getProduct() {
+    //   let storage = JSON.parse(localStorage.getItem('cart'))
+    //   if (storage?.length > 0 && storage?.length != null) {
+    //     this.products = storage
+    //   } else {
+    //     this.products = []
+    //   }
+    // },
     clearAllProduct() {
       if (this.allChecked == true) {
         this.cleanCart()
-        this.products = []
+        // this.cart = []
         this.allChecked = false
       }
     },
     onDeletProductItem(index) {
-      this.products.splice(index, 1)
+      this.cart.splice(index, 1)
       // console.log(this.products)
-      localStorage.setItem('cart', JSON.stringify(this.products))
+      localStorage.setItem('cart', JSON.stringify(this.cart))
+    },
+    savePrice() {
+      const cartInfo = {
+        sum: this.sum,
+        discount: this.discount,
+        actualPaid: this.actualPaid
+      }
+
+      localStorage.setItem('cartPrice', JSON.stringify(cartInfo))
     }
   },
   computed: {
     ...mapState(cartStore, ['cart']),
     sum() {
-      const price = this.products.reduce((total, items) => total + items.price2 * items.count, 0)
+      const price = this.cart.reduce((total, items) => total + items?.prod_price * items?.count, 0)
       return price
     },
     canSubmit() {
@@ -200,9 +213,9 @@ export default {
     isMobile() {
       return this.windowWidth < 450
     },
-    // discount() {
-    //   return this.sum * 0.8
-    // },
+    discount() {
+      return this.sum * 0
+    },
     actualPaid() {
       return this.sum + this.discount
     }
@@ -213,7 +226,22 @@ export default {
     }
   },
   mounted() {
-    this.getProduct()
+    // this.getProduct()
+    this.savePrice()
+  },
+  beforeUnmount() {
+    this.savePrice()
+  },
+  watch: {
+    sum() {
+      this.savePrice()
+    },
+    discount() {
+      this.savePrice()
+    },
+    actualPaid() {
+      this.savePrice()
+    }
   }
 }
 </script>
