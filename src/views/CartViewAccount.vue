@@ -182,7 +182,6 @@ export default {
     clearAllProduct() {
       if (this.allChecked == true) {
         this.cleanCart()
-        // this.cart = []
         this.allChecked = false
       }
     },

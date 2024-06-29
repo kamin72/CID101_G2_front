@@ -66,6 +66,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import memberStore from '@/stores/loginMember'
+import cartStore from '@/stores/cart'
 
 export default {
   props: {
@@ -99,6 +100,7 @@ export default {
   },
   methods: {
     ...mapActions(memberStore, ['getMemberData', 'fetchMemberData']),
+    ...mapActions(cartStore, ['cleanCart']),
     syncMember() {
       this.$emit('isChecked', this.localChecked)
     },
@@ -131,6 +133,7 @@ export default {
             alert('訂單建立成功')
           }
         })
+      this.cleanCart()
     },
     getPriceData() {
       let storage = localStorage.getItem('cartPrice')
