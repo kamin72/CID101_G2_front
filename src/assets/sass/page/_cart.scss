@@ -549,79 +549,104 @@ section {
     border-bottom: 2px solid black;
     padding: 0 0 10px;
   }
-  .creditTerm {
-    width: 50%;
-    @include t() {
-      width: 100%;
-    }
-    small {
-      line-height: 20px;
-    }
-  }
-  .cardNumber {
-    width: 100%;
-    p {
-      padding: 8px 0;
-    }
-    .cardNumber-input-wrap {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      input[type='number'] {
-        border: 0;
-        width: calc(25% - 20px);
-        padding: 8px 10px;
-      }
-      span {
-        padding: 0 5px;
-      }
-    }
-  }
-  .box {
-    width: 100%;
+  form {
     display: flex;
-    justify-content: space-between;
-    p {
-      padding: 8px 0;
-    }
-    .cardUser {
-      width: 55%;
-      input[type='number'] {
-        border: 0;
-        width: calc(100% - 10px);
-        padding: 8px 10px;
-        @include m() {
-          width: calc(100% - 30px);
-        }
+    div {
+      padding: 10px 0px;
+      padding-right: 100px;
+      h4 {
+        padding: 10px 0px;
       }
     }
-    .cardDate {
-      width: 20%;
-      input[type='text'] {
-        border: 0;
-        width: calc(100% - 10px);
-        padding: 8px 10px;
-        @include m() {
-          width: calc(100% - 30px);
-        }
-      }
-    }
-    .cvv2 {
-      width: 20%;
-      input[type='number'] {
-        border: 0;
-        width: calc(100% - 10px);
-        padding: 8px 10px;
-        @include m() {
-          width: calc(100% - 30px);
-        }
-      }
+    button {
+      margin-top: 20px;
+      height: 50px;
     }
   }
 }
-.paidInfo > div {
-  padding: 10px 0;
-}
+// .paidInfo {
+//   width: 70%;
+//   @include t() {
+//     width: 100%;
+//     padding-bottom: 50px;
+//   }
+//   .column {
+//     border-bottom: 2px solid black;
+//     padding: 0 0 10px;
+//   }
+//   .creditTerm {
+//     width: 50%;
+//     @include t() {
+//       width: 100%;
+//     }
+//     small {
+//       line-height: 20px;
+//     }
+//   }
+//   .cardNumber {
+//     width: 100%;
+//     p {
+//       padding: 8px 0;
+//     }
+//     .cardNumber-input-wrap {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//       input[type='number'] {
+//         border: 0;
+//         width: calc(25% - 20px);
+//         padding: 8px 10px;
+//       }
+//       span {
+//         padding: 0 5px;
+//       }
+//     }
+//   }
+//   .box {
+//     width: 100%;
+//     display: flex;
+//     justify-content: space-between;
+//     p {
+//       padding: 8px 0;
+//     }
+//     .cardUser {
+//       width: 55%;
+//       input[type='number'] {
+//         border: 0;
+//         width: calc(100% - 10px);
+//         padding: 8px 10px;
+//         @include m() {
+//           width: calc(100% - 30px);
+//         }
+//       }
+//     }
+//     .cardDate {
+//       width: 20%;
+//       input[type='text'] {
+//         border: 0;
+//         width: calc(100% - 10px);
+//         padding: 8px 10px;
+//         @include m() {
+//           width: calc(100% - 30px);
+//         }
+//       }
+//     }
+//     .cvv2 {
+//       width: 20%;
+//       input[type='number'] {
+//         border: 0;
+//         width: calc(100% - 10px);
+//         padding: 8px 10px;
+//         @include m() {
+//           width: calc(100% - 30px);
+//         }
+//       }
+//     }
+//   }
+// }
+// .paidInfo > div {
+//   padding: 10px 0;
+// }
 
 //提交付款資訊
 .paySubmit {

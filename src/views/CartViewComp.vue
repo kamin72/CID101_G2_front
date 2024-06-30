@@ -20,17 +20,9 @@
             <span class="material-symbols-outlined" @click="clearAllProduct"> delete </span>
           </div>
         </div>
-        <CartList
-          v-for="(productItem, productIndex) in cart"
-          :key="productItem?.prod_id"
-          :item="productItem"
-          :index="productIndex"
-          :isChecked="allChecked"
-          @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)"
-          @reduce="reduce(productIndex)"
-          @deleteProductItem="onDeletProductItem"
-        />
+        <CartList v-for="(productItem, productIndex) in cart" :key="productItem?.prod_id" :item="productItem"
+          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
         <div class="sum">
           <div class="text">總價</div>
           <div class="price">NT. {{ sum }}</div>
@@ -52,24 +44,13 @@
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <!-- <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label> -->
-          <label
-            ><input
-              type="checkbox"
-              class="agree"
-              v-model="agreeTerms"
-            />我同意所有交易條款[查看條款]</label
-          >
-          <label
-            ><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
-            SipsVineyard的最新消息</label
-          >
+          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
+          <label><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
+            SipsVineyard的最新消息</label>
         </div>
         <!-- <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none"> -->
-        <button
-          class="big-btn-primary cartSubmit"
-          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
-          @click="handleCanSubmit"
-        >
+        <button class="big-btn-primary cartSubmit" :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          @click="handleCanSubmit">
           送出詢價單
         </button>
         <!-- </RouterLink> -->
@@ -162,10 +143,12 @@ export default {
     add(index) {
       if (this.cart[index].count == 100) return
       this.cart[index].count++
+      localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     reduce(index) {
       if (this.cart[index].count == 0) return
       this.cart[index].count--
+      localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
@@ -193,22 +176,37 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     handleCanSubmit() {
+      let allItemsSufficient = true;
       for (let i = 0; i < this.cart.length; i++) {
-        if (this.cart[i]['count'] >= 10) {
-          this.$router.push('/cart_comp/cartdelivery_comp')
-        } else {
-          alert('批發商每樣商品數量需達10瓶以上才可購買')
-          return
+        if (this.cart[i]['count'] < 10) {
+          allItemsSufficient = false;
+          break
         }
       }
+      if (allItemsSufficient) {
+        this.$router.push('/cart_comp/cartdelivery_comp')
+      } else {
+        alert('批發商每樣商品數量需達10瓶以上才可購買')
+      }
+
+    },
+    savePrice() {
+      const cartInfo = {
+        sum: this.sum,
+        discount: this.discount,
+        actualPaid: this.actualPaid
+      }
+      localStorage.setItem('cartPrice', JSON.stringify(cartInfo))
     }
   },
   mounted() {
     window.addEventListener('resize', this.updateWindowWidth)
     this.checkCart()
+    this.savePrice()
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
+    this.savePrice()
   },
   computed: {
     ...mapState(cartStore, ['cart']),
@@ -223,7 +221,7 @@ export default {
       return this.windowWidth < 450
     },
     discount() {
-      return this.sum * 0.8
+      return this.sum * 0.2
     },
     actualPaid() {
       return this.sum - this.discount
@@ -232,6 +230,17 @@ export default {
   provide() {
     return {
       total: this.total
+    }
+  },
+  watch: {
+    sum() {
+      this.savePrice()
+    },
+    discount() {
+      this.savePrice()
+    },
+    actualPaid() {
+      this.savePrice()
     }
   }
 }

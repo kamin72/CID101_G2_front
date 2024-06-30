@@ -27,13 +27,16 @@ export default defineStore('memberStore', {
         formData.append('account', account)
         formData.append('password', password)
 
-        const response = await fetch('http://localhost/CID101_G2_php/front/memberLogin.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: formData.toString()
-        })
+        const response = await fetch(
+          'http://localhost/CID101_G2_php/front/member/memberLogin.php',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData.toString()
+          }
+        )
 
         const data = await response.json()
 
@@ -53,7 +56,7 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberData() {
-      fetch('http://localhost/CID101_G2_php/front/memberLogin.php')
+      fetch('http://localhost/CID101_G2_php/front/member/memberLogin.php')
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
@@ -73,7 +76,7 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberCompData() {
-      fetch('http://localhost/CID101_G2_php/front/getMember_comp.php')
+      fetch('http://localhost/CID101_G2_php/front/member/getMember_comp.php')
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {

@@ -8,13 +8,13 @@
     </section>
     <div class="wrap_all">
       <FormComp v-model:phone="phone" v-model:email="email" @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage" />
+        @update:email="saveToLocalstorage" ref="form" />
       <aside class="payMethod">
         <PayMethod @change-method="changePaymentMethod" />
         <div class="hr"></div>
         <RouterLink :to="{ path: 'pay_info', query: { method: selectedMethod } }" style="text-decoration: none">
           <button class="big-btn-primary deliverySubmit" :disabled="!canSubmit"
-            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'">
+            :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'" @click="submitChildForm">
             提交配送資訊
           </button>
         </RouterLink>
@@ -145,6 +145,9 @@ export default {
       if (savedMethod !== null) {
         this.selectedMethod = parseInt(savedMethod)
       }
+    },
+    submitChildForm() {
+      this.$refs.form.submitOrder()
     }
   },
   computed: {

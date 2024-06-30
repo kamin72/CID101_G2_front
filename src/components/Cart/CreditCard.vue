@@ -4,18 +4,20 @@
       <h3 class="title">付款資訊</h3>
     </div>
     <form @submit.prevent="sendCardInfo">
-      <label for="">
-        訂單編號
-        <input type="text" name="MerchantTradeNo" v-model="MerchantTradeNo" />
-      </label>
-      <label for="">
-        總金額
-        <input type="text" name="TotalAmount" v-model="TotalAmount" />
-      </label>
-      <label for="">
-        商品名稱
-        <input type="text" name="ItemName" v-model="ItemName" />
-      </label>
+      <div>
+        <h4>
+          商品名稱
+        </h4>
+        <p v-for="item in cart" :key="item.prod_id">{{ item.prod_name }} X {{ item.count }}</p>
+        <input type="hidden" name="ItemName" v-model="cartInfo">
+      </div>
+      <div>
+        <h4>
+          應付金額
+        </h4>
+        <p>{{ cartPrice.actualPaid }}</p>
+        <input type="hidden" name="TotalAmount" v-model="cartPrice.actualPaid" />
+      </div>
 
       <!-- <div class="creditTerm">
       <small>
@@ -60,17 +62,18 @@ export default {
     return {
       MerchantTradeNo: null,
       TotalAmount: null,
-      ItemName: ''
+      ItemName: '',
+      cartInfo: []
     }
   },
   methods: {
     sendCardInfo() {
       // 創建一個包含表單數據的對象
       const formData = {
-        MerchantTradeNo: this.MerchantTradeNo,
-        TotalAmount: this.TotalAmount,
+        // MerchantTradeNo: this.MerchantTradeNo,
+        TotalAmount: this.cartPrice.actualPaid,
         // TradeDesc: this.TradeDesc,
-        ItemName: this.ItemName
+        ItemName: this.cartInfo
       }
 
       // 創建一個隱藏的表單並提交
@@ -91,7 +94,7 @@ export default {
 
       document.body.appendChild(form)
       form.submit()
-    }
+    },
     // try {
     //   let orderInfo = {
     //     MerchantTradeNo: this.MerchantTradeNo,
@@ -132,6 +135,25 @@ export default {
     //       console.log(data)
     //     })
     // }
+    getCartInfo() {
+      this.cartInfo = this.cart.map(item => `${item.prod_name}X${item.count}`).join('#');
+    }
+  },
+  computed: {
+    cart() {
+      return JSON.parse(localStorage.getItem('cart'))
+    },
+    cartPrice() {
+      return JSON.parse(localStorage.getItem('cartPrice'))
+
+    }
+  },
+  mounted() {
+    this.getCartInfo()
+    console.log(this.cartInfo)
+  },
+  created() {
+
   }
 }
 </script>
