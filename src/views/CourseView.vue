@@ -21,23 +21,23 @@
                     </div>
                 </div>
                 <!-- 推薦卡片清單 -->
-                <router-link r-link v-for="(course, index) in recommendedCourses" :key="index"
+                <router-link v-for="course in recommendedCourses2" :key="course.course_id"
                     class="col-3 col-md-6 col-sm-6 event-card1"
-                    :to="{ name: 'courseDetail', params: { id: course.id } }">
+                    :to="{ name: 'courseDetail', params: { id: course.course_id } }">
                     <div class="event-card1-img-wrap">
-                        <img :src="parseServerImg(course.img)" />
-                        <div v-if="course.tag" class="event-card1-tag">
-                            <p>{{ course.tag }}</p>
+                        <img :src="parseServerImg(course.course_image)" />
+                        <div v-if="course.course_ribbon" class="event-card1-ribbon">
+                            <p>{{ course.course_ribbon }}</p>
                         </div>
                         <div class="book-now">
                             <p>BOOK NOW</p>
                         </div>
                     </div>
                     <div class="event-card1-font-wrap">
-                        <h4>{{ course.name }}</h4>
-                        <p>{{ formatDisplayDate(new Date(course.date)) }} 開課</p>
+                        <h4>{{ course.course_name }}</h4>
+                        <p>{{ formatDisplayDate(new Date(course.course_starttime)) }} 開課</p>
                     </div>
-                    <h4>NT. {{ discountedPrice(course.price, course.discount) }}</h4>
+                    <h4>NT. {{ discountedPrice(course.course_price, course.course_discountedprices) }}</h4>
                 </router-link>
             </div>
         </div>
@@ -104,11 +104,11 @@
                                         <router-link v-if="hasCourse(day.date)"
                                             :to="{ name: 'courseDetail', params: { id: getCourseIdByDate(day.date) } }"
                                             class="course-item">
-                                            <small v-if="getCourseTagByDate(day.date)" class="course-tag">
-                                                {{ getCourseTagByDate(day.date) }}
+                                            <small v-if="getCourseRibbonByDate(day.date)" class="course-ribbon">
+                                                {{ getCourseRibbonByDate(day.date) }}
                                             </small>
                                             <p :style="{
-                                                paddingTop: getCourseTagByDate(day.date) ? '' : 'unset',
+                                                paddingTop: getCourseRibbonByDate(day.date) ? '' : 'unset',
                                             }">
                                                 {{ getCourseNameByDate(day.date) }}
                                             </p>
@@ -132,33 +132,32 @@
                                 <span class="next material-symbols-outlined"
                                     @click="nextListMonth">arrow_forward_ios</span>
                             </div>
-                            <div v-for="([date, course], index) in getMonthCourses(
-                                currentListDate
-                            )" :key="index" class="event-card2">
-                                <div v-if="course.tag" class="event-card2-tag">
-                                    <p>{{ course.tag }}</p>
+                            <div v-for="course in getMonthCourses(currentListDate)" :key="course.course_id"
+                                class="event-card2">
+                                <div v-if="course.course_ribbon" class="event-card2-ribbon">
+                                    <p>{{ course.course_ribbon }}</p>
                                 </div>
                                 <div class="event-card2-img-wrap">
-                                    <img :src="parseServerImg(course.img)" />
+                                    <img :src="parseServerImg(course.course_image)" />
                                 </div>
                                 <div class="event-card2-info-wrap">
                                     <div class="event-card2-left-wrap">
                                         <div class="event-card2-title-wrap">
-                                            <h4>{{ course.name }}</h4>
-                                            <p>{{ formatDisplayDate(new Date(date)) }} 開課</p>
+                                            <h4>{{ course.course_name }}</h4>
+                                            <p>{{ formatDisplayDate(new Date(course.course_starttime)) }} 開課</p>
                                         </div>
                                         <div class="event-card2-intro-wrap">
-                                            <small>{{ course.desc }}</small>
+                                            <small>{{ course.course_desc }}</small>
                                         </div>
                                     </div>
                                     <div class="event-card2-right-wrap">
                                         <div class="price">
-                                            <h4><span>NT. </span>{{ discountedPrice(course.price, course.discount) }}
-                                            </h4>
+                                            <h4><span>NT. </span>{{ discountedPrice(course.course_price,
+                                                course.course_discountedprices) }}</h4>
                                         </div>
                                     </div>
                                 </div>
-                                <router-link :to="{ name: 'courseDetail', params: { id: course.id } }"
+                                <router-link :to="{ name: 'courseDetail', params: { id: course.course_id } }"
                                     class="small-btn-primary">
                                     詳情資訊<span class="material-symbols-outlined">arrow_forward_ios</span>
                                 </router-link>
@@ -172,8 +171,7 @@
 </template>
 
 <script>
-import courseData from '../../public/courses.json';
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import courseStore from '@/stores/course';
 
 export default {
@@ -182,19 +180,17 @@ export default {
             weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             currentDate: new Date(),
             currentListDate: new Date(),
+            courses: new Map(),
             showCalen: true,
             showList: false,
             activeButton: "calen",
             recommendedCourses: [],
-            courseData: courseData,
             isMobile: false,
             windowWidth: 450,
-            courses: [],
-            loading: false,
-            error: null
         };
     },
     computed: {
+        ...mapState(courseStore, ['allCourse', 'loading', 'error']),
         currentMonth() {
             return this.currentDate.getMonth() + 1;
         },
@@ -247,6 +243,14 @@ export default {
         allCourse() {
             return courseStore().allCourse;
         },
+        recommendedCourses2() {
+            const currentDate = new Date();
+            const futureCoursesArray = this.allCourse
+                .filter(item => new Date(item.course_starttime) >= currentDate)
+                .sort((a, b) => new Date(a.course_starttime) - new Date(b.course_starttime));
+
+            return futureCoursesArray.slice(0, 4);
+        }
     },
     watch: {
         windowWidth: {
@@ -266,7 +270,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(courseStore, ['getData']),
+        ...mapActions(courseStore, ['fetchCourses']),
         prevMonth() {
             this.currentDate = new Date(
                 this.currentDate.getFullYear(),
@@ -307,10 +311,10 @@ export default {
             const formattedDate = this.formatDate(date);
             return this.courses.has(formattedDate);
         },
-        getCourseTagByDate(date) {
+        getCourseRibbonByDate(date) {
             const formattedDate = this.formatDate(date);
             const course = this.courses.has(formattedDate) ? this.courses.get(formattedDate) : null;
-            return course ? course.tag : null;
+            return course ? course.ribbon : null;
         },
         getCourseNameByDate(date) {
             const formattedDate = this.formatDate(date);
@@ -328,68 +332,48 @@ export default {
         parseServerImg(file) {
             return `${import.meta.env.VITE_FILE_URL}/${file}`
         },
-        getRecommendedCourses() {
-            const currentDate = new Date();
-            const futureCoursesArray = Array.from(this.courses).filter(
-                ([date]) => new Date(date) >= currentDate
-            );
-
-            if (futureCoursesArray.length <= 4) {
-                this.recommendedCourses = futureCoursesArray.map(([date, course]) => ({
-                    ...course,
-                    date,
-                }));
-            } else {
-                const shuffledCourses = futureCoursesArray.sort(
-                    () => 0.5 - Math.random()
-                );
-                this.recommendedCourses = shuffledCourses
-                    .slice(0, 4)
-                    .map(([date, course]) => ({ ...course, date }));
-            }
-        },
         getCourseIdByDate(date) {
             const formattedDate = this.formatDate(date);
-            const course = this.courses.get(formattedDate);
-            return course ? course.id : '';
+            const course = this.allCourse.find(course =>
+                course.course_starttime.startsWith(formattedDate)
+            );
+            return course ? course.course_id : '';
         },
         getMonthCourses(date) {
             const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
-            const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-            return Array.from(this.courses).filter(([courseDate]) => {
-                const formattedDate = new Date(courseDate);
-                return formattedDate >= monthStart && formattedDate <= monthEnd;
+            const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            return this.allCourse.filter(course => {
+                const courseDate = new Date(course.course_starttime);
+                return courseDate >= monthStart && courseDate <= monthEnd;
             });
         },
-        discountedPrice(price, discount) {
-            return discount ? price * (1 - discount) : price;
+        discountedPrice(price, discountedPrice) {
+            return discountedPrice > 0 ? discountedPrice : price;
         },
         checkIsMobile() {
             this.windowWidth = window.innerWidth // 不寫死，比較有彈性
         },
-        async fetchCourses() {
-            this.loading = true;
-            this.error = null;
-            try {
-                const response = await fetch('../../../../c');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const data = await response.json();
-                this.courses = data;
-            } catch (error) {
-                console.error('Error fetching courses:', error);
-                this.error = '無法獲取課程數據。請稍後再試。';
-            } finally {
-                this.loading = false;
-            }
-        }
+        updateCoursesMap() {
+            this.courses.clear();
+            this.allCourse.forEach(course => {
+                this.courses.set(course.course_starttime.split(' ')[0], {
+                    id: course.course_id,
+                    img: course.course_image,
+                    ribbon: course.course_ribbon,
+                    name: course.course_name,
+                    price: course.course_price,
+                    discountedPrice: course.course_discountedprices,
+                    desc: course.course_desc,
+                });
+            });
+        },
     },
 
     async mounted() {
         window.addEventListener('resize', this.checkIsMobile);
-        await this.getData();
-        this.getRecommendedCourses();
+        await this.fetchCourses();
+        this.updateCoursesMap();
+        this.checkIsMobile();
     },
 
     beforeUnmount() {
@@ -397,17 +381,6 @@ export default {
     },
 
     created() {
-        this.courseData.forEach(course => {
-            this.courses.set(course.date, {
-                id: course.id,
-                img: course.image,
-                tag: course.tag,
-                name: course.name,
-                price: course.price,
-                desc: course.desc,
-            });
-        });
-
         this.checkIsMobile();
 
         if (this.isMobile) {
@@ -415,6 +388,6 @@ export default {
             this.showList = true;
             this.showCalen = false;
         }
-    },
+    }
 };
 </script>
