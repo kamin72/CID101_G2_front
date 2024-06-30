@@ -8,7 +8,7 @@
     </section>
     <!-- 付款方式內容 -->
     <div class="wrap_all">
-      <CreditCard v-show="selectedMethod == 0" />
+      <CreditCard v-show="selectedMethod == 0" ref="form" />
       <PaybyStore v-show="selectedMethod == 1" />
       <YardSelf v-show="selectedMethod == 2" />
       <!-- 付款方式 -->
@@ -16,7 +16,7 @@
         <PayMethod />
         <div class="hr"></div>
         <RouterLink to="/cart_comp/cart_finish" style="text-decoration: none">
-          <button class="big-btn-primary paySubmit">提交付款資訊</button>
+          <button class="big-btn-primary paySubmit" @click="submitChildForm">提交付款資訊</button>
         </RouterLink>
       </aside>
     </div>
@@ -31,6 +31,9 @@ import CreditCard from '@/components/Cart/CreditCard.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 import PaybyStore from '@/components/Cart/PaybyStore.vue'
 import YardSelf from '@/components/Cart/YardSelf.vue'
+
+import { mapActions } from 'pinia'
+import cartStore from '@/stores/cart'
 
 export default {
   components: {
@@ -108,11 +111,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions(cartStore, ['cleanCart']),
     changePaymentMethod(index) {
       this.selectedMethod = index
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
+    },
+    submitChildForm() {
+      this.$refs.form.submitOrder()
+      this.cleanCart()
     }
   },
   watch: {},
@@ -125,11 +133,9 @@ export default {
     window.scrollTo(0, 0),
       (this.selectedMethod = this.method),
       window.addEventListener('resize', this.updateWindowWidth)
-
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
-  },
-
+  }
 }
 </script>
