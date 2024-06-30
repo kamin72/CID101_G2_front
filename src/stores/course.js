@@ -5,58 +5,87 @@ export default defineStore('courseStore', {
     allCourse: [],
     specificCourse: null,
     tempCourse: [],
-    checkoutSum: 0, // 新添加的狀態來存儲結帳金額
+    checkoutSum: 0,
     otherRequirements: '',
     participantCount: 1,
+    loading: false,
+    error: null,
   }),
 
   actions: {
-    //fetch所有課程，將資料丟進state裡的allCourse陣列
-    getData() {
-      fetch('../../public/courses.json')
-        .then((response) => response.json())
-        .then((data) => {
-          this.allCourse = data
-        })
-    },
-    //fetch路由中id的資料，將資料丟進specificCourse
-    getSpecificData(courseId) {
-      if (courseId) {
-        fetch('../../public/courses.json')
-          .then((response) => response.json())
-          .then((data) => {
-            this.specificCourse = data.find((course) => course.id == courseId)
-          })
-          .catch((error) => {
-            console.error('Failed to fetch specific course:', error)
-          })
+    // 從後台獲取所有課程
+    async fetchCourses() {
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetch('http://localhost/CID_G2_php/front/getCourse.php')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        this.allCourse = data.course
+      } catch (error) {
+        console.error('Error fetching courses:', error)
+        this.error = '無法獲取課程數據。請稍後再試。'
+      } finally {
+        this.loading = false
       }
     },
-    storeCourse() {
-      let storage = localStorage.setItem('course', JSON.stringify(this.specificCourse))
-      this.tempCourse = storage
+
+    // 從後台獲取特定課程
+    async getSpecificData(courseId) {
+      if (courseId) {
+        this.loading = true
+        this.error = null
+        try {
+          const response = await fetch(`http://localhost/CID_G2_php/front/getCourse.php?id=${courseId}`)
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          const data = await response.json()
+          // 假設 API 返回的結構與獲取所有課程時相同
+          this.specificCourse = data.course[0] // 獲取第一個（也應該是唯一的）課程
+        } catch (error) {
+          console.error('Failed to fetch specific course:', error)
+          this.error = '無法獲取特定課程數據。請稍後再試。'
+        } finally {
+          this.loading = false
+        }
+      }
     },
-    // 新添加的動作來設置結帳金額
+
+    storeCourse() {
+      localStorage.setItem('course', JSON.stringify(this.specificCourse))
+      this.tempCourse = JSON.parse(localStorage.getItem('course'))
+    },
+
     setCheckoutSum(sum) {
       this.checkoutSum = sum
-      // 可以選擇將金額也存儲到 localStorage，以便在頁面刷新後保留
       localStorage.setItem('checkoutSum', sum)
     },
-    // 新添加的動作來從 localStorage 加載結帳金額
+
     loadCheckoutSum() {
       const savedSum = localStorage.getItem('checkoutSum')
       if (savedSum) {
         this.checkoutSum = parseFloat(savedSum)
-      }else {
-        console.warn('在 localStorage 中找不到結帳金額');
-        this.checkoutSum = 0; // 或者某個默認值
+      } else {
+        console.warn('在 localStorage 中找不到結帳金額')
+        this.checkoutSum = 0
       }
     },
+
     setOtherRequirements(requirements) {
-      this.otherRequirements = requirements;
+      this.otherRequirements = requirements
     },
+
     setParticipantCount(count) {
-      this.participantCount = count;
+      this.participantCount = count
     },
+  },
+
+  getters: {
+    getCourseById: (state) => (id) => {
+      return state.allCourse.find(course => course.course_id === parseInt(id))
+    }
   }
 })
