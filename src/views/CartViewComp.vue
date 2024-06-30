@@ -20,9 +20,17 @@
             <span class="material-symbols-outlined" @click="clearAllProduct"> delete </span>
           </div>
         </div>
-        <CartList v-for="(productItem, productIndex) in cart" :key="productItem?.prod_id" :item="productItem"
-          :index="productIndex" :isChecked="allChecked" @update:isChecked="updateItemCheck(productIndex, $event)"
-          @add="add(productIndex)" @reduce="reduce(productIndex)" @deleteProductItem="onDeletProductItem" />
+        <CartList
+          v-for="(productItem, productIndex) in cart"
+          :key="productItem?.prod_id"
+          :item="productItem"
+          :index="productIndex"
+          :isChecked="allChecked"
+          @update:isChecked="updateItemCheck(productIndex, $event)"
+          @add="add(productIndex)"
+          @reduce="reduce(productIndex)"
+          @deleteProductItem="onDeletProductItem"
+        />
         <div class="sum">
           <div class="text">總價</div>
           <div class="price">NT. {{ sum }}</div>
@@ -44,13 +52,24 @@
             所有交易細節請均以我們服務人員與您確認訂單當時的內容與說明為準，如有造成不便及困擾之處，敬請見諒。
           </p>
           <!-- <label><input type="checkbox" class="eighteen" v-model="isEighteen" />我已年滿18歲</label> -->
-          <label><input type="checkbox" class="agree" v-model="agreeTerms" />我同意所有交易條款[查看條款]</label>
-          <label><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
-            SipsVineyard的最新消息</label>
+          <label
+            ><input
+              type="checkbox"
+              class="agree"
+              v-model="agreeTerms"
+            />我同意所有交易條款[查看條款]</label
+          >
+          <label
+            ><input type="checkbox" class="reciveMeg" v-model="receiveMessages" />是否願意收到Silken
+            SipsVineyard的最新消息</label
+          >
         </div>
         <!-- <RouterLink to="/cart_comp/cartdelivery_comp" style="text-decoration: none"> -->
-        <button class="big-btn-primary cartSubmit" :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
-          @click="handleCanSubmit">
+        <button
+          class="big-btn-primary cartSubmit"
+          :class="!canSubmit ? 'big-btn-invalid' : 'big-btn-primary'"
+          @click="handleCanSubmit"
+        >
           送出詢價單
         </button>
         <!-- </RouterLink> -->
@@ -176,10 +195,15 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart))
     },
     handleCanSubmit() {
-      let allItemsSufficient = true;
+      let allItemsSufficient = true
+      if (this.cart.length == 0) {
+        alert('您的購物車裡沒有商品')
+        return
+      }
+
       for (let i = 0; i < this.cart.length; i++) {
         if (this.cart[i]['count'] < 10) {
-          allItemsSufficient = false;
+          allItemsSufficient = false
           break
         }
       }
@@ -188,7 +212,6 @@ export default {
       } else {
         alert('批發商每樣商品數量需達10瓶以上才可購買')
       }
-
     },
     savePrice() {
       const cartInfo = {

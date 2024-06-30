@@ -5,16 +5,12 @@
     </div>
     <form @submit.prevent="sendCardInfo">
       <div>
-        <h4>
-          商品名稱
-        </h4>
+        <h4>商品名稱</h4>
         <p v-for="item in cart" :key="item.prod_id">{{ item.prod_name }} X {{ item.count }}</p>
-        <input type="hidden" name="ItemName" v-model="cartInfo">
+        <input type="hidden" name="ItemName" v-model="productInfo" />
       </div>
       <div>
-        <h4>
-          應付金額
-        </h4>
+        <h4>應付金額</h4>
         <p>{{ cartPrice.actualPaid }}</p>
         <input type="hidden" name="TotalAmount" v-model="cartPrice.actualPaid" />
       </div>
@@ -53,27 +49,39 @@
     </div> -->
       <button class="small-btn-primary" type="submit">前往付款</button>
     </form>
+    <!-- 要傳到資料庫的訂單資訊 -->
+    <form ref="form" @submit.prevent="submitOrder">
+      <input type="hidden" name="name" :value="memberComp?.[0]['name']" />
+      <input type="hidden" name="address" :value="memberComp?.[0]['address']" />
+      <input type="hidden" name="phone" :value="deliveryInfo_comp?.['phone']" />
+      <input type="hidden" name="address" :value="deliveryInfo_comp?.['email']" />
+      <input type="hidden" name="sum" :value="cartPrice.sum" />
+      <input type="hidden" name="discount" :value="cartPrice.discount" />
+      <input type="hidden" name="actualPaid" :value="cartPrice.actualPaid" />
+    </form>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   data() {
     return {
       MerchantTradeNo: null,
       TotalAmount: null,
       ItemName: '',
-      cartInfo: []
+      productInfo: []
     }
   },
   methods: {
+    ...mapActions(memberStore, ['fetchMemberCompData', 'getMemberCompData']),
     sendCardInfo() {
       // 創建一個包含表單數據的對象
       const formData = {
-        // MerchantTradeNo: this.MerchantTradeNo,
         TotalAmount: this.cartPrice.actualPaid,
-        // TradeDesc: this.TradeDesc,
-        ItemName: this.cartInfo
+        ItemName: this.productInfo
       }
 
       // 創建一個隱藏的表單並提交
@@ -135,25 +143,62 @@ export default {
     //       console.log(data)
     //     })
     // }
-    getCartInfo() {
-      this.cartInfo = this.cart.map(item => `${item.prod_name}X${item.count}`).join('#');
+    getproductInfo() {
+      this.productInfo = this.cart.map((item) => `${item.prod_name}X${item.count}`).join('#')
+    },
+    submitOrder() {
+      const formData = {
+        name: this.memberComp?.[0].name,
+        address: this.memberComp?.[0].address,
+        phone: this.deliveryInfo_comp?.['phone'],
+        email: this.deliveryInfo_comp?.['email'],
+        sum: this.cartPrice?.sum,
+        discount: this.cartPrice?.discount,
+        actualPaid: this.cartPrice?.actualPaid
+      }
+      const form = new URLSearchParams(formData)
+      const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: form
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert('訂單不成立')
+            return
+          } else {
+            // console.log(data)
+            alert('訂單建立成功')
+          }
+        })
     }
   },
   computed: {
+    ...mapState(memberStore, ['memberComp']),
+
     cart() {
       return JSON.parse(localStorage.getItem('cart'))
     },
     cartPrice() {
       return JSON.parse(localStorage.getItem('cartPrice'))
-
+    },
+    deliveryInfo_comp() {
+      return JSON.parse(localStorage.getItem('deliveryInfo_comp'))
     }
   },
   mounted() {
-    this.getCartInfo()
-    console.log(this.cartInfo)
+    this.getproductInfo()
+    // console.log(this.productInfo)
   },
   created() {
-
+    this.fetchMemberCompData()
+    this.getMemberCompData()
+    // console.log(this.memberComp)
   }
 }
 </script>
