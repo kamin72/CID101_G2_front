@@ -32,7 +32,7 @@
         <div class="wrap_mem_center">
             <div class="member_info_list">
                 <div class="member_type">
-                    <h3>王小明</h3>
+                    <h3>王陽明</h3>
                     <h4>一般會員</h4>
                 </div>
                 <div class="member_icon">

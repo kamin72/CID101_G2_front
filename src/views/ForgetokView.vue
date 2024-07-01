@@ -11,7 +11,7 @@
             </div>
             <div class="password_list">
                 <input :type='pwdFlag ? "password" : "text"' id="new_password" autocomplete="new_password"
-                    v-model="newPassword" placeholder="請輸入新密碼" @input="validatePassword">
+                    v-model="newPassword" placeholder="請輸入新密碼" @blur="validatePassword">
                 <div class="eyes_visibility">
                     <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
                         visibility_off
@@ -20,13 +20,15 @@
                         visibility
                     </span>
                 </div>
+
             </div>
-            <span v-if="errorMessage" class="prompt_psw">{{ errorMessage }}
+            <span v-if="passwordErrorMessage" class="prompt_psw">
+                {{ passwordErrorMessage }}
             </span>
 
             <div class="password_list">
                 <input :type='pwdFlags ? "password" : "text"' id="password_check" autocomplete="password_check"
-                    placeholder="再次輸入密碼" @input="validateConfirmPassword" v-model="confirmPassword">
+                    placeholder="再次輸入密碼" @blur="validatePasswordCheck" v-model="confirmPassword">
                 <div class="eyes_visibility">
                     <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">visibility_off
                     </span>
@@ -35,12 +37,12 @@
                     </span>
                 </div>
             </div>
-            <span v-if="errorMessages" class="prompt_psw">
-                {{ errorMessage }}
+            <span v-if="confirmPasswordErrorMessage" class="prompt_psw">
+                {{ confirmPasswordErrorMessage }}
             </span>
             <div class="function_btn" style="margin-top: 40px">
-                <button type="button" class="big-btn-primary" style="display: inline-block;margin-top: 30px;"
-                    :disabled="!isFormValid">
+                <button type="button" class="big-btn-primary" style="display: inline-block;"
+                    :disabled="!isFormValid" @click="resetPassword">
                     重設密碼
                 </button>
             </div>
@@ -58,39 +60,53 @@ export default {
             pwdFlags: true,
             newPassword: '',
             confirmPassword: '',
-            errorMessage: '',
-            isPasswordMatch: true,
+            passwordErrorMessage: '',
+            confirmPasswordErrorMessage: '',
+            isValidPassword: false,
+            isValidPasswordCheck: false
+        }
+    },
+    computed: {
+        isFormValid() {
+            return this.isValidPassword && this.isValidPasswordCheck;
         }
     },
     methods: {
-        // 眼睛開閉
+        // 切換密碼可見性
         togglePassword() {
             this.pwdFlag = !this.pwdFlag;
         },
         togglePasswords() {
             this.pwdFlags = !this.pwdFlags;
         },
-        // 密碼需符合規定
+        // 新密碼正規判定
         validatePassword() {
-            const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-            // if (!passwordPattern.test(this.newPassword)) {
-            //     this.errorMessage = '密碼不符合規定';
-            //     return false;
-            // }
-            if (this.newPassword !== this.password_check) {
-                this.errorMessages = '密碼與確認密碼不一致';
-                return false;
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+            this.isValidPassword = passwordPattern.test(this.newPassword)
+            if (!this.isValidPassword) {
+                this.passwordErrorMessage = '密碼必須至少8個字符，包含至少一個大寫字母、一個小寫字母和一個數字'
+            } else {
+                this.passwordErrorMessage = '';
+                this.isValidPassword = true
             }
-            this.errorMessage = '';
-            return true;
+        },
+        // 再輸入一次密碼判定
+        validatePasswordCheck() {
+            this.isValidPasswordCheck = this.newPassword === this.confirmPassword;
+            if (!this.isValidPasswordCheck) {
+                this.confirmPasswordErrorMessage = '輸入的密碼不一致'
+            } else {
+                this.confirmPasswordErrorMessage = '';
+                this.isValidPasswordCheck = true
+            }
         },
         resetPassword() {
             if (this.isFormValid) {
-                alert('密碼重設成功');
+                alert('重設密碼成功');
                 this.$router.push('/');
             }
         },
-    }
+    },
 }
 </script>
 

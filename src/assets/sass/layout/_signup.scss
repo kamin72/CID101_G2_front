@@ -61,66 +61,84 @@
     max-width: $max-width;
     width: 100%;
     margin: auto;
+
     @include t {
         width: 80%;
         margin: auto;
     }
+
     .wrap_signup {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin: 20px auto;
+
         form {
             margin: auto;
-            .form_ltem_list {
+
+            .form_item_list {
                 display: flex;
                 border-bottom: 2px solid #FFFFFF;
                 background-color: $secondary-botton-color;
+
                 .form_item {
                     width: 250px;
-                    @include t{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    @include t {
                         // width: 150px;
                         width: 90%;
                     }
+
                     label {
                         font-size: 24px;
                         color: white;
                         background-color: $secondary-botton-color;
                         padding: 10px 20px;
-                        text-align: center;
                         display: block;
-                        margin: auto;
+                        text-align: center;
                         @include t {
                             font-size: 14px;
                             padding: 15px 20px;
                             display: block;
+                            text-align: center;
                         }
                     }
                 }
+
                 .form_box {
-                    width: 550px;
+                    width: 450px;
                     background-color: #F8F5F2;
                     position: relative;
+
+                    // display: flex;
+                    // flex-direction: column;
                     @include t {
                         width: 250px;
                     }
+
                     input {
                         width: 250px;
                         font-size: 14px;
                         display: inline-block;
                         outline: none;
                         border: none;
-                        padding: 3px;
+                        padding: 5px;
                         margin: 10px;
+
                         @include t {
                             width: 180px;
                         }
                     }
+
                     .material-symbols-outlined {
                         font-size: 18px;
-                        padding-top: 10px;
+                        padding-top: 12px;
                         position: absolute;
+
                         @include t {
                             font-size: 13px;
                             padding-top: 14px;
@@ -128,6 +146,16 @@
                             right: 15px;
                         }
                     }
+
+                    .form-prompt {
+                        color: red;
+                        font-size: 12px;
+                        display: block;
+                        margin-top: 5px;
+                        margin: 0 5px 7px 10px;
+                        // word-break: break-all; /* 如果需要長字串換行 */
+                    }
+
                     // .address{
                     //     width: 400px;
                     //     @include t { 
@@ -140,6 +168,7 @@
                 }
             }
         }
+
         .form_privacy_policy {
             display: flex;
             align-items: center;
@@ -149,6 +178,7 @@
             span {
                 display: flex;
                 margin: 2px 0;
+
                 @include t {
                     font-size: 14px;
                     margin: 2px;

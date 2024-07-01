@@ -2,16 +2,16 @@
     <div class="login_container">
         <div class="wrap_login">
             <div class="login_item">
-                <RouterLink to="/login"> 
+                <RouterLink to="/login" style="text-decoration: none;"> 
                     <a href="#" class="log_in">會員登入</a>
                 </RouterLink>
-                <a href="#" class="sign_up">註冊會員</a>
+                <a href="#" class="sign_up" style="border-bottom: 2px solid #322D26;">註冊會員</a>
             </div>
             <div class="sign_up_item">
-                <RouterLink to="/memberform"> 
+                <RouterLink to="/memberform" style="text-decoration: none;"> 
                     <a href="#" class="big-btn-primary">一般會員</a>
                 </RouterLink>
-                <RouterLink to="/wholesalerform"> 
+                <RouterLink to="/wholesalerform" style="text-decoration: none;"> 
                     <a href="#" class="big-btn-primary">批發商</a>
                 </RouterLink>
             </div>
@@ -22,16 +22,4 @@
 <script>
 </script>
 <style>
-.sign_up_item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin: 50px 0;
-}
-.sign_up_item a {
-    text-decoration: none;
-    display: inline-block;
-}
 </style>    

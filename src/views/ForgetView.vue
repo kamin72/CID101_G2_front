@@ -12,7 +12,6 @@
             <div class="account_list">
                 <input type="text" id="email" v-model="email" @blur="validateEmail" placeholder="請輸入電子信箱">
             </div>
-            <!-- <span v-if="!isValidEmail" class="prompt">請輸入有效的電子郵件地址</span> -->
             <span v-if="errorMessage" class="prompt">{{ errorMessage }}</span>
             <button type="button" class="big-btn-primary" :disabled="!isEmailValid" style="margin-top: 80px; display: inline-block;">
                 發送信件
