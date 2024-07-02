@@ -198,7 +198,7 @@
           <div class="product-img">
             <RouterLink :to="'/ProductDetail/' + product?.prod_id">
               <img
-                :src="parseServerImg(product?.prod_img)"
+                :src="parseServerImg('wine/' + product?.prod_img)"
                 alt="Product Image"
                 style="object-fit: contain"
               />

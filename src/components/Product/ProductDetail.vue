@@ -18,7 +18,7 @@
           <div class="detail-img">
             <div class="detail-img-wrap" :style="{backgroundImage: `url(${parseServerImg(detail?.bg_img)})`}">
               <!-- <img :src="detail.image" alt="" /> -->
-              <img :src="parseServerImg(detail?.prod_img)" alt="Product Image" />
+              <img :src="parseServerImg('wine/' + detail?.prod_img)" alt="Product Image" />
             </div>
           </div>
 
@@ -69,7 +69,7 @@
                     <div class="product-img">
                       <RouterLink :to="'/ProductDetail/' + like?.prod_id">
                         <!-- <img :src="like.image" alt="Product Image" style="object-fit: contain" /> -->
-                        <img :src="parseServerImg(like?.prod_img)" alt="Product Image" style="object-fit: contain" />
+                        <img :src="parseServerImg('wine/' + like?.prod_img)" alt="Product Image" style="object-fit: contain" />
                       </RouterLink>
                     </div>
 
@@ -97,8 +97,8 @@
     <section class="section-product-detail-sm">
       <div class="container">
         <div class="detail-img-sm">
-          <div class="detail-img-wrap-sm" :style="{backgroundImage: `url(${parseServerImg(detail?.bg_img)})`}">
-            <img :src="parseServerImg(detail?.prod_img)" alt="Product Image"  />
+          <div class="detail-img-wrap-sm" :style="{backgroundImage: `url(${parseServerImg('wine/' + detail?.bg_img)})`}">
+            <img :src="parseServerImg('wine/' + detail?.prod_img)" alt="Product Image"  />
           </div>
         </div>
 
@@ -151,7 +151,7 @@
             <div class="product-card">
               <div class="product-img">
                 <RouterLink :to="'/ProductDetail/' + like?.prod_id">
-                  <img :src="parseServerImg(like?.prod_img)" alt="Product Image" style="object-fit: contain" />
+                  <img :src="parseServerImg('wine/' + like?.prod_img)" alt="Product Image" style="object-fit: contain" />
                 </RouterLink>
               </div>
 
