@@ -120,7 +120,6 @@ export default {
     },
     submitChildForm() {
       this.$refs.form.submitOrder()
-      this.cleanCart()
     }
   },
   watch: {},

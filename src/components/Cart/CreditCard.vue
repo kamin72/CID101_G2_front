@@ -65,6 +65,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import memberStore from '@/stores/loginMember'
+import cartStore from '@/stores/cart'
 
 export default {
   data() {
@@ -146,40 +147,80 @@ export default {
     getproductInfo() {
       this.productInfo = this.cart.map((item) => `${item.prod_name}X${item.count}`).join('#')
     },
+    // submitOrder() {
+    //   const formData = {
+    //     name: this.memberComp?.[0].name,
+    //     address: this.memberComp?.[0].address,
+    //     phone: this.deliveryInfo_comp?.['phone'],
+    //     email: this.deliveryInfo_comp?.['email'],
+    //     sum: this.cartPrice?.sum,
+    //     discount: this.cartPrice?.discount,
+    //     actualPaid: this.cartPrice?.actualPaid
+    //   }
+    //   const form = new URLSearchParams(formData)
+    //   const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
+
+    //   fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded'
+    //     },
+    //     body: form
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       if (data.error) {
+    //         alert('訂單不成立')
+    //         return
+    //       } else {
+    //         // console.log(data)
+    //         alert('訂單建立成功')
+    //       }
+    //     })
+    // }
     submitOrder() {
-      const formData = {
-        name: this.memberComp?.[0].name,
-        address: this.memberComp?.[0].address,
+      const orderData = {
+        name: this.memberComp?.[0]['name'],
+        address: this.memberComp?.[0]['address'],
         phone: this.deliveryInfo_comp?.['phone'],
         email: this.deliveryInfo_comp?.['email'],
-        sum: this.cartPrice?.sum,
-        discount: this.cartPrice?.discount,
-        actualPaid: this.cartPrice?.actualPaid
+        sum: this.cartPrice.sum,
+        discount: this.cartPrice.discount,
+        actualPaid: this.cartPrice.actualPaid,
+        cart: this.cart // 包含購物車信息
       }
-      const form = new URLSearchParams(formData)
+
       const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
 
       fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
-        body: form
+        body: JSON.stringify(orderData)
       })
-        .then((res) => res.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('網絡響應不正常')
+          }
+          return response.json()
+        })
         .then((data) => {
           if (data.error) {
-            alert('訂單不成立')
-            return
-          } else {
-            // console.log(data)
-            alert('訂單建立成功')
+            throw new Error(data.error)
           }
+          alert('訂單建立成功')
+          this.cleanCart() // 只有在成功後才清空購物車
+        })
+        .catch((error) => {
+          console.error('錯誤:', error)
+          alert('訂單提交失敗：' + error.message)
         })
     }
   },
   computed: {
     ...mapState(memberStore, ['memberComp']),
+    ...mapState(cartStore, ['cart']),
 
     cart() {
       return JSON.parse(localStorage.getItem('cart'))
