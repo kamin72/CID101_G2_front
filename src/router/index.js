@@ -80,25 +80,28 @@ const router = createRouter({
       path: '/courseDetail/:id',
       name: 'courseDetail',
       component: () => import('@/views/CourseDetailView.vue'),
+      props: route => ({ courseId: route.params.id }),
       meta: { title: '品酒課程 | 課程詳情' }
-    },
-    {
-      path: '/courseBookingDetail_pay/:id',
-      name: 'courseBookingDetail_pay',
-      component: () => import('@/views/CourseBookingDetail_payment.vue'),
-      meta: { title: '品酒課程 | 付款流程' }
     },
     {
       path: '/courseBookingDetail/:id',
       name: 'courseBookingDetail',
       component: () => import('@/views/CourseBookingDetail.vue'),
-      meta: { title: '品酒課程 | 預約課程' }
+      meta: { title: '品酒課程 | 預約課程',
+              requiresAuth: true
+      }
     },
     {
       path: '/courseBookingDetail_confirm/:id',
       name: 'courseBookingDetail_confirm',
       component: () => import('@/views/CourseBookingDetail_confirm.vue'),
       meta: { title: '品酒課程 | 確認預約資料' }
+    },
+    {
+      path: '/courseBookingDetail_pay/:id',
+      name: 'courseBookingDetail_pay',
+      component: () => import('@/views/CourseBookingDetail_payment.vue'),
+      meta: { title: '品酒課程 | 付款流程' }
     },
     {
       path: '/courseBookingDetail_finish/:id',
@@ -263,40 +266,24 @@ const router = createRouter({
     }
   ],
   scrollBehavior(to, from, savedPosition) {
-    // return 期望滾動到哪個位置
-    // 始終滾動到頂部
     return { top: 0 }
   }
 })
 
 const isLoggedIn = () => {
   const memberInfo = localStorage.getItem('memberInfo')
-  return memberInfo !== null && memberInfo !== 'undefined'
+  return memberInfo !== null && memberInfo !== 'undefined' && memberInfo !== ''
 }
 
-export default router
-
-router.beforeEach(async (to, from) => {
-  if (to.meta && to.meta.title) {
-    document.title = to.meta.title
-  }
-})
-
 router.beforeEach((to, from, next) => {
-  // 如果路由中有 meta.title，则设置页面标题
-  if (to.meta.title) {
-    document.title = to.meta.title
-  } else {
-    document.title = '默認標題' // 设置默认标题
-  }
-  next()
-})
+  // 設置頁面標題
+  document.title = to.meta.title || 'Silken Sip Vineyard'
 
-router.beforeEach((to, from, next) => {
-  //  登入導航守衛，將需要登入的頁面設定 meta: {requiresAuth: true}
+  // 檢查是否需要登入
+  // query: { redirect: to.fullPath },用戶登入後可回到原本想訪問的頁面
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
-      next({ path: '/login' })
+      next({ path: '/login', query: { redirect: to.fullPath } })
     } else {
       next()
     }
@@ -304,3 +291,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+export default router

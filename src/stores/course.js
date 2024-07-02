@@ -16,7 +16,6 @@ export default defineStore('courseStore', {
     // 從後台獲取所有課程
     async fetchCourses() {
       this.loading = true
-      this.error = null
       try {
         const response = await fetch('http://localhost/CID_G2_php/front/getCourse.php')
         if (!response.ok) {

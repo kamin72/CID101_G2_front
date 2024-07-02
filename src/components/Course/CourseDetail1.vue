@@ -95,7 +95,7 @@ export default {
   },
 
   props: {
-    id: {
+    courseId: {
       type: [Number, String],
       required: true
     }
@@ -111,7 +111,7 @@ export default {
   },
 
   computed: { // computed是渲染畫面後要做的事
-    ...mapState(courseStore, ['specificCourse']),
+    ...mapState(courseStore, ['specificCourse']), // 抓課程id
     course() {
       // 定義course = specificCourse
       return this.specificCourse
