@@ -138,9 +138,9 @@
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
-import { mapState, mapActions } from 'pinia';
-import courseStore from '@/stores/course';
-import memberStore from '@/stores/loginMember';
+import { mapState, mapActions } from 'pinia'
+import courseStore from '@/stores/course'
+import memberStore from '@/stores/loginMember'
 
 export default {
     components: {
