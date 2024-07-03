@@ -265,6 +265,8 @@ const router = createRouter({
       meta: { title: '會員中心 | 預約紀錄詳情' }
     }
   ],
+  // return 期望滾動到哪個位置
+  // 始終滾動到頂部
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 }
   }
@@ -280,7 +282,6 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title || 'Silken Sip Vineyard'
 
   // 檢查是否需要登入
-  // query: { redirect: to.fullPath },用戶登入後可回到原本想訪問的頁面
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!isLoggedIn()) {
       next({ path: '/login', query: { redirect: to.fullPath } })
