@@ -3,7 +3,8 @@
     <div class="game-container">
       <div v-if="!showScorePopup">
         <div class="question">
-          <h3>Q.{{ currentQuestionIndex + 1 }}</h3> <!-- 題號按順序顯示 -->
+          <h3>Q.{{ currentQuestionIndex + 1 }}</h3>
+          <!-- 題號按順序顯示 -->
           <p>{{ currentQuestion.text }}</p>
         </div>
         <div class="options">
@@ -24,49 +25,74 @@
       </div>
       <div class="bottle-glass-container">
         <div class="bottle-container">
-          <img src="../assets/img/game/winebottle.png" alt="Wine Bottle" class="wine-bottle" :class="{ 'pouring': isPouring }" />
+          <img
+            src="../assets/img/game/winebottle.png"
+            alt="Wine Bottle"
+            class="wine-bottle"
+            :class="{ pouring: isPouring }"
+          />
         </div>
         <div class="glass-container">
           <div class="wine-glass">
             <div class="water" :style="{ height: waterLevel + '%' }"></div>
           </div>
-          <div class="wine-glass-stem"></div> <!-- 新增红酒杯的脚 -->
-          <div class="wine-glass-base"></div> <!-- 新增红酒杯的底部 -->
+          <div class="wine-glass-stem"></div>
+          <div class="wine-glass-base"></div>
         </div>
       </div>
     </div>
-  <div class="coupon-pic"></div>
+    <div class="coupon-pic"></div>
     <div v-if="showScorePopup" class="score-popup">
       <div class="score-popup-content">
         <h3>恭喜~你的得分是：{{ totalScore }} 分</h3>
-        <!-- --------------------------------------------------------- -->
         <div class="letter-icon">
-          <div class="confetti" v-for="index in 100" :key="index" :style="generateConfettiStyle()"></div>
-          <svg :class="{ hide: isOpen }" width="200" height="200" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="64" height="48" y="8" rx="4" fill="#D1D5DB"/>
-            <path class="flap" :class="{ open: isOpen }" d="M4 8L32 32L60 8" stroke="#1F2937" stroke-width="4" fill="#1F2937"/>
-            <path d="M4 8H60V48H4V8Z" stroke="#1F2937" stroke-width="4"/>
+          <div
+            class="confetti"
+            v-for="index in 100"
+            :key="index"
+            :style="generateConfettiStyle()"
+          ></div>
+          <svg
+            :class="{ hide: isOpen }"
+            width="200"
+            height="200"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="64" height="48" y="8" rx="4" fill="#D1D5DB" />
+            <path
+              class="flap"
+              :class="{ open: isOpen }"
+              d="M4 8L32 32L60 8"
+              stroke="#1F2937"
+              stroke-width="4"
+              fill="#1F2937"
+            />
+            <path d="M4 8H60V48H4V8Z" stroke="#1F2937" stroke-width="4" />
           </svg>
-        <div class="coupon" :class="{ show: isOpen }">{{ couponMessage }}</div>
-    </div>
-    <!-- --------------------------------------------------------- -->
-        <button @click="claimCoupon">領取優惠券</button>
+          <div class="coupon" :class="{ show: isOpen }">{{ couponMessage }}</div>
+        </div>
+        <button @click="saveCouponToMember">領取優惠券</button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   name: 'LetterIcon',
   data() {
     return {
       isOpen: false,
-      totalScore: 0, // 用于存储用户的总分数
-      showScorePopup: false, // 控制弹窗显示
+      totalScore: 0,
+      showScorePopup: false, 
       isPouring: false,
       waterLevel: 0,
-      increment: 10, // 每次回答正确增加的水量百分比
+      increment: 10, 
       couponMessage: '',
       questions: [
         {
@@ -152,343 +178,248 @@ export default {
       ],
       currentQuestionIndex: 0,
       selectedOption: null,
-    };
+      couponInfo: null,
+      couponList:[],
+      memWithCoupon: null,
+    }
   },
   computed: {
+    ...mapState(memberStore, ['memberInfo']),
     currentQuestion() {
-      return this.questions[this.currentQuestionIndex];
+      return this.questions[this.currentQuestionIndex]
     }
   },
   created() {
-    this.shuffleQuestions();
+    this.shuffleQuestions()
+    },
+    mounted() {
+    this.fetchCoupon()
+    this.getCoupon()
+    this.checkLocalStorage()
   },
   methods: {
-    toggleOpen() {  
-      this.isOpen = !this.isOpen;
+    ...mapActions(memberStore, ['getMemberData']),
+    // 1. 檢查是否有會員資料
+    checkLocalStorage() {
+      let storage = localStorage.getItem('memberInfo')
+      if (storage) {
+        this.memberInfo = JSON.parse(storage)
+      }
+    },
+     // 當用戶完成遊戲後，點擊領取優惠券按鈕時
+     async handleCouponClaim() {
+      this.checkLocalStorage()
+      if (this.memberInfo) {
+        const response = await this.checkCouponInBackend()
+        if (response) {
+          await this.saveCouponToMember()
+          const today = new Date().toISOString().split('T')[0]
+          localStorage.setItem('lastClaimDate', today)
+        }
+      } else {
+        this.promptLogin()
+      }
+    }, 
+    async checkCouponInBackend() {
+      try {
+        const response = await fetch('http://localhost/CID101_G2_php/front/checkCoupon.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            memberNo: this.memberInfo[0].no
+          })
+        })
+        const data = await response.json()
+        if (data.success) {
+          if (data.couponAvailable) {
+            return true
+          } else {
+            alert(data.msg)
+            return false
+          }
+        } else {
+          alert(`很抱歉，檢查優惠券時發生錯誤。${data.msg}`)
+          return false
+        }
+      } catch (error) {
+        console.error('Network response was not ok:', error)
+        alert('很抱歉，檢查優惠券時發生錯誤。')
+        return false
+      }
+    },  
+    // 2. 將優惠券存入會員資料
+    async saveCouponToMember() {
+      let couponAmount = this.calculateCouponAmount()
+      let coupon = this.couponList.find(item => item.dis_amount == couponAmount)
+      if (couponAmount > 0) {
+        const memInfo = JSON.parse(localStorage.getItem('memberInfo'))[0]
+        this.memWithCoupon = {...memInfo, ...coupon}
+        // if (!this.memberInfo?.[0]['coupons']) {
+        //   // 确保优惠券数组存在
+        //   this.memberInfo[0]['coupons'] = []
+        //   // console.log( this.memberInfo)
+        // }
+        // this.memberInfo[0]['coupons'].push({ disSerial: this.couponInfo[''] ,amount: couponAmount, date: new Date() })
+        // console.log( this.memberInfo)
+        // localStorage.setItem('memberInfo', JSON.stringify(this.memberInfo)) // 更新本地存储
+        this.couponMessage = `成功領取${couponAmount}元的優惠券！`
+        this.toggleOpen()
+      } else {
+        alert('很抱歉，暫無符合條件的優惠券。')
+      }
+
+      try {
+    const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
+      })
+    })
+    const data = await response.json()
+    if (data.success) {
+      console.log('優惠券已成功存儲到後台')
+      alert('資料新增成功')
+    } else {
+      alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
+    }
+  } catch (error) {
+    console.error('Network response was not ok:', error)
+    alert('很抱歉，儲存優惠券時發生錯誤。')
+  }
+},
+    calculateCouponAmount() {
+      let couponAmount = 0
+      if (this.totalScore >= 60 && this.totalScore <= 69) {
+        couponAmount = 100
+      } else if (this.totalScore >= 70 && this.totalScore <= 80) {
+        couponAmount = 200
+      } else if (this.totalScore === 90) {
+        couponAmount = 300
+      } else if (this.totalScore === 100) {
+        couponAmount = 500
+      }
+      return couponAmount
+    },
+    // 3. 提示用戶登錄
+    promptLogin() {
+      alert('請先登入以領取優惠券')
+      this.$router.push('/login')
+      // 假設會員在登入後會重定向回遊戲頁面並自動保存優惠券
+    },
+    fetchCoupon() {
+      fetch('http://localhost/CID101_G2_php/front/getCoupon.php')
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.coupon) {
+            this.couponList = data.coupon
+            // console.log(this.couponList);
+            // localStorage.setItem('couponInfo', JSON.stringify(data.coupon))
+          }
+        })
+    },
+    getCoupon() {
+      let storage = localStorage.getItem('couponInfo')
+      if (storage) {
+        this.couponInfo = JSON.parse(storage)
+      } else {
+        this.couponInfo = null
+      }
+    },
+    toggleOpen() {
+      this.isOpen = !this.isOpen
       if (this.isOpen) {
-        this.centerCoupon();
+        this.centerCoupon()
       }
     },
     centerCoupon() {
       if (this.isOpen) {
-        const coupon = document.querySelector('.coupon');
-        const rect = coupon.getBoundingClientRect();
-        const x = window.innerWidth / 2 - rect.width / 2;
-        const y = window.innerHeight / 2 - rect.height / 2;
-        coupon.style.transform = `translate(${x}px, ${y}px)`;
+        const coupon = document.querySelector('.coupon')
+        const rect = coupon.getBoundingClientRect()
+        const x = window.innerWidth / 2 - rect.width / 2
+        const y = window.innerHeight / 2 - rect.height / 2
+        coupon.style.transform = `translate(${x}px, ${y}px)`
       }
     },
-    watch: {
-      isOpen() {
-        this.centerCoupon();
-      },
-    },
     generateConfettiStyle() {
-      const colors = ['#ff0', '#f0f', '#0ff', '#0f0', '#00f', '#f00'];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const left = Math.random() * 100 + 'vw';
-      const top = Math.random() * -50 + 'vh'; 
-      const rotate = Math.random() * 360 + 'deg';
+      const colors = ['#ff0', '#f0f', '#0ff', '#0f0', '#00f', '#f00']
+      const color = colors[Math.floor(Math.random() * colors.length)]
+      const left = Math.random() * 100 + 'vw'
+      const top = Math.random() * -50 + 'vh'
+      const rotate = Math.random() * 360 + 'deg'
       return {
         backgroundColor: color,
         left,
         top,
         transform: `rotate(${rotate})`
-      };
-  },
+      }
+    },
     shuffleQuestions() {
       for (let i = this.questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]]
       }
     },
     checkAnswer(optionId) {
-      this.selectedOption = optionId;
-      const selected = this.currentQuestion.options.find(option => option.id === optionId);
+      this.selectedOption = optionId
+      const selected = this.currentQuestion.options.find((option) => option.id === optionId)
       if (selected.correct) {
-        this.isPouring = true;
+        this.isPouring = true
         setTimeout(() => {
-          this.isPouring = false;
+          this.isPouring = false
           if (this.waterLevel + this.increment <= 100) {
-            this.waterLevel += this.increment;
+            this.waterLevel += this.increment
           }
-          this.nextQuestion();
-        }, 1000); // 模拟倒水动画时间
+          this.nextQuestion()
+        }, 1000) // 模拟倒水动画时间
       } else {
         setTimeout(() => {
-          this.nextQuestion();
-        }, 1000); // 延迟以显示错误效果
+          this.nextQuestion()
+        }, 1000) // 延迟以显示错误效果
       }
     },
     nextQuestion() {
       if (this.currentQuestionIndex < this.questions.length - 1) {
-        this.currentQuestionIndex++;
-        this.selectedOption = null;
+        this.currentQuestionIndex++
+        this.selectedOption = null
       } else {
-        this.totalScore = this.questions.filter(q => {
-          const selectedOption = q.options.find(o => o.id === this.selectedOption);
-          return selectedOption && selectedOption.correct;
-        }).length * 10;
-        this.showScorePopup = true;
-      }
-    },
-    claimCoupon() {
-      let couponAmount = 0;
-      if (this.totalScore === 60) {
-        couponAmount = 100;
-      } else if (this.totalScore >= 70 && this.totalScore <= 80) {
-        couponAmount = 200;
-      } else if (this.totalScore === 90) {
-        couponAmount = 300;
-      } else if (this.totalScore === 100) {
-        couponAmount = 500;
-      }
-      if (couponAmount > 0) {
-        this.couponMessage = `成功領取${couponAmount}元的優惠券！`;
-        this.toggleOpen();
-      } else {
-        alert('很抱歉，暫無符合條件的優惠券。');
+        this.totalScore =
+          this.questions.filter((q) => {
+            const selectedOption = q.options.find((o) => o.id === this.selectedOption)
+            return selectedOption && selectedOption.correct
+          }).length * 10
+        this.showScorePopup = true
       }
     }
+    // claimCoupon() {
+    //   let couponAmount = this.calculateCouponAmount()
+    //   if (this.totalScore === 60) {
+    //     couponAmount = 100
+    //   } else if (this.totalScore >= 70 && this.totalScore <= 80) {
+    //     couponAmount = 200
+    //   } else if (this.totalScore === 90) {
+    //     couponAmount = 300
+    //   } else if (this.totalScore === 100) {
+    //     couponAmount = 500
+    //   }
+    //   if (couponAmount > 0) {
+    //     this.couponMessage = `成功領取${couponAmount}元的優惠券！`
+    //     this.toggleOpen()
+    //   } else {
+    //     alert('很抱歉，暫無符合條件的優惠券。')
+    //   }
+    // }
+  },
+  watch: {
+    isOpen() {
+      this.centerCoupon()
+    }
   }
-};
+}
 </script>
-
-
-<style scoped>
-/* .game-container {
-  position: relative;
-} */
-/* .bottle-container {
-  position: relative;
-  margin: 20px 0;
-  right: -45%;
-  width: 46%;
-  transition: transform 1s;
-} */
-/* .wine-bottle {
-  width: 100%;
-  height: 100%;
-  transform-origin: bottom center;
-  transition: transform 1s;
-} */
-/* .wine-bottle.pouring {
-  transform: rotate(-15deg);
-} */
-/* .glass-container {
-  width: 100px;
-  height: 250px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  right: -10%;
-  bottom: -165%;
-} */
-/* .wine-glass {
-  position: relative;
-  border: 2px solid #CEE1ED;
-  background-color: #CEE1ED;
-  border-radius: 0 0 50% 50%;
-  overflow: hidden;
-  width: 120px;
-  height: 155px;
-} */
-/* .wine-glass-stem {
-  width: 6px;
-  height: 80px;
-  background-color: #CEE1ED;
-  margin-top: -2px;
-} */
-/* .wine-glass-base {
-  width: 95px;
-  height: 10px;
-  background-color: #CEE1ED;
-  border-radius: 50%;
-  margin-top: -2px;
-} */
-/* .water {
-  position: absolute;
-  bottom: 43%;
-  width: 100%;
-  background-color: rgba(165, 42, 42, 0.8);
-  transition: height 1s;
-  border-radius: 0 0 50% 50%;
-} */
-/* button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-} */
-/* button.correct {
-  background-color: lightgreen;
-}
-button.wrong {
-  background-color: lightcoral;
-}
-button.shake {
-  animation: shake 0.5s;
-} */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-.checkmark {
-  color: green;
-  font-weight: bold;
-  margin-left: 10px;
-}
-.bottle-glass-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-.wine-glass {
-  position: relative;
-  width: 120px;
-  height: 155px;
-  border: 2px solid #CEE1ED;
-  background-color: #CEE1ED;
-  border-radius: 0 0 50% 50%;
-  overflow: hidden;
-}
-.water {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(165, 42, 42, 0.8);
-  transition: height 1s;
-}
-.score-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-.score-popup-content {
-  background: white;
-  padding: 20px;
-  text-align: center;
-  border-radius: 10px;
-  pointer-events: auto; /* 确保弹窗内的元素仍可点击 */
-}
-.score-popup-content button:hover {
-  background-color: #7f1023;
-}
-.options {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px; /* 控制按鈕之間的間距 */
-}
-.options button {
-  width: 160px;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-/*  */
-.letter-icon {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  /* overflow: hidden; */
-}
-
-svg {
-  max-width: 100%;
-  height: auto;
-  transition: opacity 1s ease;
-}
-
-svg.hide {
-  opacity: 0;
-}
-
-.flap {
-  transform-origin: top;
-  transition: transform 0.8s ease;
-
-}
-
-
-.coupon {
-  /* outline: 1px solid red; */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  background-color: #7f1023;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.5s ease, transform 1s ease;
-  display: flex;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); 
-  clip-path: polygon(
-    0 0, 2% 10%, 0 20%, 2% 30%, 0 40%, 2% 50%, 0 60%, 2% 70%, 0 80%, 2% 90%, 0 100%,
-    100% 100%, 98% 90%, 100% 80%, 98% 70%, 100% 60%, 98% 50%, 100% 40%, 98% 30%, 100% 20%, 98% 10%, 100% 0
-  );
-}
-
-
-.coupon.show {
-  opacity: 1;
-  z-index: 1;
-  animation: popup 1.5s ease forwards;
-}
-
-@keyframes popup {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(0.7);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.5);
-  }
-}
-
-/* 彩带动画 */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #f00; /* 彩带颜色 */
-  animation: confetti-fall 4s infinite; /* 使用动画 */
-}
-
-/* 彩带动画关键帧 */
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh); 
-    opacity: 0;
-  }
-}
-</style>

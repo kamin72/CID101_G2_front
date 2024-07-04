@@ -8,14 +8,15 @@
             <p>遊戲結束後會獲得優惠券</p>
             <p>(一天只能獲得一次)</p>
         </div>
-       
-        <router-link to="/GameTest">
+       <div>
+         <router-link to="/GameTest">
             <button class="button">
                 <a href="#">START</a>
             </button>
         </router-link>
+       </div>
+       
       </div>
     </section>
 
 </template>
-  
