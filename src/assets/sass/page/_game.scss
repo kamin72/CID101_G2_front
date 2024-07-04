@@ -100,6 +100,10 @@
             }
         }
         .options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
             @include t {
                 display: flex;
                 flex-direction: column;
