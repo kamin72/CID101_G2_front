@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="form_box">
-                        <p>{{ course.name }}</p>
+                        <p>{{ course.course_name }}</p>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form_box">
-                        <p>NT. {{ course.price }}</p>
+                        <p>NT. {{ course.course_price }}</p>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
                 </div>
             </div>
 
-            <RouterLink :to="'/courseBookingDetail_confirm/' + course.id" style="text-decoration: none;">
+            <RouterLink :to="'/courseBookingDetail_confirm/' + course.course_id" style="text-decoration: none;">
                 <button :disabled="disabledButton"
                     :class="{ 'big-btn-invalid': disabledButton, 'big-btn-primary': false, 'reserveCourse': true }"
                     class="big-btn-primary  reserveCourse">
@@ -138,8 +138,9 @@
 <script>
 import CartFlow from '@/components/Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
-import { mapState, mapActions } from 'pinia';
-import courseStore from '@/stores/course';
+import { mapState, mapActions } from 'pinia'
+import courseStore from '@/stores/course'
+import memberStore from '@/stores/loginMember'
 
 export default {
     components: {
@@ -197,16 +198,27 @@ export default {
                 }
             ],
             count: 1,
-            memName: 'John Doe',
-            memEmail: 'john.doe@example.com',
-            memPhone: '0912345678',
+            memName: '',
+            memEmail: '',
+            memPhone: '',
             otherRequirements: '',
             isChecked: false,
             windowWidth: window.innerWidth,
         }
     },
     computed: {
-        ...mapState(courseStore, ['specificCourse', 'otherRequirements', 'participantCount']), // 使用 mapState 獲取 specificCourse
+        ...mapState(courseStore, ['specificCourse', 'otherRequirements', 'participantCount']),
+        ...mapState(memberStore, ['memberInfo']),
+
+        memName() {
+            return this.memberInfo?.[0]?.name || ''
+        },
+        memEmail() {
+            return this.memberInfo?.[0]?.email || ''
+        },
+        memPhone() {
+            return this.memberInfo?.[0]?.phone || ''
+        },
         course() {
             return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
         },
@@ -240,6 +252,15 @@ export default {
         },
     },
     async mounted() {
+        // 確保會員資料已加載
+        memberStore().getMemberData();
+
+        // 如果會員未登入，重定向到登入頁面
+        if (!this.memberInfo) {
+            this.$router.push({ name: 'login' });
+            return;
+        }
+
         try {
             const courseId = this.$route.params.id
             this.getSpecificData(courseId)
@@ -255,7 +276,6 @@ export default {
     watch: {
         '$route.params.id': {
             handler(newId) {
-                // console.log(newId)
                 this.getSpecificData(newId)
             },
             immediate: true
@@ -276,13 +296,13 @@ export default {
         otherRequirements: {
             handler(newValue) {
                 this.setOtherRequirements(newValue);
-            },
+            }
         },
         participantCount: {
             handler(newValue) {
                 this.setParticipantCount(newValue);
-            },
-        },
-    },
+            }
+        }
+    }
 }
 </script>

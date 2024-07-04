@@ -65,6 +65,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import memberStore from '@/stores/loginMember'
+import cartStore from '@/stores/cart'
 
 export default {
   data() {
@@ -77,6 +78,7 @@ export default {
   },
   methods: {
     ...mapActions(memberStore, ['fetchMemberCompData', 'getMemberCompData']),
+    ...mapActions(cartStore, ['cleanCart']),
     sendCardInfo() {
       // 創建一個包含表單數據的對象
       const formData = {
@@ -103,83 +105,83 @@ export default {
       document.body.appendChild(form)
       form.submit()
     },
-    // try {
-    //   let orderInfo = {
-    //     MerchantTradeNo: this.MerchantTradeNo,
-    //     TotalAmount: this.TotalAmount,
-    //     TradeDesc: this.TradeDesc,
-    //     ItemName: this.ItemName,
-    //   }
-    //   // const formData = new URLSearchParams(orderInfo)
-
-    //   const form = document.createElement("form");
-    //   for (const key in orderInfo) {
-    //     const element = document.createElement("input");
-    //     element.value = orderInfo[key];
-    //     element.name = key;
-    //     form.appendChild(element);
-    //   }
-
-    //   form.method = "POST";
-    //   form.action = "http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php";
-    //   document.body.appendChild(form)
-    //   form.submit()
-
-    // var xhr = new XMLHttpRequest()
-    // console.log(xhr)
-    // xhr.open('POST', 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php', true);
-    // xhr.send(formData);
-
-    // } catch(error) {
-    //   console.error('pay error', error)
-    // }
-    // getCheckResponse() {
-    //   fetch(
-    //     'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/GetCheckoutResponse.php'
-    //   )
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       alert('pay success')
-    //       console.log(data)
-    //     })
-    // }
     getproductInfo() {
       this.productInfo = this.cart.map((item) => `${item.prod_name}X${item.count}`).join('#')
     },
+    // submitOrder() {
+    //   const formData = {
+    //     name: this.memberComp?.[0].name,
+    //     address: this.memberComp?.[0].address,
+    //     phone: this.deliveryInfo_comp?.['phone'],
+    //     email: this.deliveryInfo_comp?.['email'],
+    //     sum: this.cartPrice?.sum,
+    //     discount: this.cartPrice?.discount,
+    //     actualPaid: this.cartPrice?.actualPaid
+    //   }
+    //   const form = new URLSearchParams(formData)
+    //   const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
+
+    //   fetch(url, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded'
+    //     },
+    //     body: form
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       if (data.error) {
+    //         alert('訂單不成立')
+    //         return
+    //       } else {
+    //         // console.log(data)
+    //         alert('訂單建立成功')
+    //       }
+    //     })
+    // }
     submitOrder() {
-      const formData = {
-        name: this.memberComp?.[0].name,
-        address: this.memberComp?.[0].address,
+      const orderData = {
+        name: this.memberComp?.[0]['name'],
+        address: this.memberComp?.[0]['address'],
         phone: this.deliveryInfo_comp?.['phone'],
         email: this.deliveryInfo_comp?.['email'],
-        sum: this.cartPrice?.sum,
-        discount: this.cartPrice?.discount,
-        actualPaid: this.cartPrice?.actualPaid
+        sum: this.cartPrice.sum,
+        discount: this.cartPrice.discount,
+        actualPaid: this.cartPrice.actualPaid,
+        cart: this.cart // 包含購物車信息
       }
-      const form = new URLSearchParams(formData)
+
       const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
 
       fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
-        body: form
+        body: JSON.stringify(orderData)
       })
-        .then((res) => res.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('網絡響應不正常')
+          }
+          return response.json()
+        })
         .then((data) => {
           if (data.error) {
-            alert('訂單不成立')
-            return
-          } else {
-            // console.log(data)
-            alert('訂單建立成功')
+            throw new Error(data.error)
           }
+          alert('訂單建立成功')
+          this.cleanCart() // 只有在成功後才清空購物車
+        })
+        .catch((error) => {
+          console.error('錯誤:', error)
+          alert('訂單提交失敗：' + error.message)
         })
     }
   },
   computed: {
     ...mapState(memberStore, ['memberComp']),
+    ...mapState(cartStore, ['cart']),
 
     cart() {
       return JSON.parse(localStorage.getItem('cart'))

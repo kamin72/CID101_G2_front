@@ -16,9 +16,8 @@ export default defineStore('courseStore', {
     // 從後台獲取所有課程
     async fetchCourses() {
       this.loading = true
-      this.error = null
       try {
-        const response = await fetch('http://localhost/CID_G2_php/front/getCourse.php')
+        const response = await fetch('http://localhost/CID101_G2_php/front/getCourse.php')
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
@@ -38,7 +37,7 @@ export default defineStore('courseStore', {
         this.loading = true
         this.error = null
         try {
-          const response = await fetch(`http://localhost/CID_G2_php/front/getCourse.php?id=${courseId}`)
+          const response = await fetch(`http://localhost/CID101_G2_php/front/getCourse.php?id=${courseId}`)
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
           }

@@ -69,7 +69,7 @@
       .month-year {
         padding: 0 $pad-1;
       }
-      @include m(){
+      @include m() {
         padding: 30px 0px;
         .month-year {
           padding: 0 30px;
@@ -110,7 +110,7 @@
             }
           }
         }
-        @include m(){
+        @include m() {
           .search-course-calen-tab {
             display: none;
           }
@@ -172,7 +172,7 @@
                 p {
                   padding-top: 10px;
                 }
-                .course-tag {
+                .course-ribbon {
                   position: absolute;
                   top: 0;
                   left: 0;
@@ -213,7 +213,7 @@
         align-items: center;
         .event-card2 {
           margin-bottom: $mar-1;
-          @include t(){
+          @include t() {
             margin-bottom: 45px;
           }
         }
@@ -255,7 +255,7 @@
                     padding-right: 5px;
                     line-height: 16px;
                   }
-                  .course-tag {
+                  .course-ribbon {
                     width: 100%;
                     padding: 4px 0;
                     text-align: center;
@@ -617,7 +617,7 @@
         display: flex;
         border-bottom: 1px solid #ffffff;
         background-color: $secondary-botton-color;
-  
+
         .form_item {
           width: 30%;
           min-height: 75px;
@@ -631,7 +631,7 @@
             min-height: 60px;
           }
         }
-  
+
         .form_box {
           display: flex;
           align-items: center;
@@ -639,7 +639,7 @@
           background-color: #f8f5f2;
           p {
             margin: 25px;
-            @include m(){
+            @include m() {
               margin: 15px;
             }
           }
@@ -750,7 +750,7 @@
                 margin-bottom: 15px;
               }
             }
-            @include t(){
+            @include t() {
               width: 90%;
               margin-left: 15px;
             }
@@ -769,7 +769,7 @@
               width: 80%;
               margin: 25px;
               padding: 7px;
-              @include t(){
+              @include t() {
                 margin: 15px;
               }
             }
@@ -786,10 +786,10 @@
       input {
         margin-right: 5px;
       }
-      @include t(){
+      @include t() {
         margin: 40px;
       }
-      @include m(){
+      @include m() {
         margin: 30px;
       }
     }
@@ -806,15 +806,15 @@
       .big-btn-secondary {
         margin-right: 25px;
       }
-      @include t(){
+      @include t() {
         margin-top: 40px;
       }
-      @include m(){
+      @include m() {
         margin-top: 30px;
       }
     }
   }
-  @include m(){
+  @include m() {
     padding-top: 0px;
   }
 }
