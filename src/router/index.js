@@ -121,12 +121,12 @@ const router = createRouter({
       component: () => import('@/views/GameRuleView.vue'),
       meta: { title: '品酒達人 | 遊戲規則' }
     },
-    {
-      path: '/gameTotal',
-      name: 'gameTotal',
-      component: () => import('@/views/GameTotalView.vue'),
-      meta: { title: '品酒達人 | 遊戲分數' }
-    },
+    // {
+    //   path: '/gameTotal',
+    //   name: 'gameTotal',
+    //   component: () => import('@/views/GameTotalView.vue'),
+    //   meta: { title: '品酒達人 | 遊戲分數' }
+    // },
     {
       path: '/gameTest',
       name: 'gameTest',

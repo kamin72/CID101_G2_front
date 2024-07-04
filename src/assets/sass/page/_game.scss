@@ -16,6 +16,9 @@
             3px 3px 5px rgba(0, 0, 0, 0.3),
             -1px -1px 2px rgba(255, 255, 255, 0.8);
         position: relative;
+        @include t {
+            background-color: #ede7de;
+        }
         .game-txt {
             // outline: 1px solid red;
             h3 {
@@ -39,6 +42,9 @@
                 padding: 10px 40px;
                 color: #ffffff;
                 letter-spacing: $letter-spacing;
+            }
+            &:hover {
+                background-color: #7f1023;
             }
         }
         .wrap-game-ansButton {
@@ -94,12 +100,21 @@
             }
         }
         .options {
+            @include t {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
             button {
+                width: 160px;
                 margin-top: 20px;
                 padding: 10px 20px;
                 border: none;
                 cursor: pointer;
                 transition: background-color 0.3s;
+                &:hover {
+                    // background-color: #7f1023;
+                }
             }
             .correct {
                 background-color: lightgreen;
@@ -110,62 +125,77 @@
             .shake {
                 animation: shake 0.5s;
             }
-        }
-        .bottle-container {
-            position: relative;
-            margin: 20px 0;
-            right: -45%;
-            width: 46%;
-            transition: transform 1s;
-            .wine-bottle {
-                width: 100%;
-                height: 100%;
-                transform-origin: bottom center;
-                transition: transform 1s;
-            }
-            .pouring {
-                transform: rotate(-15deg);
+            .checkmark {
+                color: green;
+                font-weight: bold;
+                margin-left: 10px;
             }
         }
-        .glass-container {
-            width: 100px;
-            height: 250px;
-            margin: 0 auto;
+        .bottle-glass-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-end;
             position: absolute;
-            right: -10%;
-            bottom: -165%;
-            .wine-glass {
+            right: 10px;
+            top: 10px;
+            @include t {
+                display: none;
+            }
+            .bottle-container {
                 position: relative;
-                border: 2px solid #cee1ed;
-                background-color: #cee1ed;
-                border-radius: 0 0 50% 50%;
-                overflow: hidden;
-                width: 120px;
-                height: 155px;
-                // .water {
-                //     position: absolute;
-                //     bottom: 43%;
-                //     width: 100%;
-                //     background-color: rgba(165, 42, 42, 0.8);
-                //     transition: height 1s;
-                //     border-radius: 0 0 50% 50%;
-                // }
+                margin: 20px 0;
+                right: -45%;
+                width: 46%;
+                transition: transform 1s;
+                .wine-bottle {
+                    width: 100%;
+                    height: 100%;
+                    transform-origin: bottom center;
+                    transition: transform 1s;
+                }
+                .pouring {
+                    transform: rotate(-15deg);
+                }
             }
-            .wine-glass-stem {
-                width: 6px;
-                height: 80px;
-                background-color: #cee1ed;
-                margin-top: -2px;
-            }
-            .wine-glass-base {
-                width: 95px;
-                height: 10px;
-                background-color: #cee1ed;
-                border-radius: 50%;
-                margin-top: -2px;
+            .glass-container {
+                width: 100px;
+                height: 250px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                right: -10%;
+                bottom: -165%;
+                .wine-glass {
+                    position: relative;
+                    border: 2px solid #cee1ed;
+                    background-color: #cee1ed;
+                    border-radius: 0 0 50% 50%;
+                    overflow: hidden;
+                    width: 120px;
+                    height: 155px;
+                    .water {
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        background-color: rgba(165, 42, 42, 0.8);
+                        transition: height 1s;
+                    }
+                }
+                .wine-glass-stem {
+                    width: 6px;
+                    height: 80px;
+                    background-color: #cee1ed;
+                    margin-top: -2px;
+                }
+                .wine-glass-base {
+                    width: 95px;
+                    height: 10px;
+                    background-color: #cee1ed;
+                    border-radius: 50%;
+                    margin-top: -2px;
+                }
             }
         }
         button {
@@ -183,9 +213,7 @@
             &.correct {
                 border-color: #28a745;
             }
-
             .checkmark {
-                // outline: 1px solid red;
                 position: absolute;
                 left: 10px;
                 top: 5%;
@@ -214,6 +242,133 @@
                     transform: translateX(5px);
                 }
             }
+        }
+    }
+    .score-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        .score-popup-content {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            pointer-events: auto;
+            button {
+                margin-top: 20px;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            .letter-icon {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                svg {
+                    max-width: 100%;
+                    height: auto;
+                    transition: opacity 1s ease;
+                    .flap {
+                        transform-origin: top;
+                        transition: transform 0.8s ease;
+                    }
+                }
+                .hide {
+                    opacity: 0;
+                }
+                .confetti {
+                    position: absolute;
+                    right: 0;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #f00;
+                    animation: confetti-fall 4s infinite;
+                }
+                .coupon {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    background-color: #7f1023;
+                    padding: 20px 40px;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: white;
+                    opacity: 0;
+                    z-index: -1;
+                    transition:
+                        opacity 0.5s ease,
+                        transform 1s ease;
+                    display: flex;
+                    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+                    clip-path: polygon(
+                        0 0,
+                        2% 10%,
+                        0 20%,
+                        2% 30%,
+                        0 40%,
+                        2% 50%,
+                        0 60%,
+                        2% 70%,
+                        0 80%,
+                        2% 90%,
+                        0 100%,
+                        100% 100%,
+                        98% 90%,
+                        100% 80%,
+                        98% 70%,
+                        100% 60%,
+                        98% 50%,
+                        100% 40%,
+                        98% 30%,
+                        100% 20%,
+                        98% 10%,
+                        100% 0
+                    );
+                }
+
+                .coupon.show {
+                    opacity: 1;
+                    z-index: 1;
+                    animation: popup 1.5s ease forwards;
+                }
+
+                @keyframes popup {
+                    0% {
+                        transform: translate(-50%, -50%) scale(0.5);
+                    }
+                    50% {
+                        transform: translate(-50%, -50%) scale(0.7);
+                    }
+                    100% {
+                        transform: translate(-50%, -50%) scale(1.5);
+                    }
+                }
+                /* 彩带动画关键帧 */
+                @keyframes confetti-fall {
+                    0% {
+                        transform: translateY(0);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(100vh);
+                        opacity: 0;
+                    }
+                }
+            }
+        }
+        .score-popup-content button:hover {
+            background-color: #7f1023;
         }
     }
 }
