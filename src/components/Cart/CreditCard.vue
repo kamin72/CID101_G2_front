@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     ...mapActions(memberStore, ['fetchMemberCompData', 'getMemberCompData']),
+    ...mapActions(cartStore, ['cleanCart']),
     sendCardInfo() {
       // 創建一個包含表單數據的對象
       const formData = {
@@ -104,46 +105,6 @@ export default {
       document.body.appendChild(form)
       form.submit()
     },
-    // try {
-    //   let orderInfo = {
-    //     MerchantTradeNo: this.MerchantTradeNo,
-    //     TotalAmount: this.TotalAmount,
-    //     TradeDesc: this.TradeDesc,
-    //     ItemName: this.ItemName,
-    //   }
-    //   // const formData = new URLSearchParams(orderInfo)
-
-    //   const form = document.createElement("form");
-    //   for (const key in orderInfo) {
-    //     const element = document.createElement("input");
-    //     element.value = orderInfo[key];
-    //     element.name = key;
-    //     form.appendChild(element);
-    //   }
-
-    //   form.method = "POST";
-    //   form.action = "http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php";
-    //   document.body.appendChild(form)
-    //   form.submit()
-
-    // var xhr = new XMLHttpRequest()
-    // console.log(xhr)
-    // xhr.open('POST', 'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php', true);
-    // xhr.send(formData);
-
-    // } catch(error) {
-    //   console.error('pay error', error)
-    // }
-    // getCheckResponse() {
-    //   fetch(
-    //     'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/GetCheckoutResponse.php'
-    //   )
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       alert('pay success')
-    //       console.log(data)
-    //     })
-    // }
     getproductInfo() {
       this.productInfo = this.cart.map((item) => `${item.prod_name}X${item.count}`).join('#')
     },
