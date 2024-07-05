@@ -191,7 +191,7 @@
     <div class="product-cards row">
       <div
         class="col-3 col-md-4 col-sm-6"
-        v-for="(product) in filteredProducts"
+        v-for="product in filteredProducts"
         :key="product.prod_id"
       >
         <div class="product-card">
@@ -235,35 +235,13 @@ export default {
     return {
       //商品資訊
       // products: [],
-
-      // 定義下拉選單的資料結構
-      dropdowns: [
-        {
-          label: '葡萄酒類別',
-          isOpen: false,
-          isMenuVisible: false,
-          options: ['紅酒', '白酒']
-        },
-        {
-          label: '葡萄品種',
-          isOpen: false,
-          isMenuVisible: false,
-          options: ['波爾多混釀', '阿里戈蝶']
-        },
-        {
-          label: '年份',
-          isOpen: false,
-          isMenuVisible: false,
-          options: ['2020年', '2019年', '2018年', '2017年', '2014年', '2013年', '2012年', '2009年']
-        },
-        {
-          label: '價格排序',
-          isOpen: false,
-          isMenuVisible: false,
-          options: ['價格由高到低', '價格由低到高']
-        }
+      dropdownsState: [
+        { isOpen: false, isMenuVisible: false },
+        { isOpen: false, isMenuVisible: false },
+        { isOpen: false, isMenuVisible: false },
+        { isOpen: false, isMenuVisible: false }
       ],
-
+    
       // 新增狀態以追蹤選中的選項
       selectedOptions: [[], [], []],
 
@@ -273,6 +251,55 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ['products', 'cart']),
+
+    dropdowns() {
+      if (!this.products || this.products.length === 0) {
+        return []
+      }
+
+      let filteredProducts = this.products
+      this.selectedOptions.forEach((options, index) => {
+        if (options.length > 0) {
+          if (index === 0) {
+            filteredProducts = filteredProducts.filter(product =>
+              options.includes(product.prod_category)
+            )
+          } else if (index === 1) {
+            filteredProducts = filteredProducts.filter(product =>
+              options.includes(product.prod_variety)
+            )
+          } else if (index === 2) {
+            filteredProducts = filteredProducts.filter(product =>
+              options.includes(product.prod_year)
+            )
+          }
+        }
+      })
+
+    
+      return [
+        {
+          label: '葡萄酒類別',
+          options: [...new Set(filteredProducts.map((p) => p.prod_category))]
+        },
+        {
+          label: '葡萄品種',
+          options: [...new Set(filteredProducts.map((p) => p.prod_variety))]
+        },
+        {
+          label: '年份',
+          options: [...new Set(filteredProducts.map((p) => p.prod_year))]
+        },
+        {
+          label: '價格排序',
+          options: ['價格由高到低', '價格由低到高']
+        }
+      ].map((dropdown, index) => ({
+        ...dropdown,
+        ...this.dropdownsState[index]
+      }))
+    },
+
     filteredProducts() {
       // 根據選中的選項篩選產品
       return this.products.filter((product) => {
@@ -292,7 +319,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(cartStore, ['checkCart', 'addCart','fetchProductList','getProductList']),
+    ...mapActions(cartStore, ['checkCart', 'addCart', 'fetchProductList', 'getProductList']),
     parseServerImg(file) {
       return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
@@ -306,9 +333,9 @@ export default {
     },
     toggleDropdown_sm(index) {
       // 手機版切換下拉選單的打開狀態
-      this.dropdowns[index].isOpen = !this.dropdowns[index].isOpen
+      this.dropdownsState[index].isOpen = !this.dropdownsState[index].isOpen
       // 切換篩選按鈕旁邊箭頭的上下方向
-      this.dropdowns[index].isMenuVisible = !this.dropdowns[index].isMenuVisible
+      this.dropdownsState[index].isMenuVisible = !this.dropdownsState[index].isMenuVisible
 
       // this.menuOpen = false
     },
@@ -316,28 +343,31 @@ export default {
     toggleMenusm_sm() {
       this.menuOpen = !this.menuOpen
       //每次當打開一個下拉選單，會關閉其他所有下拉選單
-      this.dropdowns.forEach((dropdown, i) => {
+      this.dropdownsState.forEach((state, i) => {
         if (i === 3) {
-          dropdown.isOpen = false
+          state.isOpen = false
         }
       })
     },
     toggleDropdown(index) {
-      // 切換下拉選單的打開狀態
-      this.dropdowns[index].isOpen = !this.dropdowns[index].isOpen
+     // 切換下拉選單的打開狀態
+      this.dropdownsState[index].isOpen = !this.dropdownsState[index].isOpen
       // 切換篩選按鈕旁邊箭頭的上下方向
-      this.dropdowns[index].isMenuVisible = !this.dropdowns[index].isMenuVisible
-      //每次當打開一個下拉選單，會關閉其他所有下拉選單
-      this.dropdowns.forEach((dropdown, i) => {
-        if (i != index) {
-          dropdown.isOpen = false
+      this.dropdownsState[index].isMenuVisible = !this.dropdownsState[index].isMenuVisible
+      
+      // 每次當打開一個下拉選單，會關閉其他所有下拉選單
+      this.dropdownsState.forEach((state, i) => {
+        if (i !== index) {
+          state.isOpen = false
         }
       })
     },
+
+    // 點擊篩選按鈕外面，會關閉選單
     closeDropdowns() {
-      this.dropdowns.forEach((dropdown) => {
-        dropdown.isOpen = false
-        dropdown.isMenuVisible = false
+      this.dropdownsState.forEach((state) => {
+        state.isOpen = false
+        state.isMenuVisible = false
       })
       this.menuOpen = false
     },
@@ -352,14 +382,6 @@ export default {
         }
       })
     },
-    // sortByPrice(e) {
-    //   let value = e.target.value;
-    //   if (value === 'desc') {
-    //     this.sortByPriceDescending();
-    //   } else if (value === 'asc') {
-    //     this.sortByPriceAscending();
-    //   }
-    // },
     sortByPriceDescending() {
       // 按照價格由高到低排序產品
       this.products.sort((a, b) => b.prod_price - a.prod_price)
@@ -377,30 +399,18 @@ export default {
       ) {
         this.closeDropdowns()
       }
-    },
+    }
   },
   mounted() {
     // this.prodData()
-    
     document.addEventListener('click', this.handleGlobalClick)
-
   },
   beforeUnmount() {
     document.removeEventListener('click', this.handleGlobalClick)
   },
-  //  created() {
-  //   fetch('http://localhost/php/product.php')
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           this.products = data
-  //         })
-  //  },
   created() {
     this.fetchProductList()
     this.getProductList()
-    // console.log(this.products?.[0]['prod_category'])
-
   }
-
 }
 </script>
