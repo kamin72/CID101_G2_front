@@ -1,4 +1,4 @@
-<template>
+ <template>
   <section class="game">
     <div class="game-container">
       <div class="game-txt">
