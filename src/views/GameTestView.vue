@@ -73,7 +73,7 @@
           </svg>
           <div class="coupon" :class="{ show: isOpen }">{{ couponMessage }}</div>
         </div>
-        <button @click="saveCouponToMember">領取優惠券</button>
+        <button @click="saveCouponToMember" class="saveCouponToMember">領取優惠券</button>
       </div>
     </div>
   </section>
@@ -234,10 +234,10 @@ export default {
         const data = await response.json()
         if (data.success) {
           if (data.couponAvailable) {
-            return true
+            return true;
           } else {
             alert(data.msg)
-            return false
+            return false;
           }
         } else {
           alert(`很抱歉，檢查優惠券時發生錯誤。${data.msg}`)
@@ -246,7 +246,7 @@ export default {
       } catch (error) {
         console.error('Network response was not ok:', error)
         alert('很抱歉，檢查優惠券時發生錯誤。')
-        return false
+        return false;
       }
     },  
     // 2. 將優惠券存入會員資料
@@ -261,18 +261,18 @@ export default {
         this.memWithCoupon = {...memInfo, ...coupon}
         console.log(this.memWithCoupon) 
     
-        this.couponMessage = `成功領取${couponAmount}元的優惠券！`
+        this.couponMessage = `$${couponAmount}優惠券！`
         this.toggleOpen()
       } else {
         alert('很抱歉，暫無符合條件的優惠券。');
-        return; // 退出函數，不再繼續執行下面的代碼
+        return;
       }
 
       try {
     const payload = JSON.stringify({
       memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
     });
-    console.log(payload); // 在發送請求之前打印 payload 檢查其內容
+    console.log(payload); 
 
     const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
       method: 'POST',
@@ -353,7 +353,7 @@ export default {
       const colors = ['#ff0', '#f0f', '#0ff', '#0f0', '#00f', '#f00']
       const color = colors[Math.floor(Math.random() * colors.length)]
       const left = Math.random() * 100 + 'vw'
-      const top = Math.random() * -50 + 'vh'
+      const top = Math.random() * 100 + 'vh'
       const rotate = Math.random() * 360 + 'deg'
       return {
         backgroundColor: color,
@@ -378,45 +378,23 @@ export default {
           if (this.waterLevel + this.increment <= 100) {
             this.waterLevel += this.increment
           }
+          this.totalScore += 10 // 每答對一題加 10 分
           this.nextQuestion()
-        }, 1000) // 模拟倒水动画时间
+        }, 1000) 
       } else {
         setTimeout(() => {
           this.nextQuestion()
-        }, 1000) // 延迟以显示错误效果
+        }, 1000) 
       }
     },
     nextQuestion() {
       if (this.currentQuestionIndex < this.questions.length - 1) {
-        this.currentQuestionIndex++
-        this.selectedOption = null
-      } else {
-        this.totalScore =
-          this.questions.filter((q) => {
-            const selectedOption = q.options.find((o) => o.id === this.selectedOption)
-            return selectedOption && selectedOption.correct
-          }).length * 10
-        this.showScorePopup = true
-      }
-    }
-    // claimCoupon() {
-    //   let couponAmount = this.calculateCouponAmount()
-    //   if (this.totalScore === 60) {
-    //     couponAmount = 100
-    //   } else if (this.totalScore >= 70 && this.totalScore <= 80) {
-    //     couponAmount = 200
-    //   } else if (this.totalScore === 90) {
-    //     couponAmount = 300
-    //   } else if (this.totalScore === 100) {
-    //     couponAmount = 500
-    //   }
-    //   if (couponAmount > 0) {
-    //     this.couponMessage = `成功領取${couponAmount}元的優惠券！`
-    //     this.toggleOpen()
-    //   } else {
-    //     alert('很抱歉，暫無符合條件的優惠券。')
-    //   }
-    // }
+    this.currentQuestionIndex++
+    this.selectedOption = null
+  } else {
+    this.showScorePopup = true // 顯示總分數彈窗
+  }
+}
   },
   watch: {
     isOpen() {
