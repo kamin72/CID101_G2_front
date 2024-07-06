@@ -182,7 +182,7 @@ export default {
                 }
             ],
             windowWidth: window.innerWidth,
-            discount:""
+            discount: ""
         }
     },
 
@@ -200,7 +200,7 @@ export default {
             return this.memberInfo?.[0]?.phone || ''
         },
         sum() {
-            return this.loadCheckoutSum;
+            return this.checkoutSum;
         },
         course() {
             return this.specificCourse || [];
@@ -208,7 +208,7 @@ export default {
         isMobile() {
             return this.windowWidth < 450
         },
-        
+
     },
 
     methods: {
@@ -223,6 +223,7 @@ export default {
         memberStore().getMemberData();
         window.addEventListener('resize', this.updateWindowWidth)
         this.discount = localStorage.getItem('selectedDiscount')
+        this.loadCheckoutSum();
     },
 
     beforeUnmount() {

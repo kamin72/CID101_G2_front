@@ -114,8 +114,8 @@
                         <h4>其他需求</h4>
                     </div>
                     <div class="form_box">
-                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"
-                            v-model="otherRequirements">
+                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10" v-model="otherRequirements"
+                            @input="updateOtherRequirements">
                         </textarea>
                     </div>
                 </div>
@@ -151,6 +151,7 @@ export default {
         CartFlow,
         CartFlowRWD
     },
+
     data() {
         return {
             flow: [
@@ -209,6 +210,7 @@ export default {
             textContent: '',
         }
     },
+
     computed: {
         ...mapState(courseStore, ['specificCourse', 'participantCount', 'otherRequirements']),
         ...mapState(memberStore, ['memberInfo']),
@@ -242,8 +244,9 @@ export default {
             return this.windowWidth < 450
         },
     },
+
     methods: {
-        ...mapActions(courseStore, ['setParticipantCount', 'getSpecificData', 'setCheckoutSum']),
+        ...mapActions(courseStore, ['setOtherRequirements', 'setParticipantCount', 'getSpecificData', 'setCheckoutSum']),
         add() {
             if (this.participantCount < 10) {
                 this.setParticipantCount(this.participantCount + 1);
@@ -277,15 +280,19 @@ export default {
                 // 可以在這裡添加用戶提示
             }
         },
+        updateOtherRequirements(event) {
+            this.setOtherRequirements(event.target.value);
+        }
     },
+
     async mounted() {
-        memberStore().getMemberData();
-        this.setCheckoutSum(this.sum);
+        memberStore().getMemberData()
+        this.setCheckoutSum(this.sum)
 
         if (!this.memberInfo) {
             this.$router.push({ name: 'login' });
             return;
-        };
+        }
 
         try {
             const courseId = this.$route.params.id;
@@ -294,22 +301,24 @@ export default {
                 this.fetchDiscounts()
             ]);
         } catch (error) {
-            console.error("Failed to fetch data:", error);
+            console.error("Failed to fetch data:", error)
             // 考慮向用戶顯示錯誤消息
-        };
+        }
 
         const savedDiscount = localStorage.getItem('selectedDiscount');
         if (savedDiscount) {
-            this.selectedDiscount = JSON.parse(savedDiscount);
+            this.selectedDiscount = JSON.parse(savedDiscount)
         }
 
-        window.addEventListener('resize', this.updateWindowWidth);
+        window.addEventListener('resize', this.updateWindowWidth)
     },
+
     beforeUnmount() {
         window.removeEventListener('resize', this.updateWindowWidth);
         // 可選：清理 localStorage
         localStorage.removeItem('otherRequirements');
     },
+
     watch: {
         '$route.params.id': {
             handler(newId) {
@@ -332,7 +341,12 @@ export default {
         selectedDiscount(newValue) {
             localStorage.setItem('selectedDiscount', newValue);
         },
+        sum: {
+            handler(newSum) {
+                this.setCheckoutSum(newSum);
+            },
+            immediate: true
+        },
     },
-
 }
 </script>
