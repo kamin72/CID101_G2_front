@@ -14,7 +14,7 @@
                         <h4>活動名稱</h4>
                     </div>
                     <div class="form_box">
-                        <p>{{ course.name }}</p>
+                        <p>{{ course.course_name }}</p>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                         <h4>課程價格</h4>
                     </div>
                     <div class="form_box">
-                        <p>NT. {{ course.price }}</p>
+                        <p>NT. {{ course.course_price }}</p>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                         <h4>折價券</h4>
                     </div>
                     <div class="form_box">
-                        <p>{{ coupon }}</p>
+                        <p>{{ discount }} 元折價券</p>
                     </div>
                 </div>
 
@@ -99,12 +99,12 @@
                 </div>
             </form>
             <div class="btn-wrap">
-                <RouterLink :to="'/courseBookingDetail/' + course.id" style="text-decoration: none;">
+                <RouterLink :to="'/courseBookingDetail/' + course.course_id" style="text-decoration: none;">
                     <button class="big-btn-secondary">
                         上一步
                     </button>
                 </RouterLink>
-                <RouterLink :to="'/courseBookingDetail_pay/' + course.id" style="text-decoration: none;">
+                <RouterLink :to="'/courseBookingDetail_pay/' + course.course_id" style="text-decoration: none;">
                     <button class="big-btn-primary">
                         確認無誤
                     </button>
@@ -119,6 +119,7 @@ import CartFlow from '@/components/Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import { mapState, mapActions } from 'pinia';
 import courseStore from '@/stores/course';
+import memberStore from '@/stores/loginMember'
 
 export default {
     components: {
@@ -180,17 +181,26 @@ export default {
                     color: '#AEA495'
                 }
             ],
-            memName: 'John Doe',
-            memEmail: 'john.doe@example.com',
-            memPhone: '0912345678',
             windowWidth: window.innerWidth,
+            discount:""
         }
     },
 
     computed: {
         ...mapState(courseStore, ['specificCourse', 'checkoutSum', 'otherRequirements', 'participantCount']),
+        ...mapState(memberStore, ['memberInfo']),
+
+        memName() {
+            return this.memberInfo?.[0]?.name || ''
+        },
+        memEmail() {
+            return this.memberInfo?.[0]?.email || ''
+        },
+        memPhone() {
+            return this.memberInfo?.[0]?.phone || ''
+        },
         sum() {
-            return this.checkoutSum;
+            return this.loadCheckoutSum;
         },
         course() {
             return this.specificCourse || [];
@@ -198,6 +208,7 @@ export default {
         isMobile() {
             return this.windowWidth < 450
         },
+        
     },
 
     methods: {
@@ -209,10 +220,9 @@ export default {
 
     mounted() {
         // 初始化會員資料
-        this.memName = 'John Doe'
-        this.memEmail = 'john.doe@example.com'
-        this.memPhone = '0912345678'
+        memberStore().getMemberData();
         window.addEventListener('resize', this.updateWindowWidth)
+        this.discount = localStorage.getItem('selectedDiscount')
     },
 
     beforeUnmount() {

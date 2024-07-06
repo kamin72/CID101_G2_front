@@ -73,10 +73,6 @@ export default defineStore('courseStore', {
       }
     },
 
-    setOtherRequirements(requirements) {
-      this.otherRequirements = requirements
-    },
-
     setParticipantCount(count) {
       this.participantCount = count
     },
