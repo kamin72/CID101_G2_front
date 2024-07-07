@@ -679,7 +679,7 @@
             padding-top: 10px;
           }
           .amount {
-            width: 25%;
+            width: 30%;
             height: 44px;
             margin: 25px;
             display: flex;
@@ -688,7 +688,7 @@
             position: relative;
             background-color: $white;
             @include t() {
-              width: 30%;
+              width: 45%;
             }
             @include m() {
               width: 55%;
@@ -698,10 +698,16 @@
             & > button {
               font-size: map-get($font-size, a);
               background-color: transparent;
-              padding: 7px 15px;
+              padding: 12px 15px;
               cursor: pointer;
               color: $gray;
               border: none;
+              @include t() {
+                padding: 12px 10px;
+              }
+              @include m() {
+                padding: 12px 7px;
+              }
             }
           }
           .creditCardWrap1 {

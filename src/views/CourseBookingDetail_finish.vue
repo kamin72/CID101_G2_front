@@ -10,7 +10,7 @@
             <div class="wrapFinish">
                 <div class="finish">
                     <div class="finishIcon">
-                        <GreenCheckmark :size="100" color="#4CAF50"/>
+                        <GreenCheckmark :size="100" color="#4CAF50" />
                         <h2 style="margin-left: 15px;">完成詢價</h2>
                     </div>
                     <h3>{{ countdown }} 幾秒後跳轉至首頁......</h3>
@@ -112,7 +112,7 @@ export default {
     },
 
     methods: {
-        ...mapActions(courseStore, ['loadCheckoutSum']),
+        ...mapActions(courseStore, ['loadCheckoutSum', 'clearBookingData']),
         startCountdown() {
             this.interval = setInterval(() => {
                 if (this.countdown > 0) {
@@ -143,6 +143,8 @@ export default {
         this.loadCheckoutSum()
         window.scrollTo(0, 0), this.startCountdown()
         window.addEventListener('resize', this.updateWindowWidth)
+        // 清除預約數據
+        this.clearBookingData();
     },
 
     beforeUnmount() {

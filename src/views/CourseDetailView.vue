@@ -19,7 +19,7 @@
               <div class="courseTime">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>上課時間 | {{ formatDate(course.course_starttime) }}</h4>
+                  <h4>時間 | {{ formatDate(course.course_starttime) }}</h4>
                   <p>
                     {{ courseTime(course.course_starttime, course.course_endtime) }}，{{
                       durationHours(course.course_starttime, course.course_endtime)
@@ -30,14 +30,14 @@
               <div class="courseAdress">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>上課教室 | 教室{{ course.course_room }}</h4>
+                  <h4>地點 | 教室{{ course.course_room }}</h4>
                   <p>桃園市中壢區復興路46號9樓</p>
                 </div>
               </div>
               <div class="coursePrice">
                 <div class="line"></div>
                 <div class="courseWrap">
-                  <h4>課程價格 | NT. {{ discountedPrice(course.course_price, course.course_discount) }}</h4>
+                  <h4>價格 | NT. {{ discountedPrice(course.course_price, course.course_discount) }}</h4>
                   <p>原價NT. {{ course.course_price }}</p>
                 </div>
               </div>

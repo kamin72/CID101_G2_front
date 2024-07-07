@@ -25,28 +25,38 @@
                 // outline: 1px solid red;
                 text-align: center;
                 font-size: map-get($font-size, h3);
+                font-family: $font-cormorant;
             }
             p {
                 text-align: center;
                 margin: 20px 0;
                 letter-spacing: $letter-spacing;
+                font-family: $font-noto;
             }
         }
         .button {
+            width: 160px;
+            height: 9%;
             // outline: 1px solid red;
             border: none;
-            margin-top: 20px;
-            a {
-                // outline: 1px solid red;
-                text-decoration: none;
-                padding: 10px 40px;
-                color: #ffffff;
-                letter-spacing: $letter-spacing;
-            }
+            background-color: #322d26;
+            padding: 0;
             &:hover {
                 background-color: #7f1023;
             }
+            .button-link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                color: inherit;
+                text-decoration: none;
+                font-family: $font-cormorant;
+                letter-spacing: $letter-spacing;
+            }
         }
+
         .wrap-game-ansButton {
             // outline: 1px solid red;
             display: flex;
@@ -97,6 +107,9 @@
             }
             p {
                 text-align: center;
+                font-size: map-get($font-size, p);
+                font-family: $font-noto;
+                letter-spacing: $letter-spacing;
             }
         }
         .options {
@@ -116,9 +129,6 @@
                 border: none;
                 cursor: pointer;
                 transition: background-color 0.3s;
-                &:hover {
-                    // background-color: #7f1023;
-                }
             }
             .correct {
                 background-color: lightgreen;
@@ -260,19 +270,26 @@
         align-items: center;
         pointer-events: none;
         .score-popup-content {
+            font-family: $font-noto;
             background: white;
             padding: 20px;
             text-align: center;
             border-radius: 10px;
             pointer-events: auto;
             button {
-                margin-top: 20px;
+                margin-top: 10px;
                 padding: 10px 20px;
                 border: none;
                 cursor: pointer;
                 transition: background-color 0.3s;
+                // outline: 1px solid red;
+                font-family: $font-noto;
+                letter-spacing: $letter-spacing;
+                background-color: #322d26;
+                color: #ffffff;
             }
             .letter-icon {
+                // outline: 1px solid red;
                 height: 100%;
                 width: 100%;
                 position: relative;
@@ -288,25 +305,30 @@
                 .hide {
                     opacity: 0;
                 }
-                .confetti {
-                    position: absolute;
-                    right: 0;
-                    width: 10px;
-                    height: 10px;
-                    background-color: #f00;
-                    animation: confetti-fall 4s infinite;
-                }
+                // .confetti {
+                //     outline: 1px solid red;
+                //     position: absolute;
+                //     right: 50%;
+                //     top: 50%;
+                //     width: 10px;
+                //     height: 10px;
+                //     background-color: #f00;
+                //     z-index: 99;
+                //     animation: confetti-fall 4s infinite;
+                // }
                 .coupon {
+                    // outline: 1px solid red;
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%) scale(1);
                     background-color: #7f1023;
-                    padding: 20px 40px;
+                    padding: 20px 45px;
                     border: none;
                     border-radius: 4px;
-                    font-size: 14px;
-                    font-weight: bold;
+                    font-size: 16px;
+                    letter-spacing: $letter-spacing;
+                    white-space: nowrap; /* 防止折行 */
                     color: white;
                     opacity: 0;
                     z-index: -1;
@@ -339,13 +361,17 @@
                         98% 10%,
                         100% 0
                     );
+                    @include t {
+                        font-size: 10px;
+                    }
+                    @include m {
+                        font-size: 8px;
+                    }
                 }
-
                 .coupon.show {
                     opacity: 1;
                     z-index: 1;
                     animation: popup 1.5s ease forwards;
-                    // font-size: 5px;
                 }
 
                 @keyframes popup {

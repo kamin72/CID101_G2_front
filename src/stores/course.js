@@ -73,12 +73,26 @@ export default defineStore('courseStore', {
       }
     },
 
-    setOtherRequirements(requirements) {
-      this.otherRequirements = requirements
-    },
-
     setParticipantCount(count) {
       this.participantCount = count
+    },
+
+    clearBookingData() {
+      // 清除 store 中的数据
+      this.checkoutSum = 0;
+      this.otherRequirements = '';
+      this.participantCount = 1;
+      this.specificCourse = null;
+
+      // 清除 localStorage 中的数据
+      localStorage.removeItem('checkoutSum');
+      localStorage.removeItem('otherRequirements');
+      localStorage.removeItem('selectedDiscount');
+    },
+
+    setOtherRequirements(requirements) {
+      this.otherRequirements = requirements;
+      localStorage.setItem('otherRequirements', requirements);
     },
   },
 

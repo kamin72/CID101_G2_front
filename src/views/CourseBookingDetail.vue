@@ -40,8 +40,12 @@
                         </div>
                     </div>
                     <div class="form_box">
-                        <select>
-                            <option value="0">請選擇折價券</option>
+                        <select v-model="selectedDiscount">
+                            <option value="">請選擇折價券</option>
+                            <option v-for="discount in discounts" :key="discount.dis_got_serial"
+                                :value="discount.dis_amount">
+                                {{ discount.dis_name }}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -110,8 +114,8 @@
                         <h4>其他需求</h4>
                     </div>
                     <div class="form_box">
-                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10"
-                            v-model="otherRequirements">
+                        <textarea id="email" placeholder="請輸入其他需求" maxlength="300" rows="10" v-model="otherRequirements"
+                            @input="updateOtherRequirements">
                         </textarea>
                     </div>
                 </div>
@@ -147,6 +151,7 @@ export default {
         CartFlow,
         CartFlowRWD
     },
+
     data() {
         return {
             flow: [
@@ -198,16 +203,16 @@ export default {
                 }
             ],
             count: 1,
-            memName: '',
-            memEmail: '',
-            memPhone: '',
-            otherRequirements: '',
             isChecked: false,
             windowWidth: window.innerWidth,
+            discounts: [], // 添加這個來存儲折扣券
+            selectedDiscount: '', // 添加這個來存儲選擇的折扣券
+            textContent: '',
         }
     },
+
     computed: {
-        ...mapState(courseStore, ['specificCourse', 'otherRequirements', 'participantCount']),
+        ...mapState(courseStore, ['specificCourse', 'participantCount', 'otherRequirements']),
         ...mapState(memberStore, ['memberInfo']),
 
         memName() {
@@ -223,7 +228,11 @@ export default {
             return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
         },
         sum() {
-            return this.participantCount * this.course.price
+            if (this.selectedDiscount) {
+                return this.participantCount * this.course.course_price - this.selectedDiscount
+            } else {
+                return this.participantCount * this.course.course_price
+            }
         },
         isSumZero() {
             return this.sum <= 0
@@ -233,10 +242,11 @@ export default {
         },
         isMobile() {
             return this.windowWidth < 450
-        }
+        },
     },
+
     methods: {
-        ...mapActions(courseStore, ['setOtherRequirements', 'setParticipantCount', 'getSpecificData', 'setCheckoutSum']), // 使用 mapActions 獲取 getSpecificData 方法
+        ...mapActions(courseStore, ['setOtherRequirements', 'setParticipantCount', 'getSpecificData', 'setCheckoutSum']),
         add() {
             if (this.participantCount < 10) {
                 this.setParticipantCount(this.participantCount + 1);
@@ -250,29 +260,65 @@ export default {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth
         },
-    },
-    async mounted() {
-        // 確保會員資料已加載
-        memberStore().getMemberData();
+        async fetchDiscounts() {
+            try {
+                const memberId = this.memberInfo?.[0]?.no;
+                if (!memberId) {
+                    console.error("會員 ID 不存在");
+                    return;
+                }
+                const response = await fetch(`http://localhost/CID101_G2_php/front/getMemberCoupon.php?memberId=${memberId}`);
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.message);
+                }
+                this.discounts = data.discounts;
+                // console.log(this.discounts);
 
-        // 如果會員未登入，重定向到登入頁面
+            } catch (error) {
+                console.error("獲取折價券失敗:", error);
+                // 可以在這裡添加用戶提示
+            }
+        },
+        updateOtherRequirements(event) {
+            this.setOtherRequirements(event.target.value);
+        }
+    },
+
+    async mounted() {
+        memberStore().getMemberData()
+        this.setCheckoutSum(this.sum)
+
         if (!this.memberInfo) {
             this.$router.push({ name: 'login' });
             return;
         }
 
         try {
-            const courseId = this.$route.params.id
-            this.getSpecificData(courseId)
-            // 确保数据加载完成后更新结算金额
+            const courseId = this.$route.params.id;
+            await Promise.all([
+                this.getSpecificData(courseId),
+                this.fetchDiscounts()
+            ]);
         } catch (error) {
-            console.error("Failed to fetch specific course data:", error)
-        };
-        window.addEventListener('resize', this.updateWindowWidth);
+            console.error("Failed to fetch data:", error)
+            // 考慮向用戶顯示錯誤消息
+        }
+
+        const savedDiscount = localStorage.getItem('selectedDiscount');
+        if (savedDiscount) {
+            this.selectedDiscount = JSON.parse(savedDiscount)
+        }
+
+        window.addEventListener('resize', this.updateWindowWidth)
     },
+
     beforeUnmount() {
-        window.removeEventListener('resize', this.updateWindowWidth)
+        window.removeEventListener('resize', this.updateWindowWidth);
+        // 可選：清理 localStorage
+        localStorage.removeItem('otherRequirements');
     },
+
     watch: {
         '$route.params.id': {
             handler(newId) {
@@ -287,22 +333,20 @@ export default {
                 }
             }
         },
+        participantCount: {
+            handler(newValue) {
+                this.setParticipantCount(newValue);
+            }
+        },
+        selectedDiscount(newValue) {
+            localStorage.setItem('selectedDiscount', newValue);
+        },
         sum: {
             handler(newSum) {
                 this.setCheckoutSum(newSum);
             },
             immediate: true
         },
-        otherRequirements: {
-            handler(newValue) {
-                this.setOtherRequirements(newValue);
-            }
-        },
-        participantCount: {
-            handler(newValue) {
-                this.setParticipantCount(newValue);
-            }
-        }
-    }
+    },
 }
 </script>
