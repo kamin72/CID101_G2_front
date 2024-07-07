@@ -49,7 +49,7 @@
         </tr>
       </table>
       <aside class="coupon">
-        <Coupon />
+        <Coupon @update:discount="handleUpdateValue" />
         <div class="terms">
           <p>
             本網站並非線上交易型網站，所列商品及其相關資訊均僅供介紹參考之用，公司客服人員會儘速與您連絡。
@@ -143,7 +143,8 @@ export default {
       allChecked: false,
       isEighteen: false,
       agreeTerms: false,
-      receiveMessages: false
+      receiveMessages: false,
+      dis_amount: 0
     }
   },
   methods: {
@@ -198,6 +199,11 @@ export default {
       }
 
       localStorage.setItem('cartPrice', JSON.stringify(cartInfo))
+    },
+    handleUpdateValue(value) {
+      this.dis_amount = Number(value) // 確保轉換為數字
+      // console.log('更新的折扣金額:', this.dis_amount)
+      this.savePrice() // 更新價格後保存
     }
   },
   computed: {
@@ -213,10 +219,10 @@ export default {
       return this.windowWidth < 450
     },
     discount() {
-      return this.sum * 0
+      return this.dis_amount || 0
     },
     actualPaid() {
-      return this.sum + this.discount
+      return this.sum - this.discount
     }
   },
   provide() {
@@ -225,8 +231,8 @@ export default {
     }
   },
   mounted() {
-    // this.getProduct()
     this.savePrice()
+    this.handleUpdateValue()
   },
   beforeUnmount() {
     this.savePrice()

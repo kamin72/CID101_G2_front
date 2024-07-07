@@ -283,7 +283,7 @@ export default {
         const payload = JSON.stringify({
           memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
         })
-        console.log(payload) // 在發送請求之前打印 payload 檢查其內容
+        // console.log(payload) // 在發送請求之前打印 payload 檢查其內容
 
         const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
           method: 'POST',
@@ -295,7 +295,7 @@ export default {
 
         const data = await response.json()
         if (data.success) {
-          console.log('優惠券已成功存儲到後台')
+          // console.log('優惠券已成功存儲到後台')
           alert('資料新增成功')
         } else {
           alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
