@@ -18,8 +18,7 @@ export default {
   data() {
     return {
       coupon: [],
-      selectedDiscount: null,
-      appliedDiscount: null
+      selectedDiscount: null
     }
   },
   methods: {
@@ -45,8 +44,7 @@ export default {
     },
     applyDiscount() {
       if (this.selectedDiscount) {
-        this.appliedDiscount = this.selectedDiscount
-        this.$emit('update:discount', this.appliedDiscount)
+        this.$emit('update:discount', this.selectedDiscount)
       }
     }
   },
