@@ -24,17 +24,13 @@
     <div class="filter-blocks">
       <!-- 已選中的篩選器選項 -->
       <div class="selected-filters">
-        <!-- 迭代每個篩選器的選中選項 -->
         <div>
-          <!-- 迭代每個選中的選項 -->
           <span
             v-for="(option, index) in selectedOptions.flat()"
             :key="`${option}-${index}`"
             class="selected-filter"
           >
             {{ option }}
-            <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
-            <!-- <i class="fa fa-times" @click="removeOption(index, option)"></i> -->
             <i class="fa fa-times" @click="removeOption(option)"></i>
           </span>
         </div>
@@ -43,28 +39,25 @@
       <!-- 篩選器區域 -->
       <div class="filter-block">
         <div class="filters">
-          <!-- 迭代每個篩選器資料 -->
           <div class="filter" v-for="(dropdown, index) in dropdowns.slice(0, 3)" :key="index">
             <button class="filter-button" @click="toggleDropdown(index)">
-              <span class="button-text"> {{ dropdown.label }}</span>
-              <span v-if="dropdown.isMenuVisible"><i class="fa-solid fa-angle-up"></i></span>
-              <span v-else><i class="fa-solid fa-angle-down"></i></span>
+              <span class="button-text">{{ dropdown.label }}</span>
+              <span @click.stop="toggleDropdown(index)">
+                <i class="fa-solid" :class="dropdown.isOpen ? 'fa-angle-up' : 'fa-angle-down'"></i>
+              </span>
             </button>
 
-            <!-- 篩選器選項清單 -->
             <div class="menu-filter">
-              <!-- 使用 v-show 指令根據 dropdown.isOpen 狀態顯示或隱藏選項清單。 -->
               <ul v-show="dropdown.isOpen">
-                <!-- 使用 v-for 指令迭代每個篩選器的選項，為每個選項創建一個 li 元素; :key="option" 設定每個選項的唯一鍵。 -->
-                <li v-for="option in dropdown.options" :key="option">
-                  <!-- v-model="selectedOptions[index]" 綁定多選框的選中狀態到 selectedOptions 陣列中的對應位置。 -->
+                <li v-for="option in getDropdownOptions(index)" :key="option">
                   <input
                     type="checkbox"
                     :id="option"
                     :value="option"
                     v-model="selectedOptions[index]"
+                    @change="updateFilters"
                   />
-                  <label :for="option"> {{ option }}</label>
+                  <label :for="option">{{ option }}</label>
                 </li>
               </ul>
             </div>
@@ -75,17 +68,14 @@
         <div class="filters">
           <div class="filter" v-for="(dropdown, index) in dropdowns.slice(3, 4)" :key="index">
             <button class="filter-button" @click="toggleDropdown(3)">
-              <span class="button-text"> {{ dropdown.label }}</span>
-              <span v-if="dropdown.isMenuVisible"><i class="fa-solid fa-angle-up"></i></span>
-              <span v-else><i class="fa-solid fa-angle-down"></i></span>
+              <span class="button-text">{{ dropdown.label }}</span>
+              <span @click.stop="toggleDropdown(3)">
+                <i class="fa-solid" :class="dropdown.isOpen ? 'fa-angle-up' : 'fa-angle-down'"></i>
+              </span>
             </button>
 
-            <!-- 篩選器選項清單 -->
             <div class="menu-filter">
-              <!-- 使用 v-show 指令根據 dropdown.isOpen 狀態顯示或隱藏選項清單。 -->
               <ul v-show="dropdown.isOpen">
-                <!-- 使用 v-for 指令迭代每個篩選器的選項，為每個選項創建一個 li 元素; :key="option" 設定每個選項的唯一鍵。 -->
-
                 <li class="desc" @click="sortByPriceDescending">價格由高到低</li>
                 <li class="asc" @click="sortByPriceAscending">價格由低到高</li>
               </ul>
@@ -98,16 +88,13 @@
     <div class="filter-blocks-sm">
       <!-- 手機版已選中的篩選器選項 -->
       <div class="selected-filters-sm">
-        <!-- 迭代每個篩選器的選中選項 -->
         <div>
-          <!-- 迭代每個選中的選項 -->
           <span
             v-for="option in selectedOptions.flat()"
             :key="`${option}-${index}`"
             class="selected-filter-sm"
           >
             {{ option }}
-            <!-- 移除選項的按鈕，點擊後調用 removeOption 方法 -->
             <i class="fa fa-times" @click="removeOption(option)"></i>
           </span>
         </div>
@@ -148,14 +135,15 @@
               </div>
               <div class="menu-filter-content-sm" v-show="dropdown.isOpen">
                 <ul class="menu-filter-content-items-sm">
-                  <li v-for="option in dropdown.options" :key="option">
+                  <li v-for="option in getDropdownOptions(index)" :key="option">
                     <input
                       type="checkbox"
                       :id="option"
                       :value="option"
                       v-model="selectedOptions[index]"
+                      @change="updateFilters"
                     />
-                    <label :for="option"> {{ option }}</label>
+                    <label :for="option">{{ option }}</label>
                   </li>
                 </ul>
               </div>
@@ -170,7 +158,7 @@
         <!-- 手機版價格排序按鈕 -->
         <div class="filter-sm" v-for="(dropdown, index) in dropdowns.slice(3, 4)" :key="index">
           <button class="filter-button-sm" @click.stop="toggleDropdown_sm(3)">
-            <span class="button-text2-sm"> {{ dropdown.label }}</span>
+            <span class="button-text2-sm">{{ dropdown.label }}</span>
             <span v-if="dropdown.isMenuVisible"><i class="fa-solid fa-angle-up"></i></span>
             <span v-else><i class="fa-solid fa-angle-down"></i></span>
           </button>
@@ -223,30 +211,21 @@
 </template>
 
 <script>
-// import image1 from '@/assets/img/wine/Elegant-Red-Wine.png'
-// import image2 from '@/assets/img/wine/Pearl-White-Wine.png'
-// import image3 from '@/assets/img/wine/Ice-White-Wine.png'
-
 import { mapState, mapActions } from 'pinia'
 import cartStore from '@/stores/cart'
 
 export default {
   data() {
     return {
-      //商品資訊
-      // products: [],
       dropdownsState: [
         { isOpen: false, isMenuVisible: false },
         { isOpen: false, isMenuVisible: false },
         { isOpen: false, isMenuVisible: false },
         { isOpen: false, isMenuVisible: false }
       ],
-    
-      // 新增狀態以追蹤選中的選項
       selectedOptions: [[], [], []],
-
-      // 手機版篩選選單打開或隱藏狀態
-      menuOpen: false
+      menuOpen: false,
+      allOptions: [[], [], []]
     }
   },
   computed: {
@@ -257,39 +236,10 @@ export default {
         return []
       }
 
-      let filteredProducts = this.products
-      this.selectedOptions.forEach((options, index) => {
-        if (options.length > 0) {
-          if (index === 0) {
-            filteredProducts = filteredProducts.filter(product =>
-              options.includes(product.prod_category)
-            )
-          } else if (index === 1) {
-            filteredProducts = filteredProducts.filter(product =>
-              options.includes(product.prod_variety)
-            )
-          } else if (index === 2) {
-            filteredProducts = filteredProducts.filter(product =>
-              options.includes(product.prod_year)
-            )
-          }
-        }
-      })
-
-    
       return [
-        {
-          label: '葡萄酒類別',
-          options: [...new Set(filteredProducts.map((p) => p.prod_category))]
-        },
-        {
-          label: '葡萄品種',
-          options: [...new Set(filteredProducts.map((p) => p.prod_variety))]
-        },
-        {
-          label: '年份',
-          options: [...new Set(filteredProducts.map((p) => p.prod_year))]
-        },
+        { label: '葡萄酒類別' },
+        { label: '葡萄品種' },
+        { label: '年份' },
         {
           label: '價格排序',
           options: ['價格由高到低', '價格由低到高']
@@ -301,21 +251,7 @@ export default {
     },
 
     filteredProducts() {
-      // 根據選中的選項篩選產品
-      return this.products.filter((product) => {
-        return this.selectedOptions.every((options, index) => {
-          if (options.length === 0) return true // 如果選項為空，則不篩選
-          if (index === 0) {
-            return options.includes(product.prod_category) // 根據選中的葡萄酒類別篩選
-          } else if (index === 1) {
-            return options.includes(product.prod_variety) // 根據選中的葡萄品種篩選
-          } else if (index === 2) {
-            return options.includes(product.prod_year) // 根據選中的年份篩選
-          } else {
-            return true // 其他選項暫時不考慮篩選
-          }
-        })
-      })
+      return this.getFilteredProducts()
     }
   },
   methods: {
@@ -323,26 +259,19 @@ export default {
     parseServerImg(file) {
       return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
-    //手機版清空篩選選項
     clearSelection() {
       this.selectedOptions = [[], [], []]
+      this.updateFilters()
     },
-    // 手機版篩選選單關閉狀態
     closeDropdown_sm() {
       this.menuOpen = false
     },
     toggleDropdown_sm(index) {
-      // 手機版切換下拉選單的打開狀態
       this.dropdownsState[index].isOpen = !this.dropdownsState[index].isOpen
-      // 切換篩選按鈕旁邊箭頭的上下方向
       this.dropdownsState[index].isMenuVisible = !this.dropdownsState[index].isMenuVisible
-
-      // this.menuOpen = false
     },
-    // 手機版篩選選單打開狀態
     toggleMenusm_sm() {
       this.menuOpen = !this.menuOpen
-      //每次當打開一個下拉選單，會關閉其他所有下拉選單
       this.dropdownsState.forEach((state, i) => {
         if (i === 3) {
           state.isOpen = false
@@ -350,20 +279,15 @@ export default {
       })
     },
     toggleDropdown(index) {
-     // 切換下拉選單的打開狀態
       this.dropdownsState[index].isOpen = !this.dropdownsState[index].isOpen
-      // 切換篩選按鈕旁邊箭頭的上下方向
       this.dropdownsState[index].isMenuVisible = !this.dropdownsState[index].isMenuVisible
-      
-      // 每次當打開一個下拉選單，會關閉其他所有下拉選單
+
       this.dropdownsState.forEach((state, i) => {
         if (i !== index) {
           state.isOpen = false
         }
       })
     },
-
-    // 點擊篩選按鈕外面，會關閉選單
     closeDropdowns() {
       this.dropdownsState.forEach((state) => {
         state.isOpen = false
@@ -371,23 +295,19 @@ export default {
       })
       this.menuOpen = false
     },
-    // 方法接收兩個參數：dropdownIndex 表示篩選器的索引，option 表示要移除的選項。
-    // 獲取指定篩選器的選中選項。
     removeOption(option) {
-      this.selectedOptions.forEach((options, dropdownIndex) => {
+      this.selectedOptions.forEach((options) => {
         const optionIndex = options.indexOf(option)
         if (optionIndex !== -1) {
-          // 從該子陣列中移除該選項
           options.splice(optionIndex, 1)
         }
       })
+      this.updateFilters()
     },
     sortByPriceDescending() {
-      // 按照價格由高到低排序產品
       this.products.sort((a, b) => b.prod_price - a.prod_price)
     },
     sortByPriceAscending() {
-      // 按照價格由低到高排序產品
       this.products.sort((a, b) => a.prod_price - b.prod_price)
     },
     handleGlobalClick(event) {
@@ -399,10 +319,50 @@ export default {
       ) {
         this.closeDropdowns()
       }
+    },
+    getFilteredProducts() {
+      return this.products.filter((product) => {
+        return this.selectedOptions.every((options, index) => {
+          if (options.length === 0) return true
+          if (index === 0) {
+            return options.includes(product.prod_category)
+          } else if (index === 1) {
+            return options.includes(product.prod_variety)
+          } else if (index === 2) {
+            return options.includes(product.prod_year)
+          } else {
+            return true
+          }
+        })
+      })
+    },
+    updateFilters() {
+      this.updateAllOptions()
+    },
+    updateAllOptions() {
+      let filteredProducts = this.products
+
+      this.allOptions[0] = [...new Set(this.filteredProducts.map((p) => p.prod_category))]
+
+      if (this.selectedOptions[0].length > 0) {
+        filteredProducts = filteredProducts.filter((p) =>
+          this.selectedOptions[0].includes(p.prod_category)
+        )
+      }
+      this.allOptions[1] = [...new Set(filteredProducts.map((p) => p.prod_variety))]
+
+      if (this.selectedOptions[1].length > 0) {
+        filteredProducts = filteredProducts.filter((p) =>
+          this.selectedOptions[1].includes(p.prod_variety)
+        )
+      }
+      this.allOptions[2] = [...new Set(filteredProducts.map((p) => p.prod_year))]
+    },
+    getDropdownOptions(index) {
+      return this.allOptions[index] || []
     }
   },
   mounted() {
-    // this.prodData()
     document.addEventListener('click', this.handleGlobalClick)
   },
   beforeUnmount() {
@@ -411,6 +371,7 @@ export default {
   created() {
     this.fetchProductList()
     this.getProductList()
+    this.updateAllOptions()
   }
 }
 </script>
