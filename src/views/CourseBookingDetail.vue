@@ -225,6 +225,7 @@ export default {
             return this.memberInfo?.[0]?.phone || ''
         },
         course() {
+            console.log(this.specificCourse)
             return this.specificCourse || []; // 定義 course 計算屬性返回 specificCourse
         },
         sum() {
@@ -295,14 +296,13 @@ export default {
         }
 
         try {
-            const courseId = this.$route.params.id;
             await Promise.all([
-                this.getSpecificData(courseId),
+                // 抓會員有無折價券
                 this.fetchDiscounts()
             ]);
         } catch (error) {
+            // 向用戶顯示錯誤消息
             console.error("Failed to fetch data:", error)
-            // 考慮向用戶顯示錯誤消息
         }
 
         const savedDiscount = localStorage.getItem('selectedDiscount');
@@ -315,8 +315,6 @@ export default {
 
     beforeUnmount() {
         window.removeEventListener('resize', this.updateWindowWidth);
-        // 可選：清理 localStorage
-        localStorage.removeItem('otherRequirements');
     },
 
     watch: {
@@ -336,16 +334,17 @@ export default {
         participantCount: {
             handler(newValue) {
                 this.setParticipantCount(newValue);
-            }
-        },
-        selectedDiscount(newValue) {
-            localStorage.setItem('selectedDiscount', newValue);
+            },
+            immediate: true
         },
         sum: {
             handler(newSum) {
                 this.setCheckoutSum(newSum);
             },
             immediate: true
+        },
+        selectedDiscount(newValue) {
+            localStorage.setItem('selectedDiscount', newValue);
         },
     },
 }

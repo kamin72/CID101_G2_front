@@ -136,12 +136,7 @@ export default {
     },
 
     mounted() {
-        // 初始化會員資料
-        this.memName = 'John Doe'
-        this.memEmail = 'john.doe@example.com'
-        this.memPhone = '0912345678'
-        this.loadCheckoutSum()
-        window.scrollTo(0, 0), this.startCountdown()
+        // window.scrollTo(0, 0), this.startCountdown()
         window.addEventListener('resize', this.updateWindowWidth)
         // 清除預約數據
         this.clearBookingData();

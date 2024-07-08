@@ -63,6 +63,16 @@ export default defineStore('courseStore', {
       localStorage.setItem('checkoutSum', sum)
     },
 
+    setParticipantCount(count) {
+      this.participantCount = count
+      localStorage.setItem('participantCount', count)
+    },
+    
+    setOtherRequirements(requirements) {
+      this.otherRequirements = requirements;
+      localStorage.setItem('otherRequirements', requirements);
+    },
+    
     loadCheckoutSum() {
       const savedSum = localStorage.getItem('checkoutSum')
       if (savedSum) {
@@ -73,12 +83,9 @@ export default defineStore('courseStore', {
       }
     },
 
-    setParticipantCount(count) {
-      this.participantCount = count
-    },
 
+    // 清除 store 中的数据
     clearBookingData() {
-      // 清除 store 中的数据
       this.checkoutSum = 0;
       this.otherRequirements = '';
       this.participantCount = 1;
@@ -88,11 +95,6 @@ export default defineStore('courseStore', {
       localStorage.removeItem('checkoutSum');
       localStorage.removeItem('otherRequirements');
       localStorage.removeItem('selectedDiscount');
-    },
-
-    setOtherRequirements(requirements) {
-      this.otherRequirements = requirements;
-      localStorage.setItem('otherRequirements', requirements);
     },
   },
 

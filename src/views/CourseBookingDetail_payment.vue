@@ -66,7 +66,18 @@
                         確認付款
                     </button>
                 </div>
-
+            </form>
+            <!-- 要傳到資料庫的訂單資訊 -->
+            <form ref="form" @submit.prevent="submitOrder">
+                <input type="hidden" name="name" :value="this.memName" />
+                <input type="hidden" name="phone" :value="this.memPhone" />
+                <input type="hidden" name="email" :value="this.memEmail" />
+                <input type="hidden" name="courseName" :value="this.course.course_name" />
+                <input type="hidden" name="coursePrice" :value="this.course.course_price" />
+                <input type="hidden" name="bookAmount" :value="this.participantCount" />
+                <input type="hidden" name="disAmount" :value="this.discount" />
+                <input type="hidden" name="bookPaidAmount" :value="this.sum" />
+                <input type="hidden" name="bookOtherRequirements" :value="this.otherRequirements" />
             </form>
         </div>
     </section>
@@ -77,6 +88,7 @@ import CartFlow from '@/components/Cart/CartFlow.vue'
 import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import { mapState, mapActions } from 'pinia';
 import courseStore from '@/stores/course';
+import memberStore from '@/stores/loginMember'
 
 export default {
     components: {
@@ -145,12 +157,23 @@ export default {
             cardHolder: '',
             expiryDate: '',
             cvv: '',
+            discount: "",
             windowWidth: window.innerWidth,
         }
     },
 
     computed: {
-        ...mapState(courseStore, ['specificCourse', 'checkoutSum']),
+        ...mapState(courseStore, ['specificCourse', 'checkoutSum', 'otherRequirements', 'participantCount']),
+        ...mapState(memberStore, ['memberInfo']),
+        memName() {
+            return this.memberInfo?.[0]?.name || ''
+        },
+        memEmail() {
+            return this.memberInfo?.[0]?.email || ''
+        },
+        memPhone() {
+            return this.memberInfo?.[0]?.phone || ''
+        },
         sum() {
             return this.checkoutSum;
         },
@@ -205,15 +228,87 @@ export default {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth
         },
+
+        // 綠界付款用
+        sendCardInfo() {
+            // 創建一個包含表單數據的對象
+            const formData = {
+                TotalAmount: this.checkoutSum,
+            }
+
+            console.log(formData)
+
+            alert(formData)
+
+            // 創建一個隱藏的表單並提交
+            const form = document.createElement('form')
+            form.method = 'POST'
+            form.action =
+                'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php'
+
+            for (const key in formData) {
+                if (formData[key] !== null && formData[key] !== '') {
+                    const input = document.createElement('input')
+                    input.type = 'hidden'
+                    input.name = key
+                    input.value = formData[key]
+                    form.appendChild(input)
+                }
+            }
+
+            document.body.appendChild(form)
+            form.submit()
+        },
+        submitOrder() {
+            const orderData = {
+                name: this.memName,
+                phone: this.memPhone,
+                email: this.memEmail,
+                courseName: this.course.course_name,
+                coursePrice: this.course.course_price,
+                bookAmount: this.participantCount,
+                disAmount: this.discount,
+                bookPaidAmount: this.sum,
+                bookOtherRequirements: this.otherRequirements,
+            }
+
+            console.log(orderData)
+
+            alert(orderData)
+
+            const url = 'http://localhost/CID101_G2_php/front/courseSubmit_account.php'
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('網絡響應不正常')
+                    }
+                    return response.json()
+                })
+                .then((data) => {
+                    if (data.error) {
+                        throw new Error(data.error)
+                    }
+                    alert('訂單建立成功')
+                })
+                .catch((error) => {
+                    console.error('錯誤:', error)
+                    alert('訂單提交失敗：' + error.message)
+                })
+        }
     },
 
     mounted() {
-        // 初始化會員資料
-        this.memName = 'John Doe'
-        this.memEmail = 'john.doe@example.com'
-        this.memPhone = '0912345678'
-        this.loadCheckoutSum()
+        memberStore().getMemberData();
         window.addEventListener('resize', this.updateWindowWidth)
+        this.discount = localStorage.getItem('selectedDiscount')
+        this.loadCheckoutSum()
     },
 
     beforeUnmount() {

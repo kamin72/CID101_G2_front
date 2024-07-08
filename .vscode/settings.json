@@ -1,6 +1,6 @@
 {
   "liveServer.settings.port": 5502,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
 }
