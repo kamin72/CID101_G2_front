@@ -22,7 +22,7 @@
     </div>
     <div class="area" v-if="isClicked">
       <label for="county"
-        >請選擇縣市
+        >請選擇縣市 (台北市)
         <select name="county" v-model="selectedCounty" class="filter-button">
           <option value="" disabled selected>請選擇</option>
           <option :value="countyItem" v-for="(countyItem, index) in counties" :key="index">
@@ -31,7 +31,7 @@
         </select>
       </label>
       <label for="district"
-        >請選擇鄉、鎮、市、區
+        >請選擇鄉、鎮、市、區 (士林區)
         <select name="district" id="" v-model="selectedDistrict" class="filter-button">
           <option value="" disabled selected>請選擇</option>
           <option :value="districtItem" v-for="districtItem in districts" :key="districtItem">
@@ -40,7 +40,7 @@
         </select>
       </label>
       <label for="street"
-        >請選擇街道
+        >請選擇街道 (中山北路、士東路)
         <select name="street" id="" v-model="selectedStreet" class="filter-button">
           <option value="" disabled selected>請選擇</option>
           <option

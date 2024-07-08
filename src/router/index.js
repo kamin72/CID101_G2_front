@@ -80,16 +80,14 @@ const router = createRouter({
       path: '/courseDetail/:id',
       name: 'courseDetail',
       component: () => import('@/views/CourseDetailView.vue'),
-      props: route => ({ courseId: route.params.id }),
+      props: (route) => ({ courseId: route.params.id }),
       meta: { title: '品酒課程 | 課程詳情' }
     },
     {
       path: '/courseBookingDetail/:id',
       name: 'courseBookingDetail',
       component: () => import('@/views/CourseBookingDetail.vue'),
-      meta: { title: '品酒課程 | 預約課程',
-              requiresAuth: true
-      }
+      meta: { title: '品酒課程 | 預約課程', requiresAuth: true }
     },
     {
       path: '/courseBookingDetail_confirm/:id',
@@ -281,8 +279,8 @@ router.beforeEach((to, from, next) => {
   // 設置頁面標題
   document.title = to.meta.title || 'Silken Sip Vineyard'
 
-  // 檢查是否需要登入
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    // 檢查是否需要登入
     if (!isLoggedIn()) {
       next({ path: '/login', query: { redirect: to.fullPath } })
     } else {

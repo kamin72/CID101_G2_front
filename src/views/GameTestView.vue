@@ -89,10 +89,10 @@ export default {
     return {
       isOpen: false,
       totalScore: 0,
-      showScorePopup: false, 
+      showScorePopup: false,
       isPouring: false,
       waterLevel: 0,
-      increment: 10, 
+      increment: 10,
       couponMessage: '',
       questions: [
         {
@@ -179,8 +179,8 @@ export default {
       currentQuestionIndex: 0,
       selectedOption: null,
       couponInfo: null,
-      couponList:[],
-      memWithCoupon: null,
+      couponList: [],
+      memWithCoupon: null
     }
   },
   computed: {
@@ -191,8 +191,8 @@ export default {
   },
   created() {
     this.shuffleQuestions()
-    },
-    mounted() {
+  },
+  mounted() {
     this.fetchCoupon()
     this.getCoupon()
     this.checkLocalStorage()
@@ -206,8 +206,8 @@ export default {
         this.memberInfo = JSON.parse(storage)
       }
     },
-     // 當用戶完成遊戲後，點擊領取優惠券按鈕時
-     async handleCouponClaim() {
+    // 當用戶完成遊戲後，點擊領取優惠券按鈕時
+    async handleCouponClaim() {
       this.checkLocalStorage()
       if (this.memberInfo) {
         const response = await this.checkCouponInBackend()
@@ -219,7 +219,7 @@ export default {
       } else {
         this.promptLogin()
       }
-    }, 
+    },
     async checkCouponInBackend() {
       try {
         const response = await fetch('http://localhost/CID101_G2_php/front/checkCoupon.php', {
@@ -234,10 +234,10 @@ export default {
         const data = await response.json()
         if (data.success) {
           if (data.couponAvailable) {
-            return true;
+            return true
           } else {
             alert(data.msg)
-            return false;
+            return false
           }
         } else {
           alert(`很抱歉，檢查優惠券時發生錯誤。${data.msg}`)
@@ -246,66 +246,77 @@ export default {
       } catch (error) {
         console.error('Network response was not ok:', error)
         alert('很抱歉，檢查優惠券時發生錯誤。')
-        return false;
+        return false
       }
-    },  
+    },
     // 2. 將優惠券存入會員資料
     async saveCouponToMember() {
-      let couponAmount = this.calculateCouponAmount();
-      let today = new Date(); // 獲取當前日期
+      let couponAmount = this.calculateCouponAmount()
+      let today = new Date() // 獲取當前日期
 
-      let coupon = this.couponList.find(item => item.dis_amount == couponAmount && new Date(item.dis_set_date) >= today); 
+      let coupon = this.couponList.find(
+        (item) => item.dis_amount == couponAmount && new Date(item.dis_set_date) >= today
+      )
 
       if (couponAmount > 0 && coupon) {
+        let storage = localStorage.getItem('memberInfo')
+        if (!storage) {
+          // 將當前頁面路徑作為查詢參數傳遞給登入頁面
+          this.$router.push({
+            path: '/login',
+            query: { redirect: this.$route.fullPath }
+          })
+        }
+
         const memInfo = JSON.parse(localStorage.getItem('memberInfo'))[0]
-        this.memWithCoupon = {...memInfo, ...coupon}
-        console.log(this.memWithCoupon) 
-    
-        this.couponMessage = `$${couponAmount}優惠券！`
+        this.memWithCoupon = { ...memInfo, ...coupon }
+        // console.log(this.memWithCoupon)
+
+        this.couponMessage = `成功領取${couponAmount}元的優惠券！`
         this.toggleOpen()
       } else {
-        alert('很抱歉，暫無符合條件的優惠券。');
-        return;
+        alert('很抱歉，暫無符合條件的優惠券。')
+        return // 退出函數，不再繼續執行下面的代碼
       }
 
       try {
-    const payload = JSON.stringify({
-      memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
-    });
-    console.log(payload); 
+        const payload = JSON.stringify({
+          memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
+        })
+        // console.log(payload) // 在發送請求之前打印 payload 檢查其內容
 
-    const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: payload
-    });
+        const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: payload
+        })
 
-    const data = await response.json();
-    if (data.success) {
-      console.log('優惠券已成功存儲到後台');
-      alert('資料新增成功');
-    } else {
-      alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`);
-    }
-  } catch (error) {
-    console.error('Network response was not ok:', error);
-    alert('很抱歉，儲存優惠券時發生錯誤。');
-  }
-},
+        const data = await response.json()
+        if (data.success) {
+          // console.log('優惠券已成功存儲到後台')
+          alert('資料新增成功')
+        } else {
+          alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
+        }
+      } catch (error) {
+        console.error('Network response was not ok:', error)
+        alert('很抱歉，儲存優惠券時發生錯誤。')
+      }
+    },
     calculateCouponAmount() {
       let couponAmount = 0
-      if (this.totalScore === 60) { 
-        couponAmount = 100;
+      if (this.totalScore === 60) {
+        couponAmount = 100
       } else if (this.totalScore >= 70 && this.totalScore <= 80) {
-        couponAmount = 200;
+        couponAmount = 200
       } else if (this.totalScore === 90) {
-        couponAmount = 300;
+        couponAmount = 300
       } else if (this.totalScore === 100) {
-        couponAmount = 500;
+        couponAmount = 500
       }
-      return couponAmount;
+      return couponAmount
     },
     // 3. 提示用戶登錄
     promptLogin() {
@@ -380,21 +391,21 @@ export default {
           }
           this.totalScore += 10 // 每答對一題加 10 分
           this.nextQuestion()
-        }, 1000) 
+        }, 1000)
       } else {
         setTimeout(() => {
           this.nextQuestion()
-        }, 1000) 
+        }, 1000)
       }
     },
     nextQuestion() {
       if (this.currentQuestionIndex < this.questions.length - 1) {
-    this.currentQuestionIndex++
-    this.selectedOption = null
-  } else {
-    this.showScorePopup = true // 顯示總分數彈窗
-  }
-}
+        this.currentQuestionIndex++
+        this.selectedOption = null
+      } else {
+        this.showScorePopup = true // 顯示總分數彈窗
+      }
+    }
   },
   watch: {
     isOpen() {
