@@ -181,6 +181,7 @@
         class="col-3 col-md-4 col-sm-6"
         v-for="product in filteredProducts"
         :key="product.prod_id"
+        v-show="product.prod_state == 1"
       >
         <div class="product-card">
           <div class="product-img">
@@ -251,7 +252,7 @@ export default {
     },
 
     filteredProducts() {
-      return this.getFilteredProducts()
+      return this.getFilteredProducts().filter(product => product.prod_state == 1);
     }
   },
   methods: {
