@@ -28,7 +28,7 @@ export default defineStore('memberStore', {
         formData.append('password', password)
 
         const response = await fetch(
-          'http://localhost/CID101_G2_php/front/member/memberLogin.php',
+          `${import.meta.env.VITE_API_URL}/front/member/memberLogin.php`,
           {
             method: 'POST',
             headers: {
@@ -56,7 +56,7 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberData() {
-      fetch('http://localhost/CID101_G2_php/front/member/memberLogin.php')
+      fetch(`${import.meta.env.VITE_API_URL}/front/member/memberLogin.php`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
@@ -76,7 +76,7 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberCompData() {
-      fetch('http://localhost/CID101_G2_php/front/member/getMember_comp.php')
+      fetch(`${import.meta.env.VITE_API_URL}/front/member/getMember_comp.php`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
