@@ -12,11 +12,11 @@
                         <label>會員帳號</label>
                     </div>
                     <div class="form_box">
-                        <input type="text" v-model="formData.account" id="wholesaler-account" @blur="validateAccount"
+                        <input type="text" v-model="account" id="account" @blur="validateAccount"
                             autocomplete="account" placeholder="請輸入帳號">
                         <span v-if="errorMessages.account" class="form-prompt">{{
                             errorMessages.account
-                        }}</span>
+                            }}</span>
                     </div>
                 </div>
                 <!-- 會員密碼 -->
@@ -25,7 +25,7 @@
                         <label>會員密碼</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.password" :type='pwdFlag ? "password" : "text"'
+                        <input v-model="password" :type='pwdFlag ? "password" : "text"'
                             id="wholesaler-password" autocomplete="password" @blur="validatePassword"
                             placeholder="請輸入密碼" />
                         <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
@@ -34,7 +34,7 @@
                             style="font-size: 18px;position: absolute;">visibility</span>
                         <span v-if="errorMessages.password" class="form-prompt">{{
                             errorMessages.password
-                            }}</span>
+                        }}</span>
 
                     </div>
                 </div>
@@ -44,16 +44,15 @@
                         <label>再輸入一次密碼</label>
                     </div>
                     <div class="form_box" style="position: relative;">
-                        <input v-model="formData.confirmPassword" :type='pwdFlags ? "password" : "text"'
+                        <input v-model="confirmPassword" :type='pwdFlag ? "password" : "text"'
                             id="confirm-password" autocomplete="current-password" @blur="validateConfirmPassword"
                             placeholder="再輸入一次密碼">
                         <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
                             style="font-size: 18px;position: absolute;">visibility_off </span>
                         <span v-show="!pwdFlags" @click="togglePasswords" class="material-symbols-outlined"
                             style="font-size: 18px;position: absolute;">visibility</span>
-                        <span v-if="errorMessages.passwordCheck" class="form-prompt">{{
-                            errorMessages.passwordCheck
-                        }}</span>
+                        <span v-if="errorMessages.passwordCheck" class="form-prompt">{{ errorMessages.passwordCheck
+                            }}</span>
                     </div>
                 </div>
                 <!-- 姓名 -->
@@ -62,7 +61,7 @@
                         <label>姓名</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.name" type="text" id="name" @blur="validateName" placeholder="請輸入姓名">
+                        <input v-model="name" type="text" id="name" @blur="validateName" placeholder="請輸入姓名" />
                         <span v-if="errorMessages.name" class="form-prompt">{{ errorMessages.name }}</span>
                     </div>
                 </div>
@@ -72,7 +71,7 @@
                         <label>電話</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.phone" type="tel" id="phone" placeholder="請輸入電話" @blur="validatePhone">
+                        <input v-model="phone" type="tel" id="phone" placeholder="請輸入電話" @blur="validatePhone">
                         <span v-if="errorMessages.phone" class="form-prompt">{{ errorMessages.phone }}</span>
                     </div>
                 </div>
@@ -82,8 +81,8 @@
                         <label>Email</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.email" type="email" id="email" placeholder="請輸入Email"
-                            @blur="validateEmail" pattern=".+@example\.com" />
+                        <input v-model="email" type="email" id="email" placeholder="請輸入Email"
+                            @blur="validateEmail" />
                         <span v-if="errorMessages.email" class="form-prompt">{{ errorMessages.email }}</span>
                     </div>
                 </div>
@@ -93,9 +92,10 @@
                         <label>公司名稱</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.companyName" type="text" id="company_name" @blur="validateName"
-                            placeholder="請輸入公司名稱">
-                        <span v-if="errorMessages.companyname" class="form-prompt">{{ errorMessages.companyname }}</span>
+                        <input v-model="companyName" type="text" id="company_name" @blur="validateCompanyName"
+                            placeholder="請輸入公司名稱" />
+                        <span v-if="errorMessages.companyName" class="form-prompt">{{ errorMessages.companyName
+                            }}</span>
                     </div>
                 </div>
                 <div class="form_item_list">
@@ -103,9 +103,9 @@
                         <label>公司統編</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.taxId" type="text" id="taxId" @blur="validateTaxId"
-                            placeholder="請輸入公司統編">
-                            <span v-if="errorMessages.companytaxId" class="form-prompt">{{ errorMessages.taxId }}</span>
+                        <input v-model="taxId" type="text" id="taxId" @blur="validateTaxId"
+                            placeholder="請輸入公司統編" />
+                        <span v-if="errorMessages.taxId" class="form-prompt">{{ errorMessages.taxId }}</span>
                     </div>
                 </div>
                 <div class="form_item_list">
@@ -113,7 +113,9 @@
                         <label>地址</label>
                     </div>
                     <div class="form_box">
-                        <input v-model="formData.address" type="text" id="address" class="address" placeholder="請輸入地址">
+                        <input v-model="address" type="text" id="address" class="address"
+                            @blur="validateAddress" placeholder="請輸入地址" />
+                        <span v-if="errorMessages.address" class="form-prompt">{{ errorMessages.address }}</span>
                     </div>
                 </div>
                 <div class="form_item_list" style="border: none;">
@@ -165,27 +167,34 @@ export default {
             ],
             pwdFlag: true,
             pwdFlags: true,
-            pwdFlag: true,
-            pwdFlags: true,
-            formData: {
-                account: '',
-                password: '',
-                confirmPassword: '',
-                name: '',
-                phone: '',
-                email: '',
-                companyName: '',
-                taxId: '',
-                address: '',
-                filePath: '',
-                file: null
-            },
+
+            account: '',
+            password: '',
+            confirmPassword: '',
+            name: '',
+            phone: '',
+            email: '',
+            companyName: '',
+            taxId: '',
+            address: '',
+            filePath: '',
+            file: null,
+            status:0,
+            identity:2,
+
             isValidAccount: true,
             isValidPassword: true,
             isValidPhone: true,
             isValidEmail: true,
             isValidTaxId: true,
             isChecked: false,
+            isValidName:true,
+            isValidCompanyName:true,
+            isValidAddress:true,
+            
+            isRegisted: false,
+            isSuccessRegist: false,
+
             errorMessages: {
                 account: '',
                 password: '',
@@ -193,6 +202,9 @@ export default {
                 name: '',
                 phone: '',
                 email: '',
+                companyName: '',
+                taxId: '',
+                address: '',
             },
         }
     },
@@ -207,115 +219,222 @@ export default {
         // 帳號正規判定
         validateAccount() {
             const accountPattern = /^[a-zA-Z0-9]+$/
-            this.isValidAccount = accountPattern.test(this.formData.account)
+            this.isValidAccount = accountPattern.test(this.account)
             if (!this.isValidAccount) {
                 this.errorMessages.account = this.isValidAccount ? '' : '帳號必須是字母或數字組成'
                 this.account = ''
             } else {
                 this.errorMessages.account = '';
-                this.isValidAccount = true
             }
         },
         // 密碼正規判定
         validatePassword() {
             const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-            this.isValidPassword = passwordPattern.test(this.formData.password)
+            this.isValidPassword = passwordPattern.test(this.password)
             if (!this.isValidPassword) {
                 this.errorMessages.password = this.isValidPassword
                     ? ''
                     : '密碼必須至少8個字符，包含至少一個大寫字母、一個小寫字母和一個數字'
             } else {
                 this.errorMessages.password = '';
-                this.isValidPassword = true
             }
         },
         // 再輸入一次密碼判定
         validateConfirmPassword() {
-            if (this.formData.password !== this.formData.confirmPassword) {
-                this.errorMessages.passwordCheck = this.isValidPasswordCheck ? '' : '輸入的密碼不一致'
+            this.isValidConfirmPassword = this.password === this.confirmPassword;
+            if (!this.isValidConfirmPassword) {
+                this.errorMessages.passwordCheck = '輸入的密碼不一致';
             } else {
-                this.errorMessages.passwordCheck = ''
-                this.isValidPasswordCheck = true
+                this.errorMessages.passwordCheck = '';
             }
         },
         // 姓名正規判定
         validateName() {
-            this.isValidName = this.name.trim() !== ''
-            this.errorMessages.name = this.isValidName ? '' : '姓名不可為空'
+            const namePattern = /^(?!.*\d)(?=\S.*\S$)/;
+            this.isValidName = namePattern.test(this.name);
+            if (!this.isValidName) {
+                this.errorMessages.name = '姓名不能為空或數字';
+            } else {
+                this.errorMessages.name = '';
+            }
         },
         // 電話正規判定
         validatePhone() {
             const phonePattern = /^\d{10}$/
-            this.isValidPhone = phonePattern.test(this.formData.phone)
+            this.isValidPhone = phonePattern.test(this.phone)
             if (!this.isValidPhone) {
                 this.errorMessages.phone = this.isValidPhone ? '' : '電話號碼必須是10位數字'
             } else {
-                this.isValidPhone = true
+                this.errorMessages.phone = ''
             }
         },
         // Email正規判定
         validateEmail() {
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            this.isValidEmail = emailPattern.test(this.formData.email)
+            this.isValidEmail = emailPattern.test(this.email)
             if (!this.isValidEmail) {
                 this.errorMessages.email = this.isValidEmail ? '' : '請輸入有效的電子郵件地址'
             } else {
                 this.errorMessages.email = ''
-                this.isValidEmail = true
+            }
+        },
+        // 公司名稱正規判定
+        validateCompanyName() {
+            
+            const companyNamePattern = /\S/;
+            this.isValidCompanyName = companyNamePattern.test(this.companyName);
+            if (!this.isValidCompanyName) {
+                this.errorMessages.companyName = '地址不能為空';
+            } else {
+                this.errorMessages.companyName = '';
             }
         },
         // 公司統編正規判定
         validateTaxId() {
-            const taxIdPattern = /^\d{8}$/
-            this.isValidTaxId = taxIdPattern.test(this.formData.taxId)
+            const taxIdPattern = /^\d{8}$/;
+            this.isValidTaxId = taxIdPattern.test(this.taxId)
             if (!this.isValidTaxId) {
-                this.errorMessages.taxId = this.isValidtaxId ? '' : '請輸入有效的統編，必須是8位數字'
+                this.errorMessages.taxId = '公司統編需為8位數字';
             } else {
                 this.errorMessages.taxId = '';
-                this.isValidTaxId = true
             }
         },
         // 公司地址正規判定
-        // methods: {
-        //     validateAddress() {
-        //         const addressPattern = /^[a-zA-Z0-9\s\-\.,#]+$/;
-        //         this.isValidAddress = addressPattern.test(this.formData.address);
-        //         if (!this.isValidAddress) {
-        //             alert('請輸入有效的地址');
-        //         }
-        //     }
-        // },
+        validateAddress() {
+            const addressPattern = /\S/;
+            this.isValidAddress = addressPattern.test(this.address);
+            if (!this.isValidAddress) {
+                this.errorMessages.address = '地址不能為空';
+            } else {
+                this.errorMessages.address = '';
+            }
+        },
         // 文件檔案正規判定
         validateFile(event) {
             const file = event.target.files[0];
             if (!file || !['image/png', 'image/jpeg'].includes(file.type)) {
                 alert('請上傳有效的圖片文件 (PNG或JPEG)');
             } else {
-                this.formData.file = file;
+                this.file = file;
             }
         },
         // 提交的資料
-        WholesaleForm() {
+        async WholesaleForm() {
+            console.log('提交的表單資料:', {
+                account: this.account,
+                password: this.password,
+                confirmPassword: this.confirmPassword,
+                name: this.name,
+                phone: this.phone,
+                email: this.email,
+                taxId: this.taxId,
+                companyName: this.companyName,
+                address: this.address,
+                file: this.file,
+            });
+            // 表單驗證和提交的邏輯
             this.validateAccount();
             this.validatePassword();
             this.validateConfirmPassword();
+            this.validateName();
             this.validatePhone();
             this.validateEmail();
+            this.validateCompanyName();
             this.validateTaxId();
+            this.validateAddress();
 
             if (
                 this.isValidAccount &&
                 this.isValidPassword &&
-                this.formData.password === this.formData.confirmPassword &&
+                this.isValidConfirmPassword &&
+                this.isValidName &&
                 this.isValidPhone &&
                 this.isValidEmail &&
-                this.isValidTaxId
+                this.isValidCompanyName &&
+                this.isValidTaxId &&
+                this.isValidAddress
             ) {
-                // 提交表單
-                alert('表單提交成功');
-                window.location.href = '/memberformok'
-            } else {
-                alert('請修正表單中的錯誤');
+                // 發送 post 請求
+                await this.getMember()
+                if (this.isRegisted) {
+                    alert('此帳號已註冊')
+                } else {
+                    await this.setWholesalerMember()
+                    if (this.isSuccessRegist) {
+                        alert('註冊成功')
+                        window.location.href = '/wholesalerformok'
+                    }
+                }
+            }
+        },
+        // 讀取批發商會員有沒有重複的帳號
+        async getMember() {
+            try {
+                const formData = new URLSearchParams()
+                formData.append('action', 'getMember')
+                formData.append('account', this.account)
+                const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+                })
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+
+                const data = await response.json()
+                if (data['member'].length > 0) {
+                this.isRegisted = true
+                } else {
+                this.isRegisted = false
+                }
+            } catch (error) {
+                this.error = error
+                console.error('There was a problem with the fetch operation:', error)
+            } finally {
+                this.loading = false
+            }
+        },
+        // 建立批發商會員
+        async setWholesalerMember() {
+            try {
+                const formData = new URLSearchParams()
+                formData.append('action', 'setWholesalerMember')
+                formData.append('account', this.account)
+                formData.append('password', this.password)
+                formData.append('name', this.name)
+                formData.append('phone', this.phone)
+                formData.append('email', this.email)
+                formData.append('status', this.status); // 0:待審核 1: 正常 2: 停用
+                formData.append('identity', this.identity); // 2 表示批發商
+                formData.append('taxId', this.taxId); 
+                formData.append('companyName', this.companyName); 
+                formData.append('address', this.address); 
+                // formData.append('file', this.file); 
+
+                const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+                })
+                if (!response.ok) {
+                throw new Error('Network response was not ok')
+                }
+                const data = await response.json()
+                if (data['created'] === true) {
+                this.isSuccessRegist = true
+                }
+            } catch (error) {
+                this.error = 'There was a problem with the fetch operation: ' + error.message;
+                console.error(this.error);
+                // this.error = error
+                // console.error('There was a problem with the fetch operation:', error)
+            } finally {
+                this.loading = false
             }
         }
     }
