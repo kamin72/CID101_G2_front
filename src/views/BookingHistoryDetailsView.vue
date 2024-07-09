@@ -36,7 +36,7 @@
         <div class="wrap_details">
             <h4>預約紀錄詳情</h4>
             <div class="details_list">
-                <p>訂單編號</p>
+                <p>課程編號</p>
                 <p>2024xxxxxxxx</p>
             </div>
             <div class="details_list">
