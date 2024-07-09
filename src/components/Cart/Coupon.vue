@@ -27,7 +27,7 @@ export default {
       const memberNo = memberInfo[0]?.no
       // console.log(memberNo)
 
-      fetch(`http://localhost/CID101_G2_php/front/cart/getMemberDiscount.php?memberNo=${memberNo}`)
+      fetch(`${import.meta.env.VITE_API_URL}/front/cart/getMemberDiscount.php?memberNo=${memberNo}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {

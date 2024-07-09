@@ -35,7 +35,7 @@
             <div class="items_list">
                 <p>課程日期</p>
                 <p>預約時段</p>
-                <p>活動名稱</p>
+                <p>課程名稱</p>
                 <!-- <p>人數</p> -->
                 <!-- <p>總金額</p> -->
                 <p>預約狀態</p>
@@ -77,7 +77,16 @@ export default {
     methods: {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth;
-        }
+        },
+        // fetchData() {
+        //     fetch('http://localhost/CID101_G2_php/front/memberManage/getMember.php')
+        //         .then((response) => response.json())
+        //         .then((data) => {
+        //             // 添加這行來檢查接收到的數據
+        //             this.members = data;
+        //             console.log(this.members);
+        //         })
+        // },
     },
     mounted() {
         window.addEventListener('resize', this.updateWindowWidth);

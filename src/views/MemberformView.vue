@@ -25,7 +25,8 @@
             <label for="password">會員密碼</label>
           </div>
           <div class="form_box">
-            <input :type="pwdFlag ? 'password' : 'text'" id="password" v-model="password" @blur="validatePassword" autocomplete="current-password" placeholder="請輸入密碼" />
+            <input :type="pwdFlag ? 'password' : 'text'" id="password" v-model="password" @blur="validatePassword"
+              autocomplete="current-password" placeholder="請輸入密碼" />
             <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
               visibility_off
             </span>
@@ -43,7 +44,8 @@
             <label for="password">再輸入一次密碼</label>
           </div>
           <div class="form_box">
-            <input :type="pwdFlags ? 'password' : 'text'" id="password_check" autocomplete="new-password" v-model="passwordCheck" @blur="validatePasswordCheck" placeholder="再輸入一次密碼" />
+            <input :type="pwdFlags ? 'password' : 'text'" id="password_check" autocomplete="new-password"
+              v-model="passwordCheck" @blur="validatePasswordCheck" placeholder="再輸入一次密碼" />
             <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
               visibility_off
             </span>
@@ -89,8 +91,6 @@
           <input type="checkbox" v-model="isChecked" />
           <span style="margin: 0 5px">我同意隱私條款政策 [隱私條款政策]</span>
         </div>
-        <!-- <RouterLink to="/memberformok" style="text-decoration: none;">
-                </RouterLink>   -->
         <input type="submit" class="big-btn-primary deliverySubmit" style="display: block; margin: 10px auto"
           value="下一步" :disabled="!isChecked" />
       </form>
@@ -131,6 +131,9 @@ export default {
       name: '',
       phone: '',
       email: '',
+      status: 1,
+      identity: 1,
+
       isValidAccount: true,
       isValidPassword: true,
       isValidPhone: true,
@@ -165,7 +168,6 @@ export default {
         this.account = ''
       } else {
         this.errorMessages.account = '';
-        this.isValidAccount = true
       }
     },
     // 密碼正規判定
@@ -178,7 +180,6 @@ export default {
           : '密碼必須至少8個字符，包含至少一個大寫字母、一個小寫字母和一個數字'
       } else {
         this.errorMessages.password = '';
-        this.isValidPassword = true
       }
     },
     // 再輸入一次密碼判定
@@ -188,13 +189,17 @@ export default {
         this.errorMessages.passwordCheck = this.isValidPasswordCheck ? '' : '輸入的密碼不一致'
       } else {
         this.errorMessages.passwordCheck = ''
-        this.isValidPasswordCheck = true
       }
     },
     // 姓名正規判定
     validateName() {
-      this.isValidName = this.name.trim() !== ''
-      this.errorMessages.name = this.isValidName ? '' : '姓名不可為空'
+      const namePattern = /^(?!.*\d)(?=\S.*\S$)/;
+      this.isValidName = namePattern.test(this.name);
+      if (!this.isValidName) {
+        this.errorMessages.name = '姓名不能為空或數字';
+      } else {
+        this.errorMessages.name = '';
+      }
     },
     // 電話正規判定
     validatePhone() {
@@ -203,8 +208,7 @@ export default {
       if (!this.isValidPhone) {
         this.errorMessages.phone = this.isValidPhone ? '' : '電話號碼必須是10位數字'
       } else {
-        this.errorMessages.phone = '';
-        this.isValidPhone = true
+        this.errorMessages.phone = ''
       }
     },
     // Email正規判定
@@ -214,8 +218,7 @@ export default {
       if (!this.isValidEmail) {
         this.errorMessages.email = this.isValidEmail ? '' : '請輸入有效的電子郵件地址'
       } else {
-        this.errorMessages.email = '';
-        this.isValidEmail = true
+        this.errorMessages.email = ''
       }
     },
     // 提交的資料
@@ -230,7 +233,6 @@ export default {
         email: this.email
       })
       // 模擬提交成功的處理
-
       this.validateAccount()
       this.validatePassword()
       this.validatePasswordCheck()
@@ -263,7 +265,8 @@ export default {
         const formData = new URLSearchParams()
         formData.append('action', 'getMember')
         formData.append('account', this.account)
-        const response = await fetch('http://localhost/CID101_G2_php/front/member.php', {
+        formData.append('member_type', this.memberType) // 1 表示一般會員，2 表示批發商
+        const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -274,6 +277,7 @@ export default {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
+
         if (data['member'].length > 0) {
           this.isRegisted = true
         } else {
@@ -296,8 +300,10 @@ export default {
         formData.append('name', this.name)
         formData.append('phone', this.phone)
         formData.append('email', this.email)
+        formData.append('status', this.status); // 0:待審核 1: 正常 2: 停用
+        formData.append('identity', this.identity); // 1 表示一般會員
 
-        const response = await fetch('http://localhost/CID101_G2_php/front/member.php', {
+        const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -308,13 +314,14 @@ export default {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
-        alert(data['created'])
         if (data['created'] === true) {
           this.isSuccessRegist = true
         }
       } catch (error) {
-        this.error = error
-        console.error('There was a problem with the fetch operation:', error)
+        this.error = 'There was a problem with the fetch operation: ' + error.message;
+        console.error(this.error);
+        // this.error = error
+        // console.error('There was a problem with the fetch operation:', error)
       } finally {
         this.loading = false
       }
@@ -324,3 +331,13 @@ export default {
 </script>
 
 <style></style>
+
+
+<!-- 
+INSERT INTO `member` (`no`, `account`, `password`, `name`, `phone`, `email`, `created_at`, `updated_at`, `status`, `identity`) VALUES
+(1, 'aaaaaa', '111111', '王陽明', '0912345678', 'aaa@gmail.com', '2024-06-22 04:30:16', NULL, 0, 1),
+(2, 'bbbbbb', '222222', '批發商', '', '', '2024-06-24 22:35:20', '2024-06-24 22:35:20', 0, 2), 
+-->
+
+<!-- INSERT INTO `member_retailer` (`retailer_no`, `no`, `company_name`, `tax_id`, `address`, `license`, `created_at`, `updated_at`) VALUES
+(1, 2, '金門酒廠', '00000000', '桃園市中壢區復興路46號', '00000000', '2024-06-25 15:50:28', '2024-06-25 15:50:28'), -->

@@ -5,11 +5,11 @@
         <div class="question">
           <h3>Q.{{ currentQuestionIndex + 1 }}</h3>
           <!-- 題號按順序顯示 -->
-          <p>{{ currentQuestion.text }}</p>
+          <p>{{ currentQuestion.q_name }}</p>
         </div>
         <div class="options">
           <button
-            v-for="option in currentQuestion.options"
+            v-for="option in options"
             :key="option.id"
             :class="{
               correct: selectedOption === option.id && option.correct,
@@ -94,88 +94,7 @@ export default {
       waterLevel: 0,
       increment: 10,
       couponMessage: '',
-      questions: [
-        {
-          num: 'Q.1',
-          text: '在品酒時，通常第一步是什麼？',
-          options: [
-            { id: 1, text: '品嘗', correct: false },
-            { id: 2, text: '觀察顏色', correct: true }
-          ]
-        },
-        {
-          num: 'Q.2',
-          text: '哪一種水果通常被用來製作紅酒？',
-          options: [
-            { id: 1, text: '蘋果', correct: false },
-            { id: 2, text: '葡萄', correct: true }
-          ]
-        },
-        {
-          num: 'Q.3',
-          text: '在葡萄酒中，什麼是“單寧”？',
-          options: [
-            { id: 1, text: '一種酸', correct: false },
-            { id: 2, text: '一種苦味化合物', correct: true }
-          ]
-        },
-        {
-          num: 'Q.4',
-          text: '哪一種葡萄品種常被用來製作白葡萄酒？',
-          options: [
-            { id: 1, text: '赤霞珠', correct: false },
-            { id: 2, text: '霞多麗', correct: true }
-          ]
-        },
-        {
-          num: 'Q.5',
-          text: '紅葡萄酒和白葡萄酒的主要區別是什麼？',
-          options: [
-            { id: 1, text: '顏色', correct: true },
-            { id: 2, text: '酸度', correct: false }
-          ]
-        },
-        {
-          num: 'Q.6',
-          text: '品酒時，第二步是什麼？',
-          options: [
-            { id: 1, text: '嗅聞香氣', correct: true },
-            { id: 2, text: '搖晃酒杯', correct: false }
-          ]
-        },
-        {
-          num: 'Q.7',
-          text: '葡萄酒中“餘味”是指什麼？',
-          options: [
-            { id: 1, text: '葡萄酒的顏色', correct: false },
-            { id: 2, text: '口中殘留的味道', correct: true }
-          ]
-        },
-        {
-          num: 'Q.8',
-          text: '哪一個國家是葡萄酒的主要生產國？',
-          options: [
-            { id: 1, text: '中國', correct: false },
-            { id: 2, text: '法國', correct: true }
-          ]
-        },
-        {
-          num: 'Q.9',
-          text: '什麼是葡萄酒的“酒體”？',
-          options: [
-            { id: 1, text: '葡萄酒的稠度', correct: true },
-            { id: 2, text: '葡萄酒的香氣', correct: false }
-          ]
-        },
-        {
-          num: 'Q.10',
-          text: '品酒時，通常最後一步是什麼？',
-          options: [
-            { id: 1, text: '評價', correct: true },
-            { id: 2, text: '吞咽', correct: false }
-          ]
-        }
-      ],
+      questions: [],
       currentQuestionIndex: 0,
       selectedOption: null,
       couponInfo: null,
@@ -187,10 +106,20 @@ export default {
     ...mapState(memberStore, ['memberInfo']),
     currentQuestion() {
       return this.questions[this.currentQuestionIndex]
+    },
+    options() {
+      if (this.currentQuestion) {
+        return [
+          { id: 1, text: this.currentQuestion.q_option_a, correct: false },
+          { id: 2, text: this.currentQuestion.q_option_b, correct: true }
+        ]
+      }
+      return []
     }
   },
   created() {
     this.shuffleQuestions()
+    this.fetchQuestions()
   },
   mounted() {
     this.fetchCoupon()
@@ -219,6 +148,21 @@ export default {
       } else {
         this.promptLogin()
       }
+    },
+    fetchQuestions() {
+      fetch('http://localhost/CID101_G2_php/front/question.php')
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            this.questions = data.question
+            // console.log(this.questions)
+          } else {
+            console.error(data.msg)
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching questions:', error)
+        })
     },
     async checkCouponInBackend() {
       try {
@@ -272,11 +216,12 @@ export default {
         this.memWithCoupon = { ...memInfo, ...coupon }
         // console.log(this.memWithCoupon)
 
-        this.couponMessage = `成功領取${couponAmount}元的優惠券！`
+        this.couponMessage = `$${couponAmount}優惠券！`
         this.toggleOpen()
+        this.$router.push('/discounthistory')
       } else {
         alert('很抱歉，暫無符合條件的優惠券。')
-        return // 退出函數，不再繼續執行下面的代碼
+        return
       }
 
       try {
@@ -295,7 +240,7 @@ export default {
 
         const data = await response.json()
         if (data.success) {
-          // console.log('優惠券已成功存儲到後台')
+          console.log('優惠券已成功存儲到後台')
           alert('資料新增成功')
         } else {
           alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
@@ -381,7 +326,7 @@ export default {
     },
     checkAnswer(optionId) {
       this.selectedOption = optionId
-      const selected = this.currentQuestion.options.find((option) => option.id === optionId)
+      const selected = this.options.find((option) => option.id === optionId)
       if (selected.correct) {
         this.isPouring = true
         setTimeout(() => {
