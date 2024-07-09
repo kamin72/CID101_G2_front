@@ -63,7 +63,7 @@ export default defineStore('memberStore', {
             alert(data.msg)
           } else if (data.member) {
             this.memberAccount = data.member
-            localStorage.setItem('memberComp', JSON.stringify(this.memberAccount))
+            // localStorage.setItem('memberComp', JSON.stringify(this.memberAccount))
           }
         })
     },

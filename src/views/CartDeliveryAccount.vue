@@ -95,7 +95,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(memberStore, ['getMemberData', 'fetchMemberData']),
+    ...mapActions(memberStore, ['getMemberData']),
     submitChildForm() {
       this.$refs.form.submitOrder()
     },
@@ -131,7 +131,6 @@ export default {
   },
   created() {
     this.getMemberData()
-    this.fetchMemberData()
   }
 }
 </script>

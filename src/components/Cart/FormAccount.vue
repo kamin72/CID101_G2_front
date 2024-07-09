@@ -98,7 +98,7 @@ export default {
     ...mapState(cartStore, ['cart'])
   },
   methods: {
-    ...mapActions(memberStore, ['getMemberData', 'fetchMemberData']),
+    ...mapActions(memberStore, ['getMemberData']),
     ...mapActions(cartStore, ['cleanCart']),
     syncMember() {
       this.$emit('isChecked', this.localChecked)
