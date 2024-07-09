@@ -143,57 +143,70 @@
 // 優惠券紀錄
 .history-container {
     .center_menu {
-        border-bottom: 1px solid #322D26;
         padding-bottom: 20px;
         margin: 40px 0;
-
         @include t {
             width: 430px;
         }
     }
-
     .wrap_discount_history {
-        margin: 30px auto;
+            display: grid;
+            width: 80%;
+            margin: auto;
+            // border-top: 1px solid #322D26;
         .items_list {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            // p {
+            //     margin: 0 30px;
+            //     padding: 10px 15px;
+            //     @include t {
+            //         font-size: 12px;
+            //         padding: 10px 15px;
+            //         margin: auto;
+            //     }
+            // }
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin: 10px 0 0 0 ;
             p {
-                margin: 0 30px;
-                padding: 10px 15px;
-                @include t {
-                    font-size: 12px;
-                    padding: 10px 15px;
-                    margin: auto;
+                padding: 5px;
+                text-align: center;
                 }
-            }
-
         }
-
         .items {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             border: 1px solid #322D26;
-            padding: 5px 0;
-            margin: auto;
-            @include t {
-                width: 400px;
-                // padding: 5px;
-            }
+            margin: 10px;
+            padding: 0 0 10px 0;
             p {
-                margin: 0 35px;
-                padding: 10px;
-                @include t {
-                    font-size: 12px;
-                    margin: auto;
-                    padding: 0 5px;
+                padding: 5px;
+                text-align: center;
                 }
-            }
-            button {
-                margin: 0 2px;
-            }
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            // border: 1px solid #322D26;
+            // padding: 5px 0;
+            // margin: auto;
+            // @include t {
+            //     width: 400px;
+            //     // padding: 5px;
+            // }
+            // p {
+            //     margin: 0 35px;
+            //     padding: 10px;
+            //     @include t {
+            //         font-size: 12px;
+            //         margin: auto;
+            //         padding: 0 5px;
+            //     }
+            // }
+            // button {
+            //     margin: 0 2px;
+            // }
         }
     }
 }

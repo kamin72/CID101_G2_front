@@ -302,7 +302,6 @@ export default {
         formData.append('email', this.email)
         formData.append('status', this.status); // 0:待審核 1: 正常 2: 停用
         formData.append('identity', this.identity); // 1 表示一般會員
-
         const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
           method: 'POST',
           headers: {
