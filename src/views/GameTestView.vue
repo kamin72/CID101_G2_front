@@ -5,11 +5,11 @@
         <div class="question">
           <h3>Q.{{ currentQuestionIndex + 1 }}</h3>
           <!-- 題號按順序顯示 -->
-          <p>{{ currentQuestion.text }}</p>
+          <p>{{ questions.q_name }}</p>
         </div>
         <div class="options">
           <button
-            v-for="option in currentQuestion.options"
+            v-for="option in options"
             :key="option.id"
             :class="{
               correct: selectedOption === option.id && option.correct,
@@ -89,110 +89,39 @@ export default {
     return {
       isOpen: false,
       totalScore: 0,
-      showScorePopup: false, 
+      showScorePopup: false,
       isPouring: false,
       waterLevel: 0,
-      increment: 10, 
+      increment: 10,
       couponMessage: '',
-      questions: [
-        {
-          num: 'Q.1',
-          text: '在品酒時，通常第一步是什麼？',
-          options: [
-            { id: 1, text: '品嘗', correct: false },
-            { id: 2, text: '觀察顏色', correct: true }
-          ]
-        },
-        {
-          num: 'Q.2',
-          text: '哪一種水果通常被用來製作紅酒？',
-          options: [
-            { id: 1, text: '蘋果', correct: false },
-            { id: 2, text: '葡萄', correct: true }
-          ]
-        },
-        {
-          num: 'Q.3',
-          text: '在葡萄酒中，什麼是“單寧”？',
-          options: [
-            { id: 1, text: '一種酸', correct: false },
-            { id: 2, text: '一種苦味化合物', correct: true }
-          ]
-        },
-        {
-          num: 'Q.4',
-          text: '哪一種葡萄品種常被用來製作白葡萄酒？',
-          options: [
-            { id: 1, text: '赤霞珠', correct: false },
-            { id: 2, text: '霞多麗', correct: true }
-          ]
-        },
-        {
-          num: 'Q.5',
-          text: '紅葡萄酒和白葡萄酒的主要區別是什麼？',
-          options: [
-            { id: 1, text: '顏色', correct: true },
-            { id: 2, text: '酸度', correct: false }
-          ]
-        },
-        {
-          num: 'Q.6',
-          text: '品酒時，第二步是什麼？',
-          options: [
-            { id: 1, text: '嗅聞香氣', correct: true },
-            { id: 2, text: '搖晃酒杯', correct: false }
-          ]
-        },
-        {
-          num: 'Q.7',
-          text: '葡萄酒中“餘味”是指什麼？',
-          options: [
-            { id: 1, text: '葡萄酒的顏色', correct: false },
-            { id: 2, text: '口中殘留的味道', correct: true }
-          ]
-        },
-        {
-          num: 'Q.8',
-          text: '哪一個國家是葡萄酒的主要生產國？',
-          options: [
-            { id: 1, text: '中國', correct: false },
-            { id: 2, text: '法國', correct: true }
-          ]
-        },
-        {
-          num: 'Q.9',
-          text: '什麼是葡萄酒的“酒體”？',
-          options: [
-            { id: 1, text: '葡萄酒的稠度', correct: true },
-            { id: 2, text: '葡萄酒的香氣', correct: false }
-          ]
-        },
-        {
-          num: 'Q.10',
-          text: '品酒時，通常最後一步是什麼？',
-          options: [
-            { id: 1, text: '評價', correct: true },
-            { id: 2, text: '吞咽', correct: false }
-          ]
-        }
-      ],
+      questions: [],
       currentQuestionIndex: 0,
       selectedOption: null,
       couponInfo: null,
-      couponList:[],
-      memWithCoupon: null,
+      couponList: [],
+      memWithCoupon: null
     }
   },
   computed: {
     ...mapState(memberStore, ['memberInfo']),
     currentQuestion() {
       return this.questions[this.currentQuestionIndex]
+    },
+    options() {
+      if (this.currentQuestion) {
+        return [
+          { id: 1, text: this.currentQuestion.q_option_a, correct: false },
+          { id: 2, text: this.currentQuestion.q_option_b, correct: true }
+        ]
+      }
+      return []
     }
   },
   created() {
     this.shuffleQuestions()
-    },
-    mounted() {
+    this.fetchQuestions()
+  },
+  mounted() {
     this.fetchCoupon()
     this.getCoupon()
     this.checkLocalStorage()
@@ -206,8 +135,8 @@ export default {
         this.memberInfo = JSON.parse(storage)
       }
     },
-     // 當用戶完成遊戲後，點擊領取優惠券按鈕時
-     async handleCouponClaim() {
+    // 當用戶完成遊戲後，點擊領取優惠券按鈕時
+    async handleCouponClaim() {
       this.checkLocalStorage()
       if (this.memberInfo) {
         const response = await this.checkCouponInBackend()
@@ -219,7 +148,22 @@ export default {
       } else {
         this.promptLogin()
       }
-    }, 
+    },
+    fetchQuestions() {
+      fetch('http://localhost/CID101_G2_php/front/question.php')
+        .then((response) => response.json())
+        .then((data) => {
+          if (!data.error) {
+            this.questions = data.question
+            // console.log(this.questions)
+          } else {
+            console.error(data.msg)
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching questions:', error)
+        })
+    },
     async checkCouponInBackend() {
       try {
         const response = await fetch('http://localhost/CID101_G2_php/front/checkCoupon.php', {
@@ -234,10 +178,10 @@ export default {
         const data = await response.json()
         if (data.success) {
           if (data.couponAvailable) {
-            return true;
+            return true
           } else {
             alert(data.msg)
-            return false;
+            return false
           }
         } else {
           alert(`很抱歉，檢查優惠券時發生錯誤。${data.msg}`)
@@ -246,66 +190,69 @@ export default {
       } catch (error) {
         console.error('Network response was not ok:', error)
         alert('很抱歉，檢查優惠券時發生錯誤。')
-        return false;
+        return false
       }
-    },  
+    },
     // 2. 將優惠券存入會員資料
     async saveCouponToMember() {
-      let couponAmount = this.calculateCouponAmount();
-      let today = new Date(); // 獲取當前日期
+      let couponAmount = this.calculateCouponAmount()
+      let today = new Date() // 獲取當前日期
 
-      let coupon = this.couponList.find(item => item.dis_amount == couponAmount && new Date(item.dis_set_date) >= today); 
+      let coupon = this.couponList.find(
+        (item) => item.dis_amount == couponAmount && new Date(item.dis_set_date) >= today
+      )
 
       if (couponAmount > 0 && coupon) {
         const memInfo = JSON.parse(localStorage.getItem('memberInfo'))[0]
-        this.memWithCoupon = {...memInfo, ...coupon}
-        console.log(this.memWithCoupon) 
-    
+        this.memWithCoupon = { ...memInfo, ...coupon }
+        // console.log(this.memWithCoupon)
+
         this.couponMessage = `$${couponAmount}優惠券！`
         this.toggleOpen()
+        this.$router.push('/discounthistory')
       } else {
-        alert('很抱歉，暫無符合條件的優惠券。');
-        return;
+        alert('很抱歉，暫無符合條件的優惠券。')
+        return
       }
 
       try {
-    const payload = JSON.stringify({
-      memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
-    });
-    console.log(payload); 
+        const payload = JSON.stringify({
+          memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
+        })
+        // console.log(payload)
 
-    const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: payload
-    });
+        const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: payload
+        })
 
-    const data = await response.json();
-    if (data.success) {
-      console.log('優惠券已成功存儲到後台');
-      alert('資料新增成功');
-    } else {
-      alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`);
-    }
-  } catch (error) {
-    console.error('Network response was not ok:', error);
-    alert('很抱歉，儲存優惠券時發生錯誤。');
-  }
-},
+        const data = await response.json()
+        if (data.success) {
+          console.log('優惠券已成功存儲到後台')
+          alert('資料新增成功')
+        } else {
+          alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
+        }
+      } catch (error) {
+        console.error('Network response was not ok:', error)
+        alert('很抱歉，儲存優惠券時發生錯誤。')
+      }
+    },
     calculateCouponAmount() {
       let couponAmount = 0
-      if (this.totalScore === 60) { 
-        couponAmount = 100;
+      if (this.totalScore === 60) {
+        couponAmount = 100
       } else if (this.totalScore >= 70 && this.totalScore <= 80) {
-        couponAmount = 200;
+        couponAmount = 200
       } else if (this.totalScore === 90) {
-        couponAmount = 300;
+        couponAmount = 300
       } else if (this.totalScore === 100) {
-        couponAmount = 500;
+        couponAmount = 500
       }
-      return couponAmount;
+      return couponAmount
     },
     // 3. 提示用戶登錄
     promptLogin() {
@@ -370,7 +317,7 @@ export default {
     },
     checkAnswer(optionId) {
       this.selectedOption = optionId
-      const selected = this.currentQuestion.options.find((option) => option.id === optionId)
+      const selected = this.options.find((option) => option.id === optionId)
       if (selected.correct) {
         this.isPouring = true
         setTimeout(() => {
@@ -380,21 +327,21 @@ export default {
           }
           this.totalScore += 10 // 每答對一題加 10 分
           this.nextQuestion()
-        }, 1000) 
+        }, 1000)
       } else {
         setTimeout(() => {
           this.nextQuestion()
-        }, 1000) 
+        }, 1000)
       }
     },
     nextQuestion() {
       if (this.currentQuestionIndex < this.questions.length - 1) {
-    this.currentQuestionIndex++
-    this.selectedOption = null
-  } else {
-    this.showScorePopup = true // 顯示總分數彈窗
-  }
-}
+        this.currentQuestionIndex++
+        this.selectedOption = null
+      } else {
+        this.showScorePopup = true // 顯示總分數彈窗
+      }
+    }
   },
   watch: {
     isOpen() {
