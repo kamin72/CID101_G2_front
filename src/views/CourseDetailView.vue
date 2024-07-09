@@ -104,20 +104,20 @@ export default {
       return `${year}/${month}/${day} (${weekday})`
     },
     courseTime(startDateTime, endDateTime) {
-    if (!startDateTime || !endDateTime) return '';
+      if (!startDateTime || !endDateTime) return '';
 
-    // 創建 Date 對象
-    const startDate = new Date(startDateTime);
-    const endDate = new Date(endDateTime);
+      // 創建 Date 對象
+      const startDate = new Date(startDateTime);
+      const endDate = new Date(endDateTime);
 
-    // 格式化時間
-    const formatTime = (date) => {
-      return date.toTimeString().slice(0, 5); // 獲取 "HH:MM" 格式
-    };
+      // 格式化時間
+      const formatTime = (date) => {
+        return date.toTimeString().slice(0, 5); // 獲取 "HH:MM" 格式
+      };
 
-    // 返回格式化的時間範圍
-    return `${formatTime(startDate)}-${formatTime(endDate)}`;
-  },
+      // 返回格式化的時間範圍
+      return `${formatTime(startDate)}-${formatTime(endDate)}`;
+    },
     durationHours(startDateTime, endDateTime) {
       if (!startDateTime || !endDateTime) return 0;
       const startDate = new Date(startDateTime);

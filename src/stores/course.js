@@ -17,7 +17,7 @@ export default defineStore('courseStore', {
     async fetchCourses() {
       this.loading = true
       try {
-        const response = await fetch('http://localhost/CID101_G2_php/front/getCourse.php')
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/front/getCourse.php`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
@@ -37,7 +37,7 @@ export default defineStore('courseStore', {
         this.loading = true
         this.error = null
         try {
-          const response = await fetch(`http://localhost/CID101_G2_php/front/getCourse.php?id=${courseId}`)
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/getCourse.php?id=${courseId}`)
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
           }

@@ -268,7 +268,7 @@ export default {
                     console.error("會員 ID 不存在");
                     return;
                 }
-                const response = await fetch(`http://localhost/CID101_G2_php/front/getMemberCoupon.php?memberId=${memberId}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/front/getMemberCoupon.php?memberId=${memberId}`);
                 const data = await response.json();
                 if (data.error) {
                     throw new Error(data.message);

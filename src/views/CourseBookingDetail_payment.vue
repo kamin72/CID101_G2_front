@@ -7,7 +7,7 @@
     </section>
     <section class="course-booking-section">
         <div class="course-booking-container">
-            <form @submit.prevent="submitForm" class="col-9 col-md-10 col-sm-12 course-booking-form">
+            <form class="col-9 col-md-10 col-sm-12 course-booking-form">
 
                 <!-- 結帳金額 -->
                 <div class="form_ltem_list">
@@ -25,35 +25,6 @@
                         <h4>其他需求</h4>
                     </div>
                     <div class="form_box" style="display: flex; flex-direction: column; align-items: unset">
-                        <div class="creditCardWrap1">
-                            <p style="margin-left: 0px; margin-top: 0px;
-                margin-bottom: 15px;">卡片號碼</p>
-                            <div class="creditCardInput">
-                                <input v-model="cardNumber1" type="text" placeholder="0000" required maxlength="4">
-                                <p>-</p>
-                                <input v-model="cardNumber2" type="text" placeholder="0000" required maxlength="4">
-                                <p>-</p>
-                                <input v-model="cardNumber3" type="text" placeholder="0000" required maxlength="4">
-                                <p>-</p>
-                                <input v-model="cardNumber4" type="text" placeholder="0000" required maxlength="4">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="creditCardWrap2">
-                            <div>
-                                <p>卡片持有人</p>
-                                <input v-model="cardHolder" type="text" placeholder="持卡人姓名" required>
-                            </div>
-                            <div>
-                                <p>有效期限</p>
-                                <input v-model="expiryDate" type="text" placeholder="MM/YY" required maxlength="5">
-                            </div>
-                            <div>
-                                <p>CVV2</p>
-                                <input v-model="cvv" type="text" placeholder="安全碼" required maxlength="3">
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="btn-wrap">
@@ -62,13 +33,13 @@
                             上一步
                         </button>
                     </RouterLink>
-                    <button type="submit" class="big-btn-primary">
+                    <button class="big-btn-primary" @click.prevent="submitOrder">
                         確認付款
                     </button>
                 </div>
             </form>
             <!-- 要傳到資料庫的訂單資訊 -->
-            <form ref="form" @submit.prevent="submitOrder">
+            <form ref="form">
                 <input type="hidden" name="name" :value="this.memName" />
                 <input type="hidden" name="phone" :value="this.memPhone" />
                 <input type="hidden" name="email" :value="this.memEmail" />
@@ -186,97 +157,53 @@ export default {
     },
 
     methods: {
-        ...mapActions(courseStore, ['loadCheckoutSum']),
-        submitForm() {
-            const validationResult = this.validateForm();
-            if (validationResult === true) {
-                // 如果表單驗證通過，可以進行提交操作
-                console.log('表單提交成功');
-                // 導航到完成頁面
-                this.$router.push('/courseBookingDetail_finish/' + this.course.id);
-            } else {
-                // 顯示警告視窗，列出所有錯誤
-                alert('請檢查並修正以下問題：\n\n' + validationResult.join('\n'));
-            }
-        },
-        validateForm() {
-            let errors = [];
+        ...mapActions(courseStore, ['loadCheckoutSum', 'getSpecificData']),
 
-            // 驗證卡號
-            if (this.cardNumber1.length !== 4 || this.cardNumber2.length !== 4 ||
-                this.cardNumber3.length !== 4 || this.cardNumber4.length !== 4) {
-                errors.push('請確保所有卡號欄位都填寫了4位數字');
-            }
-
-            // 驗證持卡人姓名
-            if (this.cardHolder.trim() === '') {
-                errors.push('請填寫持卡人姓名');
-            }
-
-            // 驗證有效期限
-            if (this.expiryDate.length !== 5 || !this.expiryDate.includes('/')) {
-                errors.push('請以 MM/YY 格式填寫有效期限');
-            }
-
-            // 驗證 CVV
-            if (this.cvv.length !== 3) {
-                errors.push('請填寫3位數的 CVV 安全碼');
-            }
-
-            return errors.length === 0 ? true : errors;
-        },
         updateWindowWidth() {
             this.windowWidth = window.innerWidth
         },
 
         // 綠界付款用
-        sendCardInfo() {
-            // 創建一個包含表單數據的對象
-            const formData = {
-                TotalAmount: this.checkoutSum,
-            }
+        // sendCardInfo() {
+        //     // 創建一個包含表單數據的對象
+        //     const formData = {
+        //         TotalAmount: this.checkoutSum,
+        //     }
 
-            console.log(formData)
 
-            alert(formData)
+        //     // 創建一個隱藏的表單並提交
+        //     const form = document.createElement('form')
+        //     form.method = 'POST'
+        //     form.action =
+        //         'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder_course.php'
 
-            // 創建一個隱藏的表單並提交
-            const form = document.createElement('form')
-            form.method = 'POST'
-            form.action =
-                'http://localhost/CID101_G2_php/front/SDK_PHP-master/example/Payment/Aio/CreateCreditOrder.php'
+        //     for (const key in formData) {
+        //         if (formData[key] !== null && formData[key] !== '') {
+        //             const input = document.createElement('input')
+        //             input.type = 'hidden'
+        //             input.name = key
+        //             input.value = formData[key]
+        //             form.appendChild(input)
+        //         }
+        //     }
 
-            for (const key in formData) {
-                if (formData[key] !== null && formData[key] !== '') {
-                    const input = document.createElement('input')
-                    input.type = 'hidden'
-                    input.name = key
-                    input.value = formData[key]
-                    form.appendChild(input)
-                }
-            }
+        //     document.body.appendChild(form)
+        //     form.submit()
+        // },
 
-            document.body.appendChild(form)
-            form.submit()
-        },
         submitOrder() {
             const orderData = {
-                name: this.memName,
-                phone: this.memPhone,
-                email: this.memEmail,
+                customerId: this.memberInfo[0].no,
+                courseId: this.course.course_id,
                 courseName: this.course.course_name,
                 coursePrice: this.course.course_price,
                 bookAmount: this.participantCount,
                 disAmount: this.discount,
                 bookPaidAmount: this.sum,
-                bookOtherRequirements: this.otherRequirements,
+                otherRequirements: this.otherRequirements,
             }
 
-            console.log(orderData)
-
-            alert(orderData)
-
-            const url = 'http://localhost/CID101_G2_php/front/courseSubmit_account.php'
+            const url = `${import.meta.env.VITE_API_URL}/courseSubmit_account.php`
 
             fetch(url, {
                 method: 'POST',
@@ -309,6 +236,8 @@ export default {
         window.addEventListener('resize', this.updateWindowWidth)
         this.discount = localStorage.getItem('selectedDiscount')
         this.loadCheckoutSum()
+        this.getSpecificData(this.$route.params.id)
+        console.log(this.otherRequirements)
     },
 
     beforeUnmount() {
