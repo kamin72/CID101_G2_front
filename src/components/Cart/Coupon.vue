@@ -30,9 +30,7 @@ export default {
       fetch(`${import.meta.env.VITE_API_URL}/front/cart/getMemberDiscount.php?memberNo=${memberNo}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.error) {
-            alert(data.msg)
-          } else {
+          if (!data.error) {
             this.coupon = data.couponData
             localStorage.setItem('couponData', JSON.stringify(this.coupon))
             // console.log(this.coupon)
