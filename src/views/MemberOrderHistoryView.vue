@@ -15,24 +15,24 @@
         </div>
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary"">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
             <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">訂單紀錄</button> -->
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
             <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">預約紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
             </RouterLink>
             <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
         <!-- 訂單紀錄 -->
-        <div class="wrap_order_history">
+        <div class="wrap_order_history" v-if="carts.length <= 0">
+            <div class="items_list">尚無資料</div>
+        </div>
+
+        <div class="wrap_order_history" v-if="carts.length > 0">
             <div class="items_list">
                 <p>訂單編號</p>
                 <p>訂單日期</p>
@@ -40,16 +40,21 @@
                 <p>訂單狀態</p>
                 <p>操作</p>
             </div>
-            <div class="items">
-                <p>2024xxxxxxxx</p>
-                <p>2024-02-29</p>
-                <p>NT.2,500</p>
-                <p>已完成</p>
-                <button class="small-btn-invalid">取消訂單</button>
-                <RouterLink to="memberorderhistorydetails" style="text-decoration: none;"> <button
-                        class="small-btn-primary">查閱</button></RouterLink>
+            <!-- this.carts[0].no -->
+            <div class="items" v-for="cart in carts" :key="cart.no">
+                <p> {{ cart.cart_id }} </p>
+                <p> {{ cart.build_date }} </p>
+                <p> {{ cart.cart_paidamount }} </p>
+                <p> {{ cart.cart_status_ch }} </p>
+                <!-- <button class="small-btn-invalid">取消訂單</button> -->
+                <RouterLink to="/" style="text-decoration: none;">
+                    <button class="small-btn-secondary">取消訂單</button>
+                </RouterLink>
+                <RouterLink to="memberorderhistorydetails" style="text-decoration: none;">
+                    <button class="small-btn-primary">查閱</button>
+                </RouterLink>
             </div>
-            <div class="items">
+            <!-- <div class="items">
                 <p>2024xxxxxxxx</p>
                 <p>2024-02-29</p>
                 <p>NT.2,500</p>
@@ -60,8 +65,8 @@
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
-            </div>
-            <div class="items">
+            </div> -->
+            <!-- <div class="items">
                 <p>2024xxxxxxxx</p>
                 <p>2024-02-29</p>
                 <p>NT.2,500</p>
@@ -72,19 +77,24 @@
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
     data() {
         return {
+            carts: [],
             windowWidth: window.innerWidth
         };
     },
     computed: {
+        ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
         buttonClass() {
             return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
         },
@@ -95,15 +105,41 @@ export default {
     methods: {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth;
-        }
+        },
+        async fetchCarts() {
+            // fetch `${import.meta.env.VITE_API_URL}(member/memberCenter_order.php`
+
+            const formData = new URLSearchParams()
+            formData.append('no', this.memberInfo[0].no)
+
+            const response = await fetch('http://localhost/CID101_G2_php/front/memberorderhistory/getCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const data = await response.json()
+            // alert(data['carts'].length);
+            if (data['carts'].length > 0) {
+                this.carts = data['carts']
+            } else {
+                this.carts = []
+            }
+            // alert( this.carts[0].no);
+        },
     },
     mounted() {
+        this.fetchCarts();
         window.addEventListener('resize', this.updateWindowWidth);
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.updateWindowWidth);
-    }
-};
+    },
+}
 </script>
 
 <style></style>

@@ -370,6 +370,7 @@ export default {
         // 讀取批發商會員有沒有重複的帳號
         async getMember() {
             try {
+                // fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php'
                 const formData = new URLSearchParams()
                 formData.append('action', 'getMember')
                 formData.append('account', this.account)

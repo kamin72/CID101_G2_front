@@ -31,6 +31,7 @@
             </RouterLink>
         </div>
 
+
         <span :class="initial" style="display:none"></span>
 
         <form @submit.prevent="submitForm">
@@ -105,7 +106,6 @@ export default {
         },
         mounted() {
             window.addEventListener('resize', this.updateWindowWidth)
-
         },
         beforeDestroy() {
             window.removeEventListener('resize', this.updateWindowWidth)
@@ -169,8 +169,8 @@ export default {
                 formData.append('phone', this.memberInfo[0].phone)
                 formData.append('email', this.memberInfo[0].email)
 
-
-                const response = await fetch('http://localhost/CID101_G2_php/front/member.php', {
+                // const response = await fetch `${import.meta.env.VITE_API_URL}(member/memberCenter.php)`, {
+                const response = await fetch ('http://localhost/CID101_G2_php/front/member/memberCenter.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

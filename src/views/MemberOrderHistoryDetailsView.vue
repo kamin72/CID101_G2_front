@@ -29,11 +29,11 @@
             </RouterLink>
             <RouterLink to="/bookinghistory" style="text-decoration: none;">
                 <!-- <button class="big-btn-primary">預約紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
             </RouterLink>
             <RouterLink to="/discounthistory" style="text-decoration: none;">
                 <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
-                <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
+                <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
         <div class="wrap_details">
