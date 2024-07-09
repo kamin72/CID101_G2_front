@@ -164,7 +164,7 @@ export default {
         cart: this.cart // 包含購物車信息
       }
 
-      const url = 'http://localhost/CID101_G2_php/front/cart/cartSubmit_account.php'
+      const url = `${import.meta.env.VITE_API_URL}/front/cart/cartSubmit_account.php`
 
       fetch(url, {
         method: 'POST',
