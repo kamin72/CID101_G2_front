@@ -35,9 +35,9 @@
                     </div>
                     <div class="event-card1-font-wrap">
                         <h4>{{ course.course_name }}</h4>
-                        <p>{{ formatDisplayDate(new Date(course.course_starttime)) }} 開課</p>
+                        <p>{{ formatDisplayDate(new Date(course.course_startTime)) }} 開課</p>
                     </div>
-                    <h4>NT. {{ discountedPrice(course.course_price, course.course_discountedprices) }}</h4>
+                    <h4>NT. {{ discountedPrice(course.course_price, course.course_discount) }}</h4>
                 </router-link>
             </div>
         </div>
@@ -144,7 +144,7 @@
                                     <div class="event-card2-left-wrap">
                                         <div class="event-card2-title-wrap">
                                             <h4>{{ course.course_name }}</h4>
-                                            <p>{{ formatDisplayDate(new Date(course.course_starttime)) }} 開課</p>
+                                            <p>{{ formatDisplayDate(new Date(course.course_startTime)) }} 開課</p>
                                         </div>
                                         <div class="event-card2-intro-wrap">
                                             <small>{{ course.course_desc }}</small>
@@ -153,7 +153,7 @@
                                     <div class="event-card2-right-wrap">
                                         <div class="price">
                                             <h4><span>NT. </span>{{ discountedPrice(course.course_price,
-                                                course.course_discountedprices) }}</h4>
+                                                course.course_discount) }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -246,8 +246,8 @@ export default {
         recommendedCourses2() {
             const currentDate = new Date();
             const futureCoursesArray = this.allCourse
-                .filter(item => new Date(item.course_starttime) >= currentDate)
-                .sort((a, b) => new Date(a.course_starttime) - new Date(b.course_starttime));
+                .filter(item => new Date(item.course_startTime) >= currentDate)
+                .sort((a, b) => new Date(a.course_startTime) - new Date(b.course_startTime));
 
             return futureCoursesArray.slice(0, 4);
         }
@@ -335,7 +335,7 @@ export default {
         getCourseIdByDate(date) {
             const formattedDate = this.formatDate(date);
             const course = this.allCourse.find(course =>
-                course.course_starttime.startsWith(formattedDate)
+                course.course_startTime.startsWith(formattedDate)
             );
             return course ? course.course_id : '';
         },
@@ -343,7 +343,7 @@ export default {
             const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
             const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
             return this.allCourse.filter(course => {
-                const courseDate = new Date(course.course_starttime);
+                const courseDate = new Date(course.course_startTime);
                 return courseDate >= monthStart && courseDate <= monthEnd;
             });
         },
@@ -356,7 +356,7 @@ export default {
         updateCoursesMap() {
             this.courses.clear();
             this.allCourse.forEach(course => {
-                this.courses.set(course.course_starttime.split(' ')[0], {
+                this.courses.set(course.course_startTime.split(' ')[0], {
                     id: course.course_id,
                     img: course.course_image,
                     ribbon: course.course_ribbon,
