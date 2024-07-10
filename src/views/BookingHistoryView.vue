@@ -34,20 +34,16 @@
         <div class="wrap_booking_history">
             <div class="items_list">
                 <p>課程日期</p>
-                <p>預約時段</p>
                 <p>課程名稱</p>
-                <!-- <p>人數</p> -->
-                <!-- <p>總金額</p> -->
+                <p>預約人數</p>
                 <p>預約狀態</p>
                 <p>操作</p>
             </div>
-            <div class="items">
-                <p>2024-05-18</p>
-                <p>14:00-16:00</p>
-                <p>品酒體驗-初級課程1</p>
-                <!-- <p>1</p> -->
-                <!-- <p>NT.3,200</p> -->
-                <p>預約完成</p>
+            <div class="items" v-for="book in books" :key="book.book_customer_id">
+                <p> {{ book.book_date }}</p>
+                <p> {{ book.book_course_name }}</p>
+                <p> {{ book.book_amount}}</p>
+                <p> {{ book.book_order_status }}</p>
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-secondary">取消訂單</button>
                 </RouterLink>
@@ -60,13 +56,18 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
     data() {
         return {
+            booked_courses: [],
             windowWidth: window.innerWidth
         };
     },
     computed: {
+        ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
         buttonClass() {
             return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
         },
@@ -78,15 +79,29 @@ export default {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth;
         },
-        // fetchData() {
-        //     fetch('http://localhost/CID101_G2_php/front/memberManage/getMember.php')
-        //         .then((response) => response.json())
-        //         .then((data) => {
-        //             // 添加這行來檢查接收到的數據
-        //             this.members = data;
-        //             console.log(this.members);
-        //         })
-        // },
+        async fetchbooked_courses() {
+            // const formData = new URLSearchParams()
+            // formData.append('no', this.memberInfo[0].no)
+            // `${import.meta.env.VITE_API_URL}/front/member/memberCenter_order.php`
+            const response = await fetch('http://localhost/CID101_G2_php/front/bookinghistory/getBooking.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const data = await response.json()
+            // alert(data['booked_courses'].length);
+            if (data['booked_courses'].length > 0) {
+                this.booked_courses = data['booked_courses']
+            } else {
+                this.booked_courses = []
+            }
+            // alert( this.booked_courses[0].no);
+        },
     },
     mounted() {
         window.addEventListener('resize', this.updateWindowWidth);

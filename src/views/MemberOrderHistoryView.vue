@@ -107,12 +107,10 @@ export default {
             this.windowWidth = window.innerWidth;
         },
         async fetchCarts() {
-            // fetch `${import.meta.env.VITE_API_URL}(member/memberCenter_order.php`
-
             const formData = new URLSearchParams()
             formData.append('no', this.memberInfo[0].no)
-
-            const response = await fetch('http://localhost/CID101_G2_php/front/memberorderhistory/getCart', {
+            // `${import.meta.env.VITE_API_URL}/front/member/memberCenter_order.php`
+            const response = await fetch('http://localhost/CID101_G2_php/front/memberorderhistory/getCart.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

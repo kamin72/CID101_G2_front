@@ -54,10 +54,55 @@ import { mapState, mapActions } from 'pinia'
 import memberStore from '@/stores/loginMember'
 
 export default {
-  data() {
-    return {
-      discounts: [],
-      windowWidth: window.innerWidth
+    data() {
+        return {
+            discounts: [],
+            windowWidth: window.innerWidth
+        };
+    },
+    computed: {
+        ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
+        buttonClass() {
+            return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
+        },
+        secondaryButtonClass() {
+            return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary';
+        }
+    },
+    methods: {
+        updateWindowWidth() {
+            this.windowWidth = window.innerWidth;
+        },
+        async fetchDiscounts() {
+            const formData = new URLSearchParams()
+            formData.append('no', this.memberInfo[0].no)
+            // fetch `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const data = await response.json()
+            // alert(data['discounts'].length);
+            if (data['discounts'].length > 0) {
+                this.discounts = data['discounts']
+            } else {
+                this.discounts = []
+            }
+            // alert( this.discount[0].no);
+        },
+    },
+    mounted() {
+        this.fetchDiscounts();
+        window.addEventListener('resize', this.updateWindowWidth);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.updateWindowWidth);
     }
   },
   computed: {
