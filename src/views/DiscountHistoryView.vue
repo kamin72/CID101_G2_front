@@ -74,8 +74,8 @@ export default {
         async fetchDiscounts() {
             const formData = new URLSearchParams()
             formData.append('no', this.memberInfo[0].no)
-            // fetch `${import.meta.env.VITE_API_URL}(discounthistory/getDiscount.php`
-            const response = await fetch('http://localhost/CID101_G2_php/front/discounthistory/getDiscount.php', {
+            // fetch `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

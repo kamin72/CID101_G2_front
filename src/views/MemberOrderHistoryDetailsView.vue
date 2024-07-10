@@ -20,35 +20,36 @@
         <!-- 會員中心導覽列 -->
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary"">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
             <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">訂單紀錄</button> -->
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
             <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">預約紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
             </RouterLink>
             <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
+        <!-- 訂單紀錄查閱 -->
         <div class="wrap_details">
+        <!-- <div class="wrap_details" v-for="cart in carts" :key="cart.no"> -->
             <h4>訂單紀錄詳情</h4>
             <div class="details_list">
                 <p>訂單編號</p>
                 <p>2024xxxxxxxx</p>
+                <!-- <p> {{ cart.cart_id }}</p> -->
             </div>
             <div class="details_list">
                 <p>訂單日期</p>
                 <p>2024-02-29</p>
+                <!-- <p> {{ cart.build_date }} </p> -->
             </div>
             <div class="details_list">
                 <p>姓名</p>
                 <p>王小明</p>
+                <!-- <p>{{ accountName }}</p> -->
             </div>
             <div class="details_list">
                 <p>電話</p>
@@ -78,6 +79,12 @@
                 <p>1</p>
                 <p>NT. 2,500</p>
             </div>
+            <!-- <div class="product_details">
+                <p>{{ item_id }} </p>
+                <p>{{ price }} </p>
+                <p>{{ amount }} </p>
+                <p>{{ cart_paidamount }} </p>
+            </div> -->
             <div class="product_price">
                 <p>總價 </p>
                 <p>NT.2,500</p>
@@ -89,19 +96,25 @@
             <div class="product_price">
                 <p>總金額 </p>
                 <p>NT.2,500</p>
+                <!-- <p>{{ cart_paidamount }} </p> -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
     data() {
         return {
-            windowWidth: window.innerWidth
+            windowWidth: window.innerWidth,
+            carts:[],
         };
     },
     computed: {
+        ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
         buttonClass() {
             return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
         },
@@ -112,7 +125,32 @@ export default {
     methods: {
         updateWindowWidth() {
             this.windowWidth = window.innerWidth;
-        }
+        },
+        async fetchCarts() {
+            // fetch `${import.meta.env.VITE_API_URL}(member/memberCenter_order.php`
+
+            const formData = new URLSearchParams()
+            formData.append('no', this.memberInfo[0].no)
+
+            const response = await fetch('http://localhost/CID101_G2_php/front/memberorderhistory/getCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            const data = await response.json()
+            // alert(data['carts'].length);
+            if (data['carts'].length > 0) {
+                this.carts = data['carts']
+            } else {
+                this.carts = []
+            }
+            // alert( this.carts[0].no);
+        },
     },
     mounted() {
         window.addEventListener('resize', this.updateWindowWidth);
@@ -123,5 +161,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -48,7 +48,7 @@
                     </div>
                     <div class="member_info">
                         <label>會員帳號</label>
-                        <input type="text" id="account"  v-model="this.memberInfo[0].account"   disabled="disabled"
+                        <input type="text" id="account" v-model="this.memberInfo[0].account" disabled="disabled"
                             style="background-color: #F8F5F2;">
                     </div>
                     <div class="member_info">
@@ -115,25 +115,25 @@ export default {
         },
         // 電話正規判定
         validatePhone() {
-        const phonePattern = /^\d{10}$/
-        this.isValidPhone = phonePattern.test(this.memberInfo[0].phone)
-        if (!this.isValidPhone) {
-            this.errorMessages.phone = this.isValidPhone ? '' : '電話號碼必須是10位數字'
-        } else {
-            this.errorMessages.phone = '';
-            this.isValidPhone = true
-        }
+            const phonePattern = /^\d{10}$/
+            this.isValidPhone = phonePattern.test(this.memberInfo[0].phone)
+            if (!this.isValidPhone) {
+                this.errorMessages.phone = this.isValidPhone ? '' : '電話號碼必須是10位數字'
+            } else {
+                this.errorMessages.phone = '';
+                this.isValidPhone = true
+            }
         },
         // Email正規判定
         validateEmail() {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        this.isValidEmail = emailPattern.test(this.memberInfo[0].email)
-        if (!this.isValidEmail) {
-            this.errorMessages.email = this.isValidEmail ? '' : '請輸入有效的電子郵件地址'
-        } else {
-            this.errorMessages.email = '';
-            this.isValidEmail = true
-        }
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            this.isValidEmail = emailPattern.test(this.memberInfo[0].email)
+            if (!this.isValidEmail) {
+                this.errorMessages.email = this.isValidEmail ? '' : '請輸入有效的電子郵件地址'
+            } else {
+                this.errorMessages.email = '';
+                this.isValidEmail = true
+            }
         },
         // 提交儲存的資料
         async submitForm() {
@@ -168,21 +168,19 @@ export default {
                 formData.append('account', this.memberInfo[0].account)
                 formData.append('phone', this.memberInfo[0].phone)
                 formData.append('email', this.memberInfo[0].email)
-
-                // const response = await fetch `${import.meta.env.VITE_API_URL}(member/memberCenter.php)`, {
-                const response = await fetch ('http://localhost/CID101_G2_php/front/member/memberCenter.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
+                
+                // `${import.meta.env.VITE_API_URL}/front/member/memberCenter.php`
+                const response = await fetch('http://localhost/CID101_G2_php/front/member/memberCenter.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData.toString()
                 })
                 if (!response.ok) {
-                throw new Error('Network response was not ok')
+                    throw new Error('Network response was not ok')
                 }
                 const data = await response.json()
-
-
                 if (data['update']) {
                     this.isUpdated = true
                 } else {
@@ -195,7 +193,6 @@ export default {
                 this.loading = false
             }
         },
-
     }
 }
 </script>
