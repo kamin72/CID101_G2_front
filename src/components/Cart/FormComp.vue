@@ -22,7 +22,7 @@
         type="text"
         placeholder="請輸入連絡電話"
         id="cartPhone_comp"
-        :value="phone"
+        :value="phone || memberComp?.[0]['phone']"
         @input="$emit('update:phone', $event.target.value)"
         required
       />
@@ -33,7 +33,7 @@
         type="text"
         placeholder="請輸入email"
         id="cartEmail_comp"
-        :value="email"
+        :value="email || memberComp?.[0]['email']"
         @input="$emit('update:email', $event.target.value)"
         required
       />

@@ -41,6 +41,9 @@ import CartFlowRWD from '@/components//Cart/CartFlowRWD.vue'
 import FormComp from '@/components/Cart/FormComp.vue'
 import PayMethod from '@/components/Cart/PayMethod.vue'
 
+import { mapState, mapActions } from 'pinia'
+import memberStore from '@/stores/loginMember'
+
 export default {
   emits: ['route-change'],
   components: {
@@ -113,12 +116,15 @@ export default {
   },
   created() {},
   mounted() {
-    window.addEventListener('resize', this.updateWindowWidth), this.showLocalstorage()
+    window.addEventListener('resize', this.updateWindowWidth)
+    this.showLocalstorage()
+    this.fetchMemberCompData()
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
   },
   methods: {
+    ...mapActions(memberStore, ['fetchMemberCompData']),
     changePaymentMethod(index) {
       this.selectedMethod = index
     },
@@ -141,8 +147,8 @@ export default {
     // }
     saveToLocalstorage() {
       this.deliveryInfo_comp = {
-        phone: this.phone,
-        email: this.email
+        phone: this.memberComp?.[0]['phone'],
+        email: this.memberComp?.[0]['email']
       }
       localStorage.setItem('deliveryInfo_comp', JSON.stringify(this.deliveryInfo_comp))
     },
@@ -159,6 +165,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(memberStore, ['memberComp']),
     canSubmit() {
       const phoneValid = /^09\d{8}$/.test(this.phone)
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)
