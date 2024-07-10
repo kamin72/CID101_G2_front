@@ -17,7 +17,6 @@
               v-model="account"
               id="account"
               @blur="validateAccount"
-              autocomplete="account"
               placeholder="請輸入帳號"
             />
             <span v-if="errorMessages.account" class="form-prompt">{{
@@ -35,7 +34,6 @@
               v-model="password"
               :type="pwdFlag ? 'password' : 'text'"
               id="wholesaler-password"
-              autocomplete="password"
               @blur="validatePassword"
               placeholder="請輸入密碼"
             />
@@ -68,7 +66,6 @@
               v-model="confirmPassword"
               :type="pwdFlag ? 'password' : 'text'"
               id="confirm-password"
-              autocomplete="current-password"
               @blur="validateConfirmPassword"
               placeholder="再輸入一次密碼"
             />
@@ -438,7 +435,7 @@ export default {
           await this.setWholesalerMember()
           if (this.isSuccessRegist) {
             alert('註冊成功')
-            window.location.href = '/wholesalerformok'
+            this.$router.push('/wholesalerformok')
           }
         }
       }

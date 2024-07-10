@@ -9,10 +9,10 @@
         <span class="frontPage-bread">
           <RouterLink to="/membercenter">會員中心</RouterLink>
         </span>
-        <span v-if="identity == '1'" class="material-symbols-outlined">arrow_forward_ios</span>
-        <span v-if="identity == '1'">一般會員資料</span>
-        <span v-if="identity == '2'" class="material-symbols-outlined">arrow_forward_ios</span>
-        <span v-if="identity == '2'">批發商會員資料</span>
+        <span v-if="identity == 1" class="material-symbols-outlined">arrow_forward_ios</span>
+        <span v-if="identity == 1">一般會員資料</span>
+        <span v-if="identity == 2" class="material-symbols-outlined">arrow_forward_ios</span>
+        <span v-if="identity == 2">批發商會員資料</span>
       </small>
     </div>
     <!-- 會員中心導覽列 -->
@@ -25,10 +25,10 @@
       <RouterLink to="/memberorderhistory" style="text-decoration: none">
         <button :class="buttonClass" style="display: inline; margin: 0 2px">訂單紀錄</button>
       </RouterLink>
-      <RouterLink to="/bookinghistory" style="text-decoration: none">
+      <RouterLink v-if="identity == 1" to="/bookinghistory" style="text-decoration: none">
         <button :class="buttonClass" style="display: inline; margin: 0 2px">預約紀錄</button>
       </RouterLink>
-      <RouterLink to="/discounthistory" style="text-decoration: none">
+      <RouterLink v-if="identity == 1" to="/discounthistory" style="text-decoration: none">
         <button :class="buttonClass" style="display: inline; margin: 0 2px">優惠券紀錄</button>
       </RouterLink>
     </div>

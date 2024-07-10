@@ -15,7 +15,6 @@
             <input
               type="text"
               id="account"
-              autocomplete="account"
               v-model="account"
               @blur="validateAccount"
               placeholder="請輸入帳號"
@@ -36,7 +35,6 @@
               id="password"
               v-model="password"
               @blur="validatePassword"
-              autocomplete="current-password"
               placeholder="請輸入密碼"
             />
             <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
@@ -59,7 +57,6 @@
             <input
               :type="pwdFlags ? 'password' : 'text'"
               id="password_check"
-              autocomplete="new-password"
               v-model="passwordCheck"
               @blur="validatePasswordCheck"
               placeholder="再輸入一次密碼"
@@ -296,7 +293,7 @@ export default {
           await this.setMember()
           if (this.isSuccessRegist) {
             alert('註冊成功')
-            window.location.href = '/memberformok'
+            this.$router.push('/memberformok')
           }
         }
       }

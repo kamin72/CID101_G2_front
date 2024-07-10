@@ -22,10 +22,10 @@
           訂單紀錄
         </button>
       </RouterLink>
-      <RouterLink to="/bookinghistory" style="text-decoration: none">
+      <RouterLink v-if="identity == 1" to="/bookinghistory" style="text-decoration: none">
         <button :class="buttonClass" style="display: inline; margin: 0 2px">預約紀錄</button>
       </RouterLink>
-      <RouterLink to="/discounthistory" style="text-decoration: none">
+      <RouterLink v-if="identity == 1" to="/discounthistory" style="text-decoration: none">
         <button :class="buttonClass" style="display: inline; margin: 0 2px">優惠券紀錄</button>
       </RouterLink>
     </div>
@@ -102,6 +102,13 @@ export default {
     },
     secondaryButtonClass() {
       return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary'
+    },
+    identity() {
+      if (this.memberInfo?.[0]['identity'] == 1) {
+        return 1
+      } else {
+        return 2
+      }
     }
   },
   methods: {
