@@ -17,12 +17,13 @@ export default defineStore('courseStore', {
     async fetchCourses() {
       this.loading = true
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/front/getCourse.php`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/getCourse.php`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
         this.allCourse = data.course
+        console.log(this.allCourse);
       } catch (error) {
         console.error('Error fetching courses:', error)
         this.error = '無法獲取課程數據。請稍後再試。'

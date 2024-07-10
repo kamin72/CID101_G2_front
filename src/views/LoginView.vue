@@ -1,5 +1,5 @@
 <template>
-  <div class="login_container">
+  <div class="login_container" style="padding: 50px 0;">
     <div class="wrap_login">
       <form @submit.prevent="handleLogin">
         <div class="login_item">
@@ -9,31 +9,16 @@
           </RouterLink>
         </div>
         <div class="account_list">
-          <input
-            type="text"
-            id="account"
-            v-model="account"
-            placeholder="帳號"
-            name="account"
-            autocomplete="account"
-          />
+          <input type="text" id="account" v-model="account" placeholder="帳號" name="account" autocomplete="account" />
           <!-- <span v-if="!isValidaccount">請輸入有效的帳號</span> -->
         </div>
         <div class="password_list">
-          <input
-            :type="pwdFlag ? 'password' : 'text'"
-            id="password"
-            v-model="password"
-            placeholder="密碼"
-            autocomplete="current-password"
-            name="password"
-          />
+          <input :type="pwdFlag ? 'password' : 'text'" id="password" v-model="password" placeholder="密碼"
+            autocomplete="current-password" name="password" />
           <div class="eyes_visibility">
-            <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-              >visibility_off
+            <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility_off
             </span>
-            <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined"
-              >visibility
+            <span v-show="!pwdFlag" @click="togglePassword" class="material-symbols-outlined">visibility
             </span>
           </div>
         </div>
