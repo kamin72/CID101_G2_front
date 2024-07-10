@@ -1,5 +1,8 @@
 <template>
   <section class="game">
+    <RouterLink to="/">
+      <img src="../assets/img/game/leftGame.png" alt="Exit Game" class="exit-game" />
+    </RouterLink>
     <div class="game-container">
       <div v-if="!showScorePopup">
         <div class="question">
@@ -203,15 +206,6 @@ export default {
       )
 
       if (couponAmount > 0 && coupon) {
-        let storage = localStorage.getItem('memberInfo')
-        if (!storage) {
-          // 將當前頁面路徑作為查詢參數傳遞給登入頁面
-          this.$router.push({
-            path: '/login',
-            query: { redirect: this.$route.fullPath }
-          })
-        }
-
         const memInfo = JSON.parse(localStorage.getItem('memberInfo'))[0]
         this.memWithCoupon = { ...memInfo, ...coupon }
         // console.log(this.memWithCoupon)
@@ -228,7 +222,7 @@ export default {
         const payload = JSON.stringify({
           memberInfo: this.memWithCoupon // 將整個 memberInfo 對象傳遞給後端
         })
-        // console.log(payload) // 在發送請求之前打印 payload 檢查其內容
+        // console.log(payload)
 
         const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
           method: 'POST',
@@ -253,13 +247,13 @@ export default {
     calculateCouponAmount() {
       let couponAmount = 0
       if (this.totalScore === 60) {
-        couponAmount = 100
+        couponAmount = 50
       } else if (this.totalScore >= 70 && this.totalScore <= 80) {
-        couponAmount = 200
+        couponAmount = 100
       } else if (this.totalScore === 90) {
-        couponAmount = 300
+        couponAmount = 200
       } else if (this.totalScore === 100) {
-        couponAmount = 500
+        couponAmount = 300
       }
       return couponAmount
     },

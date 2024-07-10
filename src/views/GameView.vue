@@ -1,5 +1,8 @@
- <template>
+<template>
   <section class="game">
+    <RouterLink to="/">
+      <img src="../assets/img/game/leftGame.png" alt="Exit Game" class="exit-game" />
+    </RouterLink>
     <div class="game-container">
       <div class="game-txt">
         <h3>Wine Quiz</h3>
