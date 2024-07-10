@@ -3,6 +3,16 @@
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
+    position: relative;
+    img {
+        width: 45px;
+        cursor: pointer;
+        position: relative;
+        left: -8%;
+        @include t {
+            width: 40px;
+        }
+    }
     .game-container {
         // outline: 1px solid red;
         width: 70%;
@@ -19,6 +29,7 @@
         @include t {
             background-color: #ede7de;
         }
+
         .game-txt {
             // outline: 1px solid red;
             h3 {
@@ -152,10 +163,12 @@
             position: absolute;
             right: 10px;
             top: 10px;
+            z-index: 100000;
             @include t {
                 display: none;
             }
             .bottle-container {
+                z-index: 100;
                 position: relative;
                 margin: 20px 0;
                 right: -45%;
@@ -179,7 +192,7 @@
                 flex-direction: column;
                 align-items: center;
                 position: absolute;
-                right: -10%;
+                right: -9%;
                 bottom: -165%;
                 .wine-glass {
                     position: relative;
