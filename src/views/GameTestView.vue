@@ -243,7 +243,7 @@ export default {
           console.log('優惠券已成功存儲到後台')
           alert('資料新增成功')
         } else {
-          alert(`很抱歉，儲存優惠券時發生錯誤。${data.msg}`)
+          alert(`很抱歉，${data.msg}`)
         }
       } catch (error) {
         console.error('Network response was not ok:', error)
