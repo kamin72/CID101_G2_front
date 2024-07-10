@@ -22,7 +22,7 @@
         type="text"
         placeholder="請輸入連絡電話"
         id="cartPhone_comp"
-        :value="phone || memberComp?.[0]['phone']"
+        :value="phone"
         @input="$emit('update:phone', $event.target.value)"
         required
       />
@@ -33,7 +33,7 @@
         type="text"
         placeholder="請輸入email"
         id="cartEmail_comp"
-        :value="email || memberComp?.[0]['email']"
+        :value="email"
         @input="$emit('update:email', $event.target.value)"
         required
       />
@@ -69,7 +69,7 @@ export default {
     ...mapState(memberStore, ['memberComp'])
   },
   methods: {
-    ...mapActions(memberStore, ['getMemberData', 'fetchMemberCompData', 'getMemberCompData']),
+    ...mapActions(memberStore, ['getMemberData', 'getMemberCompData']),
     getPriceData() {
       let storage = localStorage.getItem('cartPrice')
       if (storage) {
@@ -81,7 +81,6 @@ export default {
     }
   },
   created() {
-    this.fetchMemberCompData()
     this.getMemberCompData()
     // console.log(this.memberComp)
   },

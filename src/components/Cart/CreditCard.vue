@@ -53,8 +53,8 @@
     <form ref="form" @submit.prevent="submitOrder">
       <input type="hidden" name="name" :value="memberComp?.[0]['name']" />
       <input type="hidden" name="address" :value="memberComp?.[0]['address']" />
-      <input type="hidden" name="phone" :value="deliveryInfo_comp?.['phone']" />
-      <input type="hidden" name="address" :value="deliveryInfo_comp?.['email']" />
+      <input type="hidden" name="phone" :value="memberComp?.[0]['phone']" />
+      <input type="hidden" name="address" :value="memberComp?.[0]['email']" />
       <input type="hidden" name="sum" :value="cartPrice.sum" />
       <input type="hidden" name="discount" :value="cartPrice.discount" />
       <input type="hidden" name="actualPaid" :value="cartPrice.actualPaid" />
@@ -142,8 +142,8 @@ export default {
       const orderData = {
         name: this.memberComp?.[0]['name'],
         address: this.memberComp?.[0]['address'],
-        phone: this.deliveryInfo_comp?.['phone'],
-        email: this.deliveryInfo_comp?.['email'],
+        phone: this.memberComp?.[0]['phone'],
+        email: this.memberComp?.[0]['email'],
         sum: this.cartPrice.sum,
         discount: this.cartPrice.discount,
         actualPaid: this.cartPrice.actualPaid,

@@ -10,8 +10,8 @@
       <FormComp
         v-model:phone="phone"
         v-model:email="email"
-        @update:phone="saveToLocalstorage"
-        @update:email="saveToLocalstorage"
+        @update:phone="showLocalstorage"
+        @update:email="showLocalstorage"
         ref="form"
       />
       <aside class="payMethod">
@@ -117,8 +117,9 @@ export default {
   created() {},
   mounted() {
     window.addEventListener('resize', this.updateWindowWidth)
-    this.showLocalstorage()
     this.fetchMemberCompData()
+    this.showLocalstorage()
+    this.assign()
   },
   beforeUnmount() {
     window.removeEventListener('resize', this.updateWindowWidth)
@@ -145,23 +146,25 @@ export default {
     //     alert('請填寫所有必填字段並確保電話為10個數字和電子郵件格式正確')
     //   }
     // }
-    saveToLocalstorage() {
-      this.deliveryInfo_comp = {
-        phone: this.memberComp?.[0]['phone'],
-        email: this.memberComp?.[0]['email']
-      }
-      localStorage.setItem('deliveryInfo_comp', JSON.stringify(this.deliveryInfo_comp))
-    },
+    // saveToLocalstorage() {
+    //   this.deliveryInfo_comp = {
+    //     phone: this.memberComp?.[0]['phone'],
+    //     email: this.memberComp?.[0]['email']
+    //   }
+    //   localStorage.setItem('deliveryInfo_comp', JSON.stringify(this.deliveryInfo_comp))
+    // },
     showLocalstorage() {
-      if (localStorage.getItem('deliveryInfo_comp')) {
-        this.deliveryInfo_comp = JSON.parse(localStorage.getItem('deliveryInfo_comp'))
-        this.phone = this.deliveryInfo_comp.phone
-        this.email = this.deliveryInfo_comp.email
-      }
+      // this.phone = this.memberComp?.[0]['phone']
+      // this.email = this.memberComp?.[0]['email']
+
       const savedMethod = localStorage.getItem('selectedMethod')
       if (savedMethod !== null) {
         this.selectedMethod = parseInt(savedMethod)
       }
+    },
+    assign() {
+      this.phone = '' || this.memberComp?.[0]['phone']
+      this.email = '' || this.memberComp?.[0]['email']
     }
   },
   computed: {

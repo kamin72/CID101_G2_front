@@ -128,7 +128,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(memberStore, ['fetchMemberData']),
+    ...mapActions(memberStore, ['fetchMemberData', 'fetchMemberCompData']),
 
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
@@ -168,11 +168,11 @@ export default {
     // 提交儲存的資料
     async submitForm() {
       // 這裡可以處理提交的資料，發送到伺服器
-      console.log('提交的表單資料:', {
-        account: this.memberInfo[0].account,
-        phone: this.memberInfo[0].phone,
-        email: this.memberInfo[0].email
-      })
+      //   console.log('提交的表單資料:', {
+      //     account: this.memberInfo[0].account,
+      //     phone: this.memberInfo[0].phone,
+      //     email: this.memberInfo[0].email
+      //   })
 
       this.validatePhone()
       this.validateEmail()
@@ -180,7 +180,12 @@ export default {
       if (this.isValidPhone && this.isValidEmail) {
         // 發送 post 請求
         await this.updateMember()
-        await this.fetchMemberData()
+
+        if (this.identity == 1) {
+          this.fetchMemberData()
+        } else if (this.identity == 2) {
+          this.fetchMemberCompData()
+        }
 
         if (this.isUpdated) {
           alert('儲存成功')
@@ -199,7 +204,7 @@ export default {
 
         // const response = await fetch `${import.meta.env.VITE_API_URL}(member/memberCenter.php)`, {
         const response = await fetch(
-          'http://localhost/CID101_G2_php/front/member/memberCenter.php',
+          `${import.meta.env.VITE_API_URL}/front/member/memberCenter.php`,
           {
             method: 'POST',
             headers: {
@@ -228,7 +233,7 @@ export default {
   },
   mounted() {
     this.fetchMemberData()
-    console.log(this.memberInfo?.[0]['identity'])
+    // console.log(this.memberInfo?.[0]['identity'])
   }
 }
 </script>

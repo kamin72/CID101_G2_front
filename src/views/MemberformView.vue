@@ -12,8 +12,14 @@
             <label for="account">會員帳號</label>
           </div>
           <div class="form_box">
-            <input type="text" id="account" autocomplete="account" v-model="account" @blur="validateAccount"
-              placeholder="請輸入帳號" />
+            <input
+              type="text"
+              id="account"
+              autocomplete="account"
+              v-model="account"
+              @blur="validateAccount"
+              placeholder="請輸入帳號"
+            />
             <span v-if="errorMessages.account" class="form-prompt">{{
               errorMessages.account
             }}</span>
@@ -25,8 +31,14 @@
             <label for="password">會員密碼</label>
           </div>
           <div class="form_box">
-            <input :type="pwdFlag ? 'password' : 'text'" id="password" v-model="password" @blur="validatePassword"
-              autocomplete="current-password" placeholder="請輸入密碼" />
+            <input
+              :type="pwdFlag ? 'password' : 'text'"
+              id="password"
+              v-model="password"
+              @blur="validatePassword"
+              autocomplete="current-password"
+              placeholder="請輸入密碼"
+            />
             <span v-show="pwdFlag" @click="togglePassword" class="material-symbols-outlined">
               visibility_off
             </span>
@@ -44,8 +56,14 @@
             <label for="password">再輸入一次密碼</label>
           </div>
           <div class="form_box">
-            <input :type="pwdFlags ? 'password' : 'text'" id="password_check" autocomplete="new-password"
-              v-model="passwordCheck" @blur="validatePasswordCheck" placeholder="再輸入一次密碼" />
+            <input
+              :type="pwdFlags ? 'password' : 'text'"
+              id="password_check"
+              autocomplete="new-password"
+              v-model="passwordCheck"
+              @blur="validatePasswordCheck"
+              placeholder="再輸入一次密碼"
+            />
             <span v-show="pwdFlags" @click="togglePasswords" class="material-symbols-outlined">
               visibility_off
             </span>
@@ -63,7 +81,13 @@
             <label>姓名</label>
           </div>
           <div class="form_box">
-            <input type="text" id="name" v-model="name" @blur="validateName" placeholder="請輸入姓名" />
+            <input
+              type="text"
+              id="name"
+              v-model="name"
+              @blur="validateName"
+              placeholder="請輸入姓名"
+            />
             <span v-if="errorMessages.name" class="form-prompt">{{ errorMessages.name }}</span>
           </div>
         </div>
@@ -73,7 +97,13 @@
             <label>電話</label>
           </div>
           <div class="form_box">
-            <input type="text" id="phone" v-model="phone" @blur="validatePhone" placeholder="請輸入電話" />
+            <input
+              type="text"
+              id="phone"
+              v-model="phone"
+              @blur="validatePhone"
+              placeholder="請輸入電話"
+            />
             <span v-if="errorMessages.phone" class="form-prompt">{{ errorMessages.phone }}</span>
           </div>
         </div>
@@ -83,7 +113,13 @@
             <label>Email</label>
           </div>
           <div class="form_box">
-            <input type="email" id="email" v-model="email" @blur="validateEmail" placeholder="請輸入Email" />
+            <input
+              type="email"
+              id="email"
+              v-model="email"
+              @blur="validateEmail"
+              placeholder="請輸入Email"
+            />
             <span v-if="errorMessages.phone" class="form-prompt">{{ errorMessages.phone }}</span>
           </div>
         </div>
@@ -91,8 +127,13 @@
           <input type="checkbox" v-model="isChecked" />
           <span style="margin: 0 5px">我同意隱私條款政策 [隱私條款政策]</span>
         </div>
-        <input type="submit" class="big-btn-primary deliverySubmit" style="display: block; margin: 10px auto"
-          value="下一步" :disabled="!isChecked" />
+        <input
+          type="submit"
+          class="big-btn-primary deliverySubmit"
+          style="display: block; margin: 10px auto"
+          value="下一步"
+          :disabled="!isChecked"
+        />
       </form>
     </div>
   </div>
@@ -167,7 +208,7 @@ export default {
         this.errorMessages.account = this.isValidAccount ? '' : '帳號必須是字母或數字組成'
         this.account = ''
       } else {
-        this.errorMessages.account = '';
+        this.errorMessages.account = ''
       }
     },
     // 密碼正規判定
@@ -179,7 +220,7 @@ export default {
           ? ''
           : '密碼必須至少8個字符，包含至少一個大寫字母、一個小寫字母和一個數字'
       } else {
-        this.errorMessages.password = '';
+        this.errorMessages.password = ''
       }
     },
     // 再輸入一次密碼判定
@@ -193,12 +234,12 @@ export default {
     },
     // 姓名正規判定
     validateName() {
-      const namePattern = /^(?!.*\d)(?=\S.*\S$)/;
-      this.isValidName = namePattern.test(this.name);
+      const namePattern = /^(?!.*\d)(?=\S.*\S$)/
+      this.isValidName = namePattern.test(this.name)
       if (!this.isValidName) {
-        this.errorMessages.name = '姓名不能為空或數字';
+        this.errorMessages.name = '姓名不能為空或數字'
       } else {
-        this.errorMessages.name = '';
+        this.errorMessages.name = ''
       }
     },
     // 電話正規判定
@@ -266,13 +307,16 @@ export default {
         formData.append('action', 'getMember')
         formData.append('account', this.account)
         formData.append('member_type', this.memberType) // 1 表示一般會員，2 表示批發商
-        const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: formData.toString()
-        })
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/front/member/memberSignup.php`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData.toString()
+          }
+        )
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -300,15 +344,18 @@ export default {
         formData.append('name', this.name)
         formData.append('phone', this.phone)
         formData.append('email', this.email)
-        formData.append('status', this.status); // 0:待審核 1: 正常 2: 停用
-        formData.append('identity', this.identity); // 1 表示一般會員
-        const response = await fetch('http://localhost/CID101_G2_php/front/member/memberSignup.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: formData.toString()
-        })
+        formData.append('status', this.status) // 0:待審核 1: 正常 2: 停用
+        formData.append('identity', this.identity) // 1 表示一般會員
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/front/member/memberSignup.php`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData.toString()
+          }
+        )
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
@@ -317,8 +364,8 @@ export default {
           this.isSuccessRegist = true
         }
       } catch (error) {
-        this.error = 'There was a problem with the fetch operation: ' + error.message;
-        console.error(this.error);
+        this.error = 'There was a problem with the fetch operation: ' + error.message
+        console.error(this.error)
         // this.error = error
         // console.error('There was a problem with the fetch operation:', error)
       } finally {
@@ -330,7 +377,6 @@ export default {
 </script>
 
 <style></style>
-
 
 <!-- 
 INSERT INTO `member` (`no`, `account`, `password`, `name`, `phone`, `email`, `created_at`, `updated_at`, `status`, `identity`) VALUES
