@@ -150,7 +150,7 @@ export default {
       }
     },
     fetchQuestions() {
-      fetch('http://localhost/CID101_G2_php/front/question.php')
+      fetch(`${import.meta.env.VITE_API_URL}/front/question.php`)
         .then((response) => response.json())
         .then((data) => {
           if (!data.error) {
@@ -166,7 +166,7 @@ export default {
     },
     async checkCouponInBackend() {
       try {
-        const response = await fetch('http://localhost/CID101_G2_php/front/checkCoupon.php', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/front/checkCoupon.php`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -230,7 +230,7 @@ export default {
         })
         // console.log(payload) // 在發送請求之前打印 payload 檢查其內容
 
-        const response = await fetch('http://localhost/CID101_G2_php/front/saveCoupon.php', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/front/saveCoupon.php`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -270,7 +270,7 @@ export default {
       // 假設會員在登入後會重定向回遊戲頁面並自動保存優惠券
     },
     fetchCoupon() {
-      fetch('http://localhost/CID101_G2_php/front/getCoupon.php')
+      fetch(`${import.meta.env.VITE_API_URL}/front/getCoupon.php`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
