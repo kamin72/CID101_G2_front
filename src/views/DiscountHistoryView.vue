@@ -58,11 +58,7 @@ export default {
     return {
       discounts: [],
       windowWidth: window.innerWidth
-<<<<<<< HEAD
     }
-=======
-    };
->>>>>>> peipei
   },
   computed: {
     ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
@@ -81,7 +77,6 @@ export default {
       const formData = new URLSearchParams()
       formData.append('no', this.memberInfo[0].no)
       // fetch `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`
-<<<<<<< HEAD
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`,
         {
@@ -92,15 +87,6 @@ export default {
           body: formData.toString()
         }
       )
-=======
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formData.toString()
-      })
->>>>>>> peipei
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
