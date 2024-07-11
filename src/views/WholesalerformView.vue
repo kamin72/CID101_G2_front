@@ -64,7 +64,7 @@
           <div class="form_box" style="position: relative">
             <input
               v-model="confirmPassword"
-              :type="pwdFlag ? 'password' : 'text'"
+              :type="pwdFlags ? 'password' : 'text'"
               id="confirm-password"
               @blur="validateConfirmPassword"
               placeholder="再輸入一次密碼"
