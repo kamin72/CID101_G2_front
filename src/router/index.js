@@ -251,13 +251,13 @@ const router = createRouter({
       meta: { title: '會員中心 | 折價券紀錄' }
     },
     {
-      path: '/memberorderhistorydetails',
-      name: 'memberorderhistorydetail',
+      path: '/memberorderhistorydetails/:id',
+      name: 'memberorderhistorydetails',
       component: () => import('@/views/MemberOrderHistoryDetailsView.vue'),
       meta: { title: '會員中心 | 訂單紀錄詳情' }
     },
     {
-      path: '/bookinghistorydetails',
+      path: '/bookinghistorydetails/:id',
       name: 'bookinghistorydetails',
       component: () => import('@/views/BookingHistoryDetailsView.vue'),
       meta: { title: '會員中心 | 預約紀錄詳情' }

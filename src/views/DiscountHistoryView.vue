@@ -58,25 +58,30 @@ export default {
     return {
       discounts: [],
       windowWidth: window.innerWidth
+<<<<<<< HEAD
     }
+=======
+    };
+>>>>>>> peipei
   },
   computed: {
     ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
     buttonClass() {
-      return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary'
+      return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
     },
     secondaryButtonClass() {
-      return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary'
+      return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary';
     }
   },
   methods: {
     updateWindowWidth() {
-      this.windowWidth = window.innerWidth
+      this.windowWidth = window.innerWidth;
     },
     async fetchDiscounts() {
       const formData = new URLSearchParams()
       formData.append('no', this.memberInfo[0].no)
       // fetch `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`
+<<<<<<< HEAD
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`,
         {
@@ -87,6 +92,15 @@ export default {
           body: formData.toString()
         }
       )
+=======
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/front/discounthistory/getDiscount.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
+      })
+>>>>>>> peipei
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
@@ -98,16 +112,16 @@ export default {
         this.discounts = []
       }
       // alert( this.discount[0].no);
-    }
+    },
   },
   mounted() {
-    this.fetchDiscounts()
-    window.addEventListener('resize', this.updateWindowWidth)
+    this.fetchDiscounts();
+    window.addEventListener('resize', this.updateWindowWidth);
   },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.updateWindowWidth)
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateWindowWidth);
   }
-}
+};
 </script>
 
 <style></style>

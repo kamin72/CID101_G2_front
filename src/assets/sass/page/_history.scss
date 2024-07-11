@@ -3,10 +3,12 @@
     max-width: $max-width;
     width: 100%;
     margin: auto;
+
     .center_menu {
         border-bottom: 1px solid #322D26;
         padding-bottom: 20px;
         margin: auto;
+
         .buttonClass {
             display: inline;
             margin-right: 2px;
@@ -28,11 +30,11 @@
                 align-items: center;
                 justify-content: center;
                 margin: 0 40px;
-    
+
                 p {
                     margin: 0 45px;
                     padding: 10px;
-    
+
                     @include t {
                         font-size: 12px;
                         padding: 10px 25px 10px 10px;
@@ -40,7 +42,7 @@
                     }
                 }
             }
-    
+
             .items {
                 display: flex;
                 align-items: center;
@@ -48,16 +50,16 @@
                 border: 1px solid #322D26;
                 padding: 5px 0;
                 margin: auto;
-    
+
                 @include t {
                     width: 400px;
                     padding: 5px;
                 }
-    
+
                 p {
                     margin: 0 35px;
                     padding: 0;
-    
+
                     @include t {
                         font-size: 12px;
                         // margin: 10px 6px;
@@ -66,13 +68,13 @@
                         padding: 0 5px;
                     }
                 }
-    
+
                 button {
                     margin: 0 2px;
                 }
             }
         }
-    
+
 }
 
 // 課程預約紀錄
@@ -82,6 +84,7 @@
         padding-bottom: 20px;
         margin: 40px 0;
     }
+
     .wrap_booking_history {
         margin: 30px auto;
 
@@ -117,7 +120,7 @@
             }
 
             p {
-                margin: 0 35px;
+                margin: 0 60px;
                 padding: 0;
 
                 @include t {
