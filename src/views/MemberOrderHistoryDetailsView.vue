@@ -40,37 +40,37 @@
       <div class="details_list">
         <p>訂單編號</p>
         <!-- <p>2024xxxxxxxx</p> -->
-        <p>{{ carts_detail.cart_id }}</p>
+        <p>{{ orderInfo.cart_id }}</p>
       </div>
       <div class="details_list">
         <p>訂單日期</p>
         <!-- <p>2024-02-29</p> -->
-        <p>{{ carts_detail.build_date }}</p>
+        <p>{{ orderInfo.build_date }}</p>
       </div>
       <div class="details_list">
         <p>姓名</p>
         <!-- <p>王陽明</p> -->
-        <p>{{ carts_detail.accountName }}</p>
+        <p>{{ orderInfo.cart_name }}</p>
       </div>
       <div class="details_list">
         <p>電話</p>
         <!-- <p>0912345678</p> -->
-        <p>{{ carts_detail.phone }}</p>
+        <p>{{ orderInfo.phone }}</p>
       </div>
       <div class="details_list">
         <p>Email</p>
         <!-- <p>abc123@email.com</p> -->
-        <p>{{ carts_detail.email }}</p>
+        <p>{{ orderInfo.email }}</p>
       </div>
       <div class="details_list">
         <p>總金額</p>
         <!-- <p>NT.2,500</p> -->
-        <p>{{ carts_detail.cart_paidamount }}</p>
+        <p>{{ orderInfo.cart_paidamount }}</p>
       </div>
       <div class="details_list" style="border: none">
         <p>訂單狀態</p>
         <!-- <p>已完成</p> -->
-        <p>{{ carts_detail.cart_status }}</p>
+        <p>{{ switchOrderStatus(orderInfo.cart_status) }}</p>
       </div>
       <div class="product_details" style="background-color: #f8f5f2; border: none">
         <p>商品名稱</p>
@@ -78,30 +78,26 @@
         <p>數量</p>
         <p>合計</p>
       </div>
-      <div class="product_details">
-        <!-- <p>俄勒岡之光紅酒 1997 </p>
-                <p>NT. 2,500</p>
-                <p>1</p>
-                <p>NT. 2,500</p> -->
-        <p>{{ carts_detail.prod_name }}</p>
-        <p>{{ carts_detail.prod_price }}</p>
-        <p>{{ carts_detail.amount }}</p>
-        <p>{{ carts_detail.cart_paidamount }}</p>
+      <div class="product_details" v-for="(item, index) in orderItem" :key="index">
+        <p>{{ item.prod_name }}</p>
+        <p>$NT. {{ item.price }}</p>
+        <p>{{ item.amount }}</p>
+        <p>$NT. {{ item.amount * item.price }}</p>
       </div>
       <div class="product_price">
         <p>總價</p>
         <!-- <p>NT.2,500</p> -->
-        <p>{{ carts_detail.cart_paidamount }}</p>
+        <p>$NT. {{ orderInfo.cart_paidamount }}</p>
       </div>
       <div class="product_price" style="border-bottom: 1px solid #000000">
         <p>折扣</p>
         <!-- <p>NT.0</p> -->
-        <p>{{ carts_detail.cart_discount }}</p>
+        <p>-$NT. {{ orderInfo.cart_discount }}</p>
       </div>
       <div class="product_price">
         <p>總金額</p>
         <!-- <p>NT.2,500</p> -->
-        <p>{{ carts_detail.cart_payableamount }}</p>
+        <p>$NT. {{ totalPaid }}</p>
       </div>
     </div>
   </div>
@@ -115,7 +111,8 @@ export default {
   data() {
     return {
       carts_detail: {},
-      carts: [],
+      orderData: [],
+      orderItem: [],
       windowWidth: window.innerWidth
     }
   },
@@ -126,15 +123,22 @@ export default {
     },
     secondaryButtonClass() {
       return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary'
+    },
+    orderInfo() {
+      const cartId = this.$route.params.id
+      return this.orderData.find((data) => data.cart_id == cartId) || []
+    },
+    totalPaid() {
+      return this.orderInfo.cart_paidamount - this.orderInfo.cart_discount
     }
   },
   watch: {
-    '$route.params.id': {
-      handler(cartId) {
-        this.fetchcarts(cartId)
-      },
-      immediate: true
-    }
+    // '$route.params.id': {
+    //   handler(cartId) {
+    //     this.fetchcarts(cartId)
+    //   },
+    //   immediate: true
+    // }
   },
   // watch: {
   //     carts() {
@@ -153,13 +157,39 @@ export default {
   //     },
   // },
   methods: {
-    async fetchcarts() {
+    async fetchAllOrderData() {
+      const formData = new URLSearchParams()
+      formData.append('no', this.memberInfo[0].no)
+      // `${import.meta.env.VITE_API_URL}/front/member/memberCenter_order.php`
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/front/memberorderhistory/getCart.php`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: formData.toString()
+        }
+      )
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
+      }
+      const data = await response.json()
+      // alert(data['carts'].length);
+      if (data['carts'].length > 0) {
+        this.orderData = data['carts']
+        // console.log(this.orderData)
+      } else {
+        this.orderData = []
+      }
+    },
+    async fetchOrderItems() {
       const cartId = this.$route.params.id
       // const response = await fetch(
       //     'http://localhost/CID101_G2_php/front/memberorderhistory/getCart.php',
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/front/memberorderhistory/getCartDetail.php?cartId=${cartId}`
+        `${import.meta.env.VITE_API_URL}/front/memberorderhistory/getMemberOrderItem.php?cartId=${cartId}`
       )
       if (!response.ok) {
         throw new Error('Network response was not ok')
@@ -167,20 +197,31 @@ export default {
       const data = await response.json()
       // alert(data['carts'].length);
       if (!data.error) {
-        this.carts = data.carts
-        console.log(this.carts)
+        this.orderItem = data.orderItem
+        // console.log(this.orderItem)
       } else {
         alert('無相關資料')
       }
     },
-    mounted() {
-      const cartId = this.$route.params.id
-      this.fetchcarts()
-      window.addEventListener('resize', this.updateWindowWidth)
-    },
-    beforeDestroy() {
-      window.removeEventListener('resize', this.updateWindowWidth)
+    switchOrderStatus(status) {
+      const statusMap = {
+        0: '未處理',
+        1: '處理中',
+        2: '已備貨',
+        3: '已取件',
+        4: '請求取消',
+        5: '已取消'
+      }
+      return statusMap[status] || '未知狀態'
     }
+  },
+  mounted() {
+    this.fetchAllOrderData()
+    this.fetchOrderItems()
+    window.addEventListener('resize', this.updateWindowWidth)
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   }
 }
 </script>
