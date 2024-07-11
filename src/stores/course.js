@@ -23,7 +23,7 @@ export default defineStore('courseStore', {
         }
         const data = await response.json()
         this.allCourse = data.course
-        console.log(this.allCourse)
+        // console.log(this .allCourse)
       } catch (error) {
         console.error('Error fetching courses:', error)
         this.error = '無法獲取課程數據。請稍後再試。'

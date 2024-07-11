@@ -56,14 +56,16 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberData() {
-      fetch(`${import.meta.env.VITE_API_URL}/front/member/memberLogin.php`)
+      fetch(
+        `${import.meta.env.VITE_API_URL}/front/member/getMember_account.php?memId=${this.memberInfo[0].no}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
             alert(data.msg)
           } else if (data.member) {
-            this.memberAccount = data.member
-            // localStorage.setItem('memberComp', JSON.stringify(this.memberAccount))
+            this.memberInfo = data.member
+            localStorage.setItem('memberInfo', JSON.stringify(this.memberInfo))
           }
         })
     },
@@ -76,7 +78,9 @@ export default defineStore('memberStore', {
       }
     },
     fetchMemberCompData() {
-      fetch(`${import.meta.env.VITE_API_URL}/front/member/getMember_comp.php`)
+      fetch(
+        `${import.meta.env.VITE_API_URL}/front/member/getMember_comp.php?memId=${this.memberInfo[0].no}`
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {

@@ -102,7 +102,7 @@ const router = createRouter({
       meta: { title: '品酒課程 | 付款流程' }
     },
     {
-      path: '/courseBookingDetail_finish/:id',
+      path: '/courseBookingDetail_finish',
       name: 'courseBookingDetail_finish',
       component: () => import('@/views/CourseBookingDetail_finish.vue'),
       meta: { title: '品酒課程 | 預約完成' }
