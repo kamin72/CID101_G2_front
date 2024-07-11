@@ -233,6 +233,7 @@ export default {
   },
   mounted() {
     this.fetchMemberData()
+    this.fetchMemberCompData()
     // console.log(this.memberInfo?.[0]['identity'])
   }
 }

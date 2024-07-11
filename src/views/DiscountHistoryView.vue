@@ -43,7 +43,7 @@
         <p>{{ discount.dis_got_date }}</p>
         <p>{{ discount.dis_name }}</p>
         <p>{{ discount.dis_set_date }}</p>
-        <p>{{ discount.dis_use_date }}</p>
+        <p>{{ discount_status(discount.dis_use_date) }}</p>
       </div>
     </div>
   </div>
@@ -63,15 +63,20 @@ export default {
   computed: {
     ...mapState(memberStore, ['memberInfo', 'accountName', 'isNormalAccount']),
     buttonClass() {
-      return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary';
+      return this.windowWidth < 996 ? 'small-btn-primary' : 'big-btn-primary'
     },
     secondaryButtonClass() {
-      return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary';
+      return this.windowWidth < 996 ? 'small-btn-secondary' : 'big-btn-secondary'
     }
   },
   methods: {
+    discount_status(dis) {
+      if (dis == '0000-00-00 00:00:00') {
+        return '未使用'
+      }
+    },
     updateWindowWidth() {
-      this.windowWidth = window.innerWidth;
+      this.windowWidth = window.innerWidth
     },
     async fetchDiscounts() {
       const formData = new URLSearchParams()
@@ -94,20 +99,21 @@ export default {
       // alert(data['discounts'].length);
       if (data['discounts'].length > 0) {
         this.discounts = data['discounts']
+        // console.log(this.discounts)
       } else {
         this.discounts = []
       }
       // alert( this.discount[0].no);
-    },
+    }
   },
   mounted() {
-    this.fetchDiscounts();
-    window.addEventListener('resize', this.updateWindowWidth);
+    this.fetchDiscounts()
+    window.addEventListener('resize', this.updateWindowWidth)
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.updateWindowWidth);
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateWindowWidth)
   }
-};
+}
 </script>
 
 <style></style>
