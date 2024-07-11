@@ -50,7 +50,7 @@
                 <RouterLink to="/" style="text-decoration: none;">
                     <button class="small-btn-secondary">取消訂單</button>
                 </RouterLink>
-                <RouterLink to="memberorderhistorydetails" style="text-decoration: none;">
+                <RouterLink :to="'/memberorderhistorydetails/' + cart.cart_id" style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
             </div>
@@ -109,7 +109,9 @@ export default {
         async fetchCarts() {
             const formData = new URLSearchParams()
             formData.append('no', this.memberInfo[0].no)
+
             // `${import.meta.env.VITE_API_URL}/front/member/memberCenter_order.php`
+
             const response = await fetch('http://localhost/CID101_G2_php/front/memberorderhistory/getCart.php', {
                 method: 'POST',
                 headers: {
@@ -127,7 +129,6 @@ export default {
             } else {
                 this.carts = []
             }
-            // alert( this.carts[0].no);
         },
     },
     mounted() {

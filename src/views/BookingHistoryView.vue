@@ -15,39 +15,36 @@
         </div>
         <div class="center_menu">
             <RouterLink to="/membercenter" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">會員資料</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">會員資料</button>
             </RouterLink>
             <RouterLink to="/memberorderhistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">訂單紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">訂單紀錄</button>
             </RouterLink>
             <RouterLink to="/bookinghistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-secondary">預約紀錄</button> -->
                 <button :class="secondaryButtonClass" style="display: inline; margin: 0 2px;">預約紀錄</button>
             </RouterLink>
             <RouterLink to="/discounthistory" style="text-decoration: none;">
-                <!-- <button class="big-btn-primary">優惠券紀錄</button> -->
                 <button :class="buttonClass" style="display: inline; margin: 0 2px;">優惠券紀錄</button>
             </RouterLink>
         </div>
         <div class="wrap_booking_history">
             <div class="items_list">
-                <p>課程日期</p>
-                <p>課程名稱</p>
-                <p>預約人數</p>
-                <p>預約狀態</p>
-                <p>操作</p>
+                <p class="cell">預約課程編號</p>
+                <p class="cell">課程日期</p>
+                <p class="cell">課程名稱</p>
+                <p class="cell">預約狀態</p>
+                <p class="cell">操作</p>
             </div>
-            <div class="items" v-for="book in books" :key="book.book_customer_id">
-                <p> {{ book.book_date }}</p>
-                <p> {{ book.book_course_name }}</p>
-                <p> {{ book.book_amount}}</p>
-                <p> {{ book.book_order_status }}</p>
+            <div class="items" v-for="booked_course in booked_courses" :key="booked_course.book_customer_id">
+                <p class="cell"> {{ booked_course.book_id }}</p>
+                <p class="cell"> {{ booked_course.book_date }}</p>
+                <p class="cell"> {{ booked_course.book_course_name }}</p>
+                <p class="cell"> {{ booked_course.book_order_status }}</p>
                 <RouterLink to="/" style="text-decoration: none;">
-                    <button class="small-btn-secondary">取消訂單</button>
+                    <button class="small-btn-invalid">取消訂單</button>
                 </RouterLink>
-                <RouterLink to="/bookinghistorydetails" style="text-decoration: none;">
+                <!-- <RouterLink to="/bookinghistorydetails" style="text-decoration: none;"> -->
+                <RouterLink :to="'/bookinghistorydetails/' + booked_course.book_id" style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
             </div>
@@ -82,13 +79,14 @@ export default {
         async fetchbooked_courses() {
             // const formData = new URLSearchParams()
             // formData.append('no', this.memberInfo[0].no)
+            
             // `${import.meta.env.VITE_API_URL}/front/member/memberCenter_order.php`
             const response = await fetch('http://localhost/CID101_G2_php/front/bookinghistory/getBooking.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
+                // method: 'POST',
+                // headers: {
+                //     'Content-Type': 'application/x-www-form-urlencoded'
+                // },
+                // body: formData.toString()
             })
             if (!response.ok) {
                 throw new Error('Network response was not ok')
@@ -105,6 +103,7 @@ export default {
     },
     mounted() {
         window.addEventListener('resize', this.updateWindowWidth);
+        this.fetchbooked_courses()
     },
     beforeDestroy() {
         window.removeEventListener('resize', this.updateWindowWidth);
