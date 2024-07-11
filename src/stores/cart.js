@@ -64,7 +64,7 @@ export default defineStore('cartStore', {
       localStorage.removeItem('cart')
     },
     fetchProductList() {
-      fetch('http://localhost/CID101_G2_php/back/productManage/product_read.php')
+      fetch(`${import.meta.env.VITE_API_URL}/productManage/product_read.php`)
         .then((response) => response.json())
         .then((data) => {
           if (data.error) {
@@ -85,7 +85,7 @@ export default defineStore('cartStore', {
       }
     },  
     fetchProductDetail(productId) {
-      fetch('http://localhost/CID101_G2_php/back/productManage/product_read.php')
+      fetch(`${import.meta.env.VITE_API_URL}/productManage/product_read.php`)
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
