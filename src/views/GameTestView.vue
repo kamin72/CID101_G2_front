@@ -15,14 +15,18 @@
             v-for="option in options"
             :key="option.id"
             :class="{
-              correct: selectedOption === option.id && option.correct,
-              wrong: selectedOption === option.id && !option.correct,
-              shake: selectedOption === option.id && !option.correct
+              correct: selectedOption === option.id && option.correct == option.text,
+              wrong: selectedOption === option.id && option.correct != option.text,
+              shake: selectedOption === option.id && option.correct != option.text
             }"
             @click="checkAnswer(option.id)"
           >
             {{ option.text }}
-            <span v-if="selectedOption === option.id && option.correct" class="checkmark">✔</span>
+            <span
+              v-if="selectedOption === option.id && option.correct == option.text"
+              class="checkmark"
+              >✔</span
+            >
           </button>
         </div>
       </div>
@@ -102,7 +106,8 @@ export default {
       selectedOption: null,
       couponInfo: null,
       couponList: [],
-      memWithCoupon: null
+      memWithCoupon: null,
+      correct: null
     }
   },
   computed: {
@@ -110,11 +115,20 @@ export default {
     currentQuestion() {
       return this.questions[this.currentQuestionIndex]
     },
+
     options() {
       if (this.currentQuestion) {
         return [
-          { id: 1, text: this.currentQuestion.q_option_a, correct: false },
-          { id: 2, text: this.currentQuestion.q_option_b, correct: true }
+          {
+            id: 1,
+            text: this.currentQuestion.q_option_a,
+            correct: this.currentQuestion.q_ans
+          },
+          {
+            id: 2,
+            text: this.currentQuestion.q_option_b,
+            correct: this.currentQuestion.q_ans
+          }
         ]
       }
       return []
@@ -131,6 +145,7 @@ export default {
   },
   methods: {
     ...mapActions(memberStore, ['getMemberData']),
+
     // 1. 檢查是否有會員資料
     checkLocalStorage() {
       let storage = localStorage.getItem('memberInfo')
@@ -321,7 +336,7 @@ export default {
     checkAnswer(optionId) {
       this.selectedOption = optionId
       const selected = this.options.find((option) => option.id === optionId)
-      if (selected.correct) {
+      if (selected.correct === selected.text) {
         this.isPouring = true
         setTimeout(() => {
           this.isPouring = false
