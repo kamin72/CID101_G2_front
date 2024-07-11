@@ -374,12 +374,3 @@ export default {
 </script>
 
 <style></style>
-
-<!-- 
-INSERT INTO `member` (`no`, `account`, `password`, `name`, `phone`, `email`, `created_at`, `updated_at`, `status`, `identity`) VALUES
-(1, 'aaaaaa', '111111', '王陽明', '0912345678', 'aaa@gmail.com', '2024-06-22 04:30:16', NULL, 0, 1),
-(2, 'bbbbbb', '222222', '批發商', '', '', '2024-06-24 22:35:20', '2024-06-24 22:35:20', 0, 2), 
--->
-
-<!-- INSERT INTO `member_retailer` (`retailer_no`, `no`, `company_name`, `tax_id`, `address`, `license`, `created_at`, `updated_at`) VALUES
-(1, 2, '金門酒廠', '00000000', '桃園市中壢區復興路46號', '00000000', '2024-06-25 15:50:28', '2024-06-25 15:50:28'), -->
