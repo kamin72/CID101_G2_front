@@ -60,11 +60,10 @@
                 <!-- <p>abc123@email.com</p> -->
                 <p>{{ booked_detail.email }}</p>
             </div>
-            <div class="details_list">
+            <!-- <div class="details_list">
                 <p>地址</p>
-                <!-- <p>320桃園市中壢區復興路46號9樓</p> -->
                 <p>{{ booked_detail.address }}</p>
-            </div>
+            </div> -->
             <div class="details_list">
                 <p>課程教室</p>
                 <!-- <p>A教室</p> -->
