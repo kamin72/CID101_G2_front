@@ -232,8 +232,11 @@ export default {
     }
   },
   mounted() {
-    this.fetchMemberData()
-    this.fetchMemberCompData()
+    if (this.identity == 1) {
+      this.fetchMemberData()
+    } else if (this.identity == 2) {
+      this.fetchMemberCompData()
+    }
     // console.log(this.memberInfo?.[0]['identity'])
   }
 }
