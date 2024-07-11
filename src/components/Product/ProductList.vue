@@ -252,7 +252,7 @@ export default {
     },
 
     filteredProducts() {
-      return this.getFilteredProducts().filter(product => product.prod_state == 1);
+      return this.getFilteredProducts().filter((product) => product.prod_state == 1)
     }
   },
   methods: {
