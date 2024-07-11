@@ -1,42 +1,70 @@
-//最新消息卡片
-.news-card-list{
-  a{
-    text-decoration: none;
-    color: inherit;
+//最新消息頁面
+.news-view{
+  .title-wrap{
+    padding-bottom: 50px;
   }
-  .news-card{
-    padding: 2%;
+  overflow: hidden;
+  padding: 15px;
+  .news-card-list{
+    
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    align-content: center;
-    .news-pic{
-      width: 100%;
-      height:70%;
-      // aspect-ratio: 4/3;
-      // overflow: hidden;
-      img{
-        display: block;
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-card{
+      aspect-ratio: 4/3;
+      padding: 2%;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      .news-pic{
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+        height:70%;
+        img{
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+  
+        }
+      }
+      .news-title{
+        width: 100%;
+        flex-grow: 1;
+        // line-height: 30px;
+  
+      }
+      .news-date{
+        width: 100%;
+        height: 5%;
+        margin: 10px 0;
+      }
+      &:hover{
+        background-color: $wine;
+        color: $white;
+      }
+      
+    }
+    
+  }
+}
+
+@include t {
+
+}
+@include m {
+  .news-view{
+    .title-wrap{
+      padding: 25px 0;
+      .line{
+        width: 100px;
       }
     }
-    .news-title{
-      width: 100%;
-      flex-grow: 1;
-      // line-height: 30px;
-
-    }
-    .news-date{
-      width: 100%;
-      height: 5%;
-      margin: 10px 0;
-    }
-    &:hover{
-      background-color: $wine;
-      color: $white;
+    .news-card-list{
+      justify-content: center;
     }
   }
 }
@@ -60,15 +88,21 @@
 .banner {
   position: relative;
   width: 100%;
-  height: 70vh;
+  // height: 50vh;
+  aspect-ratio: 16/7;
+  // height: 70vh;
   .bgImgWrap {
-    position: fixed;
     width: 100%;
+    height: 100%;
+    // aspect-ratio: ;
     z-index: -1;
+    // aspect-ratio: 16/9;
     img {
       object-fit: cover;
-      object-position: bottom;
+      object-position: center;
       width: 100%;
+      height: 100%;
+      // aspect-ratio: 4/3;
     }
   }
   .maskWrap {
@@ -83,8 +117,7 @@
   }
 }
 
-@include t() {
-}
+
 @include m() {
   .courseBanner {
     // height: 200px;

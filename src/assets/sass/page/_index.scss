@@ -832,9 +832,11 @@
     display: flex;
     flex-wrap: wrap;
     .wineSwiper {
-      width: 60%;
+      width: 50%;
+      // margin: 3%;
+      // padding-right: 2%;
       --swiper-navigation-size: 30px;
-      --swiper-navigation-sides-offset: 5%;
+      --swiper-navigation-sides-offset: 0;
       .swiper-button-prev:after,
       .swiper-button-next:after {
         color: #000000;
@@ -844,14 +846,15 @@
         }
       }
       .swiper-slide .bottle {
-        height: 100%;
-        transform: translateX(-23%);
+        // height: 100%;
+        width: 250%;
+        transform: translateX(-33%);
         @include t {
-          transform: translateX(-25%);
+          // transform: translateX(-35%);
         }
         @include m {
-          height: 70%;
-          transform: translateX(-30%);
+          // height: 70%;
+          // transform: translateX(-40%);
         }
       }
       .swiper-button {
@@ -931,7 +934,7 @@
   @include t {
     .container {
       .wineSwiper {
-        width: 100%;
+        width: 80%;
       }
       .wine-content {
         width: 90%;
@@ -946,8 +949,7 @@
     padding: 25px 0;
     .container {
       .wineSwiper {
-        width: 100%;
-        margin-bottom: -20%;
+        width: 90%;
       }
       .wine-content {
         width: 90%;
