@@ -15,119 +15,133 @@
     },
     data() {
       return {
-        wine: [
-          {
-            id: 1,
-            nameEn: 'Modern Red Wine',
-            nameCh: '精釀紅酒 2016',
-            price: '1200',
-            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: 'Elegant-Red-Wine.png',
-          },
-          {
-            id: 2,
-            nameEn: 'White Wine',
-            nameCh: '精選白葡萄酒',
-            price: '1200',
-            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: 'Ice-White-Wine.png',
-          },
-          {
-            id: 3,
-            nameEn: 'Modern Red Wine3',
-            nameCh: '葡萄酒3',
-            price: '1200',
-            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: 'Pearl-White-Wine.png',
-          },
-          {
-            id: 4,
-            nameEn: 'Modern Red Wine4',
-            nameCh: '葡萄酒4',
-            price: '1200',
-            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: 'Star-Fortified-Wine.png',
-          },
-          {
-            id: 5,
-            nameEn: 'Modern Red Wine5',
-            nameCh: '葡萄酒5',
-            price: '1200',
-            txt: '香氣優雅，充滿了黑醋栗的香氣，並帶有李子白蘭地、香草、焦糖、丁香和肉桂的味道。此酒散發出新鮮的皮革和橄欖的味道，並伴有豐富而細緻的單寧和鐵一樣的礦物質味。口感圓潤、精緻、複雜，回味持久。',
-            img: 'Sky-Sparkling-Wine.png',
-          },
-        ],
+        wine: [],
         modules: [EffectCoverflow, Navigation],
-        activeSlide: 2, // Track the active slide index
+        activeSlide: 0, // Initialize activeSlide to 0 to prevent out-of-bound errors
+        swiper: null,
       };
     },
     methods: {
+      fetchWineData() {
+        fetch(`${import.meta.env.VITE_API_URL}/home/wineCarousel.php`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              alert(data.msg);
+            } else if (data.wine) {
+              // Duplicate the wine data array twice
+              this.wine = data.wine.concat(data.wine);
+              localStorage.setItem('wine', JSON.stringify(this.wine));
+              // Reset activeSlide to 0 when new data is fetched
+              this.activeSlide = 0;
+            }
+          });
+      },
       onSlideChange(swiper) {
         this.activeSlide = swiper.realIndex;
       },
-      // 部屬用-解析伺服器圖片路徑
       parseServerImg(imgURL) {
-        return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+        return `${import.meta.env.VITE_FILE_URL}/${imgURL}`;
       },
+      onSwiper(swiper) {
+        this.swiper = swiper;
+      },
+    },
+    mounted() {
+      this.fetchWineData();
     },
   }
 </script>
 
 <template>
-    <swiper
-      ref="mySwiper"
+  <swiper
+    ref="mySwiper"
       :slidesPerView="5"
       :loop="true"
       :centeredSlides="true"
-      :initialSlide="2"
-      :loopAdditionalSlides="2"
       :effect="'coverflow'"
       :coverflowEffect="{
         rotate: 0,
-        stretch: 0,
-        depth: 200,
-        modifier: 3,
+        stretch: -60,
+        depth: 400,
+        modifier: 1,
         slideShadows: false,
       }"
       :breakpoints="{
-        430: {
+        430:{
           coverflowEffect:{
             rotate: 0,
-            stretch: 0,
+            stretch: -50,
+            depth: 300,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
+        500:{
+          coverflowEffect:{
+            rotate: 0,
+            stretch: -90,
+            depth: 450,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
+        600:{
+          coverflowEffect:{
+            rotate: 0,
+            stretch: -130,
+            depth: 600,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
+        700:{
+          coverflowEffect:{
+            rotate: 0,
+            stretch: -130,
             depth: 500,
             modifier: 1,
             slideShadows: false,
           }
-	      },
+        },
+        800: {
+          coverflowEffect:{
+            rotate: 0,
+            stretch: -120,
+            depth: 400,
+            modifier: 1,
+            slideShadows: false,
+          }
+        },
         995: {
           coverflowEffect:{
             rotate: 0,
-            stretch: 0,
-            depth: 500,
+            stretch: -50,
+            depth: 200,
             modifier: 1,
             slideShadows: false,
           }
-	      }
+        }
       }"
-      :navigation="{
-	    nextEl: '.swiper-button-next',
-	    prevEl: '.swiper-button-prev'
-	    }"
-      :modules="modules"
-      class="wineSwiper"
-      @slideChange="onSlideChange"
-    >
-      <swiper-slide v-for="bottle in wine" :key="bottle.id">
-        <!-- 部屬用-解析伺服器圖片路徑 -->
-        <img :src="parseServerImg(bottle.img)" :alt="bottle.nameCh" class="bottle"/>
-      </swiper-slide>
-      <button class="swiper-button swiper-button-next"></button>
-      <button class="swiper-button swiper-button-prev"></button>	
-    </swiper>
-    <div class="wine-content">
-      <h2>{{ wine[activeSlide].nameEn }}</h2>
-      <h3>{{ wine[activeSlide].nameCh }}</h3>
-      <h4>NT. {{ wine[activeSlide].price }}</h4>
-      <p>{{ wine[activeSlide].txt }}</p>
-    </div>
+    :navigation="{
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    }"
+    :modules="modules"
+    class="wineSwiper"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide v-for="item in wine" :key="item.prod_id">
+      <img :src="parseServerImg(item.prod_img)" :alt="item.prod_name" class="bottle"/>
+    </swiper-slide>
+    <button class="swiper-button swiper-button-next"></button>
+    <button class="swiper-button swiper-button-prev"></button>  
+  </swiper>
+  <div class="wine-content" v-if="wine.length > 0">
+    <h2>{{ wine[activeSlide]?.prod_ename }}</h2>
+    <h3>{{ wine[activeSlide]?.prod_name }}</h3>
+    <h4>NT. {{ wine[activeSlide]?.prod_price }}</h4>
+    <p>{{ wine[activeSlide]?.prod_describe }}</p>
+  </div>
 </template>
