@@ -52,6 +52,11 @@
     <div v-if="showScorePopup" class="score-popup">
       <div class="score-popup-content">
         <h3>恭喜~你的得分是：{{ totalScore }} 分</h3>
+        <!-- 新增照片 -->
+        <!-- <div v-if="totalScore === 100" class="teacher-pic">
+          <img src="../assets/img/game/teacherpic.png" alt="布萊恩照片" />
+          <p>順利轉職成功唷！</p>
+        </div> -->
         <div class="letter-icon">
           <div
             class="confetti"
