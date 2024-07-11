@@ -9,7 +9,7 @@ export default defineStore('courseStore', {
     otherRequirements: '',
     participantCount: 1,
     loading: false,
-    error: null,
+    error: null
   }),
 
   actions: {
@@ -17,13 +17,13 @@ export default defineStore('courseStore', {
     async fetchCourses() {
       this.loading = true
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/getCourse.php`)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/front/getCourse.php`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         const data = await response.json()
         this.allCourse = data.course
-        console.log(this.allCourse);
+        console.log(this.allCourse)
       } catch (error) {
         console.error('Error fetching courses:', error)
         this.error = '無法獲取課程數據。請稍後再試。'
@@ -38,7 +38,9 @@ export default defineStore('courseStore', {
         this.loading = true
         this.error = null
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/getCourse.php?id=${courseId}`)
+          const response = await fetch(
+            `${import.meta.env.VITE_API_URL}/front/getCourse.php?id=${courseId}`
+          )
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`)
           }
@@ -68,12 +70,12 @@ export default defineStore('courseStore', {
       this.participantCount = count
       localStorage.setItem('participantCount', count)
     },
-    
+
     setOtherRequirements(requirements) {
-      this.otherRequirements = requirements;
-      localStorage.setItem('otherRequirements', requirements);
+      this.otherRequirements = requirements
+      localStorage.setItem('otherRequirements', requirements)
     },
-    
+
     loadCheckoutSum() {
       const savedSum = localStorage.getItem('checkoutSum')
       if (savedSum) {
@@ -84,24 +86,23 @@ export default defineStore('courseStore', {
       }
     },
 
-
     // 清除 store 中的数据
     clearBookingData() {
-      this.checkoutSum = 0;
-      this.otherRequirements = '';
-      this.participantCount = 1;
-      this.specificCourse = null;
+      this.checkoutSum = 0
+      this.otherRequirements = ''
+      this.participantCount = 1
+      this.specificCourse = null
 
       // 清除 localStorage 中的数据
-      localStorage.removeItem('checkoutSum');
-      localStorage.removeItem('otherRequirements');
-      localStorage.removeItem('selectedDiscount');
-    },
+      localStorage.removeItem('checkoutSum')
+      localStorage.removeItem('otherRequirements')
+      localStorage.removeItem('selectedDiscount')
+    }
   },
 
   getters: {
     getCourseById: (state) => (id) => {
-      return state.allCourse.find(course => course.course_id === parseInt(id))
+      return state.allCourse.find((course) => course.course_id === parseInt(id))
     }
   }
 })
