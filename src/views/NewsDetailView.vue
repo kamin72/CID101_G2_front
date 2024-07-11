@@ -1,40 +1,42 @@
 <template>
-    <!-- 大圖banner -->
-    <div class="banner" v-if="news">
-        <div class="bgImgWrap">
-            <img :src="parseServerImg(news.news_img)" alt="" />
-        </div>
-        <div class="maskWrap">
-            <img src="../assets/img/home/homebanner2.png" alt="" />
-        </div>
+  <!-- 大圖banner -->
+  <div class="banner" v-if="news">
+    <div class="bgImgWrap">
+      <img :src="parseServerImg(news.news_img)" alt="" />
     </div>
-    <section class="news-view news-detail">
-        <div class="container">
-            <div class="news-wrap">
-                <div class="news-title">
-                    <h3>{{news.news_title}}</h3>
-                </div>
-                <div class="news-date">
-                    <p>{{ news.news_date }}</p>
-                </div>
-                <div class="news-content" v-html="formattedContent(news.news_content)">
-                </div>
-            </div>
-            <div class="product-title-filter">
-            <div class="col-12 our-product">
-                <div class="title-wrap">
-                    <div class="line"></div>
-                    <h2>Latest</h2>
-                    <div class="line"></div>
-                </div>
-            </div>
-            </div>
-            <div class="row news-card-list">
-        <router-link v-for="item in latestNewsList" :key="item.news_id"
-                     :to="{ name: 'news_detail', params: { id: item.news_id } }"
-                     class="col-4 col-md-6 col-sm-12 news-card">
+    <div class="maskWrap">
+      <img src="../assets/img/home/homebanner2.png" alt="" />
+    </div>
+  </div>
+  <section class="news-view news-detail">
+    <div class="container">
+      <div class="news-wrap">
+        <div class="news-title">
+          <h3>{{ news.news_title }}</h3>
+        </div>
+        <div class="news-date">
+          <p>{{ news.news_date }}</p>
+        </div>
+        <div class="news-content" v-html="formattedContent(news.news_content)"></div>
+      </div>
+      <div class="product-title-filter">
+        <div class="col-12 our-product">
+          <div class="title-wrap">
+            <div class="line"></div>
+            <h2>Latest</h2>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row news-card-list">
+        <router-link
+          v-for="item in latestNewsList"
+          :key="item.news_id"
+          :to="{ name: 'news_detail', params: { id: item.news_id } }"
+          class="col-4 col-md-6 col-sm-12 news-card"
+        >
           <div class="news-pic">
-            <img :src="parseServerImg(item.news_img)" alt="最新消息圖片"/>
+            <img :src="parseServerImg(item.news_img)" alt="最新消息圖片" />
           </div>
           <p class="news-date">{{ item.news_date }}</p>
           <h4 class="news-title">{{ item.news_title }}</h4>
@@ -113,45 +115,45 @@ export default {
     }
   },
   methods: {
-        parseImgNews(file) {
-            return new URL(`../assets/img/news/${file}`, import.meta.url).href;
-        },
-        // 部屬用-解析伺服器圖片路徑
-        parseServerImg(imgURL) {
-            return `${import.meta.env.VITE_FILE_URL}/news/${imgURL}`
-        },
-        fetchNewsData(newsId) {
-        fetch(`${import.meta.env.VITE_API_URL}/news.php`)
-            .then((res) => res.json())
-            .then((data) => {
-            if (data.error) {
-                alert(data.msg);
-            } else if (data.news) {
-                this.news = data.news.find(news => news.news_id == newsId);
-                this.latestNewsList = data.news
-                .filter(item => item.news_state == 1 && item.news_id != newsId)
-                .sort((a, b) => new Date(b.news_date) - new Date(a.news_date))
-                .slice(0, 3); // 获取最新三篇
-                localStorage.setItem('news', JSON.stringify(this.news));
-                localStorage.setItem('latestNewsList', JSON.stringify(this.latestNewsList));
-            }
-            })
-            .catch((error) => {
-            console.error('Error fetching news data:', error);
-            alert('Error fetching news data');
-            });
-        },
-        
-        formattedContent(content) {
-            const paragraphs = content.split('\n');
-            return paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('');
-        },
-        fetchLatestNews(data) {
-        // 获取时间最新的三篇新闻
-            this.latestNewsList = data
-            .sort((a, b) => new Date(b.date) - new Date(a.date)) // 按时间降序排序
-            .slice(0, 3); // 获取前三篇
-        },
+    parseImgNews(file) {
+      return new URL(`../assets/img/news/${file}`, import.meta.url).href
+    },
+    // 部屬用-解析伺服器圖片路徑
+    parseServerImg(imgURL) {
+      return `${import.meta.env.VITE_FILE_URL}/${imgURL}`
+    },
+    fetchNewsData(newsId) {
+      fetch(`${import.meta.env.VITE_API_URL}/front/news.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.news) {
+            this.news = data.news.find((news) => news.news_id == newsId)
+            this.latestNewsList = data.news
+              .filter((item) => item.news_state == 1 && item.news_id != newsId)
+              .sort((a, b) => new Date(b.news_date) - new Date(a.news_date))
+              .slice(0, 3) // 获取最新三篇
+            localStorage.setItem('news', JSON.stringify(this.news))
+            localStorage.setItem('latestNewsList', JSON.stringify(this.latestNewsList))
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching news data:', error)
+          alert('Error fetching news data')
+        })
+    },
+
+    formattedContent(content) {
+      const paragraphs = content.split('\n')
+      return paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join('')
+    },
+    fetchLatestNews(data) {
+      // 获取时间最新的三篇新闻
+      this.latestNewsList = data
+        .sort((a, b) => new Date(b.date) - new Date(a.date)) // 按时间降序排序
+        .slice(0, 3) // 获取前三篇
+    }
   },
   created() {
     const newsId = this.$route.params.id
