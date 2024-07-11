@@ -192,9 +192,14 @@
             <label>公司資料電子檔</label>
           </div>
           <div class="form_box">
-            <input type="file" id="file_path" accept="image/png, image/jpeg" />
-            <!-- 後台需新增file_path相對應的欄位 用來存取檔案路徑 -->
+            <input type="file" @change="onfile" id="file_path" accept="image/png, image/jpeg" />
+            <span v-if="errorMessages.company_file" class="form-prompt">{{
+              errorMessages.company_file
+            }}</span>
+
+            <img :src="company_file">
           </div>
+          
         </div>
         <div class="form_privacy_policy">
           <input type="checkbox" v-model="isChecked" id="privacy_policy" />
@@ -269,6 +274,9 @@ export default {
       isRegisted: false,
       isSuccessRegist: false,
 
+      company_file:null,
+      isValidCompanyFile:false,
+
       errorMessages: {
         account: '',
         password: '',
@@ -278,11 +286,31 @@ export default {
         email: '',
         companyName: '',
         taxId: '',
-        address: ''
+        address: '',
+        company_file:''
       }
     }
   },
   methods: {
+
+    onfile(event){
+      this.file=event.target.files[0]
+      let filereader=new FileReader();
+      filereader.readAsDataURL(this.file)
+      filereader.addEventListener("load",()=>{
+        this.company_file=filereader.result;
+        console.warn(this.company_file)
+
+      })
+      if(!['image/png', 'image/jpeg'].includes(this.file.type)){
+        this.isValidCompanyFile =false;
+        this.errorMessages.company_file = '檔案個格式須為png、jpeg'
+      }else{
+        this.isValidCompanyFile =true;
+        this.errorMessages.company_file = ''
+      }
+    },
+
     // 切換密碼可見性
     togglePassword() {
       this.pwdFlag = !this.pwdFlag
@@ -383,12 +411,13 @@ export default {
       }
     },
     // 文件檔案正規判定
-    validateFile(event) {
-      const file = event.target.files[0]
-      if (!file || !['image/png', 'image/jpeg'].includes(file.type)) {
-        alert('請上傳有效的圖片文件 (PNG或JPEG)')
-      } else {
-        this.file = file
+    validateFile() {
+      if(this.company_file){
+        this.isValidCompanyFile =true;
+        this.errorMessages.company_file = ''
+      }else{
+        this.isValidCompanyFile =false;
+        this.errorMessages.company_file = '請選擇檔案'
       }
     },
     // 提交的資料
@@ -403,7 +432,8 @@ export default {
         taxId: this.taxId,
         companyName: this.companyName,
         address: this.address,
-        file: this.file
+        file: this.file,
+        company_file:this.company_file
       })
       // 表單驗證和提交的邏輯
       this.validateAccount()
@@ -415,6 +445,7 @@ export default {
       this.validateCompanyName()
       this.validateTaxId()
       this.validateAddress()
+      this.validateFile()
 
       if (
         this.isValidAccount &&
@@ -425,7 +456,8 @@ export default {
         this.isValidEmail &&
         this.isValidCompanyName &&
         this.isValidTaxId &&
-        this.isValidAddress
+        this.isValidAddress &&
+        this.isValidCompanyFile
       ) {
         // 發送 post 請求
         await this.getMember()
@@ -489,8 +521,8 @@ export default {
         formData.append('taxId', this.taxId)
         formData.append('companyName', this.companyName)
         formData.append('address', this.address)
-        // formData.append('file', this.file);
-
+        formData.append('company_file', this.company_file)
+      
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/front/member/memberSignup.php`,
           {
