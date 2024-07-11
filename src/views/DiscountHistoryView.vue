@@ -97,6 +97,9 @@ export default {
       } else {
         this.discounts = []
       }
+      if (this.dis_use_date == "" ){
+        this.dis_use_date = "尚未使用"
+      }
       // alert( this.discount[0].no);
     },
   },

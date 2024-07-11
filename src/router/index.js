@@ -254,7 +254,7 @@ const router = createRouter({
       path: '/memberorderhistorydetails/:id',
       name: 'memberorderhistorydetails',
       component: () => import('@/views/MemberOrderHistoryDetailsView.vue'),
-      meta: { title: '會員中心 | 訂單紀錄詳情' }
+      meta: { title: '會員中心 | 訂單紀錄詳情' },
     },
     {
       path: '/bookinghistorydetails/:id',

@@ -52,7 +52,10 @@
                 <RouterLink to="/" style="text-decoration: none">
                     <button class="small-btn-secondary">取消訂單</button>
                 </RouterLink>
-                <RouterLink to="memberorderhistorydetails" style="text-decoration: none">
+                <!-- <RouterLink to="memberorderhistorydetails" style="text-decoration: none">
+                    <button class="small-btn-primary">查閱</button>
+                </RouterLink> -->
+                <RouterLink :to="'/memberorderhistorydetails/' + cart.cart_id " style="text-decoration: none;">
                     <button class="small-btn-primary">查閱</button>
                 </RouterLink>
             </div>
@@ -145,6 +148,7 @@ export default {
     mounted() {
         this.fetchCarts()
         window.addEventListener('resize', this.updateWindowWidth)
+
     },
     beforeUnmount() {
         window.removeEventListener('resize', this.updateWindowWidth)
