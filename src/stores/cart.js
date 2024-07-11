@@ -64,7 +64,7 @@ export default defineStore('cartStore', {
       localStorage.removeItem('cart')
     },
     fetchProductList() {
-      fetch(`${import.meta.env.VITE_API_URL}/productManage/product_read.php`)
+      fetch(`${import.meta.env.VITE_API_URL}/back/productManage/product_read.php`)
         .then((response) => response.json())
         .then((data) => {
           if (data.error) {
@@ -72,7 +72,6 @@ export default defineStore('cartStore', {
           } else if (data.products) {
             this.products = data.products
             localStorage.setItem('products', JSON.stringify(this.products))
-
           }
         })
     },
@@ -83,21 +82,20 @@ export default defineStore('cartStore', {
       } else {
         this.products = []
       }
-    },  
+    },
     fetchProductDetail(productId) {
-      fetch(`${import.meta.env.VITE_API_URL}/productManage/product_read.php`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          alert(data.msg)
-        } else if (data.products) {
-          this.products = data.products
-          this.detail = this.products.find((product) => product.prod_id === Number(productId))
-          localStorage.setItem('detail', JSON.stringify(this.detail))
-
+      fetch(`${import.meta.env.VITE_API_URL}/back/productManage/product_read.php`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert(data.msg)
+          } else if (data.products) {
+            this.products = data.products
+            this.detail = this.products.find((product) => product.prod_id === Number(productId))
+            localStorage.setItem('detail', JSON.stringify(this.detail))
           }
         })
-    },
+    }
     // getProductDetail() {
     //   let storage = localStorage.getItem('detail')
     //   if (storage) {
