@@ -20,13 +20,13 @@
                 </div>
 
                 <!-- 信用卡/金融卡付款 -->
-                <div class="form_ltem_list" style="border: none;">
+                <!-- <div class="form_ltem_list" style="border: none;">
                     <div class="form_item">
                         <h4>其他需求</h4>
                     </div>
                     <div class="form_box" style="display: flex; flex-direction: column; align-items: unset">
                     </div>
-                </div>
+                </div> -->
                 <div class="btn-wrap">
                     <RouterLink :to="'/courseBookingDetail_confirm/' + course.id" style="text-decoration: none;">
                         <button type="button" class="big-btn-secondary">
