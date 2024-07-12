@@ -127,10 +127,14 @@ export default {
         this.phone = ''
         this.email = ''
       }
+    },
+    assignValue() {
+      this.address = '台北市士林區華興里7鄰123號'
     }
   },
   created() {
     this.getMemberData()
+    this.assignValue()
   }
 }
 </script>

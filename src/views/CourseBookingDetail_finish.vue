@@ -132,6 +132,35 @@ export default {
     },
     updateWindowWidth() {
       this.windowWidth = window.innerWidth
+    },
+    submitOrder() {
+      const orderData = JSON.parse(localStorage.getItem('courseOrder'))
+
+      const url = `${import.meta.env.VITE_API_URL}/front/courseSubmit_account.php`
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('網絡響應不正常')
+          }
+          return response.json()
+        })
+        .then((data) => {
+          if (data.error) {
+            throw new Error(data.error)
+          }
+          alert('訂單建立成功')
+        })
+        .catch((error) => {
+          console.error('錯誤:', error)
+          alert('訂單提交失敗：' + error.message)
+        })
     }
   },
 
@@ -141,6 +170,7 @@ export default {
     window.addEventListener('resize', this.updateWindowWidth)
     // 清除預約數據
     this.clearBookingData()
+    this.submitOrder()
   },
 
   beforeUnmount() {
