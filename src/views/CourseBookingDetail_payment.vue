@@ -193,7 +193,7 @@ export default {
       document.body.appendChild(form)
       form.submit()
 
-      this.submitOrder()
+      this.saveOrderData()
     },
 
     submitOrder() {
@@ -233,6 +233,19 @@ export default {
           console.error('錯誤:', error)
           alert('訂單提交失敗：' + error.message)
         })
+    },
+    saveOrderData() {
+      const orderData = {
+        customerId: this.memberInfo[0].no,
+        courseId: this.course.course_id,
+        courseName: this.course.course_name,
+        coursePrice: this.course.course_price,
+        bookAmount: this.participantCount,
+        disAmount: this.discount,
+        bookPaidAmount: this.sum,
+        otherRequirements: this.otherRequirements
+      }
+      localStorage.setItem('courseOrder', JSON.stringify(orderData))
     }
   },
 
@@ -242,7 +255,7 @@ export default {
     this.discount = localStorage.getItem('selectedDiscount')
     this.loadCheckoutSum()
     this.getSpecificData(this.$route.params.id)
-    console.log(this.otherRequirements)
+    // console.log(this.otherRequirements)
   },
 
   beforeUnmount() {

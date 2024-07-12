@@ -19,18 +19,17 @@
         name="name"
       />
     </div>
-    <div class="receiveAddress">
-      <p class="title" style="font-weight: 700">收件地址</p>
-      <input
-        type="text"
-        placeholder="請輸入收件地址"
-        id="cartAddress"
-        :value="address"
-        @input="$emit('update:address', $event.target.value)"
-        required
-        name="address"
-      />
-    </div>
+
+    <input
+      type="hidden"
+      placeholder="請輸入收件地址"
+      id="cartAddress"
+      :value="address"
+      @input="$emit('update:address', $event.target.value)"
+      required
+      name="address"
+    />
+
     <div class="phone">
       <p class="title" style="font-weight: 700">連絡電話</p>
       <input
