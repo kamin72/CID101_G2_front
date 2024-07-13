@@ -37,7 +37,14 @@
                         <h4>{{ course.course_name }}</h4>
                         <p>{{ formatDisplayDate(new Date(course.course_startTime)) }} 開課</p>
                     </div>
-                    <h4>NT. {{ discountedPrice(course.course_price, course.course_discount) }}</h4>
+                    <h4>
+                        <span v-if="course.course_discount > 0" style="color: red;">
+                            NT. {{ discountedPrice(course.course_price, course.course_discount) }}
+                        </span>
+                        <span v-else>
+                            NT. {{ course.course_price }}
+                        </span>
+                    </h4>
                 </router-link>
             </div>
         </div>
@@ -152,8 +159,15 @@
                                     </div>
                                     <div class="event-card2-right-wrap">
                                         <div class="price">
-                                            <h4><span>NT. </span>{{ discountedPrice(course.course_price,
-                                                course.course_discount) }}</h4>
+                                            <h4 v-if="course.course_discount > 0" style="color: red;">
+                                                <span style="color: #322d26;">NT. </span>{{
+                                                    discountedPrice(course.course_price,
+                                                        course.course_discount)
+                                                }}
+                                            </h4>
+                                            <h4 v-else>
+                                                <span style="color: #322d26;">NT. </span>{{ course.course_price }}
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
@@ -348,7 +362,11 @@ export default {
             });
         },
         discountedPrice(price, discountedPrice) {
-            return discountedPrice > 0 ? discountedPrice : price;
+            if (discountedPrice > 0) {
+                return price - discountedPrice
+            } else {
+                return price
+            }
         },
         checkIsMobile() {
             this.windowWidth = window.innerWidth // 不寫死，比較有彈性
