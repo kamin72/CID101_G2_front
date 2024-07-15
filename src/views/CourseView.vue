@@ -38,8 +38,9 @@
                         <p>{{ formatDisplayDate(new Date(course.course_startTime)) }} 開課</p>
                     </div>
                     <h4>
-                        <span v-if="course.course_discount > 0" style="color: red;">
-                            NT. {{ discountedPrice(course.course_price, course.course_discount) }}
+                        <span v-if="course.course_discount > 0" style="color: #ae2b41;">
+                            <span style="color: #322d26;">NT. </span>{{ discountedPrice(course.course_price,
+                                course.course_discount) }}
                         </span>
                         <span v-else>
                             NT. {{ course.course_price }}
@@ -159,14 +160,14 @@
                                     </div>
                                     <div class="event-card2-right-wrap">
                                         <div class="price">
-                                            <h4 v-if="course.course_discount > 0" style="color: red;">
-                                                <span style="color: #322d26;">NT. </span>{{
+                                            <h4 v-if="course.course_discount > 0" style="color: #ae2b41;">
+                                                NT. {{
                                                     discountedPrice(course.course_price,
                                                         course.course_discount)
                                                 }}
                                             </h4>
                                             <h4 v-else>
-                                                <span style="color: #322d26;">NT. </span>{{ course.course_price }}
+                                                NT. {{ course.course_price }}
                                             </h4>
                                         </div>
                                     </div>

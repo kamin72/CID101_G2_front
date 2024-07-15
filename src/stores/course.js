@@ -35,23 +35,26 @@ export default defineStore('courseStore', {
     // 從後台獲取特定課程
     async getSpecificData(courseId) {
       if (courseId) {
-        this.loading = true
-        this.error = null
+        this.loading = true;
+        this.error = null;
         try {
           const response = await fetch(
             `${import.meta.env.VITE_API_URL}/front/getCourse.php?id=${courseId}`
-          )
+          );
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-          const data = await response.json()
-          // 假設 API 返回的結構與獲取所有課程時相同
-          this.specificCourse = data.course[0] // 獲取第一個（也應該是唯一的）課程
+          const data = await response.json();
+          if (data.course && data.course.length > 0) {
+            this.specificCourse = data.course[0];
+          } else {
+            throw new Error('Course not found');
+          }
         } catch (error) {
-          console.error('Failed to fetch specific course:', error)
-          this.error = '無法獲取特定課程數據。請稍後再試。'
+          console.error('Failed to fetch specific course:', error);
+          this.error = '無法獲取特定課程數據。請稍後再試。';
         } finally {
-          this.loading = false
+          this.loading = false;
         }
       }
     },

@@ -38,9 +38,16 @@
                 <div class="line"></div>
                 <div class="courseWrap">
                   <h4>
-                    價格 | NT. {{ discountedPrice(course.course_price, course.course_discount) }}
+                    <span v-if="course.course_discount > 0" style="color: #ae2b41;">
+                      特價 | NT. {{ discountedPrice(course.course_price,
+                        course.course_discount) }}
+                    </span>
+                    <span v-else>
+                      價格 | NT. {{ course.course_price }}
+                    </span>
                   </h4>
-                  <p>原價NT. {{ course.course_price }}</p>
+                  <p v-if="course.course_discount > 0">原價 NT. {{ course.course_price }}</p>
+                  <p v-else style="display: none;"></p>
                 </div>
               </div>
             </div>
@@ -49,10 +56,8 @@
             <p>
               {{ course.course_intro }}
             </p>
-            <RouterLink
-              :to="{ name: 'courseBookingDetail', params: { id: course.course_id } }"
-              style="text-decoration: none"
-            >
+            <RouterLink :to="{ name: 'courseBookingDetail', params: { id: course.course_id } }"
+              style="text-decoration: none">
               <button class="big-btn-primary reserveCourse">
                 <span class="material-symbols-outlined"> edit_calendar </span>預約課程
               </button>
@@ -138,9 +143,13 @@ export default {
     parseServerImg(file) {
       return `${import.meta.env.VITE_FILE_URL}/${file}`
     },
-    discountedPrice(price, discount) {
-      return discount ? price * discount : price
-    }
+    discountedPrice(price, discountedPrice) {
+      if (discountedPrice > 0) {
+        return price - discountedPrice
+      } else {
+        return price
+      }
+    },
   },
 
   async mounted() {
